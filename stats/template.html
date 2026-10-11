@@ -234,6 +234,8 @@ footer { color: var(--text-3); font-size: 12px; padding: 24px 0 40px; border-top
       <a href="#/games" data-r="games">Games</a>
       <a href="#/maps" data-r="maps">Maps</a>
       <a href="#/players" data-r="players">Players</a>
+      <a href="#/weapons" data-r="weapons">Weapons</a>
+      <a href="#/awards" data-r="awards">Awards</a>
     </nav>
     <div class="hctl">
       <label class="toggle" title="Only count games that reached the final round (excludes aim maps and abandoned games)"><input type="checkbox" id="onlyFin"><span>Completed games only</span></label>
@@ -286,19 +288,41 @@ function rating(k, d, r, k1, k2, k3, k4, k5) {
   return (k / r / 0.679 + 0.7 * Math.max(r - d, 0) / r / 0.317 + (k1 + 4 * k2 + 9 * k3 + 16 * k4 + 25 * k5) / r / 1.277) / 2.7;
 }
 
-const SUM_KEYS = ['r','k','d','a','fa','hs','tk','ek','ed','k1','k2','k3','k4','k5','awp','knife','wb','ns','smoke','blindk','plant','defuse'];
+const SUM_KEYS = ['r','k','d','a','fa','hs','tk','sui','ek','ed','k1','k2','k3','k4','k5','awp','knife','zeus','nade','wb','ns','smoke','blindk','plant','defuse'];
+
+// weapon classes
+const CATS = {
+  Rifle: ['ak47','m4a1','m4a1_silencer','galilar','famas','sg556','aug'],
+  Sniper: ['awp','ssg08','g3sg1','scar20'],
+  SMG: ['mac10','mp9','mp7','mp5sd','ump45','p90','bizon'],
+  Pistol: ['glock','hkp2000','usp_silencer','p250','fiveseven','tec9','cz75a','deagle','elite','revolver'],
+  Heavy: ['nova','xm1014','mag7','sawedoff','m249','negev'],
+};
+const weaponCat = w => { for (const [c, ws] of Object.entries(CATS)) if (ws.includes(w)) return c; return /^(knife|bayonet)/.test(w) ? 'Knife' : (w === 'hegrenade' || w === 'inferno') ? 'Grenade' : w === 'taser' ? 'Zeus' : 'Other'; };
+const normWeapon = w => /^(knife|bayonet)/.test(w) ? 'knife' : w;
+function topWeapons(wp, n = 3) {
+  const m = {};
+  for (const [w, c] of Object.entries(wp)) m[normWeapon(w)] = (m[normWeapon(w)] || 0) + c;
+  return Object.entries(m).sort((a, b) => b[1] - a[1]).slice(0, n);
+}
+function catShare(wp) {
+  const tot = Object.values(wp).reduce((a, b) => a + b, 0) || 1, out = {};
+  for (const [w, c] of Object.entries(wp)) { const k = weaponCat(w); out[k] = (out[k] || 0) + c / tot; }
+  return out;
+}
 function aggregate(gs) {
   const by = new Map();
   for (const g of gs) {
     for (const p of g.p) {
       let s = by.get(p.id);
-      if (!s) { s = {id: p.id, n: NAMES[p.id], g: 0, w: 0, l: 0, mvp: 0, dmg: 0, dmgR: 0, nights: new Set(), maps: new Set(), wp: {}}; SUM_KEYS.forEach(k => s[k] = 0); by.set(p.id, s); }
+      if (!s) { s = {id: p.id, n: NAMES[p.id], g: 0, w: 0, l: 0, mvp: 0, dmg: 0, dmgR: 0, nights: new Set(), maps: new Set(), wp: {}, wh: {}}; SUM_KEYS.forEach(k => s[k] = 0); by.set(p.id, s); }
       s.g++; s.nights.add(g.night); s.maps.add(g.map);
       if (p.res === 'W') s.w++; else if (p.res === 'L') s.l++;
       if (g.mvp === p.id) s.mvp++;
       SUM_KEYS.forEach(k => s[k] += p[k] || 0);
       if (p.dmg != null && p.dmgR) { s.dmg += p.dmg; s.dmgR += p.dmgR; }
       for (const [w, c] of Object.entries(p.w)) s.wp[w] = (s.wp[w] || 0) + c;
+      for (const [w, c] of Object.entries(p.wh || {})) s.wh[w] = (s.wh[w] || 0) + c;
     }
   }
   for (const s of by.values()) derive(s);
@@ -314,6 +338,9 @@ function derive(s) {
   s.wr = (s.w + s.l) ? s.w / (s.w + s.l) : null;
   s.entry = s.ek - s.ed;
   s.mk = s.k3 + s.k4 + s.k5;
+  const fav = topWeapons(s.wp, 1)[0];
+  s.fav = fav ? fav[0] : null; s.favK = fav ? fav[1] : 0; s.favShare = s.k ? s.favK / s.k : 0;
+  s.nw = topWeapons(s.wp, 99).length;
   return s;
 }
 // per-game player row with derived values
@@ -388,9 +415,10 @@ const C = {
   awp: {k: 'awp', l: 'AWP', t: 'AWP kills'},
   mvp: {k: 'mvp', l: 'MVP', t: 'Games where this player had the best rating (min. half the rounds played)'},
   nights: {k: 'nn', l: 'Nights', v: r => r.nights.size},
+  fav: {k: 'favK', l: 'Fav weapon', cls: 'l', t: 'Weapon with the most kills', f: (v, r) => r.fav ? `<a href="#/weapon/${r.fav}">${esc(weaponName(r.fav))}</a> <span class="muted">${pct(r.favShare)}</span>` : '–'},
   r: {k: 'r', l: 'Rnds', t: 'Rounds played'},
 };
-const BOARD = [C.player, C.g, C.wl, C.rt, C.k, C.d, C.a, C.diff, C.kd, C.adr, C.kpr, C.hsp, C.entry, C.mk, C.k5, C.awp, C.mvp];
+const BOARD = [C.player, C.g, C.wl, C.rt, C.k, C.d, C.a, C.diff, C.kd, C.adr, C.kpr, C.hsp, C.entry, C.mk, C.k5, C.awp, C.mvp, C.fav];
 
 function minGamesFilter(el, rows, def, onChange) {
   const opts = [1, 2, 3, 5, 10, 20].filter(n => n <= Math.max(...rows.map(r => r.g), 1));
@@ -483,9 +511,9 @@ function recordCards(gs) {
   return `<div class="recs">${recs.join('')}</div>`;
 }
 function weaponsBlock(wp, n = 10) {
-  const items = Object.entries(wp).sort((a, b) => b[1] - a[1]).slice(0, n);
+  const items = topWeapons(wp, n);
   const tot = Object.values(wp).reduce((a, b) => a + b, 0) || 1;
-  return hbars(items.map(([w, c]) => ({label: weaponName(w), value: c, tip: `<b>${esc(weaponName(w))}</b><br>${c} kills · ${pct(c / tot)} of all`})));
+  return hbars(items.map(([w, c]) => ({label: weaponName(w), value: c, href: `#/weapon/${w}`, tip: `<b>${esc(weaponName(w))}</b><br>${c} kills · ${pct(c / tot)} of all`})));
 }
 
 // ---------- views ----------
@@ -701,12 +729,14 @@ function viewPlayer(id) {
       ${tile('ADR', f0(me.adr), `${f2(me.kpr)} kills / round`)}
       ${tile('Headshots', pct(me.hsp), `${me.hs} HS kills`)}
       ${tile('Multi-kills', me.mk, `${me.k3} × 3K · ${me.k4} × 4K · ${me.k5} aces`)}
+      ${me.fav ? tile('Favourite weapon', esc(weaponName(me.fav)), `${me.favK} kills · ${pct(me.favShare)} of all`) : ''}
     </div>
     <section class="card pad"><h2>Rating by night</h2>${vbars(perNight.map(r => ({label: nightDate(r.night).toLocaleDateString('en-US', {month: 'short', day: 'numeric'}), value: r.rt, tip: `<b>${nightLabel(r.night)}</b><br>Rating ${f2(r.rt)} · ${r.k}–${r.d} · ${r.g} games`, href: `#/night/${r.night}`})), {ref: 1, fmt: v => v.toFixed(1)})}
       <div class="note">Dashed line = 1.00 (average).</div></section>
     <section class="grid2">
       <div><h2>By map</h2><div id="pm"></div></div>
-      <div class="card pad"><h2>Kills by weapon</h2>${weaponsBlock(me.wp)}</div>
+      <div class="card pad"><h2>Kills by weapon</h2>${weaponsBlock(me.wp)}
+        <h2 style="margin-top:20px">Weapon classes</h2>${hbars(Object.entries(catShare(me.wp)).sort((a, b) => b[1] - a[1]).map(([c, v]) => ({label: c, value: v, tip: `<b>${c}</b><br>${pct(v)} of kills`})), pct)}</div>
     </section>
     <section><h2>By night</h2><div id="pn"></div></section>
     <section><h2>Game log</h2><div id="pg"></div></section>`;
@@ -728,6 +758,143 @@ function viewPlayer(id) {
   ], prs, {sort: 'start', href: r => `#/game/${r.gid}`});
 }
 
+function viewWeapons() {
+  pageTitle('Weapons');
+  const gs = games();
+  const rows = aggregate(gs);
+  const all = {}, allHs = {}, users = {};
+  for (const r of rows) {
+    for (const [w0, c] of Object.entries(r.wp)) { const w = normWeapon(w0); all[w] = (all[w] || 0) + c; (users[w] = users[w] || {})[r.id] = [r, ((users[w][r.id] || [])[1] || 0) + c]; }
+    for (const [w0, c] of Object.entries(r.wh)) { const w = normWeapon(w0); allHs[w] = (allHs[w] || 0) + c; }
+  }
+  const tot = Object.values(all).reduce((a, b) => a + b, 0) || 1;
+  const wrows = Object.entries(all).map(([w, k]) => {
+    const us = Object.values(users[w]).sort((a, b) => b[1] - a[1]);
+    return {w, n: weaponName(w), cat: weaponCat(w), k, share: k / tot, hsp: (allHs[w] || 0) / k, users: us.length, top: us[0], second: us[1]};
+  });
+  const most = wrows.slice().sort((a, b) => b.k - a.k)[0];
+  const maxG = Math.max(...rows.map(r => r.g));
+  const regulars = rows.filter(r => r.g >= Math.min(5, maxG));
+  const awper = rows.slice().sort((a, b) => b.awp - a.awp)[0];
+  const hsKing = regulars.filter(r => r.k >= 30).sort((a, b) => b.hsp - a.hsp)[0];
+  const loyal = regulars.filter(r => r.k >= 30).sort((a, b) => b.favShare - a.favShare)[0];
+  const varied = regulars.slice().sort((a, b) => b.nw - a.nw)[0];
+  const cats = {}; for (const w of wrows) cats[w.cat] = (cats[w.cat] || 0) + w.k;
+
+  $('#app').innerHTML = `
+    <div class="pagehead"><div><h1>Weapons</h1><div class="sub">${tot.toLocaleString()} kills with ${wrows.length} different weapons</div></div></div>
+    <div class="tiles">
+      ${tile('Most used', esc(most.n), `${most.k} kills · ${pct(most.share)} of all`, true)}
+      ${awper && awper.awp ? tile('Top AWPer', esc(awper.n), `${awper.awp} AWP kills`) : ''}
+      ${hsKing ? tile('Headshot machine', esc(hsKing.n), `${pct(hsKing.hsp)} headshots`) : ''}
+      ${loyal ? tile('Most loyal', esc(loyal.n), `${pct(loyal.favShare)} of kills with ${esc(weaponName(loyal.fav))}`) : ''}
+      ${varied ? tile('Most versatile', esc(varied.n), `kills with ${varied.nw} weapons`) : ''}
+    </div>
+    <section><h2>Favourite weapon by player</h2><div id="pw"><div class="filters"></div><div class="t"></div></div>
+      <div class="note">Class columns show each player's share of their own kills. Click a weapon for its leaderboard.</div></section>
+    <section class="grid2">
+      <div class="card pad"><h2>Kills by weapon</h2>${weaponsBlock(all, 15)}</div>
+      <div class="card pad"><h2>Kills by weapon class</h2>${hbars(Object.entries(cats).sort((a, b) => b[1] - a[1]).map(([c, k]) => ({label: c, value: k, tip: `<b>${c}</b><br>${k} kills · ${pct(k / tot)}`})))}</div>
+    </section>
+    <section><h2>Weapon leaders</h2><div id="wt"></div></section>`;
+
+  const share = c => ({k: 'c_' + c, l: c, v: r => catShare(r.wp)[c] || 0, f: v => v ? pct(v) : '<span class="muted">–</span>'});
+  const wcell = (r, i) => { const t = topWeapons(r.wp, i + 1)[i]; return t ? `<a href="#/weapon/${t[0]}">${esc(weaponName(t[0]))}</a> <span class="muted">${t[1]}</span>` : '–'; };
+  const cols = [
+    C.player, C.g, C.k,
+    {k: 'favK', l: 'Favourite', cls: 'l', f: (v, r) => r.fav ? `<a href="#/weapon/${r.fav}"><b>${esc(weaponName(r.fav))}</b></a> <span class="muted">${r.favK} · ${pct(r.favShare)}</span>` : '–'},
+    {k: 'w2', l: '2nd', cls: 'l', sort: false, f: (v, r) => wcell(r, 1)},
+    {k: 'w3', l: '3rd', cls: 'l', sort: false, f: (v, r) => wcell(r, 2)},
+    share('Rifle'), share('Sniper'), share('SMG'), share('Pistol'), share('Heavy'),
+    {k: 'nw', l: 'Weapons', t: 'Different weapons with at least one kill'},
+  ];
+  const draw = mg => mountTable($('#pw .t'), cols, rows.filter(r => r.g >= mg), {sort: 'k', rank: true});
+  const def = Math.min(5, maxG);
+  minGamesFilter($('#pw .filters'), rows, def, draw);
+  draw(def);
+
+  mountTable($('#wt'), [
+    {k: 'n', l: 'Weapon', cls: 'l pname', asc: true, f: (v, r) => `<a href="#/weapon/${r.w}">${esc(v)}</a>`},
+    {k: 'cat', l: 'Class', cls: 'l', asc: true},
+    {k: 'k', l: 'Kills'}, {k: 'share', l: 'Share', f: pct}, {k: 'hsp', l: 'HS%', f: pct},
+    {k: 'users', l: 'Players', t: 'Players with at least one kill'},
+    {k: 'topk', l: 'Leader', cls: 'l', v: r => r.top[1], f: (v, r) => `${plink(r.top[0].id, r.top[0].n)} <span class="muted">${r.top[1]}</span>`},
+    {k: 'sec', l: 'Runner-up', cls: 'l', v: r => r.second ? r.second[1] : null, f: (v, r) => r.second ? `${plink(r.second[0].id, r.second[0].n)} <span class="muted">${r.second[1]}</span>` : '–'},
+  ], wrows, {sort: 'k', href: r => `#/weapon/${r.w}`});
+}
+
+function viewWeapon(w) {
+  const gs = games();
+  pageTitle(weaponName(w));
+  const wk = wp => Object.entries(wp || {}).reduce((s, [x, c]) => s + (normWeapon(x) === w ? c : 0), 0);
+  const rows = aggregate(gs).map(r => {
+    const k = wk(r.wp);
+    return Object.assign(r, {wk: k, whs: k ? wk(r.wh) / k : 0, wshare: r.k ? k / r.k : 0, wpr: r.r ? k / r.r : 0});
+  }).filter(r => r.wk);
+  if (!rows.length) return notFound();
+  const tot = rows.reduce((s, r) => s + r.wk, 0);
+  const hs = rows.reduce((s, r) => s + wk(r.wh), 0);
+  const allK = rows.length ? gs.reduce((s, g) => s + g.p.reduce((a, p) => a + p.k, 0), 0) : 1;
+  const nights = [...new Set(gs.map(g => g.night))].sort();
+  const per = nights.map(n => ({n, k: gs.filter(g => g.night === n).reduce((s, g) => s + g.p.reduce((a, p) => a + wk(p.w), 0), 0)}));
+  const lead = rows.slice().sort((a, b) => b.wk - a.wk)[0];
+  $('#app').innerHTML = `
+    <div class="crumb"><a href="#/weapons">Weapons</a> / ${esc(weaponName(w))}</div>
+    <div class="pagehead"><div><h1>${esc(weaponName(w))}</h1><div class="sub">${esc(weaponCat(w))}</div></div></div>
+    <div class="tiles">
+      ${tile('Leader', esc(lead.n), `${lead.wk} kills · ${pct(lead.wk / tot)} of the total`, true)}
+      ${tile('Kills', tot, `${pct(tot / allK)} of all kills`)}
+      ${tile('Headshots', pct(hs / tot), `${hs} HS kills`)}
+      ${tile('Players', rows.length)}
+    </div>
+    <section><h2>Leaderboard</h2><div id="lb"></div>
+      <div class="note">“Share” is how much of that player's own kills came with this weapon.</div></section>
+    <section class="card pad"><h2>Kills per night</h2>${vbars(per.map(p => ({label: nightDate(p.n).toLocaleDateString('en-US', {month: 'short', day: 'numeric'}), value: p.k, tip: `<b>${nightLabel(p.n)}</b><br>${p.k} kills`, href: `#/night/${p.n}`})))}</section>`;
+  mountTable($('#lb'), [C.player, C.g, {k: 'wk', l: 'Kills'}, {k: 'whs', l: 'HS%', f: pct}, {k: 'wshare', l: 'Share', f: pct},
+    {k: 'wpr', l: 'Per round', t: 'Kills with this weapon per round played', f: f2}, {k: 'k', l: 'All kills'}], rows, {sort: 'wk', rank: true});
+}
+
+const AWARDS = [
+  {k: 'wb', l: 'Wallbanger', d: 'Kills through walls'},
+  {k: 'ns', l: 'No-scope artist', d: 'No-scope sniper kills'},
+  {k: 'smoke', l: 'Smoke criminal', d: 'Kills through smoke'},
+  {k: 'blindk', l: 'Blind fury', d: 'Kills while flashed'},
+  {k: 'knife', l: 'Butcher', d: 'Knife kills'},
+  {k: 'zeus', l: 'Electrician', d: 'Zeus kills'},
+  {k: 'nade', l: 'Grenadier', d: 'HE and molotov kills'},
+  {k: 'fa', l: 'Flash support', d: 'Flash assists'},
+  {k: 'a', l: 'Team player', d: 'Assists'},
+  {k: 'ek', l: 'Entry fragger', d: 'Opening kills'},
+  {k: 'k5', l: 'Ace machine', d: 'Aces (5 kills in a round)'},
+  {k: 'k4', l: 'Almost ace', d: '4-kill rounds'},
+  {k: 'plant', l: 'Bomb planter', d: 'Bomb plants'},
+  {k: 'defuse', l: 'Ninja defuser', d: 'Bomb defuses'},
+  {k: 'awp', l: 'Big green', d: 'AWP kills'},
+  {k: 'ed', l: 'First to fall', d: 'Opening deaths'},
+  {k: 'tk', l: 'Wrong team', d: 'Team kills'},
+  {k: 'sui', l: 'Self-destruct', d: 'Suicides (fall damage, own grenades)'},
+  {k: 'd', l: 'Cannon fodder', d: 'Deaths'},
+];
+function viewAwards() {
+  pageTitle('Awards');
+  const rows = aggregate(games());
+  $('#app').innerHTML = `
+    <div class="pagehead"><div><h1>Awards</h1><div class="sub">Who leads every odd stat in the logs</div></div></div>
+    <div class="recs">${AWARDS.map(a => {
+      const s = rows.filter(r => r[a.k] > 0).sort((x, y) => y[a.k] - x[a.k]);
+      if (!s.length) return '';
+      return `<a class="card rec" href="#/player/${s[0].id}"><div class="l">${a.l}</div><div class="v">${s[0][a.k]}</div><div class="w">${esc(s[0].n)}</div>
+        <div class="s">${a.d}${s[1] ? ` · 2nd ${esc(s[1].n)} (${s[1][a.k]})` : ''}</div></a>`;
+    }).join('')}</div>
+    <section><h2>Playstyle table</h2><div id="ps"><div class="filters"></div><div class="t"></div></div>
+      <div class="note">Totals across all games. Hover a column name for what it counts.</div></section>`;
+  const cols = [C.player, C.g, ...AWARDS.filter(a => !['d', 'a', 'awp', 'k4', 'k5'].includes(a.k))
+    .map(a => ({k: a.k, l: a.d.replace(/ \(.*\)/, '').replace(/^Kills /, '').replace(/ kills$/, ''), t: `${a.l}: ${a.d}`, f: v => v ? v : '<span class="muted">0</span>'}))];
+  const draw = mg => mountTable($('#ps .t'), cols, rows.filter(r => r.g >= mg), {sort: 'wb', rank: true});
+  minGamesFilter($('#ps .filters'), rows, 1, draw);
+  draw(1);
+}
+
 function notFound() {
   $('#app').innerHTML = `<h1>Not found</h1><p class="sub">Nothing here${onlyFin ? ' with “Completed games only” switched on' : ''}. <a href="#/" style="color:var(--accent)">Back to overview</a></p>`;
 }
@@ -738,7 +905,8 @@ function route() {
   document.querySelectorAll('#nav a').forEach(a => a.classList.toggle('on',
     a.dataset.r === view || (a.dataset.r && view === a.dataset.r.replace(/s$/, ''))));
   ({'': viewOverview, nights: viewNights, night: () => viewNight(arg), games: viewGames, game: () => viewGame(+arg),
-    maps: viewMaps, map: () => viewMap(arg), players: viewPlayers, player: () => viewPlayer(arg)}[view] || notFound)();
+    maps: viewMaps, map: () => viewMap(arg), players: viewPlayers, player: () => viewPlayer(arg),
+    weapons: viewWeapons, weapon: () => viewWeapon(arg), awards: viewAwards}[view] || notFound)();
   tip.style.opacity = 0;
 }
 addEventListener('hashchange', () => { route(); scrollTo(0, 0); });

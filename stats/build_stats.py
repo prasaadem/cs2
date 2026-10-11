@@ -64,6 +64,7 @@ class Match:
         self.present = [set()]      # players seen per round
         self.stats = collections.defaultdict(collections.Counter)
         self.weapons = collections.defaultdict(collections.Counter)
+        self.weapon_hs = collections.defaultdict(collections.Counter)
         self.names = {}
         self.team = {}
         self.json = None            # last round_stats block: (rounds, {id: dmg})
@@ -162,6 +163,7 @@ def parse_group(files, tz):
                     cur.weapons[aid][w] += 1
                     if 'headshot' in rest:
                         s['hs'] += 1
+                        cur.weapon_hs[aid][w] += 1
                     if 'penetrated' in rest:
                         s['wb'] += 1
                     if 'noscope' in rest:
@@ -174,6 +176,10 @@ def parse_group(files, tz):
                         s['knife'] += 1
                     if w == 'awp':
                         s['awp'] += 1
+                    if w == 'taser':
+                        s['zeus'] += 1
+                    if w in ('hegrenade', 'inferno'):
+                        s['nade'] += 1
                     if not cur.round_kills[-1]:
                         s['ek'] += 1
                         v['ed'] += 1
@@ -272,7 +278,9 @@ def build_game(m, gid):
             'dmg': dmg if dmg is not None and dmg_rounds else None,
             'dmgR': dmg_rounds if dmg is not None else 0,
             'rt': round(rating(s['k'], s['d'], played, mk), 3),
+            'zeus': s['zeus'], 'nade': s['nade'],
             'w': dict(m.weapons[sid].most_common()),
+            'wh': dict(m.weapon_hs[sid]),
         })
     players.sort(key=lambda p: (-p['rt'], -p['k']))
     night = (m.start - dt.timedelta(hours=6)).date().isoformat()
