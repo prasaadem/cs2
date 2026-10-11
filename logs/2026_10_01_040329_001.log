@@ -1,0 +1,103 @@
+L 10/01/2026 - 04:03:29: Log file started (file "logs/2026_10_01_040329_001.log") (game "csgo") (version "10924")
+L 10/01/2026 - 04:03:29: server_cvar: "sv_tags" "dathost,dathost.com"
+L 10/01/2026 - 04:03:29: server_cvar: "sv_tags" "dathost.com, dathost"
+L 10/01/2026 - 04:03:29: server_cvar: "cash_player_bomb_defused" "200"
+L 10/01/2026 - 04:03:29: server_cvar: "cash_player_bomb_planted" "200"
+L 10/01/2026 - 04:03:29: server_cvar: "cash_player_interact_with_hostage" "300"
+L 10/01/2026 - 04:03:29: server_cvar: "cash_player_killed_enemy_default" "200"
+L 10/01/2026 - 04:03:29: server_cvar: "cash_player_killed_enemy_factor" "0.5"
+L 10/01/2026 - 04:03:29: server_cvar: "cash_team_elimination_bomb_map" "2700"
+L 10/01/2026 - 04:03:29: server_cvar: "cash_team_elimination_hostage_map_t" "2000"
+L 10/01/2026 - 04:03:29: server_cvar: "cash_team_elimination_hostage_map_ct" "2300"
+L 10/01/2026 - 04:03:29: server_cvar: "cash_team_loser_bonus" "2400"
+L 10/01/2026 - 04:03:29: server_cvar: "cash_team_loser_bonus_consecutive_rounds" "0"
+L 10/01/2026 - 04:03:29: server_cvar: "cash_team_planted_bomb_but_defused" "200"
+L 10/01/2026 - 04:03:29: server_cvar: "cash_team_terrorist_win_bomb" "2700"
+L 10/01/2026 - 04:03:29: server_cvar: "cash_team_win_by_defusing_bomb" "2700"
+L 10/01/2026 - 04:03:29: server_cvar: "cash_team_win_by_hostage_rescue" "3000"
+L 10/01/2026 - 04:03:29: server_cvar: "cash_team_win_by_time_running_out_hostage" "2000"
+L 10/01/2026 - 04:03:29: server_cvar: "cash_team_win_by_time_running_out_bomb" "2700"
+L 10/01/2026 - 04:03:29: server_cvar: "mp_freezetime" "5"
+L 10/01/2026 - 04:03:29: server_cvar: "mp_friendlyfire" "true"
+L 10/01/2026 - 04:03:29: server_cvar: "mp_maxrounds" "15"
+L 10/01/2026 - 04:03:29: server_cvar: "mp_roundtime" "3"
+L 10/01/2026 - 04:03:29: server_cvar: "mp_roundtime_hostage" "2"
+L 10/01/2026 - 04:03:29: server_cvar: "mp_roundtime_defuse" "2.25"
+L 10/01/2026 - 04:03:30: Started:  ""
+L 10/01/2026 - 04:03:30: World triggered "Warmup_Start"
+L 10/01/2026 - 04:03:31: "Sheldor<0><[U:1:1080094440]><>" entered the game
+L 10/01/2026 - 04:03:33: rcon from "169.150.232.56:38926": command "status_json"
+L 10/01/2026 - 04:03:33: rcon from "169.150.232.56:38926": command "status"
+L 10/01/2026 - 04:03:33: "pichekistha<1><[U:1:80924469]><>" entered the game
+L 10/01/2026 - 04:03:37: "pichekistha<1><[U:1:80924469]>" switched from team <Unassigned> to <TERRORIST>
+L 10/01/2026 - 04:03:37: World triggered "Game_Commencing"
+L 10/01/2026 - 04:03:37: Starting Freeze period
+L 10/01/2026 - 04:03:37: JSON_BEGIN{
+L 10/01/2026 - 04:03:37: "name": "round_stats",
+L 10/01/2026 - 04:03:37: "round_number" : "1",
+L 10/01/2026 - 04:03:37: "score_t" : "0",
+L 10/01/2026 - 04:03:37: "score_ct" : "0",
+L 10/01/2026 - 04:03:37: "map" : "de_dust2",
+L 10/01/2026 - 04:03:37: "server" : "cupcake",
+L 10/01/2026 - 04:03:37: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 10/01/2026 - 04:03:37: "players" : {
+L 10/01/2026 - 04:03:37: "player_0" : "          1080094440,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/01/2026 - 04:03:37: "player_1" : "            80924469,      2,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/01/2026 - 04:03:37: }}JSON_END
+L 10/01/2026 - 04:03:37: World triggered "Match_Start" on "de_dust2"
+L 10/01/2026 - 04:03:37: MatchStatus: Team "CT" is unset.
+L 10/01/2026 - 04:03:37: MatchStatus: Team "TERRORIST" is unset.
+L 10/01/2026 - 04:03:37: MatchStatus: Score: 0:0 on map "de_dust2" RoundsPlayed: -1
+L 10/01/2026 - 04:03:38: "pichekistha<1><[U:1:80924469]><TERRORIST>" purchased "smokegrenade"
+L 10/01/2026 - 04:03:39: World triggered "Warmup_Start"
+L 10/01/2026 - 04:03:43: rcon from "169.150.232.56:33244": command "status_json"
+L 10/01/2026 - 04:03:43: rcon from "169.150.232.56:33244": command "status"
+L 10/01/2026 - 04:03:45: "Pheonix<2><[U:1:104794797]><>" connected, address "66.22.138.79:65269"
+L 10/01/2026 - 04:03:45: "pichekistha<1><[U:1:80924469]><TERRORIST>" sv_throw_smokegrenade -451.948 -644.903 212.263 0.000 0.000 0.000 12.572 639.574 489.019 600.000 -562.000 0.000 45 2
+L 10/01/2026 - 04:03:46: "Pheonix<2><[U:1:104794797]><>" STEAM USERID validated
+L 10/01/2026 - 04:03:48: "Sheldor<0><[U:1:1080094440]>" switched from team <Unassigned> to <CT>
+L 10/01/2026 - 04:03:48: "Pheonix<2><[U:1:104794797]><>" entered the game
+L 10/01/2026 - 04:03:50: "pichekistha<1><[U:1:80924469]><TERRORIST>" threw smokegrenade [-462 1649 -124]
+L 10/01/2026 - 04:03:52: "Pheonix<2><[U:1:104794797]>" switched from team <Unassigned> to <CT>
+L 10/01/2026 - 04:03:53: rcon from "169.150.232.56:42030": command "status_json"
+L 10/01/2026 - 04:03:53: rcon from "169.150.232.56:42030": command "status"
+L 10/01/2026 - 04:03:58: rcon from "169.150.247.207:40620": command "status"
+L 10/01/2026 - 04:03:58: "Fraggy<3><[U:1:87305029]><>" connected, address "98.247.74.188:55946"
+L 10/01/2026 - 04:03:58: rcon from "169.150.247.207:40636": command "status_json"
+L 10/01/2026 - 04:03:59: "Fraggy<3><[U:1:87305029]><>" STEAM USERID validated
+L 10/01/2026 - 04:04:03: rcon from "169.150.232.56:47184": command "status_json"
+L 10/01/2026 - 04:04:03: rcon from "169.150.232.56:47184": command "status"
+L 10/01/2026 - 04:04:03: "Fraggy<3><[U:1:87305029]><>" entered the game
+L 10/01/2026 - 04:04:06: "Fraggy<3><[U:1:87305029]>" switched from team <Unassigned> to <TERRORIST>
+L 10/01/2026 - 04:04:08: "Sheldor<0><[U:1:1080094440]><CT>" [283 2518 -118] killed "pichekistha<1><[U:1:80924469]><TERRORIST>" [371 2381 -120] with "usp_silencer"
+L 10/01/2026 - 04:04:10: "Fraggy<3><[U:1:87305029]><TERRORIST>" purchased "ak47"
+L 10/01/2026 - 04:04:13: rcon from "169.150.232.56:53234": command "status_json"
+L 10/01/2026 - 04:04:13: rcon from "169.150.232.56:53234": command "status"
+L 10/01/2026 - 04:04:14: "prasaadem<4><[U:1:1075176373]><>" connected, address "23.118.107.196:50880"
+L 10/01/2026 - 04:04:15: "pichekistha<1><[U:1:80924469]><TERRORIST>" purchased "tec9"
+L 10/01/2026 - 04:04:15: "prasaadem<4><[U:1:1075176373]><>" STEAM USERID validated
+L 10/01/2026 - 04:04:15: "pichekistha<1><[U:1:80924469]><TERRORIST>" purchased "smokegrenade"
+L 10/01/2026 - 04:04:16: "prasaadem<4><[U:1:1075176373]><>" entered the game
+L 10/01/2026 - 04:04:20: "prasaadem<4><[U:1:1075176373]>" switched from team <Unassigned> to <TERRORIST>
+L 10/01/2026 - 04:04:23: rcon from "169.150.232.56:42088": command "status_json"
+L 10/01/2026 - 04:04:23: rcon from "169.150.232.56:42088": command "status"
+L 10/01/2026 - 04:04:23: "pichekistha<1><[U:1:80924469]><TERRORIST>" sv_throw_smokegrenade -450.519 -644.891 211.897 0.000 0.000 0.000 10.738 639.470 489.429 600.000 805.000 0.000 45 2
+L 10/01/2026 - 04:04:29: "pichekistha<1><[U:1:80924469]><TERRORIST>" threw smokegrenade [-358 2125 -127]
+L 10/01/2026 - 04:04:33: rcon from "169.150.232.56:50956": command "status_json"
+L 10/01/2026 - 04:04:33: rcon from "169.150.232.56:50956": command "status"
+L 10/01/2026 - 04:04:38: "Fraggy<3><[U:1:87305029]><TERRORIST>" [1357 2120 -5] killed "Pheonix<2><[U:1:104794797]><CT>" [415 2245 -129] with "ak47" (headshot)
+L 10/01/2026 - 04:04:41: "Sheldor<0><[U:1:1080094440]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/01/2026 - 04:04:41: "Sheldor<0><[U:1:1080094440]>" switched from team <CT> to <Unassigned>
+L 10/01/2026 - 04:04:41: "Sheldor<0><[U:1:1080094440]><Unassigned>" [152 2484 -120] committed suicide with "world"
+L 10/01/2026 - 04:04:41: "pichekistha<1><[U:1:80924469]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/01/2026 - 04:04:41: "pichekistha<1><[U:1:80924469]>" switched from team <TERRORIST> to <Unassigned>
+L 10/01/2026 - 04:04:41: "pichekistha<1><[U:1:80924469]><Unassigned>" [209 2287 -119] committed suicide with "world"
+L 10/01/2026 - 04:04:41: "Pheonix<2><[U:1:104794797]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/01/2026 - 04:04:41: "Pheonix<2><[U:1:104794797]>" switched from team <CT> to <Unassigned>
+L 10/01/2026 - 04:04:41: "Fraggy<3><[U:1:87305029]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/01/2026 - 04:04:41: "Fraggy<3><[U:1:87305029]>" switched from team <TERRORIST> to <Unassigned>
+L 10/01/2026 - 04:04:41: "Fraggy<3><[U:1:87305029]><Unassigned>" [880 2313 -13] committed suicide with "world"
+L 10/01/2026 - 04:04:41: "prasaadem<4><[U:1:1075176373]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/01/2026 - 04:04:41: "prasaadem<4><[U:1:1075176373]>" switched from team <TERRORIST> to <Unassigned>
+L 10/01/2026 - 04:04:41: "prasaadem<4><[U:1:1075176373]><Unassigned>" [188 -308 2] committed suicide with "world"
+L 10/01/2026 - 04:04:41: Log file closed

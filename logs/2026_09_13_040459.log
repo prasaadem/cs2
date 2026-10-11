@@ -1,0 +1,1816 @@
+L 09/13/2026 - 04:04:59: Log file started (file "logs/2026_09_13_040459.log") (game "csgo") (version "10896")
+L 09/13/2026 - 04:04:59: Loading map "aim_ak_bench"
+L 09/13/2026 - 04:04:59: server cvars start
+L 09/13/2026 - 04:04:59: "tv_relaypassword" = ""
+L 09/13/2026 - 04:04:59: "tv_password" = ""
+L 09/13/2026 - 04:04:59: "tv_password1" = ""
+L 09/13/2026 - 04:04:59: "tv_advertise_watchable" = "false"
+L 09/13/2026 - 04:04:59: "sv_voiceenable" = "true"
+L 09/13/2026 - 04:04:59: "sv_password" = "kodikura"
+L 09/13/2026 - 04:04:59: "sv_tags" = "dathost,dathost.com"
+L 09/13/2026 - 04:04:59: "sv_steamgroup" = ""
+L 09/13/2026 - 04:04:59: "sv_cheats" = "false"
+L 09/13/2026 - 04:04:59: "sv_debug_overlays_broadcast" = "false"
+L 09/13/2026 - 04:04:59: "tv_enable_dynamic" = "false"
+L 09/13/2026 - 04:04:59: "tv_enable" = "false"
+L 09/13/2026 - 04:04:59: "tv_enable1" = "false"
+L 09/13/2026 - 04:04:59: "sv_alltalk" = "false"
+L 09/13/2026 - 04:04:59: "mp_friendlyfire" = "true"
+L 09/13/2026 - 04:04:59: "sv_stopspeed" = "80"
+L 09/13/2026 - 04:04:59: "sv_noclipaccelerate" = "5"
+L 09/13/2026 - 04:04:59: "sv_noclipspeed" = "1200"
+L 09/13/2026 - 04:04:59: "sv_noclipspeedscaleonshift" = "0.5"
+L 09/13/2026 - 04:04:59: "sv_noclipfriction" = "4"
+L 09/13/2026 - 04:04:59: "sv_specaccelerate" = "5"
+L 09/13/2026 - 04:04:59: "sv_specspeed" = "1200"
+L 09/13/2026 - 04:04:59: "sv_specnoclip" = "true"
+L 09/13/2026 - 04:04:59: "sv_maxspeed" = "320"
+L 09/13/2026 - 04:04:59: "sv_accelerate" = "5.5"
+L 09/13/2026 - 04:04:59: "sv_airaccelerate" = "12"
+L 09/13/2026 - 04:04:59: "sv_wateraccelerate" = "10"
+L 09/13/2026 - 04:04:59: "sv_waterfriction" = "1"
+L 09/13/2026 - 04:04:59: "sv_footsteps" = "1"
+L 09/13/2026 - 04:04:59: "sv_rollspeed" = "200"
+L 09/13/2026 - 04:04:59: "sv_rollangle" = "0"
+L 09/13/2026 - 04:04:59: "sv_friction" = "5.2"
+L 09/13/2026 - 04:04:59: "sv_bounce" = "0"
+L 09/13/2026 - 04:04:59: "sv_stepsize" = "18"
+L 09/13/2026 - 04:04:59: "sv_mover_pogofrequency" = "10"
+L 09/13/2026 - 04:04:59: "sv_mover_pogodampingratio" = "1"
+L 09/13/2026 - 04:04:59: "sv_mover_maxslope" = "0.7"
+L 09/13/2026 - 04:04:59: "r_JeepViewDampenFreq" = "7"
+L 09/13/2026 - 04:04:59: "r_JeepViewDampenDamp" = "1"
+L 09/13/2026 - 04:04:59: "r_JeepViewZHeight" = "10"
+L 09/13/2026 - 04:04:59: "r_AirboatViewDampenFreq" = "7"
+L 09/13/2026 - 04:04:59: "r_AirboatViewDampenDamp" = "1"
+L 09/13/2026 - 04:04:59: "r_AirboatViewZHeight" = "0"
+L 09/13/2026 - 04:04:59: "sv_allchat" = "true"
+L 09/13/2026 - 04:04:59: "buddha" = "false"
+L 09/13/2026 - 04:04:59: "buddha_ignore_bots" = "false"
+L 09/13/2026 - 04:04:59: "buddha_reset_hp" = "1"
+L 09/13/2026 - 04:04:59: "mp_teamplay" = "false"
+L 09/13/2026 - 04:04:59: "mp_forcerespawn" = "true"
+L 09/13/2026 - 04:04:59: "decalfrequency" = "10"
+L 09/13/2026 - 04:04:59: "mp_fadetoblack" = "false"
+L 09/13/2026 - 04:04:59: "mp_weaponstay" = "false"
+L 09/13/2026 - 04:04:59: "sv_autobuyammo" = "false"
+L 09/13/2026 - 04:04:59: "mp_promoted_item_enabled" = "false"
+L 09/13/2026 - 04:04:59: "sv_accelerate_use_weapon_speed" = "true"
+L 09/13/2026 - 04:04:59: "sv_accelerate_debug_speed" = "false"
+L 09/13/2026 - 04:04:59: "cash_team_terrorist_win_bomb" = "2700"
+L 09/13/2026 - 04:04:59: "cash_team_elimination_hostage_map_t" = "2000"
+L 09/13/2026 - 04:04:59: "cash_team_elimination_hostage_map_ct" = "2300"
+L 09/13/2026 - 04:04:59: "cash_team_elimination_bomb_map" = "2700"
+L 09/13/2026 - 04:04:59: "cash_team_win_by_time_running_out_hostage" = "2000"
+L 09/13/2026 - 04:04:59: "cash_team_win_by_time_running_out_bomb" = "2700"
+L 09/13/2026 - 04:04:59: "cash_team_win_by_defusing_bomb" = "2700"
+L 09/13/2026 - 04:04:59: "cash_team_win_by_hostage_rescue" = "3000"
+L 09/13/2026 - 04:04:59: "cash_team_loser_bonus" = "2400"
+L 09/13/2026 - 04:04:59: "cash_team_loser_bonus_consecutive_rounds" = "0"
+L 09/13/2026 - 04:04:59: "cash_team_winner_bonus_consecutive_rounds" = "0"
+L 09/13/2026 - 04:04:59: "cash_team_rescued_hostage" = "0"
+L 09/13/2026 - 04:04:59: "cash_team_hostage_alive" = "0"
+L 09/13/2026 - 04:04:59: "cash_team_planted_bomb_but_defused" = "200"
+L 09/13/2026 - 04:04:59: "cash_team_hostage_interaction" = "500"
+L 09/13/2026 - 04:04:59: "cash_team_bonus_shorthanded" = "0"
+L 09/13/2026 - 04:04:59: "cash_player_killed_teammate" = "-300"
+L 09/13/2026 - 04:04:59: "cash_player_killed_enemy_factor" = "0.5"
+L 09/13/2026 - 04:04:59: "cash_player_killed_enemy_default" = "200"
+L 09/13/2026 - 04:04:59: "cash_player_bomb_planted" = "200"
+L 09/13/2026 - 04:04:59: "cash_player_bomb_defused" = "200"
+L 09/13/2026 - 04:04:59: "cash_player_rescued_hostage" = "1000"
+L 09/13/2026 - 04:04:59: "cash_player_interact_with_hostage" = "300"
+L 09/13/2026 - 04:04:59: "cash_player_damage_hostage" = "-30"
+L 09/13/2026 - 04:04:59: "cash_player_killed_hostage" = "-1000"
+L 09/13/2026 - 04:04:59: "cash_player_respawn_amount" = "0"
+L 09/13/2026 - 04:04:59: "cash_player_get_killed" = "0"
+L 09/13/2026 - 04:04:59: "cash_team_per_dead_enemy" = "50"
+L 09/13/2026 - 04:04:59: "cash_player_drop_on_death" = "0"
+L 09/13/2026 - 04:04:59: "cash_player_drop_on_death_stack_value" = "250"
+L 09/13/2026 - 04:04:59: "sv_competitive_minspec" = "true"
+L 09/13/2026 - 04:04:59: "mp_teammates_are_enemies" = "false"
+L 09/13/2026 - 04:04:59: "mp_buy_anywhere" = "0"
+L 09/13/2026 - 04:04:59: "mp_buy_during_immunity" = "0"
+L 09/13/2026 - 04:04:59: "sv_kick_ban_duration" = "15"
+L 09/13/2026 - 04:04:59: "sv_deadtalk" = "false"
+L 09/13/2026 - 04:04:59: "sv_spec_hear" = "3"
+L 09/13/2026 - 04:04:59: "mp_c4timer" = "40"
+L 09/13/2026 - 04:04:59: "mp_roundtime" = "3"
+L 09/13/2026 - 04:04:59: "mp_roundtime_hostage" = "2"
+L 09/13/2026 - 04:04:59: "mp_roundtime_defuse" = "2.25"
+L 09/13/2026 - 04:04:59: "mp_team_intro_time" = "6.5"
+L 09/13/2026 - 04:04:59: "mp_freezetime" = "5"
+L 09/13/2026 - 04:04:59: "mp_limitteams" = "2"
+L 09/13/2026 - 04:04:59: "mp_autoteambalance" = "true"
+L 09/13/2026 - 04:04:59: "mp_maxrounds" = "15"
+L 09/13/2026 - 04:04:59: "mp_winlimit" = "0"
+L 09/13/2026 - 04:04:59: "mp_tournament" = "false"
+L 09/13/2026 - 04:04:59: "mp_timelimit" = "0"
+L 09/13/2026 - 04:04:59: "mp_fraglimit" = "0"
+L 09/13/2026 - 04:04:59: "nextmode" = ""
+L 09/13/2026 - 04:04:59: "nextlevel" = ""
+L 09/13/2026 - 04:04:59: "sv_teamid_overhead_always_prohibit" = "false"
+L 09/13/2026 - 04:04:59: "sv_show_team_equipment_prohibit" = "false"
+L 09/13/2026 - 04:04:59: "sv_teamid_overhead" = "true"
+L 09/13/2026 - 04:04:59: "sv_gravity" = "800"
+L 09/13/2026 - 04:04:59: "sv_vote_issue_kick_allowed" = "true"
+L 09/13/2026 - 04:04:59: "sv_vote_kick_ban_duration" = "15"
+L 09/13/2026 - 04:04:59: "sv_vote_issue_loadbackup_allowed" = "true"
+L 09/13/2026 - 04:04:59: "sv_vote_issue_loadbackup_spec_only" = "false"
+L 09/13/2026 - 04:04:59: "sv_vote_issue_pause_match_spec_only" = "false"
+L 09/13/2026 - 04:04:59: "metamod_version" = "2.0.0-dev+1410"
+L 09/13/2026 - 04:04:59: server cvars end
+L 09/13/2026 - 04:04:59: server_cvar: "mp_friendlyfire" "false"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_team_terrorist_win_bomb" "3500"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_team_elimination_hostage_map_t" "1000"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_team_elimination_hostage_map_ct" "2000"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_team_elimination_bomb_map" "3250"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_team_win_by_time_running_out_hostage" "3250"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_team_win_by_time_running_out_bomb" "3250"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_team_win_by_defusing_bomb" "3250"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_team_win_by_hostage_rescue" "3500"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_team_loser_bonus" "1400"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_team_loser_bonus_consecutive_rounds" "500"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_team_planted_bomb_but_defused" "600"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_player_killed_enemy_factor" "1"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_player_killed_enemy_default" "300"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_player_bomb_planted" "300"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_player_bomb_defused" "300"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_player_interact_with_hostage" "150"
+L 09/13/2026 - 04:04:59: server_cvar: "mp_roundtime" "5"
+L 09/13/2026 - 04:04:59: server_cvar: "mp_roundtime_hostage" "0"
+L 09/13/2026 - 04:04:59: server_cvar: "mp_roundtime_defuse" "0"
+L 09/13/2026 - 04:04:59: server_cvar: "mp_freezetime" "6"
+L 09/13/2026 - 04:04:59: server_cvar: "mp_maxrounds" "0"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_player_bomb_defused" "200"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_player_bomb_planted" "200"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_player_interact_with_hostage" "300"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_player_killed_enemy_default" "200"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_player_killed_enemy_factor" "0.5"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_team_elimination_bomb_map" "2700"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_team_elimination_hostage_map_t" "2000"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_team_elimination_hostage_map_ct" "2300"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_team_loser_bonus" "2400"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_team_loser_bonus_consecutive_rounds" "0"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_team_planted_bomb_but_defused" "200"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_team_terrorist_win_bomb" "2700"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_team_win_by_defusing_bomb" "2700"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_team_win_by_hostage_rescue" "3000"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_team_win_by_time_running_out_hostage" "2000"
+L 09/13/2026 - 04:04:59: server_cvar: "cash_team_win_by_time_running_out_bomb" "2700"
+L 09/13/2026 - 04:04:59: server_cvar: "mp_freezetime" "5"
+L 09/13/2026 - 04:04:59: server_cvar: "mp_friendlyfire" "true"
+L 09/13/2026 - 04:04:59: server_cvar: "mp_maxrounds" "15"
+L 09/13/2026 - 04:04:59: server_cvar: "mp_roundtime" "3"
+L 09/13/2026 - 04:04:59: server_cvar: "mp_roundtime_hostage" "2"
+L 09/13/2026 - 04:04:59: server_cvar: "mp_roundtime_defuse" "2.25"
+L 09/13/2026 - 04:04:59: Started:  ""
+L 09/13/2026 - 04:05:00: World triggered "Warmup_Start"
+L 09/13/2026 - 04:05:00: server_cvar: "mp_freezetime" "0"
+L 09/13/2026 - 04:05:00: server_cvar: "mp_maxrounds" "9999"
+L 09/13/2026 - 04:05:00: server_cvar: "mp_limitteams" "0"
+L 09/13/2026 - 04:05:00: server_cvar: "mp_autoteambalance" "false"
+L 09/13/2026 - 04:05:01: "pichekistha<0><[U:1:80924469]><>" connected, address "71.34.75.84:51980"
+L 09/13/2026 - 04:05:01: rcon from "169.150.232.56:34474": command "status_json"
+L 09/13/2026 - 04:05:02: rcon from "169.150.232.56:34474": command "status"
+L 09/13/2026 - 04:05:02: "pichekistha<65280><[U:1:80924469]><>" STEAM USERID validated
+L 09/13/2026 - 04:05:02: "Sheldor<1><[U:1:1080094440]><>" connected, address "68.67.249.5:31787"
+L 09/13/2026 - 04:05:03: "pichekistha<0><[U:1:80924469]><>" entered the game
+L 09/13/2026 - 04:05:03: "Sheldor<65281><[U:1:1080094440]><>" STEAM USERID validated
+L 09/13/2026 - 04:05:04: "Sheldor<1><[U:1:1080094440]><>" entered the game
+L 09/13/2026 - 04:05:06: "pichekistha<0><[U:1:80924469]>" switched from team <Unassigned> to <TERRORIST>
+L 09/13/2026 - 04:05:06: World triggered "Game_Commencing"
+L 09/13/2026 - 04:05:06: Starting Freeze period
+L 09/13/2026 - 04:05:06: JSON_BEGIN{
+L 09/13/2026 - 04:05:06: "name": "round_stats",
+L 09/13/2026 - 04:05:06: "round_number" : "1",
+L 09/13/2026 - 04:05:06: "score_t" : "0",
+L 09/13/2026 - 04:05:06: "score_ct" : "0",
+L 09/13/2026 - 04:05:06: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:05:06: "server" : "cupcake",
+L 09/13/2026 - 04:05:06: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:05:06: "players" : {
+L 09/13/2026 - 04:05:06: "player_0" : "            80924469,      2,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:05:06: "player_1" : "          1080094440,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:05:06: }}JSON_END
+L 09/13/2026 - 04:05:06: World triggered "Match_Start" on "aim_ak_bench"
+L 09/13/2026 - 04:05:06: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:05:06: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:05:06: MatchStatus: Score: 0:0 on map "aim_ak_bench" RoundsPlayed: -1
+L 09/13/2026 - 04:05:08: World triggered "Warmup_Start"
+L 09/13/2026 - 04:05:11: rcon from "169.150.232.56:36722": command "status_json"
+L 09/13/2026 - 04:05:11: rcon from "169.150.232.56:36722": command "status"
+L 09/13/2026 - 04:05:12: "Sheldor<1><[U:1:1080094440]>" switched from team <Unassigned> to <CT>
+L 09/13/2026 - 04:05:16: "Sheldor<1><[U:1:1080094440]><CT>" disconnected (reason "NETWORK_DISCONNECT_DISCONNECT_BY_USER")
+L 09/13/2026 - 04:05:16: "Sheldor<1><[U:1:1080094440]>" switched from team <CT> to <Unassigned>
+L 09/13/2026 - 04:05:16: "Sheldor<1><[U:1:1080094440]><Unassigned>" [-496 -672 64] committed suicide with "world"
+L 09/13/2026 - 04:05:21: rcon from "169.150.232.56:37436": command "status_json"
+L 09/13/2026 - 04:05:22: rcon from "169.150.232.56:37436": command "status"
+L 09/13/2026 - 04:05:31: rcon from "169.150.232.56:42366": command "status_json"
+L 09/13/2026 - 04:05:31: rcon from "169.150.232.56:42366": command "status"
+L 09/13/2026 - 04:05:41: rcon from "169.150.232.56:48796": command "status_json"
+L 09/13/2026 - 04:05:42: rcon from "169.150.232.56:48796": command "status"
+L 09/13/2026 - 04:05:43: rcon from "185.180.15.34:50450": command "status"
+L 09/13/2026 - 04:05:51: rcon from "169.150.232.56:43364": command "status_json"
+L 09/13/2026 - 04:05:51: rcon from "169.150.232.56:43364": command "status"
+L 09/13/2026 - 04:06:01: rcon from "169.150.232.56:43768": command "status_json"
+L 09/13/2026 - 04:06:02: rcon from "169.150.232.56:43768": command "status"
+L 09/13/2026 - 04:06:11: rcon from "169.150.232.56:32860": command "status_json"
+L 09/13/2026 - 04:06:12: rcon from "169.150.232.56:32860": command "status"
+L 09/13/2026 - 04:06:21: rcon from "169.150.232.56:50040": command "status_json"
+L 09/13/2026 - 04:06:22: rcon from "169.150.232.56:50040": command "status"
+L 09/13/2026 - 04:06:23: "Pheonix<2><[U:1:104794797]><>" connected, address "107.192.216.137:57497"
+L 09/13/2026 - 04:06:24: "Pheonix<2><[U:1:104794797]><>" STEAM USERID validated
+L 09/13/2026 - 04:06:25: "Pheonix<2><[U:1:104794797]><>" entered the game
+L 09/13/2026 - 04:06:29: "Pheonix<2><[U:1:104794797]>" switched from team <Unassigned> to <CT>
+L 09/13/2026 - 04:06:31: rcon from "169.150.232.56:57268": command "status_json"
+L 09/13/2026 - 04:06:32: rcon from "169.150.232.56:57268": command "status"
+L 09/13/2026 - 04:06:34: "pichekistha<0><[U:1:80924469]><TERRORIST>" [-493 -639 64] killed "Pheonix<2><[U:1:104794797]><CT>" [-217 -669 64] with "ak47"
+L 09/13/2026 - 04:06:40: World triggered "Warmup_End"
+L 09/13/2026 - 04:06:40: Starting Freeze period
+L 09/13/2026 - 04:06:40: JSON_BEGIN{
+L 09/13/2026 - 04:06:40: "name": "round_stats",
+L 09/13/2026 - 04:06:40: "round_number" : "1",
+L 09/13/2026 - 04:06:40: "score_t" : "0",
+L 09/13/2026 - 04:06:40: "score_ct" : "0",
+L 09/13/2026 - 04:06:40: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:06:40: "server" : "cupcake",
+L 09/13/2026 - 04:06:40: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:06:40: "players" : {
+L 09/13/2026 - 04:06:40: "player_0" : "            80924469,      2,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:06:40: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:06:40: "player_2" : "           104794797,      3,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:06:40: }}JSON_END
+L 09/13/2026 - 04:06:40: World triggered "Match_Start" on "aim_ak_bench"
+L 09/13/2026 - 04:06:40: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:06:40: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:06:40: MatchStatus: Score: 0:0 on map "aim_ak_bench" RoundsPlayed: 0
+L 09/13/2026 - 04:06:40: World triggered "Round_Start"
+L 09/13/2026 - 04:06:41: rcon from "169.150.232.56:35052": command "status_json"
+L 09/13/2026 - 04:06:42: rcon from "169.150.232.56:35052": command "status"
+L 09/13/2026 - 04:06:46: "Pheonix<2><[U:1:104794797]><CT>" [-266 -735 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [-422 451 117] with "ak47" (headshot)
+L 09/13/2026 - 04:06:46: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "1") (T "0")
+L 09/13/2026 - 04:06:46: Team "CT" scored "1" with "1" players
+L 09/13/2026 - 04:06:46: Team "TERRORIST" scored "0" with "1" players
+L 09/13/2026 - 04:06:46: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:06:46: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:06:46: MatchStatus: Score: 1:0 on map "aim_ak_bench" RoundsPlayed: 1
+L 09/13/2026 - 04:06:46: World triggered "Round_End"
+L 09/13/2026 - 04:06:51: rcon from "169.150.232.56:35602": command "status_json"
+L 09/13/2026 - 04:06:51: rcon from "169.150.232.56:35602": command "status"
+L 09/13/2026 - 04:06:53: Starting Freeze period
+L 09/13/2026 - 04:06:53: JSON_BEGIN{
+L 09/13/2026 - 04:06:53: "name": "round_stats",
+L 09/13/2026 - 04:06:53: "round_number" : "2",
+L 09/13/2026 - 04:06:53: "score_t" : "0",
+L 09/13/2026 - 04:06:53: "score_ct" : "1",
+L 09/13/2026 - 04:06:53: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:06:53: "server" : "cupcake",
+L 09/13/2026 - 04:06:53: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:06:53: "players" : {
+L 09/13/2026 - 04:06:53: "player_0" : "            80924469,      2,   3400,      0,      1,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:06:53: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:06:53: "player_2" : "           104794797,      3,   3450,      1,      0,      0, 100.00, 100.00,   0.00,    100,      1,      0,      0,      0,      0,      0,      1,      1,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:06:53: }}JSON_END
+L 09/13/2026 - 04:06:53: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:06:53: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:06:53: MatchStatus: Score: 1:0 on map "aim_ak_bench" RoundsPlayed: 1
+L 09/13/2026 - 04:06:53: World triggered "Round_Start"
+L 09/13/2026 - 04:06:58: "Pheonix<2><[U:1:104794797]><CT>" [-273 -628 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [-255 595 64] with "ak47" (headshot)
+L 09/13/2026 - 04:06:58: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "2") (T "0")
+L 09/13/2026 - 04:06:58: Team "CT" scored "2" with "1" players
+L 09/13/2026 - 04:06:58: Team "TERRORIST" scored "0" with "2" players
+L 09/13/2026 - 04:06:58: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:06:58: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:06:58: MatchStatus: Score: 2:0 on map "aim_ak_bench" RoundsPlayed: 2
+L 09/13/2026 - 04:06:58: World triggered "Round_End"
+L 09/13/2026 - 04:07:01: rcon from "169.150.232.56:57476": command "status_json"
+L 09/13/2026 - 04:07:02: rcon from "169.150.232.56:57476": command "status"
+L 09/13/2026 - 04:07:05: Starting Freeze period
+L 09/13/2026 - 04:07:05: JSON_BEGIN{
+L 09/13/2026 - 04:07:05: "name": "round_stats",
+L 09/13/2026 - 04:07:05: "round_number" : "3",
+L 09/13/2026 - 04:07:05: "score_t" : "0",
+L 09/13/2026 - 04:07:05: "score_ct" : "2",
+L 09/13/2026 - 04:07:05: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:07:05: "server" : "cupcake",
+L 09/13/2026 - 04:07:05: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:07:05: "players" : {
+L 09/13/2026 - 04:07:05: "player_0" : "            80924469,      2,   5800,      0,      2,      0,  26.00,   0.00,   0.00,     13,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:07:05: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:07:05: "player_2" : "           104794797,      3,   5900,      2,      0,      0, 200.00, 100.00,   0.00,    100,      2,      0,      0,      0,      0,      0,      2,      2,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:07:05: }}JSON_END
+L 09/13/2026 - 04:07:05: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:07:05: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:07:05: MatchStatus: Score: 2:0 on map "aim_ak_bench" RoundsPlayed: 2
+L 09/13/2026 - 04:07:05: World triggered "Round_Start"
+L 09/13/2026 - 04:07:11: "Pheonix<2><[U:1:104794797]><CT>" [-336 -630 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [344 532 64] with "ak47" (headshot)
+L 09/13/2026 - 04:07:11: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "3") (T "0")
+L 09/13/2026 - 04:07:11: Team "CT" scored "3" with "1" players
+L 09/13/2026 - 04:07:11: Team "TERRORIST" scored "0" with "2" players
+L 09/13/2026 - 04:07:11: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:07:11: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:07:11: MatchStatus: Score: 3:0 on map "aim_ak_bench" RoundsPlayed: 3
+L 09/13/2026 - 04:07:11: World triggered "Round_End"
+L 09/13/2026 - 04:07:11: rcon from "169.150.232.56:48238": command "status_json"
+L 09/13/2026 - 04:07:11: rcon from "169.150.232.56:48238": command "status"
+L 09/13/2026 - 04:07:18: Starting Freeze period
+L 09/13/2026 - 04:07:18: JSON_BEGIN{
+L 09/13/2026 - 04:07:18: "name": "round_stats",
+L 09/13/2026 - 04:07:18: "round_number" : "4",
+L 09/13/2026 - 04:07:18: "score_t" : "0",
+L 09/13/2026 - 04:07:18: "score_ct" : "3",
+L 09/13/2026 - 04:07:18: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:07:18: "server" : "cupcake",
+L 09/13/2026 - 04:07:18: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:07:18: "players" : {
+L 09/13/2026 - 04:07:18: "player_0" : "            80924469,      2,   8200,      0,      3,      0, 105.00,   0.00,   0.00,     35,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:07:18: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:07:18: "player_2" : "           104794797,      3,   8350,      3,      0,      0, 300.00, 100.00,   0.00,    100,      3,      0,      0,      0,      0,      0,      3,      3,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:07:18: }}JSON_END
+L 09/13/2026 - 04:07:18: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:07:18: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:07:18: MatchStatus: Score: 3:0 on map "aim_ak_bench" RoundsPlayed: 3
+L 09/13/2026 - 04:07:18: World triggered "Round_Start"
+L 09/13/2026 - 04:07:21: rcon from "169.150.232.56:54672": command "status_json"
+L 09/13/2026 - 04:07:22: rcon from "169.150.232.56:54672": command "status"
+L 09/13/2026 - 04:07:29: "pichekistha<0><[U:1:80924469]><TERRORIST>" [-298 599 64] killed "Pheonix<2><[U:1:104794797]><CT>" [272 -652 64] with "ak47" (headshot)
+L 09/13/2026 - 04:07:29: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "3") (T "1")
+L 09/13/2026 - 04:07:29: Team "CT" scored "3" with "1" players
+L 09/13/2026 - 04:07:29: Team "TERRORIST" scored "1" with "2" players
+L 09/13/2026 - 04:07:29: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:07:29: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:07:29: MatchStatus: Score: 3:1 on map "aim_ak_bench" RoundsPlayed: 4
+L 09/13/2026 - 04:07:29: World triggered "Round_End"
+L 09/13/2026 - 04:07:31: rcon from "169.150.232.56:35128": command "status_json"
+L 09/13/2026 - 04:07:32: rcon from "169.150.232.56:35128": command "status"
+L 09/13/2026 - 04:07:36: Starting Freeze period
+L 09/13/2026 - 04:07:36: JSON_BEGIN{
+L 09/13/2026 - 04:07:36: "name": "round_stats",
+L 09/13/2026 - 04:07:36: "round_number" : "5",
+L 09/13/2026 - 04:07:36: "score_t" : "1",
+L 09/13/2026 - 04:07:36: "score_ct" : "3",
+L 09/13/2026 - 04:07:36: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:07:36: "server" : "cupcake",
+L 09/13/2026 - 04:07:36: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:07:36: "players" : {
+L 09/13/2026 - 04:07:36: "player_0" : "            80924469,      2,  10000,      1,      3,      0, 205.00, 100.00,   0.33,     51,      1,      0,      0,      0,      0,      0,      1,      1,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:07:36: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:07:36: "player_2" : "           104794797,      3,  10000,      3,      1,      0, 300.00, 100.00,   3.00,     75,      3,      0,      0,      0,      0,      0,      3,      3,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:07:36: }}JSON_END
+L 09/13/2026 - 04:07:36: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:07:36: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:07:36: MatchStatus: Score: 3:1 on map "aim_ak_bench" RoundsPlayed: 4
+L 09/13/2026 - 04:07:36: World triggered "Round_Start"
+L 09/13/2026 - 04:07:41: rcon from "169.150.232.56:57156": command "status_json"
+L 09/13/2026 - 04:07:42: rcon from "169.150.232.56:57156": command "status"
+L 09/13/2026 - 04:07:42: "pichekistha<0><[U:1:80924469]><TERRORIST>" [-378 511 64] killed "Pheonix<2><[U:1:104794797]><CT>" [650 -541 64] with "ak47" (headshot)
+L 09/13/2026 - 04:07:42: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "3") (T "2")
+L 09/13/2026 - 04:07:42: Team "CT" scored "3" with "2" players
+L 09/13/2026 - 04:07:42: Team "TERRORIST" scored "2" with "2" players
+L 09/13/2026 - 04:07:42: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:07:42: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:07:42: MatchStatus: Score: 3:2 on map "aim_ak_bench" RoundsPlayed: 5
+L 09/13/2026 - 04:07:42: World triggered "Round_End"
+L 09/13/2026 - 04:07:49: Starting Freeze period
+L 09/13/2026 - 04:07:49: JSON_BEGIN{
+L 09/13/2026 - 04:07:49: "name": "round_stats",
+L 09/13/2026 - 04:07:49: "round_number" : "6",
+L 09/13/2026 - 04:07:49: "score_t" : "2",
+L 09/13/2026 - 04:07:49: "score_ct" : "3",
+L 09/13/2026 - 04:07:49: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:07:49: "server" : "cupcake",
+L 09/13/2026 - 04:07:49: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:07:49: "players" : {
+L 09/13/2026 - 04:07:49: "player_0" : "            80924469,      2,  10000,      2,      3,      0, 305.00, 100.00,   0.67,     61,      2,      0,      0,      0,      0,      0,      2,      2,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:07:49: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:07:49: "player_2" : "           104794797,      3,  10000,      3,      2,      0, 346.00, 100.00,   1.50,     69,      3,      0,      0,      0,      0,      0,      3,      3,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:07:49: }}JSON_END
+L 09/13/2026 - 04:07:49: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:07:49: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:07:49: MatchStatus: Score: 3:2 on map "aim_ak_bench" RoundsPlayed: 5
+L 09/13/2026 - 04:07:49: World triggered "Round_Start"
+L 09/13/2026 - 04:07:51: rcon from "169.150.232.56:58430": command "status_json"
+L 09/13/2026 - 04:07:52: rcon from "169.150.232.56:58430": command "status"
+L 09/13/2026 - 04:08:00: "Pheonix<2><[U:1:104794797]><CT>" [623 -766 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [234 579 64] with "ak47" (headshot)
+L 09/13/2026 - 04:08:00: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "4") (T "2")
+L 09/13/2026 - 04:08:00: Team "CT" scored "4" with "2" players
+L 09/13/2026 - 04:08:00: Team "TERRORIST" scored "2" with "2" players
+L 09/13/2026 - 04:08:00: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:08:00: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:08:00: MatchStatus: Score: 4:2 on map "aim_ak_bench" RoundsPlayed: 6
+L 09/13/2026 - 04:08:00: World triggered "Round_End"
+L 09/13/2026 - 04:08:01: rcon from "169.150.232.56:58556": command "status_json"
+L 09/13/2026 - 04:08:02: rcon from "169.150.232.56:58556": command "status"
+L 09/13/2026 - 04:08:07: Starting Freeze period
+L 09/13/2026 - 04:08:07: JSON_BEGIN{
+L 09/13/2026 - 04:08:07: "name": "round_stats",
+L 09/13/2026 - 04:08:07: "round_number" : "7",
+L 09/13/2026 - 04:08:07: "score_t" : "2",
+L 09/13/2026 - 04:08:07: "score_ct" : "4",
+L 09/13/2026 - 04:08:07: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:08:07: "server" : "cupcake",
+L 09/13/2026 - 04:08:07: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:08:07: "players" : {
+L 09/13/2026 - 04:08:07: "player_0" : "            80924469,      2,  10000,      2,      4,      0, 305.00, 100.00,   0.50,     51,      2,      0,      0,      0,      0,      0,      2,      2,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:08:07: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:08:07: "player_2" : "           104794797,      3,  10000,      4,      2,      0, 446.00, 100.00,   2.00,     74,      4,      0,      0,      0,      0,      0,      4,      4,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:08:07: }}JSON_END
+L 09/13/2026 - 04:08:07: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:08:07: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:08:07: MatchStatus: Score: 4:2 on map "aim_ak_bench" RoundsPlayed: 6
+L 09/13/2026 - 04:08:07: World triggered "Round_Start"
+L 09/13/2026 - 04:08:11: rcon from "169.150.232.56:42536": command "status_json"
+L 09/13/2026 - 04:08:11: rcon from "169.150.232.56:42536": command "status"
+L 09/13/2026 - 04:08:21: rcon from "169.150.232.56:56276": command "status_json"
+L 09/13/2026 - 04:08:21: rcon from "169.150.232.56:56276": command "status"
+L 09/13/2026 - 04:08:23: "Pheonix<2><[U:1:104794797]><CT>" [200 -830 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [268 636 64] with "ak47" (headshot)
+L 09/13/2026 - 04:08:23: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "5") (T "2")
+L 09/13/2026 - 04:08:23: Team "CT" scored "5" with "2" players
+L 09/13/2026 - 04:08:23: Team "TERRORIST" scored "2" with "2" players
+L 09/13/2026 - 04:08:23: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:08:23: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:08:23: MatchStatus: Score: 5:2 on map "aim_ak_bench" RoundsPlayed: 7
+L 09/13/2026 - 04:08:23: World triggered "Round_End"
+L 09/13/2026 - 04:08:30: Starting Freeze period
+L 09/13/2026 - 04:08:30: JSON_BEGIN{
+L 09/13/2026 - 04:08:30: "name": "round_stats",
+L 09/13/2026 - 04:08:30: "round_number" : "8",
+L 09/13/2026 - 04:08:30: "score_t" : "2",
+L 09/13/2026 - 04:08:30: "score_ct" : "5",
+L 09/13/2026 - 04:08:30: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:08:30: "server" : "cupcake",
+L 09/13/2026 - 04:08:30: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:08:30: "players" : {
+L 09/13/2026 - 04:08:30: "player_0" : "            80924469,      2,  10000,      2,      5,      0, 305.00, 100.00,   0.40,     44,      2,      0,      0,      0,      0,      0,      2,      2,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:08:30: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:08:30: "player_2" : "           104794797,      3,  10000,      5,      2,      0, 546.00, 100.00,   2.50,     78,      5,      0,      0,      0,      0,      0,      5,      5,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:08:30: }}JSON_END
+L 09/13/2026 - 04:08:30: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:08:30: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:08:30: MatchStatus: Score: 5:2 on map "aim_ak_bench" RoundsPlayed: 7
+L 09/13/2026 - 04:08:30: World triggered "Round_Start"
+L 09/13/2026 - 04:08:31: rcon from "169.150.232.56:42080": command "status_json"
+L 09/13/2026 - 04:08:32: rcon from "169.150.232.56:42080": command "status"
+L 09/13/2026 - 04:08:41: rcon from "169.150.232.56:38068": command "status_json"
+L 09/13/2026 - 04:08:42: rcon from "169.150.232.56:38068": command "status"
+L 09/13/2026 - 04:08:44: "pichekistha<0><[U:1:80924469]><TERRORIST>" [-184 544 64] killed "Pheonix<2><[U:1:104794797]><CT>" [-705 -791 64] with "ak47" (headshot)
+L 09/13/2026 - 04:08:44: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "5") (T "3")
+L 09/13/2026 - 04:08:44: Team "CT" scored "5" with "2" players
+L 09/13/2026 - 04:08:44: Team "TERRORIST" scored "3" with "2" players
+L 09/13/2026 - 04:08:44: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:08:44: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:08:44: MatchStatus: Score: 5:3 on map "aim_ak_bench" RoundsPlayed: 8
+L 09/13/2026 - 04:08:44: World triggered "Round_End"
+L 09/13/2026 - 04:08:51: Starting Freeze period
+L 09/13/2026 - 04:08:51: JSON_BEGIN{
+L 09/13/2026 - 04:08:51: "name": "round_stats",
+L 09/13/2026 - 04:08:51: "round_number" : "9",
+L 09/13/2026 - 04:08:51: "score_t" : "3",
+L 09/13/2026 - 04:08:51: "score_ct" : "5",
+L 09/13/2026 - 04:08:51: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:08:51: "server" : "cupcake",
+L 09/13/2026 - 04:08:51: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:08:51: "players" : {
+L 09/13/2026 - 04:08:51: "player_0" : "            80924469,      2,  10000,      3,      5,      0, 405.00, 100.00,   0.60,     51,      3,      0,      0,      0,      0,      0,      3,      3,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:08:51: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:08:51: "player_2" : "           104794797,      3,  10000,      5,      3,      0, 631.00, 100.00,   1.67,     79,      5,      0,      0,      0,      0,      0,      5,      5,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:08:51: }}JSON_END
+L 09/13/2026 - 04:08:51: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:08:51: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:08:51: MatchStatus: Score: 5:3 on map "aim_ak_bench" RoundsPlayed: 8
+L 09/13/2026 - 04:08:51: World triggered "Round_Start"
+L 09/13/2026 - 04:08:51: rcon from "169.150.232.56:37170": command "status_json"
+L 09/13/2026 - 04:08:52: rcon from "169.150.232.56:37170": command "status"
+L 09/13/2026 - 04:08:56: "Pheonix<2><[U:1:104794797]><CT>" [134 -727 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [435 452 117] with "ak47" (headshot)
+L 09/13/2026 - 04:08:56: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "6") (T "3")
+L 09/13/2026 - 04:08:56: Team "CT" scored "6" with "2" players
+L 09/13/2026 - 04:08:56: Team "TERRORIST" scored "3" with "2" players
+L 09/13/2026 - 04:08:56: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:08:56: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:08:56: MatchStatus: Score: 6:3 on map "aim_ak_bench" RoundsPlayed: 9
+L 09/13/2026 - 04:08:56: World triggered "Round_End"
+L 09/13/2026 - 04:09:01: rcon from "169.150.232.56:50364": command "status_json"
+L 09/13/2026 - 04:09:02: rcon from "169.150.232.56:50364": command "status"
+L 09/13/2026 - 04:09:03: Starting Freeze period
+L 09/13/2026 - 04:09:03: JSON_BEGIN{
+L 09/13/2026 - 04:09:03: "name": "round_stats",
+L 09/13/2026 - 04:09:03: "round_number" : "10",
+L 09/13/2026 - 04:09:03: "score_t" : "3",
+L 09/13/2026 - 04:09:03: "score_ct" : "6",
+L 09/13/2026 - 04:09:03: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:09:03: "server" : "cupcake",
+L 09/13/2026 - 04:09:03: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:09:03: "players" : {
+L 09/13/2026 - 04:09:03: "player_0" : "            80924469,      2,  10000,      3,      6,      0, 405.00, 100.00,   0.50,     45,      3,      0,      0,      0,      0,      0,      3,      3,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:09:03: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:09:03: "player_2" : "           104794797,      3,  10000,      6,      3,      0, 731.00, 100.00,   2.00,     81,      6,      0,      0,      0,      0,      0,      6,      6,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:09:03: }}JSON_END
+L 09/13/2026 - 04:09:03: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:09:03: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:09:03: MatchStatus: Score: 6:3 on map "aim_ak_bench" RoundsPlayed: 9
+L 09/13/2026 - 04:09:03: World triggered "Round_Start"
+L 09/13/2026 - 04:09:11: rcon from "169.150.232.56:35392": command "status_json"
+L 09/13/2026 - 04:09:11: rcon from "169.150.232.56:35392": command "status"
+L 09/13/2026 - 04:09:21: rcon from "169.150.232.56:54158": command "status_json"
+L 09/13/2026 - 04:09:22: rcon from "169.150.232.56:54158": command "status"
+L 09/13/2026 - 04:09:23: "Pheonix<2><[U:1:104794797]><CT>" [-414 -669 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [705 460 64] with "ak47" (headshot)
+L 09/13/2026 - 04:09:23: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "7") (T "3")
+L 09/13/2026 - 04:09:23: Team "CT" scored "7" with "2" players
+L 09/13/2026 - 04:09:23: Team "TERRORIST" scored "3" with "2" players
+L 09/13/2026 - 04:09:23: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:09:23: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:09:23: MatchStatus: Score: 7:3 on map "aim_ak_bench" RoundsPlayed: 10
+L 09/13/2026 - 04:09:23: World triggered "Round_End"
+L 09/13/2026 - 04:09:30: Starting Freeze period
+L 09/13/2026 - 04:09:30: JSON_BEGIN{
+L 09/13/2026 - 04:09:30: "name": "round_stats",
+L 09/13/2026 - 04:09:30: "round_number" : "11",
+L 09/13/2026 - 04:09:30: "score_t" : "3",
+L 09/13/2026 - 04:09:30: "score_ct" : "7",
+L 09/13/2026 - 04:09:30: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:09:30: "server" : "cupcake",
+L 09/13/2026 - 04:09:30: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:09:30: "players" : {
+L 09/13/2026 - 04:09:30: "player_0" : "            80924469,      2,  10000,      3,      7,      0, 489.00, 100.00,   0.43,     49,      3,      0,      0,      0,      0,      0,      3,      3,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:09:30: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:09:30: "player_2" : "           104794797,      3,  10000,      7,      3,      0, 831.00, 100.00,   2.33,     83,      7,      0,      0,      0,      0,      0,      7,      7,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:09:30: }}JSON_END
+L 09/13/2026 - 04:09:30: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:09:30: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:09:30: MatchStatus: Score: 7:3 on map "aim_ak_bench" RoundsPlayed: 10
+L 09/13/2026 - 04:09:30: World triggered "Round_Start"
+L 09/13/2026 - 04:09:31: rcon from "169.150.232.56:56578": command "status_json"
+L 09/13/2026 - 04:09:32: rcon from "169.150.232.56:56578": command "status"
+L 09/13/2026 - 04:09:41: "Pheonix<2><[U:1:104794797]><CT>" [-395 -760 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [190 382 64] with "ak47"
+L 09/13/2026 - 04:09:41: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "8") (T "3")
+L 09/13/2026 - 04:09:41: Team "CT" scored "8" with "2" players
+L 09/13/2026 - 04:09:41: Team "TERRORIST" scored "3" with "2" players
+L 09/13/2026 - 04:09:41: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:09:41: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:09:41: MatchStatus: Score: 8:3 on map "aim_ak_bench" RoundsPlayed: 11
+L 09/13/2026 - 04:09:41: World triggered "Round_End"
+L 09/13/2026 - 04:09:41: rcon from "169.150.232.56:38336": command "status_json"
+L 09/13/2026 - 04:09:41: rcon from "169.150.232.56:38336": command "status"
+L 09/13/2026 - 04:09:42: rcon from "169.150.247.207:42586": command "status"
+L 09/13/2026 - 04:09:42: rcon from "169.150.247.207:42602": command "status_json"
+L 09/13/2026 - 04:09:48: Starting Freeze period
+L 09/13/2026 - 04:09:48: JSON_BEGIN{
+L 09/13/2026 - 04:09:48: "name": "round_stats",
+L 09/13/2026 - 04:09:48: "round_number" : "12",
+L 09/13/2026 - 04:09:48: "score_t" : "3",
+L 09/13/2026 - 04:09:48: "score_ct" : "8",
+L 09/13/2026 - 04:09:48: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:09:48: "server" : "cupcake",
+L 09/13/2026 - 04:09:48: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:09:48: "players" : {
+L 09/13/2026 - 04:09:48: "player_0" : "            80924469,      2,  10000,      3,      8,      0, 541.00, 100.00,   0.38,     49,      3,      0,      0,      0,      0,      0,      3,      3,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:09:48: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:09:48: "player_2" : "           104794797,      3,  10000,      8,      3,      0, 931.00,  87.50,   2.67,     85,      8,      0,      0,      0,      0,      0,      8,      8,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:09:48: }}JSON_END
+L 09/13/2026 - 04:09:48: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:09:48: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:09:48: MatchStatus: Score: 8:3 on map "aim_ak_bench" RoundsPlayed: 11
+L 09/13/2026 - 04:09:48: World triggered "Round_Start"
+L 09/13/2026 - 04:09:51: rcon from "169.150.232.56:58780": command "status_json"
+L 09/13/2026 - 04:09:51: rcon from "169.150.232.56:58780": command "status"
+L 09/13/2026 - 04:09:52: "pichekistha<0><[U:1:80924469]><TERRORIST>" [361 549 64] killed "Pheonix<2><[U:1:104794797]><CT>" [-414 -746 64] with "ak47"
+L 09/13/2026 - 04:09:52: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "8") (T "4")
+L 09/13/2026 - 04:09:52: Team "CT" scored "8" with "2" players
+L 09/13/2026 - 04:09:52: Team "TERRORIST" scored "4" with "2" players
+L 09/13/2026 - 04:09:52: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:09:52: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:09:52: MatchStatus: Score: 8:4 on map "aim_ak_bench" RoundsPlayed: 12
+L 09/13/2026 - 04:09:52: World triggered "Round_End"
+L 09/13/2026 - 04:09:59: Starting Freeze period
+L 09/13/2026 - 04:09:59: JSON_BEGIN{
+L 09/13/2026 - 04:09:59: "name": "round_stats",
+L 09/13/2026 - 04:09:59: "round_number" : "13",
+L 09/13/2026 - 04:09:59: "score_t" : "4",
+L 09/13/2026 - 04:09:59: "score_ct" : "8",
+L 09/13/2026 - 04:09:59: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:09:59: "server" : "cupcake",
+L 09/13/2026 - 04:09:59: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:09:59: "players" : {
+L 09/13/2026 - 04:09:59: "player_0" : "            80924469,      2,  10000,      4,      8,      0, 641.00,  75.00,   0.50,     53,      4,      0,      0,      0,      0,      0,      4,      4,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:09:59: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:09:59: "player_2" : "           104794797,      3,  10000,      8,      4,      0, 970.00,  87.50,   2.00,     81,      8,      0,      0,      0,      0,      0,      8,      8,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:09:59: }}JSON_END
+L 09/13/2026 - 04:09:59: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:09:59: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:09:59: MatchStatus: Score: 8:4 on map "aim_ak_bench" RoundsPlayed: 12
+L 09/13/2026 - 04:09:59: World triggered "Round_Start"
+L 09/13/2026 - 04:10:01: rcon from "169.150.232.56:38358": command "status_json"
+L 09/13/2026 - 04:10:01: rcon from "169.150.232.56:38358": command "status"
+L 09/13/2026 - 04:10:07: "Pheonix<2><[U:1:104794797]><CT>" [689 -594 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [-424 563 64] with "ak47" (headshot)
+L 09/13/2026 - 04:10:07: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "9") (T "4")
+L 09/13/2026 - 04:10:07: Team "CT" scored "9" with "2" players
+L 09/13/2026 - 04:10:07: Team "TERRORIST" scored "4" with "2" players
+L 09/13/2026 - 04:10:07: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:10:07: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:10:07: MatchStatus: Score: 9:4 on map "aim_ak_bench" RoundsPlayed: 13
+L 09/13/2026 - 04:10:07: World triggered "Round_End"
+L 09/13/2026 - 04:10:11: rcon from "169.150.232.56:51934": command "status_json"
+L 09/13/2026 - 04:10:12: rcon from "169.150.232.56:51934": command "status"
+L 09/13/2026 - 04:10:14: Starting Freeze period
+L 09/13/2026 - 04:10:14: JSON_BEGIN{
+L 09/13/2026 - 04:10:14: "name": "round_stats",
+L 09/13/2026 - 04:10:14: "round_number" : "14",
+L 09/13/2026 - 04:10:14: "score_t" : "4",
+L 09/13/2026 - 04:10:14: "score_ct" : "9",
+L 09/13/2026 - 04:10:14: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:10:14: "server" : "cupcake",
+L 09/13/2026 - 04:10:14: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:10:14: "players" : {
+L 09/13/2026 - 04:10:14: "player_0" : "            80924469,      2,  10000,      4,      9,      0, 641.00,  75.00,   0.44,     49,      4,      0,      0,      0,      0,      0,      4,      4,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:10:14: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:10:14: "player_2" : "           104794797,      3,  10000,      9,      4,      0,1070.00,  88.89,   2.25,     82,      9,      0,      0,      0,      0,      0,      9,      9,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:10:14: }}JSON_END
+L 09/13/2026 - 04:10:14: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:10:14: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:10:14: MatchStatus: Score: 9:4 on map "aim_ak_bench" RoundsPlayed: 13
+L 09/13/2026 - 04:10:14: World triggered "Round_Start"
+L 09/13/2026 - 04:10:18: "pichekistha<0><[U:1:80924469]><TERRORIST>" [191 605 64] killed "Pheonix<2><[U:1:104794797]><CT>" [620 -630 64] with "ak47" (headshot)
+L 09/13/2026 - 04:10:18: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "9") (T "5")
+L 09/13/2026 - 04:10:18: Team "CT" scored "9" with "2" players
+L 09/13/2026 - 04:10:18: Team "TERRORIST" scored "5" with "2" players
+L 09/13/2026 - 04:10:18: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:10:18: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:10:18: MatchStatus: Score: 9:5 on map "aim_ak_bench" RoundsPlayed: 14
+L 09/13/2026 - 04:10:18: World triggered "Round_End"
+L 09/13/2026 - 04:10:20: "Fraggy<3><[U:1:87305029]><>" connected, address "76.135.231.48:55577"
+L 09/13/2026 - 04:10:21: "Fraggy<3><[U:1:87305029]><>" STEAM USERID validated
+L 09/13/2026 - 04:10:21: rcon from "169.150.232.56:37316": command "status_json"
+L 09/13/2026 - 04:10:22: rcon from "169.150.232.56:37316": command "status"
+L 09/13/2026 - 04:10:22: "Fraggy<3><[U:1:87305029]><>" entered the game
+L 09/13/2026 - 04:10:25: Starting Freeze period
+L 09/13/2026 - 04:10:25: JSON_BEGIN{
+L 09/13/2026 - 04:10:25: "name": "round_stats",
+L 09/13/2026 - 04:10:25: "round_number" : "15",
+L 09/13/2026 - 04:10:25: "score_t" : "5",
+L 09/13/2026 - 04:10:25: "score_ct" : "9",
+L 09/13/2026 - 04:10:25: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:10:25: "server" : "cupcake",
+L 09/13/2026 - 04:10:25: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:10:25: "players" : {
+L 09/13/2026 - 04:10:25: "player_0" : "            80924469,      2,  10000,      5,      9,      0, 741.00,  80.00,   0.56,     53,      5,      0,      0,      0,      0,      0,      5,      5,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:10:25: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:10:25: "player_2" : "           104794797,      3,  10000,      9,      5,      0,1096.00,  88.89,   1.80,     78,      9,      0,      0,      0,      0,      0,      9,      9,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:10:25: "player_3" : "            87305029,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:10:25: }}JSON_END
+L 09/13/2026 - 04:10:25: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:10:25: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:10:25: MatchStatus: Score: 9:5 on map "aim_ak_bench" RoundsPlayed: 14
+L 09/13/2026 - 04:10:25: World triggered "Round_Start"
+L 09/13/2026 - 04:10:31: rcon from "169.150.232.56:57030": command "status_json"
+L 09/13/2026 - 04:10:31: rcon from "169.150.232.56:57030": command "status"
+L 09/13/2026 - 04:10:38: "pichekistha<0><[U:1:80924469]><TERRORIST>" [-134 589 64] killed "Pheonix<2><[U:1:104794797]><CT>" [-597 -750 64] with "ak47" (headshot)
+L 09/13/2026 - 04:10:38: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "9") (T "6")
+L 09/13/2026 - 04:10:38: Team "CT" scored "9" with "2" players
+L 09/13/2026 - 04:10:38: Team "TERRORIST" scored "6" with "2" players
+L 09/13/2026 - 04:10:38: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:10:38: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:10:38: MatchStatus: Score: 9:6 on map "aim_ak_bench" RoundsPlayed: 15
+L 09/13/2026 - 04:10:38: World triggered "Round_End"
+L 09/13/2026 - 04:10:39: "Fraggy<3><[U:1:87305029]>" switched from team <Unassigned> to <TERRORIST>
+L 09/13/2026 - 04:10:41: rcon from "169.150.232.56:50452": command "status_json"
+L 09/13/2026 - 04:10:41: rcon from "169.150.232.56:50452": command "status"
+L 09/13/2026 - 04:10:43: rcon from "185.180.15.34:45986": command "status"
+L 09/13/2026 - 04:10:45: Starting Freeze period
+L 09/13/2026 - 04:10:45: JSON_BEGIN{
+L 09/13/2026 - 04:10:45: "name": "round_stats",
+L 09/13/2026 - 04:10:45: "round_number" : "16",
+L 09/13/2026 - 04:10:45: "score_t" : "6",
+L 09/13/2026 - 04:10:45: "score_ct" : "9",
+L 09/13/2026 - 04:10:45: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:10:45: "server" : "cupcake",
+L 09/13/2026 - 04:10:45: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:10:45: "players" : {
+L 09/13/2026 - 04:10:45: "player_0" : "            80924469,      2,  10000,      6,      9,      0, 841.00,  83.33,   0.67,     56,      6,      0,      0,      0,      0,      0,      6,      6,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:10:45: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:10:45: "player_2" : "           104794797,      3,  10000,      9,      6,      0,1148.00,  88.89,   1.50,     77,      9,      0,      0,      0,      0,      0,      9,      9,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:10:45: "player_3" : "            87305029,      2,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:10:45: }}JSON_END
+L 09/13/2026 - 04:10:45: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:10:45: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:10:45: MatchStatus: Score: 9:6 on map "aim_ak_bench" RoundsPlayed: 15
+L 09/13/2026 - 04:10:45: World triggered "Round_Start"
+L 09/13/2026 - 04:10:51: rcon from "169.150.232.56:54976": command "status_json"
+L 09/13/2026 - 04:10:52: rcon from "169.150.232.56:54976": command "status"
+L 09/13/2026 - 04:10:52: "Pheonix<2><[U:1:104794797]><CT>" [607 -642 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [176 572 64] with "ak47" (headshot)
+L 09/13/2026 - 04:10:55: "Pheonix<2><[U:1:104794797]><CT>" [635 -611 64] killed "Fraggy<3><[U:1:87305029]><TERRORIST>" [-599 451 64] with "ak47" (headshot)
+L 09/13/2026 - 04:10:55: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "10") (T "6")
+L 09/13/2026 - 04:10:55: Team "CT" scored "10" with "2" players
+L 09/13/2026 - 04:10:55: Team "TERRORIST" scored "6" with "4" players
+L 09/13/2026 - 04:10:55: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:10:55: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:10:55: MatchStatus: Score: 10:6 on map "aim_ak_bench" RoundsPlayed: 16
+L 09/13/2026 - 04:10:55: World triggered "Round_End"
+L 09/13/2026 - 04:11:01: rcon from "169.150.232.56:57710": command "status_json"
+L 09/13/2026 - 04:11:02: rcon from "169.150.232.56:57710": command "status"
+L 09/13/2026 - 04:11:02: Starting Freeze period
+L 09/13/2026 - 04:11:02: JSON_BEGIN{
+L 09/13/2026 - 04:11:02: "name": "round_stats",
+L 09/13/2026 - 04:11:02: "round_number" : "17",
+L 09/13/2026 - 04:11:02: "score_t" : "6",
+L 09/13/2026 - 04:11:02: "score_ct" : "10",
+L 09/13/2026 - 04:11:02: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:11:02: "server" : "cupcake",
+L 09/13/2026 - 04:11:02: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:11:02: "players" : {
+L 09/13/2026 - 04:11:02: "player_0" : "            80924469,      2,  10000,      6,     10,      0, 867.00,  83.33,   0.60,     54,      6,      0,      0,      0,      0,      0,      6,      6,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:11:02: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:11:02: "player_2" : "           104794797,      3,  10000,     11,      6,      0,1348.00,  90.91,   1.83,     84,     10,      0,      0,      0,      0,      0,     11,     10,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:11:02: "player_3" : "            87305029,      2,   3400,      0,      1,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:11:02: }}JSON_END
+L 09/13/2026 - 04:11:02: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:11:02: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:11:02: MatchStatus: Score: 10:6 on map "aim_ak_bench" RoundsPlayed: 16
+L 09/13/2026 - 04:11:02: World triggered "Round_Start"
+L 09/13/2026 - 04:11:11: rcon from "169.150.232.56:33892": command "status_json"
+L 09/13/2026 - 04:11:12: rcon from "169.150.232.56:33892": command "status"
+L 09/13/2026 - 04:11:14: "pichekistha<0><[U:1:80924469]><TERRORIST>" [-111 538 64] killed "Pheonix<2><[U:1:104794797]><CT>" [-670 -727 64] with "ak47" (headshot)
+L 09/13/2026 - 04:11:14: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "10") (T "7")
+L 09/13/2026 - 04:11:14: Team "CT" scored "10" with "2" players
+L 09/13/2026 - 04:11:14: Team "TERRORIST" scored "7" with "4" players
+L 09/13/2026 - 04:11:14: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:11:14: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:11:14: MatchStatus: Score: 10:7 on map "aim_ak_bench" RoundsPlayed: 17
+L 09/13/2026 - 04:11:14: World triggered "Round_End"
+L 09/13/2026 - 04:11:21: Starting Freeze period
+L 09/13/2026 - 04:11:21: JSON_BEGIN{
+L 09/13/2026 - 04:11:21: "name": "round_stats",
+L 09/13/2026 - 04:11:21: "round_number" : "18",
+L 09/13/2026 - 04:11:21: "score_t" : "7",
+L 09/13/2026 - 04:11:21: "score_ct" : "10",
+L 09/13/2026 - 04:11:21: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:11:21: "server" : "cupcake",
+L 09/13/2026 - 04:11:21: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:11:21: "players" : {
+L 09/13/2026 - 04:11:21: "player_0" : "            80924469,      2,  10000,      7,     10,      0, 967.00,  85.71,   0.70,     57,      7,      0,      0,      0,      0,      0,      6,      7,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:11:21: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:11:21: "player_2" : "           104794797,      3,  10000,     11,      7,      0,1433.00,  90.91,   1.57,     84,     10,      0,      0,      0,      0,      0,     11,     10,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:11:21: "player_3" : "            87305029,      2,   5400,      0,      1,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:11:21: }}JSON_END
+L 09/13/2026 - 04:11:21: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:11:21: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:11:21: MatchStatus: Score: 10:7 on map "aim_ak_bench" RoundsPlayed: 17
+L 09/13/2026 - 04:11:21: World triggered "Round_Start"
+L 09/13/2026 - 04:11:21: rcon from "169.150.232.56:47818": command "status_json"
+L 09/13/2026 - 04:11:22: rcon from "169.150.232.56:47818": command "status"
+L 09/13/2026 - 04:11:27: "Pheonix<2><[U:1:104794797]><CT>" [-681 -533 64] killed "Fraggy<3><[U:1:87305029]><TERRORIST>" [-43 185 64] with "ak47" (headshot)
+L 09/13/2026 - 04:11:31: rcon from "169.150.232.56:38286": command "status_json"
+L 09/13/2026 - 04:11:31: rcon from "169.150.232.56:38286": command "status"
+L 09/13/2026 - 04:11:32: "Pheonix<2><[U:1:104794797]><CT>" [-583 -479 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [-141 514 64] with "ak47" (headshot)
+L 09/13/2026 - 04:11:32: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "11") (T "7")
+L 09/13/2026 - 04:11:32: Team "CT" scored "11" with "2" players
+L 09/13/2026 - 04:11:32: Team "TERRORIST" scored "7" with "4" players
+L 09/13/2026 - 04:11:32: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:11:32: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:11:32: MatchStatus: Score: 11:7 on map "aim_ak_bench" RoundsPlayed: 18
+L 09/13/2026 - 04:11:32: World triggered "Round_End"
+L 09/13/2026 - 04:11:39: Starting Freeze period
+L 09/13/2026 - 04:11:39: JSON_BEGIN{
+L 09/13/2026 - 04:11:39: "name": "round_stats",
+L 09/13/2026 - 04:11:39: "round_number" : "19",
+L 09/13/2026 - 04:11:39: "score_t" : "7",
+L 09/13/2026 - 04:11:39: "score_ct" : "11",
+L 09/13/2026 - 04:11:39: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:11:39: "server" : "cupcake",
+L 09/13/2026 - 04:11:39: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:11:39: "players" : {
+L 09/13/2026 - 04:11:39: "player_0" : "            80924469,      2,  10000,      7,     11,      0, 967.00,  85.71,   0.64,     54,      7,      0,      0,      0,      0,      0,      6,      7,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:11:39: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:11:39: "player_2" : "           104794797,      3,  10000,     13,      7,      0,1633.00,  92.31,   1.86,     91,     11,      0,      0,      0,      0,      0,     13,     11,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:11:39: "player_3" : "            87305029,      2,   7800,      0,      2,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:11:39: }}JSON_END
+L 09/13/2026 - 04:11:39: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:11:39: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:11:39: MatchStatus: Score: 11:7 on map "aim_ak_bench" RoundsPlayed: 18
+L 09/13/2026 - 04:11:39: World triggered "Round_Start"
+L 09/13/2026 - 04:11:41: rcon from "169.150.232.56:60996": command "status_json"
+L 09/13/2026 - 04:11:41: rcon from "169.150.232.56:60996": command "status"
+L 09/13/2026 - 04:11:47: "Pheonix<2><[U:1:104794797]><CT>" [-173 -665 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [-714 241 172] with "ak47"
+L 09/13/2026 - 04:11:51: rcon from "169.150.232.56:33568": command "status_json"
+L 09/13/2026 - 04:11:51: rcon from "169.150.232.56:33568": command "status"
+L 09/13/2026 - 04:11:53: "bazooka39<4><[U:1:1076778384]><>" connected, address "104.190.138.219:64785"
+L 09/13/2026 - 04:11:54: "bazooka39<4><[U:1:1076778384]><>" STEAM USERID validated
+L 09/13/2026 - 04:11:54: "bazooka39<4><[U:1:1076778384]><>" entered the game
+L 09/13/2026 - 04:11:56: "Pheonix<2><[U:1:104794797]><CT>" [-479 -452 64] killed "Fraggy<3><[U:1:87305029]><TERRORIST>" [-549 497 64] with "ak47" (headshot)
+L 09/13/2026 - 04:11:56: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "12") (T "7")
+L 09/13/2026 - 04:11:56: Team "CT" scored "12" with "2" players
+L 09/13/2026 - 04:11:56: Team "TERRORIST" scored "7" with "4" players
+L 09/13/2026 - 04:11:56: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:11:56: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:11:56: MatchStatus: Score: 12:7 on map "aim_ak_bench" RoundsPlayed: 19
+L 09/13/2026 - 04:11:56: World triggered "Round_End"
+L 09/13/2026 - 04:11:59: "bazooka39<4><[U:1:1076778384]>" switched from team <Unassigned> to <CT>
+L 09/13/2026 - 04:12:01: rcon from "169.150.232.56:34664": command "status_json"
+L 09/13/2026 - 04:12:02: rcon from "169.150.232.56:34664": command "status"
+L 09/13/2026 - 04:12:03: Starting Freeze period
+L 09/13/2026 - 04:12:03: JSON_BEGIN{
+L 09/13/2026 - 04:12:03: "name": "round_stats",
+L 09/13/2026 - 04:12:03: "round_number" : "20",
+L 09/13/2026 - 04:12:03: "score_t" : "7",
+L 09/13/2026 - 04:12:03: "score_ct" : "12",
+L 09/13/2026 - 04:12:03: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:12:03: "server" : "cupcake",
+L 09/13/2026 - 04:12:03: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:12:03: "players" : {
+L 09/13/2026 - 04:12:03: "player_0" : "            80924469,      2,  10000,      7,     12,      0, 967.00,  85.71,   0.58,     51,      7,      0,      0,      0,      0,      0,      6,      7,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:12:03: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:12:03: "player_2" : "           104794797,      3,  10000,     15,      7,      0,1833.00,  86.67,   2.14,     96,     12,      0,      0,      0,      0,      0,     15,     12,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:12:03: "player_3" : "            87305029,      2,  10000,      0,      3,      0,  26.00,   0.00,   0.00,      1,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:12:03: "player_4" : "          1076778384,      3,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:12:03: }}JSON_END
+L 09/13/2026 - 04:12:03: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:12:03: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:12:03: MatchStatus: Score: 12:7 on map "aim_ak_bench" RoundsPlayed: 19
+L 09/13/2026 - 04:12:03: World triggered "Round_Start"
+L 09/13/2026 - 04:12:11: rcon from "169.150.232.56:43758": command "status_json"
+L 09/13/2026 - 04:12:12: rcon from "169.150.232.56:43758": command "status"
+L 09/13/2026 - 04:12:17: "pichekistha<0><[U:1:80924469]><TERRORIST>" [-105 543 64] killed "bazooka39<4><[U:1:1076778384]><CT>" [-630 -591 64] with "ak47" (headshot)
+L 09/13/2026 - 04:12:20: "Fraggy<3><[U:1:87305029]><TERRORIST>" [-450 451 117] killed "Pheonix<2><[U:1:104794797]><CT>" [-207 -822 64] with "ak47" (headshot)
+L 09/13/2026 - 04:12:20: "pichekistha<0><[U:1:80924469]><TERRORIST>" assisted killing "Pheonix<2><[U:1:104794797]><CT>"
+L 09/13/2026 - 04:12:20: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "12") (T "8")
+L 09/13/2026 - 04:12:20: Team "CT" scored "12" with "4" players
+L 09/13/2026 - 04:12:20: Team "TERRORIST" scored "8" with "4" players
+L 09/13/2026 - 04:12:20: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:12:20: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:12:20: MatchStatus: Score: 12:8 on map "aim_ak_bench" RoundsPlayed: 20
+L 09/13/2026 - 04:12:20: World triggered "Round_End"
+L 09/13/2026 - 04:12:21: rcon from "169.150.232.56:58234": command "status_json"
+L 09/13/2026 - 04:12:22: rcon from "169.150.232.56:58234": command "status"
+L 09/13/2026 - 04:12:27: Starting Freeze period
+L 09/13/2026 - 04:12:27: JSON_BEGIN{
+L 09/13/2026 - 04:12:27: "name": "round_stats",
+L 09/13/2026 - 04:12:27: "round_number" : "21",
+L 09/13/2026 - 04:12:27: "score_t" : "8",
+L 09/13/2026 - 04:12:27: "score_ct" : "12",
+L 09/13/2026 - 04:12:27: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:12:27: "server" : "cupcake",
+L 09/13/2026 - 04:12:27: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:12:27: "players" : {
+L 09/13/2026 - 04:12:27: "player_0" : "            80924469,      2,  10000,      8,     12,      1,1119.00,  87.50,   0.67,     56,      8,      0,      0,      0,      0,      0,      6,      8,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:12:27: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:12:27: "player_2" : "           104794797,      3,  10000,     15,      8,      0,1917.00,  86.67,   1.88,     96,     12,      0,      0,      0,      0,      0,     15,     12,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:12:27: "player_3" : "            87305029,      2,  10000,      1,      3,      0,  74.00, 100.00,   0.33,      4,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:12:27: "player_4" : "          1076778384,      3,   3400,      0,      1,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:12:27: }}JSON_END
+L 09/13/2026 - 04:12:27: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:12:27: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:12:27: MatchStatus: Score: 12:8 on map "aim_ak_bench" RoundsPlayed: 20
+L 09/13/2026 - 04:12:27: World triggered "Round_Start"
+L 09/13/2026 - 04:12:31: rcon from "169.150.232.56:55712": command "status_json"
+L 09/13/2026 - 04:12:31: rcon from "169.150.232.56:55712": command "status"
+L 09/13/2026 - 04:12:33: "Fraggy<3><[U:1:87305029]><TERRORIST>" [-231 554 64] killed "bazooka39<4><[U:1:1076778384]><CT>" [-325 -674 64] with "ak47" (headshot)
+L 09/13/2026 - 04:12:37: "Fraggy<3><[U:1:87305029]><TERRORIST>" [-412 451 117] killed "Pheonix<2><[U:1:104794797]><CT>" [696 -521 64] with "ak47" (headshot)
+L 09/13/2026 - 04:12:37: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "12") (T "9")
+L 09/13/2026 - 04:12:37: Team "CT" scored "12" with "4" players
+L 09/13/2026 - 04:12:37: Team "TERRORIST" scored "9" with "4" players
+L 09/13/2026 - 04:12:37: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:12:37: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:12:37: MatchStatus: Score: 12:9 on map "aim_ak_bench" RoundsPlayed: 21
+L 09/13/2026 - 04:12:37: World triggered "Round_End"
+L 09/13/2026 - 04:12:41: rcon from "169.150.232.56:38586": command "status_json"
+L 09/13/2026 - 04:12:41: rcon from "169.150.232.56:38586": command "status"
+L 09/13/2026 - 04:12:44: Starting Freeze period
+L 09/13/2026 - 04:12:44: JSON_BEGIN{
+L 09/13/2026 - 04:12:44: "name": "round_stats",
+L 09/13/2026 - 04:12:44: "round_number" : "22",
+L 09/13/2026 - 04:12:44: "score_t" : "9",
+L 09/13/2026 - 04:12:44: "score_ct" : "12",
+L 09/13/2026 - 04:12:44: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:12:44: "server" : "cupcake",
+L 09/13/2026 - 04:12:44: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:12:44: "players" : {
+L 09/13/2026 - 04:12:44: "player_0" : "            80924469,      2,  10000,      8,     12,      1,1119.00,  87.50,   0.67,     53,      8,      0,      0,      0,      0,      0,      6,      8,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:12:44: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:12:44: "player_2" : "           104794797,      3,  10000,     15,      9,      0,1917.00,  86.67,   1.67,     91,     12,      0,      0,      0,      0,      0,     15,     12,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:12:44: "player_3" : "            87305029,      2,  10000,      3,      3,      0, 274.00, 100.00,   1.00,     13,      1,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:12:44: "player_4" : "          1076778384,      3,   5800,      0,      2,      0,  10.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:12:44: }}JSON_END
+L 09/13/2026 - 04:12:44: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:12:44: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:12:44: MatchStatus: Score: 12:9 on map "aim_ak_bench" RoundsPlayed: 21
+L 09/13/2026 - 04:12:44: World triggered "Round_Start"
+L 09/13/2026 - 04:12:51: rcon from "169.150.232.56:52152": command "status_json"
+L 09/13/2026 - 04:12:52: rcon from "169.150.232.56:52152": command "status"
+L 09/13/2026 - 04:12:55: "pichekistha<0><[U:1:80924469]><TERRORIST>" [-605 421 64] killed "Pheonix<2><[U:1:104794797]><CT>" [-126 -645 64] with "ak47" (headshot)
+L 09/13/2026 - 04:12:56: "Fraggy<3><[U:1:87305029]><TERRORIST>" [408 572 64] killed "bazooka39<4><[U:1:1076778384]><CT>" [-529 -443 64] with "ak47" (headshot)
+L 09/13/2026 - 04:12:56: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "12") (T "10")
+L 09/13/2026 - 04:12:56: Team "CT" scored "12" with "4" players
+L 09/13/2026 - 04:12:56: Team "TERRORIST" scored "10" with "4" players
+L 09/13/2026 - 04:12:56: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:12:56: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:12:56: MatchStatus: Score: 12:10 on map "aim_ak_bench" RoundsPlayed: 22
+L 09/13/2026 - 04:12:56: World triggered "Round_End"
+L 09/13/2026 - 04:13:01: rcon from "169.150.232.56:48902": command "status_json"
+L 09/13/2026 - 04:13:02: rcon from "169.150.232.56:48902": command "status"
+L 09/13/2026 - 04:13:03: Starting Freeze period
+L 09/13/2026 - 04:13:03: JSON_BEGIN{
+L 09/13/2026 - 04:13:03: "name": "round_stats",
+L 09/13/2026 - 04:13:03: "round_number" : "23",
+L 09/13/2026 - 04:13:03: "score_t" : "10",
+L 09/13/2026 - 04:13:03: "score_ct" : "12",
+L 09/13/2026 - 04:13:03: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:13:03: "server" : "cupcake",
+L 09/13/2026 - 04:13:03: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:13:03: "players" : {
+L 09/13/2026 - 04:13:03: "player_0" : "            80924469,      2,  10000,      9,     12,      1,1219.00,  88.89,   0.75,     55,      9,      0,      0,      0,      0,      0,      6,      9,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:13:03: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:13:03: "player_2" : "           104794797,      3,  10000,     15,     10,      0,1943.00,  86.67,   1.50,     88,     12,      0,      0,      0,      0,      0,     15,     12,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:13:03: "player_3" : "            87305029,      2,  10000,      4,      3,      0, 374.00, 100.00,   1.33,     17,      1,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:13:03: "player_4" : "          1076778384,      3,   8200,      0,      3,      0,  10.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:13:03: }}JSON_END
+L 09/13/2026 - 04:13:03: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:13:03: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:13:03: MatchStatus: Score: 12:10 on map "aim_ak_bench" RoundsPlayed: 22
+L 09/13/2026 - 04:13:03: World triggered "Round_Start"
+L 09/13/2026 - 04:13:06: "pichekistha<0><[U:1:80924469]><TERRORIST>" [654 460 64] killed "bazooka39<4><[U:1:1076778384]><CT>" [145 -554 64] with "ak47" (headshot)
+L 09/13/2026 - 04:13:11: rcon from "169.150.232.56:51020": command "status_json"
+L 09/13/2026 - 04:13:12: rcon from "169.150.232.56:51020": command "status"
+L 09/13/2026 - 04:13:12: "Pheonix<2><[U:1:104794797]><CT>" [-477 -754 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [657 463 64] with "ak47"
+L 09/13/2026 - 04:13:12: "bazooka39<4><[U:1:1076778384]><CT>" assisted killing "pichekistha<0><[U:1:80924469]><TERRORIST>"
+L 09/13/2026 - 04:13:16: "Pheonix<2><[U:1:104794797]><CT>" [-483 -752 64] killed "Fraggy<3><[U:1:87305029]><TERRORIST>" [630 462 64] with "ak47" (headshot)
+L 09/13/2026 - 04:13:16: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "13") (T "10")
+L 09/13/2026 - 04:13:16: Team "CT" scored "13" with "4" players
+L 09/13/2026 - 04:13:16: Team "TERRORIST" scored "10" with "4" players
+L 09/13/2026 - 04:13:16: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:13:16: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:13:16: MatchStatus: Score: 13:10 on map "aim_ak_bench" RoundsPlayed: 23
+L 09/13/2026 - 04:13:16: World triggered "Round_End"
+L 09/13/2026 - 04:13:21: rcon from "169.150.232.56:53386": command "status_json"
+L 09/13/2026 - 04:13:22: rcon from "169.150.232.56:53386": command "status"
+L 09/13/2026 - 04:13:23: Starting Freeze period
+L 09/13/2026 - 04:13:23: JSON_BEGIN{
+L 09/13/2026 - 04:13:23: "name": "round_stats",
+L 09/13/2026 - 04:13:23: "round_number" : "24",
+L 09/13/2026 - 04:13:23: "score_t" : "10",
+L 09/13/2026 - 04:13:23: "score_ct" : "13",
+L 09/13/2026 - 04:13:23: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:13:23: "server" : "cupcake",
+L 09/13/2026 - 04:13:23: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:13:23: "players" : {
+L 09/13/2026 - 04:13:23: "player_0" : "            80924469,      2,  10000,     10,     13,      1,1319.00,  90.00,   0.77,     57,      9,      0,      0,      0,      0,      0,      6,     10,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:13:23: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:13:23: "player_2" : "           104794797,      3,  10000,     17,     10,      0,2117.00,  82.35,   1.70,     92,     13,      0,      0,      0,      0,      0,     17,     12,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:13:23: "player_3" : "            87305029,      2,  10000,      4,      4,      0, 400.00, 100.00,   1.00,     17,      1,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:13:23: "player_4" : "          1076778384,      3,  10000,      0,      4,      1,  36.00,   0.00,   0.00,      2,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:13:23: }}JSON_END
+L 09/13/2026 - 04:13:23: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:13:23: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:13:23: MatchStatus: Score: 13:10 on map "aim_ak_bench" RoundsPlayed: 23
+L 09/13/2026 - 04:13:23: World triggered "Round_Start"
+L 09/13/2026 - 04:13:31: rcon from "169.150.232.56:50928": command "status_json"
+L 09/13/2026 - 04:13:32: rcon from "169.150.232.56:50928": command "status"
+L 09/13/2026 - 04:13:34: "Pheonix<2><[U:1:104794797]><CT>" [-39 -793 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [-711 260 134] with "ak47" (headshot)
+L 09/13/2026 - 04:13:41: "Pheonix<2><[U:1:104794797]><CT>" [-393 -764 64] killed "Fraggy<3><[U:1:87305029]><TERRORIST>" [359 509 64] with "ak47" (headshot)
+L 09/13/2026 - 04:13:41: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "14") (T "10")
+L 09/13/2026 - 04:13:41: Team "CT" scored "14" with "4" players
+L 09/13/2026 - 04:13:41: Team "TERRORIST" scored "10" with "4" players
+L 09/13/2026 - 04:13:41: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:13:41: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:13:41: MatchStatus: Score: 14:10 on map "aim_ak_bench" RoundsPlayed: 24
+L 09/13/2026 - 04:13:41: World triggered "Round_End"
+L 09/13/2026 - 04:13:41: rcon from "169.150.232.56:59554": command "status_json"
+L 09/13/2026 - 04:13:41: rcon from "169.150.232.56:59554": command "status"
+L 09/13/2026 - 04:13:48: Starting Freeze period
+L 09/13/2026 - 04:13:48: JSON_BEGIN{
+L 09/13/2026 - 04:13:48: "name": "round_stats",
+L 09/13/2026 - 04:13:48: "round_number" : "25",
+L 09/13/2026 - 04:13:48: "score_t" : "10",
+L 09/13/2026 - 04:13:48: "score_ct" : "14",
+L 09/13/2026 - 04:13:48: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:13:48: "server" : "cupcake",
+L 09/13/2026 - 04:13:48: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:13:48: "players" : {
+L 09/13/2026 - 04:13:48: "player_0" : "            80924469,      2,  10000,     10,     14,      1,1319.00,  90.00,   0.71,     55,      9,      0,      0,      0,      0,      0,      6,     10,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:13:48: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:13:48: "player_2" : "           104794797,      3,  10000,     19,     10,      0,2317.00,  84.21,   1.90,     97,     14,      0,      0,      0,      0,      0,     17,     13,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:13:48: "player_3" : "            87305029,      2,  10000,      4,      5,      0, 400.00, 100.00,   0.80,     17,      1,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:13:48: "player_4" : "          1076778384,      3,  10000,      0,      4,      1,  36.00,   0.00,   0.00,      2,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:13:48: }}JSON_END
+L 09/13/2026 - 04:13:48: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:13:48: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:13:48: MatchStatus: Score: 14:10 on map "aim_ak_bench" RoundsPlayed: 24
+L 09/13/2026 - 04:13:48: World triggered "Round_Start"
+L 09/13/2026 - 04:13:51: rcon from "169.150.232.56:52930": command "status_json"
+L 09/13/2026 - 04:13:51: rcon from "169.150.232.56:52930": command "status"
+L 09/13/2026 - 04:13:55: "pichekistha<0><[U:1:80924469]><TERRORIST>" [-732 250 134] killed "Pheonix<2><[U:1:104794797]><CT>" [681 -541 64] with "ak47" (headshot)
+L 09/13/2026 - 04:14:01: rcon from "169.150.232.56:54958": command "status_json"
+L 09/13/2026 - 04:14:02: rcon from "169.150.232.56:54958": command "status"
+L 09/13/2026 - 04:14:08: "pichekistha<0><[U:1:80924469]><TERRORIST>" [-731 -175 64] killed "bazooka39<4><[U:1:1076778384]><CT>" [32 -624 64] with "ak47" (headshot)
+L 09/13/2026 - 04:14:08: "Fraggy<3><[U:1:87305029]><TERRORIST>" assisted killing "bazooka39<4><[U:1:1076778384]><CT>"
+L 09/13/2026 - 04:14:08: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "14") (T "11")
+L 09/13/2026 - 04:14:08: Team "CT" scored "14" with "4" players
+L 09/13/2026 - 04:14:08: Team "TERRORIST" scored "11" with "4" players
+L 09/13/2026 - 04:14:08: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:14:08: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:14:08: MatchStatus: Score: 14:11 on map "aim_ak_bench" RoundsPlayed: 25
+L 09/13/2026 - 04:14:08: World triggered "Round_End"
+L 09/13/2026 - 04:14:11: rcon from "169.150.232.56:41434": command "status_json"
+L 09/13/2026 - 04:14:11: rcon from "169.150.232.56:41434": command "status"
+L 09/13/2026 - 04:14:15: Starting Freeze period
+L 09/13/2026 - 04:14:15: JSON_BEGIN{
+L 09/13/2026 - 04:14:15: "name": "round_stats",
+L 09/13/2026 - 04:14:15: "round_number" : "26",
+L 09/13/2026 - 04:14:15: "score_t" : "11",
+L 09/13/2026 - 04:14:15: "score_ct" : "14",
+L 09/13/2026 - 04:14:15: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:14:15: "server" : "cupcake",
+L 09/13/2026 - 04:14:15: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:14:15: "players" : {
+L 09/13/2026 - 04:14:15: "player_0" : "            80924469,      2,  10000,     12,     14,      1,1438.00,  91.67,   0.86,     58,     10,      0,      0,      0,      0,      0,      6,     11,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:14:15: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:14:15: "player_2" : "           104794797,      3,  10000,     19,     11,      0,2317.00,  84.21,   1.73,     93,     14,      0,      0,      0,      0,      0,     17,     13,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:14:15: "player_3" : "            87305029,      2,  10000,      4,      5,      1, 481.00, 100.00,   0.80,     19,      1,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:14:15: "player_4" : "          1076778384,      3,  10000,      0,      5,      1,  36.00,   0.00,   0.00,      1,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:14:15: }}JSON_END
+L 09/13/2026 - 04:14:15: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:14:15: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:14:15: MatchStatus: Score: 14:11 on map "aim_ak_bench" RoundsPlayed: 25
+L 09/13/2026 - 04:14:15: World triggered "Round_Start"
+L 09/13/2026 - 04:14:20: "Pheonix<2><[U:1:104794797]><CT>" [664 -655 64] killed "Fraggy<3><[U:1:87305029]><TERRORIST>" [-384 504 64] with "ak47" (headshot)
+L 09/13/2026 - 04:14:21: rcon from "169.150.232.56:51078": command "status_json"
+L 09/13/2026 - 04:14:22: rcon from "169.150.232.56:51078": command "status"
+L 09/13/2026 - 04:14:23: "Pheonix<2><[U:1:104794797]><CT>" [718 -587 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [-729 250 134] with "ak47" (headshot)
+L 09/13/2026 - 04:14:23: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "15") (T "11")
+L 09/13/2026 - 04:14:23: Team "CT" scored "15" with "4" players
+L 09/13/2026 - 04:14:23: Team "TERRORIST" scored "11" with "4" players
+L 09/13/2026 - 04:14:23: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:14:23: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:14:23: MatchStatus: Score: 15:11 on map "aim_ak_bench" RoundsPlayed: 26
+L 09/13/2026 - 04:14:23: World triggered "Round_End"
+L 09/13/2026 - 04:14:30: Starting Freeze period
+L 09/13/2026 - 04:14:30: JSON_BEGIN{
+L 09/13/2026 - 04:14:30: "name": "round_stats",
+L 09/13/2026 - 04:14:30: "round_number" : "27",
+L 09/13/2026 - 04:14:30: "score_t" : "11",
+L 09/13/2026 - 04:14:30: "score_ct" : "15",
+L 09/13/2026 - 04:14:30: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:14:30: "server" : "cupcake",
+L 09/13/2026 - 04:14:30: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:14:30: "players" : {
+L 09/13/2026 - 04:14:30: "player_0" : "            80924469,      2,  10000,     12,     15,      1,1464.00,  91.67,   0.80,     56,     10,      0,      0,      0,      0,      0,      6,     11,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:14:30: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:14:30: "player_2" : "           104794797,      3,  10000,     21,     11,      0,2517.00,  85.71,   1.91,     97,     15,      0,      0,      0,      0,      0,     17,     14,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:14:30: "player_3" : "            87305029,      2,  10000,      4,      6,      1, 481.00, 100.00,   0.67,     18,      1,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:14:30: "player_4" : "          1076778384,      3,  10000,      0,      5,      1,  36.00,   0.00,   0.00,      1,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:14:30: }}JSON_END
+L 09/13/2026 - 04:14:30: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:14:30: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:14:30: MatchStatus: Score: 15:11 on map "aim_ak_bench" RoundsPlayed: 26
+L 09/13/2026 - 04:14:30: World triggered "Round_Start"
+L 09/13/2026 - 04:14:31: rcon from "169.150.232.56:51112": command "status_json"
+L 09/13/2026 - 04:14:31: rcon from "169.150.232.56:51112": command "status"
+L 09/13/2026 - 04:14:34: "pichekistha<0><[U:1:80924469]><TERRORIST>" [223 526 64] killed "bazooka39<4><[U:1:1076778384]><CT>" [601 -622 64] with "ak47" (headshot)
+L 09/13/2026 - 04:14:35: "Pheonix<2><[U:1:104794797]><CT>" [170 -701 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [268 529 64] with "ak47"
+L 09/13/2026 - 04:14:40: "Fraggy<3><[U:1:87305029]><TERRORIST>" [-565 487 64] killed "Pheonix<2><[U:1:104794797]><CT>" [-177 -832 64] with "ak47" (headshot)
+L 09/13/2026 - 04:14:40: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "15") (T "12")
+L 09/13/2026 - 04:14:40: Team "CT" scored "15" with "4" players
+L 09/13/2026 - 04:14:40: Team "TERRORIST" scored "12" with "4" players
+L 09/13/2026 - 04:14:40: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:14:40: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:14:40: MatchStatus: Score: 15:12 on map "aim_ak_bench" RoundsPlayed: 27
+L 09/13/2026 - 04:14:40: World triggered "Round_End"
+L 09/13/2026 - 04:14:41: rcon from "169.150.232.56:50766": command "status_json"
+L 09/13/2026 - 04:14:41: rcon from "169.150.232.56:50766": command "status"
+L 09/13/2026 - 04:14:47: Starting Freeze period
+L 09/13/2026 - 04:14:47: JSON_BEGIN{
+L 09/13/2026 - 04:14:47: "name": "round_stats",
+L 09/13/2026 - 04:14:47: "round_number" : "28",
+L 09/13/2026 - 04:14:47: "score_t" : "12",
+L 09/13/2026 - 04:14:47: "score_ct" : "15",
+L 09/13/2026 - 04:14:47: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:14:47: "server" : "cupcake",
+L 09/13/2026 - 04:14:47: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:14:47: "players" : {
+L 09/13/2026 - 04:14:47: "player_0" : "            80924469,      2,  10000,     13,     16,      1,1564.00,  92.31,   0.81,     58,     11,      0,      0,      0,      0,      0,      6,     12,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:14:47: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:14:47: "player_2" : "           104794797,      3,  10000,     22,     12,      0,2702.00,  81.82,   1.83,    100,     15,      0,      0,      0,      0,      0,     18,     14,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:14:47: "player_3" : "            87305029,      2,  10000,      5,      6,      1, 581.00, 100.00,   0.83,     22,      1,      0,      0,      0,      0,      0,      1,      1,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:14:47: "player_4" : "          1076778384,      3,  10000,      0,      6,      1,  36.00,   0.00,   0.00,      1,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:14:47: }}JSON_END
+L 09/13/2026 - 04:14:47: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:14:47: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:14:47: MatchStatus: Score: 15:12 on map "aim_ak_bench" RoundsPlayed: 27
+L 09/13/2026 - 04:14:47: World triggered "Round_Start"
+L 09/13/2026 - 04:14:51: "pichekistha<0><[U:1:80924469]><TERRORIST>" [-639 453 64] killed "Pheonix<2><[U:1:104794797]><CT>" [-135 -634 64] with "ak47" (headshot)
+L 09/13/2026 - 04:14:51: rcon from "169.150.232.56:52114": command "status_json"
+L 09/13/2026 - 04:14:51: rcon from "169.150.232.56:52114": command "status"
+L 09/13/2026 - 04:14:52: "bazooka39<4><[U:1:1076778384]><CT>" [162 -557 64] killed "Fraggy<3><[U:1:87305029]><TERRORIST>" [651 471 64] with "ak47" (headshot)
+L 09/13/2026 - 04:15:01: rcon from "169.150.232.56:40716": command "status_json"
+L 09/13/2026 - 04:15:01: rcon from "169.150.232.56:40716": command "status"
+L 09/13/2026 - 04:15:09: "pichekistha<0><[U:1:80924469]><TERRORIST>" [332 598 64] killed "bazooka39<4><[U:1:1076778384]><CT>" [-216 -548 64] with "ak47"
+L 09/13/2026 - 04:15:09: "Fraggy<3><[U:1:87305029]><TERRORIST>" assisted killing "bazooka39<4><[U:1:1076778384]><CT>"
+L 09/13/2026 - 04:15:09: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "15") (T "13")
+L 09/13/2026 - 04:15:09: Team "CT" scored "15" with "4" players
+L 09/13/2026 - 04:15:09: Team "TERRORIST" scored "13" with "4" players
+L 09/13/2026 - 04:15:09: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:15:09: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:15:09: MatchStatus: Score: 15:13 on map "aim_ak_bench" RoundsPlayed: 28
+L 09/13/2026 - 04:15:09: World triggered "Round_End"
+L 09/13/2026 - 04:15:11: rcon from "169.150.232.56:50846": command "status_json"
+L 09/13/2026 - 04:15:12: rcon from "169.150.232.56:50846": command "status"
+L 09/13/2026 - 04:15:16: Starting Freeze period
+L 09/13/2026 - 04:15:16: JSON_BEGIN{
+L 09/13/2026 - 04:15:16: "name": "round_stats",
+L 09/13/2026 - 04:15:16: "round_number" : "29",
+L 09/13/2026 - 04:15:16: "score_t" : "13",
+L 09/13/2026 - 04:15:16: "score_ct" : "15",
+L 09/13/2026 - 04:15:16: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:15:16: "server" : "cupcake",
+L 09/13/2026 - 04:15:16: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:15:16: "players" : {
+L 09/13/2026 - 04:15:16: "player_0" : "            80924469,      2,  10000,     15,     16,      1,1711.00,  86.67,   0.94,     61,     12,      0,      0,      0,      0,      0,      7,     13,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:15:16: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:15:16: "player_2" : "           104794797,      3,  10000,     22,     13,      0,2702.00,  81.82,   1.69,     96,     15,      0,      0,      0,      0,      0,     18,     14,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:15:16: "player_3" : "            87305029,      2,  10000,      5,      7,      2, 634.00, 100.00,   0.71,     23,      1,      0,      0,      0,      0,      0,      1,      1,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:15:16: "player_4" : "          1076778384,      3,  10000,      1,      7,      1, 145.00, 100.00,   0.14,      5,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:15:16: }}JSON_END
+L 09/13/2026 - 04:15:16: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:15:16: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:15:16: MatchStatus: Score: 15:13 on map "aim_ak_bench" RoundsPlayed: 28
+L 09/13/2026 - 04:15:16: World triggered "Round_Start"
+L 09/13/2026 - 04:15:21: rcon from "169.150.232.56:50836": command "status_json"
+L 09/13/2026 - 04:15:22: rcon from "169.150.232.56:50836": command "status"
+L 09/13/2026 - 04:15:22: "bazooka39<4><[U:1:1076778384]><CT>" disconnected (reason "NETWORK_DISCONNECT_DISCONNECT_BY_USER")
+L 09/13/2026 - 04:15:22: "bazooka39<4><[U:1:1076778384]>" switched from team <CT> to <Unassigned>
+L 09/13/2026 - 04:15:22: "bazooka39<4><[U:1:1076778384]><Unassigned>" [448 -704 64] committed suicide with "world"
+L 09/13/2026 - 04:15:23: "Fraggy<3><[U:1:87305029]><TERRORIST>" [-578 351 64] killed "Pheonix<2><[U:1:104794797]><CT>" [736 -489 64] with "ak47" (headshot)
+L 09/13/2026 - 04:15:23: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "15") (T "14")
+L 09/13/2026 - 04:15:23: Team "CT" scored "15" with "3" players
+L 09/13/2026 - 04:15:23: Team "TERRORIST" scored "14" with "4" players
+L 09/13/2026 - 04:15:23: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:15:23: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:15:23: MatchStatus: Score: 15:14 on map "aim_ak_bench" RoundsPlayed: 29
+L 09/13/2026 - 04:15:23: World triggered "Round_End"
+L 09/13/2026 - 04:15:30: Starting Freeze period
+L 09/13/2026 - 04:15:30: JSON_BEGIN{
+L 09/13/2026 - 04:15:30: "name": "round_stats",
+L 09/13/2026 - 04:15:30: "round_number" : "30",
+L 09/13/2026 - 04:15:30: "score_t" : "14",
+L 09/13/2026 - 04:15:30: "score_ct" : "15",
+L 09/13/2026 - 04:15:30: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:15:30: "server" : "cupcake",
+L 09/13/2026 - 04:15:30: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:15:30: "players" : {
+L 09/13/2026 - 04:15:30: "player_0" : "            80924469,      2,  10000,     15,     16,      1,1711.00,  86.67,   0.94,     59,     12,      0,      0,      0,      0,      0,      7,     13,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:15:30: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:15:30: "player_2" : "           104794797,      3,  10000,     22,     14,      0,2753.00,  81.82,   1.57,     95,     15,      0,      0,      0,      0,      0,     18,     14,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:15:30: "player_3" : "            87305029,      2,  10000,      6,      7,      2, 734.00, 100.00,   0.86,     25,      2,      0,      0,      0,      0,      0,      1,      2,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:15:30: "player_4" : "          1076778384,      0,  10000,      1,      8,      1, 145.00, 100.00,   0.12,      5,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:15:30: }}JSON_END
+L 09/13/2026 - 04:15:30: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:15:30: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:15:30: MatchStatus: Score: 15:14 on map "aim_ak_bench" RoundsPlayed: 29
+L 09/13/2026 - 04:15:30: World triggered "Round_Start"
+L 09/13/2026 - 04:15:31: rcon from "169.150.232.56:48182": command "status_json"
+L 09/13/2026 - 04:15:32: rcon from "169.150.232.56:48182": command "status"
+L 09/13/2026 - 04:15:36: "Pheonix<2><[U:1:104794797]><CT>" [96 -649 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [629 391 64] with "ak47"
+L 09/13/2026 - 04:15:41: rcon from "169.150.232.56:41690": command "status_json"
+L 09/13/2026 - 04:15:42: rcon from "169.150.232.56:41690": command "status"
+L 09/13/2026 - 04:15:43: "Fraggy<3><[U:1:87305029]><TERRORIST>" [519 407 180] killed "Pheonix<2><[U:1:104794797]><CT>" [-382 -697 64] with "ak47" (headshot)
+L 09/13/2026 - 04:15:43: "pichekistha<0><[U:1:80924469]><TERRORIST>" assisted killing "Pheonix<2><[U:1:104794797]><CT>"
+L 09/13/2026 - 04:15:43: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "15") (T "15")
+L 09/13/2026 - 04:15:43: Team "CT" scored "15" with "2" players
+L 09/13/2026 - 04:15:43: Team "TERRORIST" scored "15" with "4" players
+L 09/13/2026 - 04:15:43: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:15:43: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:15:43: MatchStatus: Score: 15:15 on map "aim_ak_bench" RoundsPlayed: 30
+L 09/13/2026 - 04:15:43: World triggered "Round_End"
+L 09/13/2026 - 04:15:43: rcon from "185.180.15.34:40442": command "status"
+L 09/13/2026 - 04:15:50: Starting Freeze period
+L 09/13/2026 - 04:15:50: JSON_BEGIN{
+L 09/13/2026 - 04:15:50: "name": "round_stats",
+L 09/13/2026 - 04:15:50: "round_number" : "31",
+L 09/13/2026 - 04:15:50: "score_t" : "15",
+L 09/13/2026 - 04:15:50: "score_ct" : "15",
+L 09/13/2026 - 04:15:50: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:15:50: "server" : "cupcake",
+L 09/13/2026 - 04:15:50: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:15:50: "players" : {
+L 09/13/2026 - 04:15:50: "player_0" : "            80924469,      2,  10000,     15,     17,      2,1764.00,  86.67,   0.88,     59,     12,      0,      0,      0,      0,      0,      7,     13,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:15:50: "player_1" : "          1080094440,      0,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:15:50: "player_2" : "           104794797,      3,  10000,     23,     15,      0,2853.00,  78.26,   1.53,     95,     15,      0,      0,      0,      0,      0,     19,     15,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:15:50: "player_3" : "            87305029,      2,  10000,      7,      7,      2, 781.00, 100.00,   1.00,     26,      3,      0,      0,      0,      0,      0,      2,      2,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:15:50: "player_4" : "          1076778384,      0,  10000,      1,      8,      1, 145.00, 100.00,   0.12,      5,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:15:50: }}JSON_END
+L 09/13/2026 - 04:15:50: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:15:50: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:15:50: MatchStatus: Score: 15:15 on map "aim_ak_bench" RoundsPlayed: 30
+L 09/13/2026 - 04:15:50: World triggered "Round_Start"
+L 09/13/2026 - 04:15:51: rcon from "169.150.232.56:60308": command "status_json"
+L 09/13/2026 - 04:15:52: rcon from "169.150.232.56:60308": command "status"
+L 09/13/2026 - 04:16:01: "Pheonix<2><[U:1:104794797]><CT>" [-31 -740 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [-582 46 64] with "ak47" (headshot)
+L 09/13/2026 - 04:16:01: rcon from "169.150.232.56:35660": command "status_json"
+L 09/13/2026 - 04:16:01: rcon from "169.150.232.56:35660": command "status"
+L 09/13/2026 - 04:16:03: "Sheldor<1><[U:1:1080094440]><>" connected, address "68.67.249.5:33604"
+L 09/13/2026 - 04:16:04: "Sheldor<1><[U:1:1080094440]><>" entered the game
+L 09/13/2026 - 04:16:05: "Sheldor<65281><[U:1:1080094440]><>" STEAM USERID validated
+L 09/13/2026 - 04:16:11: rcon from "169.150.232.56:43594": command "status_json"
+L 09/13/2026 - 04:16:12: rcon from "169.150.232.56:43594": command "status"
+L 09/13/2026 - 04:16:15: "Pheonix<2><[U:1:104794797]><CT>" [651 -457 64] killed "Fraggy<3><[U:1:87305029]><TERRORIST>" [-534 -396 64] with "ak47" (headshot)
+L 09/13/2026 - 04:16:15: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "16") (T "15")
+L 09/13/2026 - 04:16:15: Team "CT" scored "16" with "2" players
+L 09/13/2026 - 04:16:15: Team "TERRORIST" scored "15" with "4" players
+L 09/13/2026 - 04:16:15: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:16:15: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:16:15: MatchStatus: Score: 16:15 on map "aim_ak_bench" RoundsPlayed: 31
+L 09/13/2026 - 04:16:15: World triggered "Round_End"
+L 09/13/2026 - 04:16:18: "Sheldor<1><[U:1:1080094440]>" switched from team <Unassigned> to <CT>
+L 09/13/2026 - 04:16:21: rcon from "169.150.232.56:52082": command "status_json"
+L 09/13/2026 - 04:16:21: rcon from "169.150.232.56:52082": command "status"
+L 09/13/2026 - 04:16:22: Starting Freeze period
+L 09/13/2026 - 04:16:22: JSON_BEGIN{
+L 09/13/2026 - 04:16:22: "name": "round_stats",
+L 09/13/2026 - 04:16:22: "round_number" : "32",
+L 09/13/2026 - 04:16:22: "score_t" : "15",
+L 09/13/2026 - 04:16:22: "score_ct" : "16",
+L 09/13/2026 - 04:16:22: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:16:22: "server" : "cupcake",
+L 09/13/2026 - 04:16:22: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:16:22: "players" : {
+L 09/13/2026 - 04:16:22: "player_0" : "            80924469,      2,  10000,     15,     18,      2,1803.00,  86.67,   0.83,     58,     12,      0,      0,      0,      0,      0,      7,     13,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:16:22: "player_1" : "          1080094440,      3,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/13/2026 - 04:16:22: "player_2" : "           104794797,      3,  10000,     25,     15,      0,3053.00,  80.00,   1.67,     98,     16,      0,      0,      0,      0,      0,     21,     16,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:16:22: "player_3" : "            87305029,      2,  10000,      7,      8,      2, 781.00, 100.00,   0.88,     25,      3,      0,      0,      0,      0,      0,      2,      2,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:16:22: "player_4" : "          1076778384,      0,  10000,      1,      8,      1, 145.00, 100.00,   0.12,      5,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:16:22: }}JSON_END
+L 09/13/2026 - 04:16:22: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:16:22: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:16:22: MatchStatus: Score: 16:15 on map "aim_ak_bench" RoundsPlayed: 31
+L 09/13/2026 - 04:16:22: World triggered "Round_Start"
+L 09/13/2026 - 04:16:31: rcon from "169.150.232.56:40156": command "status_json"
+L 09/13/2026 - 04:16:31: rcon from "169.150.232.56:40156": command "status"
+L 09/13/2026 - 04:16:34: "Fraggy<3><[U:1:87305029]><TERRORIST>" [-150 487 64] killed "Pheonix<2><[U:1:104794797]><CT>" [-650 -566 64] with "ak47" (headshot)
+L 09/13/2026 - 04:16:38: "Sheldor<1><[U:1:1080094440]><CT>" [-164 -713 64] killed "Fraggy<3><[U:1:87305029]><TERRORIST>" [-436 236 64] with "ak47"
+L 09/13/2026 - 04:16:41: rcon from "169.150.232.56:52110": command "status_json"
+L 09/13/2026 - 04:16:41: rcon from "169.150.232.56:52110": command "status"
+L 09/13/2026 - 04:16:42: "Sheldor<1><[U:1:1080094440]><CT>" [51 -723 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [625 436 64] with "ak47"
+L 09/13/2026 - 04:16:42: "Pheonix<2><[U:1:104794797]><CT>" assisted killing "pichekistha<0><[U:1:80924469]><TERRORIST>"
+L 09/13/2026 - 04:16:42: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "17") (T "15")
+L 09/13/2026 - 04:16:42: Team "CT" scored "17" with "4" players
+L 09/13/2026 - 04:16:42: Team "TERRORIST" scored "15" with "4" players
+L 09/13/2026 - 04:16:42: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:16:42: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:16:42: MatchStatus: Score: 17:15 on map "aim_ak_bench" RoundsPlayed: 32
+L 09/13/2026 - 04:16:42: World triggered "Round_End"
+L 09/13/2026 - 04:16:49: Starting Freeze period
+L 09/13/2026 - 04:16:49: JSON_BEGIN{
+L 09/13/2026 - 04:16:49: "name": "round_stats",
+L 09/13/2026 - 04:16:49: "round_number" : "33",
+L 09/13/2026 - 04:16:49: "score_t" : "15",
+L 09/13/2026 - 04:16:49: "score_ct" : "17",
+L 09/13/2026 - 04:16:49: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:16:49: "server" : "cupcake",
+L 09/13/2026 - 04:16:49: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:16:49: "players" : {
+L 09/13/2026 - 04:16:49: "player_0" : "            80924469,      2,  10000,     15,     19,      2,1803.00,  86.67,   0.79,     56,     12,      0,      0,      0,      0,      0,      7,     13,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:16:49: "player_1" : "          1080094440,      3,   3600,      2,      0,      0, 168.00,   0.00,   0.00,      5,      1,      0,      0,      0,      0,      0,      2,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:16:49: "player_2" : "           104794797,      3,  10000,     25,     16,      1,3085.00,  80.00,   1.56,     96,     16,      0,      0,      0,      0,      0,     21,     16,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:16:49: "player_3" : "            87305029,      2,  10000,      8,      9,      2, 907.00, 100.00,   0.89,     28,      3,      0,      0,      0,      0,      0,      2,      3,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:16:49: "player_4" : "          1076778384,      0,  10000,      1,      8,      1, 145.00, 100.00,   0.12,      5,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:16:49: }}JSON_END
+L 09/13/2026 - 04:16:49: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:16:49: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:16:49: MatchStatus: Score: 17:15 on map "aim_ak_bench" RoundsPlayed: 32
+L 09/13/2026 - 04:16:49: World triggered "Round_Start"
+L 09/13/2026 - 04:16:51: rcon from "169.150.232.56:47484": command "status_json"
+L 09/13/2026 - 04:16:51: rcon from "169.150.232.56:47484": command "status"
+L 09/13/2026 - 04:16:54: "pichekistha<0><[U:1:80924469]><TERRORIST>" [169 452 64] killed "Pheonix<2><[U:1:104794797]><CT>" [214 -653 64] with "ak47" (headshot)
+L 09/13/2026 - 04:17:01: rcon from "169.150.232.56:44116": command "status_json"
+L 09/13/2026 - 04:17:01: rcon from "169.150.232.56:44116": command "status"
+L 09/13/2026 - 04:17:09: "pichekistha<0><[U:1:80924469]><TERRORIST>" [224 381 64] killed "Sheldor<1><[U:1:1080094440]><CT>" [-418 -758 64] with "ak47" (headshot)
+L 09/13/2026 - 04:17:09: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "17") (T "16")
+L 09/13/2026 - 04:17:09: Team "CT" scored "17" with "4" players
+L 09/13/2026 - 04:17:09: Team "TERRORIST" scored "16" with "4" players
+L 09/13/2026 - 04:17:09: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:17:09: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:17:09: MatchStatus: Score: 17:16 on map "aim_ak_bench" RoundsPlayed: 33
+L 09/13/2026 - 04:17:09: World triggered "Round_End"
+L 09/13/2026 - 04:17:11: rcon from "169.150.232.56:51128": command "status_json"
+L 09/13/2026 - 04:17:11: rcon from "169.150.232.56:51128": command "status"
+L 09/13/2026 - 04:17:16: Starting Freeze period
+L 09/13/2026 - 04:17:16: JSON_BEGIN{
+L 09/13/2026 - 04:17:16: "name": "round_stats",
+L 09/13/2026 - 04:17:16: "round_number" : "34",
+L 09/13/2026 - 04:17:16: "score_t" : "16",
+L 09/13/2026 - 04:17:16: "score_ct" : "17",
+L 09/13/2026 - 04:17:16: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:17:16: "server" : "cupcake",
+L 09/13/2026 - 04:17:16: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:17:16: "players" : {
+L 09/13/2026 - 04:17:16: "player_0" : "            80924469,      2,  10000,     17,     19,      2,2003.00,  88.24,   0.89,     61,     13,      0,      0,      0,      0,      0,      7,     14,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:17:16: "player_1" : "          1080094440,      3,   6000,      2,      1,      0, 260.00,   0.00,   2.00,      8,      1,      0,      0,      0,      0,      0,      2,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:17:16: "player_2" : "           104794797,      3,  10000,     25,     17,      1,3085.00,  80.00,   1.47,     93,     16,      0,      0,      0,      0,      0,     21,     16,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:17:16: "player_3" : "            87305029,      2,  10000,      8,      9,      2, 907.00, 100.00,   0.89,     27,      3,      0,      0,      0,      0,      0,      2,      3,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:17:16: "player_4" : "          1076778384,      0,  10000,      1,      8,      1, 145.00, 100.00,   0.12,      4,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:17:16: }}JSON_END
+L 09/13/2026 - 04:17:16: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:17:16: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:17:16: MatchStatus: Score: 17:16 on map "aim_ak_bench" RoundsPlayed: 33
+L 09/13/2026 - 04:17:16: World triggered "Round_Start"
+L 09/13/2026 - 04:17:19: "pichekistha<0><[U:1:80924469]><TERRORIST>" [625 503 64] killed "Pheonix<2><[U:1:104794797]><CT>" [107 -656 64] with "ak47" (headshot)
+L 09/13/2026 - 04:17:21: rcon from "169.150.232.56:36986": command "status_json"
+L 09/13/2026 - 04:17:21: rcon from "169.150.232.56:36986": command "status"
+L 09/13/2026 - 04:17:24: "pichekistha<0><[U:1:80924469]><TERRORIST>" [623 419 64] killed "Sheldor<1><[U:1:1080094440]><CT>" [-487 -754 64] with "ak47" (headshot)
+L 09/13/2026 - 04:17:24: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "17") (T "17")
+L 09/13/2026 - 04:17:24: Team "CT" scored "17" with "4" players
+L 09/13/2026 - 04:17:24: Team "TERRORIST" scored "17" with "4" players
+L 09/13/2026 - 04:17:24: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:17:24: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:17:24: MatchStatus: Score: 17:17 on map "aim_ak_bench" RoundsPlayed: 34
+L 09/13/2026 - 04:17:24: World triggered "Round_End"
+L 09/13/2026 - 04:17:31: Starting Freeze period
+L 09/13/2026 - 04:17:31: JSON_BEGIN{
+L 09/13/2026 - 04:17:31: "name": "round_stats",
+L 09/13/2026 - 04:17:31: "round_number" : "35",
+L 09/13/2026 - 04:17:31: "score_t" : "17",
+L 09/13/2026 - 04:17:31: "score_ct" : "17",
+L 09/13/2026 - 04:17:31: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:17:31: "server" : "cupcake",
+L 09/13/2026 - 04:17:31: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:17:31: "players" : {
+L 09/13/2026 - 04:17:31: "player_0" : "            80924469,      2,  10000,     19,     19,      2,2203.00,  89.47,   1.00,     65,     14,      0,      0,      0,      0,      0,      7,     15,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:17:31: "player_1" : "          1080094440,      3,   8400,      2,      2,      0, 286.00,   0.00,   1.00,      8,      1,      0,      0,      0,      0,      0,      2,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:17:31: "player_2" : "           104794797,      3,  10000,     25,     18,      1,3085.00,  80.00,   1.39,     91,     16,      0,      0,      0,      0,      0,     21,     16,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:17:31: "player_3" : "            87305029,      2,  10000,      8,      9,      2, 907.00, 100.00,   0.89,     27,      3,      0,      0,      0,      0,      0,      2,      3,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:17:31: "player_4" : "          1076778384,      0,  10000,      1,      8,      1, 145.00, 100.00,   0.12,      4,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:17:31: }}JSON_END
+L 09/13/2026 - 04:17:31: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:17:31: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:17:31: MatchStatus: Score: 17:17 on map "aim_ak_bench" RoundsPlayed: 34
+L 09/13/2026 - 04:17:31: World triggered "Round_Start"
+L 09/13/2026 - 04:17:31: rcon from "169.150.232.56:49648": command "status_json"
+L 09/13/2026 - 04:17:32: rcon from "169.150.232.56:49648": command "status"
+L 09/13/2026 - 04:17:39: "Pheonix<2><[U:1:104794797]><CT>" [129 -725 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [634 551 64] with "ak47"
+L 09/13/2026 - 04:17:41: rcon from "169.150.232.56:35054": command "status_json"
+L 09/13/2026 - 04:17:42: rcon from "169.150.232.56:35054": command "status"
+L 09/13/2026 - 04:17:51: "Pheonix<2><[U:1:104794797]><CT>" [366 -626 64] killed "Fraggy<3><[U:1:87305029]><TERRORIST>" [-705 540 64] with "ak47"
+L 09/13/2026 - 04:17:51: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "18") (T "17")
+L 09/13/2026 - 04:17:51: Team "CT" scored "18" with "4" players
+L 09/13/2026 - 04:17:51: Team "TERRORIST" scored "17" with "4" players
+L 09/13/2026 - 04:17:51: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:17:51: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:17:51: MatchStatus: Score: 18:17 on map "aim_ak_bench" RoundsPlayed: 35
+L 09/13/2026 - 04:17:51: World triggered "Round_End"
+L 09/13/2026 - 04:17:51: rcon from "169.150.232.56:50694": command "status_json"
+L 09/13/2026 - 04:17:51: rcon from "169.150.232.56:50694": command "status"
+L 09/13/2026 - 04:17:58: Starting Freeze period
+L 09/13/2026 - 04:17:58: JSON_BEGIN{
+L 09/13/2026 - 04:17:58: "name": "round_stats",
+L 09/13/2026 - 04:17:58: "round_number" : "36",
+L 09/13/2026 - 04:17:58: "score_t" : "17",
+L 09/13/2026 - 04:17:58: "score_ct" : "18",
+L 09/13/2026 - 04:17:58: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:17:58: "server" : "cupcake",
+L 09/13/2026 - 04:17:58: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:17:58: "players" : {
+L 09/13/2026 - 04:17:58: "player_0" : "            80924469,      2,  10000,     19,     20,      2,2203.00,  89.47,   0.95,     63,     14,      0,      0,      0,      0,      0,      7,     15,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:17:58: "player_1" : "          1080094440,      3,  10000,      2,      2,      0, 286.00,   0.00,   1.00,      8,      1,      0,      0,      0,      0,      0,      2,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:17:58: "player_2" : "           104794797,      3,  10000,     27,     18,      1,3285.00,  74.07,   1.50,     94,     17,      0,      0,      0,      0,      0,     21,     17,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:17:58: "player_3" : "            87305029,      2,  10000,      8,     10,      2, 907.00, 100.00,   0.80,     26,      3,      0,      0,      0,      0,      0,      2,      3,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:17:58: "player_4" : "          1076778384,      0,  10000,      1,      8,      1, 145.00, 100.00,   0.12,      4,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:17:58: }}JSON_END
+L 09/13/2026 - 04:17:58: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:17:58: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:17:58: MatchStatus: Score: 18:17 on map "aim_ak_bench" RoundsPlayed: 35
+L 09/13/2026 - 04:17:58: World triggered "Round_Start"
+L 09/13/2026 - 04:18:01: rcon from "169.150.232.56:41366": command "status_json"
+L 09/13/2026 - 04:18:01: rcon from "169.150.232.56:41366": command "status"
+L 09/13/2026 - 04:18:05: "pichekistha<0><[U:1:80924469]><TERRORIST>" [243 611 64] killed "Pheonix<2><[U:1:104794797]><CT>" [230 -690 64] with "ak47" (headshot)
+L 09/13/2026 - 04:18:10: "Fraggy<3><[U:1:87305029]><TERRORIST>" [631 428 64] killed "Sheldor<1><[U:1:1080094440]><CT>" [-728 -634 64] with "ak47" (headshot)
+L 09/13/2026 - 04:18:10: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "18") (T "18")
+L 09/13/2026 - 04:18:10: Team "CT" scored "18" with "4" players
+L 09/13/2026 - 04:18:10: Team "TERRORIST" scored "18" with "4" players
+L 09/13/2026 - 04:18:10: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:18:10: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:18:10: MatchStatus: Score: 18:18 on map "aim_ak_bench" RoundsPlayed: 36
+L 09/13/2026 - 04:18:10: World triggered "Round_End"
+L 09/13/2026 - 04:18:11: rcon from "169.150.232.56:52530": command "status_json"
+L 09/13/2026 - 04:18:11: rcon from "169.150.232.56:52530": command "status"
+L 09/13/2026 - 04:18:17: Starting Freeze period
+L 09/13/2026 - 04:18:17: JSON_BEGIN{
+L 09/13/2026 - 04:18:17: "name": "round_stats",
+L 09/13/2026 - 04:18:17: "round_number" : "37",
+L 09/13/2026 - 04:18:17: "score_t" : "18",
+L 09/13/2026 - 04:18:17: "score_ct" : "18",
+L 09/13/2026 - 04:18:17: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:18:17: "server" : "cupcake",
+L 09/13/2026 - 04:18:17: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:18:17: "players" : {
+L 09/13/2026 - 04:18:17: "player_0" : "            80924469,      2,  10000,     20,     20,      2,2303.00,  90.00,   1.00,     64,     15,      0,      0,      0,      0,      0,      7,     16,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:18:17: "player_1" : "          1080094440,      3,  10000,      2,      3,      0, 312.00,   0.00,   0.67,      9,      1,      0,      0,      0,      0,      0,      2,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:18:17: "player_2" : "           104794797,      3,  10000,     27,     19,      1,3285.00,  74.07,   1.42,     91,     17,      0,      0,      0,      0,      0,     21,     17,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:18:17: "player_3" : "            87305029,      2,  10000,      9,     10,      2,1007.00, 100.00,   0.90,     28,      3,      0,      0,      0,      0,      0,      2,      3,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:18:17: "player_4" : "          1076778384,      0,  10000,      1,      8,      1, 145.00, 100.00,   0.12,      4,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:18:17: }}JSON_END
+L 09/13/2026 - 04:18:17: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:18:17: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:18:17: MatchStatus: Score: 18:18 on map "aim_ak_bench" RoundsPlayed: 36
+L 09/13/2026 - 04:18:17: World triggered "Round_Start"
+L 09/13/2026 - 04:18:20: "Fraggy<3><[U:1:87305029]><TERRORIST>" [430 451 117] killed "Pheonix<2><[U:1:104794797]><CT>" [540 -744 64] with "ak47" (headshot)
+L 09/13/2026 - 04:18:21: rcon from "169.150.232.56:43666": command "status_json"
+L 09/13/2026 - 04:18:21: rcon from "169.150.232.56:43666": command "status"
+L 09/13/2026 - 04:18:29: "Fraggy<3><[U:1:87305029]><TERRORIST>" [521 -446 64] killed "Sheldor<1><[U:1:1080094440]><CT>" [-456 -704 64] with "p250" (headshot)
+L 09/13/2026 - 04:18:29: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "18") (T "19")
+L 09/13/2026 - 04:18:29: Team "CT" scored "18" with "4" players
+L 09/13/2026 - 04:18:29: Team "TERRORIST" scored "19" with "4" players
+L 09/13/2026 - 04:18:29: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:18:29: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:18:29: MatchStatus: Score: 18:19 on map "aim_ak_bench" RoundsPlayed: 37
+L 09/13/2026 - 04:18:29: World triggered "Round_End"
+L 09/13/2026 - 04:18:31: rcon from "169.150.232.56:53438": command "status_json"
+L 09/13/2026 - 04:18:32: rcon from "169.150.232.56:53438": command "status"
+L 09/13/2026 - 04:18:36: Starting Freeze period
+L 09/13/2026 - 04:18:36: JSON_BEGIN{
+L 09/13/2026 - 04:18:36: "name": "round_stats",
+L 09/13/2026 - 04:18:36: "round_number" : "38",
+L 09/13/2026 - 04:18:36: "score_t" : "19",
+L 09/13/2026 - 04:18:36: "score_ct" : "18",
+L 09/13/2026 - 04:18:36: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:18:36: "server" : "cupcake",
+L 09/13/2026 - 04:18:36: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:18:36: "players" : {
+L 09/13/2026 - 04:18:36: "player_0" : "            80924469,      2,  10000,     20,     20,      2,2303.00,  90.00,   1.00,     62,     15,      0,      0,      0,      0,      0,      7,     16,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:18:36: "player_1" : "          1080094440,      3,  10000,      2,      4,      0, 397.00,   0.00,   0.50,     11,      1,      0,      0,      0,      0,      0,      2,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:18:36: "player_2" : "           104794797,      3,  10000,     27,     20,      1,3285.00,  74.07,   1.35,     89,     17,      0,      0,      0,      0,      0,     21,     17,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:18:36: "player_3" : "            87305029,      2,  10000,     11,     10,      2,1207.00, 100.00,   1.10,     33,      4,      0,      0,      0,      0,      0,      2,      4,      1,      0,      0,0.000000,0.000000,      0,      2,      0"
+L 09/13/2026 - 04:18:36: "player_4" : "          1076778384,      0,  10000,      1,      8,      1, 145.00, 100.00,   0.12,      4,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:18:36: }}JSON_END
+L 09/13/2026 - 04:18:36: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:18:36: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:18:36: MatchStatus: Score: 18:19 on map "aim_ak_bench" RoundsPlayed: 37
+L 09/13/2026 - 04:18:36: World triggered "Round_Start"
+L 09/13/2026 - 04:18:41: "Fraggy<3><[U:1:87305029]><TERRORIST>" [673 349 64] killed "Sheldor<1><[U:1:1080094440]><CT>" [-448 -704 64] with "ak47" (headshot)
+L 09/13/2026 - 04:18:41: rcon from "169.150.232.56:57028": command "status_json"
+L 09/13/2026 - 04:18:42: rcon from "169.150.232.56:57028": command "status"
+L 09/13/2026 - 04:18:42: "pichekistha<0><[U:1:80924469]><TERRORIST>" [-280 614 64] killed "Pheonix<2><[U:1:104794797]><CT>" [-161 -645 64] with "ak47" (headshot)
+L 09/13/2026 - 04:18:42: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "18") (T "20")
+L 09/13/2026 - 04:18:42: Team "CT" scored "18" with "4" players
+L 09/13/2026 - 04:18:42: Team "TERRORIST" scored "20" with "4" players
+L 09/13/2026 - 04:18:42: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:18:42: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:18:42: MatchStatus: Score: 18:20 on map "aim_ak_bench" RoundsPlayed: 38
+L 09/13/2026 - 04:18:42: World triggered "Round_End"
+L 09/13/2026 - 04:18:49: Starting Freeze period
+L 09/13/2026 - 04:18:49: JSON_BEGIN{
+L 09/13/2026 - 04:18:49: "name": "round_stats",
+L 09/13/2026 - 04:18:49: "round_number" : "39",
+L 09/13/2026 - 04:18:49: "score_t" : "20",
+L 09/13/2026 - 04:18:49: "score_ct" : "18",
+L 09/13/2026 - 04:18:49: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:18:49: "server" : "cupcake",
+L 09/13/2026 - 04:18:49: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:18:49: "players" : {
+L 09/13/2026 - 04:18:49: "player_0" : "            80924469,      2,  10000,     21,     20,      2,2403.00,  90.48,   1.05,     63,     16,      0,      0,      0,      0,      0,      7,     16,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:18:49: "player_1" : "          1080094440,      3,  10000,      2,      5,      0, 397.00,   0.00,   0.40,     10,      1,      0,      0,      0,      0,      0,      2,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:18:49: "player_2" : "           104794797,      3,  10000,     27,     21,      1,3285.00,  74.07,   1.29,     86,     17,      0,      0,      0,      0,      0,     21,     17,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:18:49: "player_3" : "            87305029,      2,  10000,     12,     10,      2,1307.00, 100.00,   1.20,     34,      4,      0,      0,      0,      0,      0,      2,      5,      1,      0,      0,0.000000,0.000000,      0,      2,      0"
+L 09/13/2026 - 04:18:49: "player_4" : "          1076778384,      0,  10000,      1,      8,      1, 145.00, 100.00,   0.12,      4,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:18:49: }}JSON_END
+L 09/13/2026 - 04:18:49: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:18:49: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:18:49: MatchStatus: Score: 18:20 on map "aim_ak_bench" RoundsPlayed: 38
+L 09/13/2026 - 04:18:49: World triggered "Round_Start"
+L 09/13/2026 - 04:18:51: rcon from "169.150.232.56:39964": command "status_json"
+L 09/13/2026 - 04:18:52: rcon from "169.150.232.56:39964": command "status"
+L 09/13/2026 - 04:18:59: "Pheonix<2><[U:1:104794797]><CT>" [-128 -744 64] killed "Fraggy<3><[U:1:87305029]><TERRORIST>" [-513 188 64] with "ak47" (headshot)
+L 09/13/2026 - 04:19:00: "pichekistha<0><[U:1:80924469]><TERRORIST>" [348 552 64] killed "Sheldor<1><[U:1:1080094440]><CT>" [-721 -678 64] with "ak47" (headshot)
+L 09/13/2026 - 04:19:01: rcon from "169.150.232.56:37878": command "status_json"
+L 09/13/2026 - 04:19:01: rcon from "169.150.232.56:37878": command "status"
+L 09/13/2026 - 04:19:07: "Pheonix<2><[U:1:104794797]><CT>" [64 -796 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [613 487 64] with "ak47"
+L 09/13/2026 - 04:19:07: "Sheldor<1><[U:1:1080094440]><CT>" assisted killing "pichekistha<0><[U:1:80924469]><TERRORIST>"
+L 09/13/2026 - 04:19:07: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "19") (T "20")
+L 09/13/2026 - 04:19:07: Team "CT" scored "19" with "4" players
+L 09/13/2026 - 04:19:07: Team "TERRORIST" scored "20" with "4" players
+L 09/13/2026 - 04:19:07: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:19:07: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:19:07: MatchStatus: Score: 19:20 on map "aim_ak_bench" RoundsPlayed: 39
+L 09/13/2026 - 04:19:07: World triggered "Round_End"
+L 09/13/2026 - 04:19:11: rcon from "169.150.232.56:51016": command "status_json"
+L 09/13/2026 - 04:19:12: rcon from "169.150.232.56:51016": command "status"
+L 09/13/2026 - 04:19:14: Starting Freeze period
+L 09/13/2026 - 04:19:14: JSON_BEGIN{
+L 09/13/2026 - 04:19:14: "name": "round_stats",
+L 09/13/2026 - 04:19:14: "round_number" : "40",
+L 09/13/2026 - 04:19:14: "score_t" : "20",
+L 09/13/2026 - 04:19:14: "score_ct" : "19",
+L 09/13/2026 - 04:19:14: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:19:14: "server" : "cupcake",
+L 09/13/2026 - 04:19:14: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:19:14: "players" : {
+L 09/13/2026 - 04:19:14: "player_0" : "            80924469,      2,  10000,     22,     21,      2,2503.00,  90.91,   1.05,     64,     16,      0,      0,      0,      0,      0,      8,     16,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:19:14: "player_1" : "          1080094440,      3,  10000,      2,      6,      1, 429.00,   0.00,   0.33,     11,      1,      0,      0,      0,      0,      0,      2,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:19:14: "player_2" : "           104794797,      3,  10000,     29,     21,      1,3453.00,  72.41,   1.38,     89,     18,      0,      0,      0,      0,      0,     22,     18,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:19:14: "player_3" : "            87305029,      2,  10000,     12,     11,      2,1333.00, 100.00,   1.09,     34,      4,      0,      0,      0,      0,      0,      2,      5,      1,      0,      0,0.000000,0.000000,      0,      2,      0"
+L 09/13/2026 - 04:19:14: "player_4" : "          1076778384,      0,  10000,      1,      8,      1, 145.00, 100.00,   0.12,      4,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:19:14: }}JSON_END
+L 09/13/2026 - 04:19:14: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:19:14: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:19:14: MatchStatus: Score: 19:20 on map "aim_ak_bench" RoundsPlayed: 39
+L 09/13/2026 - 04:19:14: World triggered "Round_Start"
+L 09/13/2026 - 04:19:21: rcon from "169.150.232.56:46472": command "status_json"
+L 09/13/2026 - 04:19:22: rcon from "169.150.232.56:46472": command "status"
+L 09/13/2026 - 04:19:23: "Sheldor<1><[U:1:1080094440]><CT>" [56 -707 64] killed "Fraggy<3><[U:1:87305029]><TERRORIST>" [583 142 64] with "ak47"
+L 09/13/2026 - 04:19:27: "pichekistha<0><[U:1:80924469]><TERRORIST>" [-199 589 64] killed "Sheldor<1><[U:1:1080094440]><CT>" [-166 -724 64] with "ak47"
+L 09/13/2026 - 04:19:27: "Fraggy<3><[U:1:87305029]><TERRORIST>" assisted killing "Sheldor<1><[U:1:1080094440]><CT>"
+L 09/13/2026 - 04:19:31: "Pheonix<2><[U:1:104794797]><CT>" [526 -419 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [189 614 64] with "ak47" (headshot)
+L 09/13/2026 - 04:19:31: "Sheldor<1><[U:1:1080094440]><CT>" assisted killing "pichekistha<0><[U:1:80924469]><TERRORIST>"
+L 09/13/2026 - 04:19:31: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "20") (T "20")
+L 09/13/2026 - 04:19:31: Team "CT" scored "20" with "4" players
+L 09/13/2026 - 04:19:31: Team "TERRORIST" scored "20" with "4" players
+L 09/13/2026 - 04:19:31: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:19:31: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:19:31: MatchStatus: Score: 20:20 on map "aim_ak_bench" RoundsPlayed: 40
+L 09/13/2026 - 04:19:31: World triggered "Round_End"
+L 09/13/2026 - 04:19:31: rcon from "169.150.232.56:48530": command "status_json"
+L 09/13/2026 - 04:19:32: rcon from "169.150.232.56:48530": command "status"
+L 09/13/2026 - 04:19:38: Starting Freeze period
+L 09/13/2026 - 04:19:38: JSON_BEGIN{
+L 09/13/2026 - 04:19:38: "name": "round_stats",
+L 09/13/2026 - 04:19:38: "round_number" : "41",
+L 09/13/2026 - 04:19:38: "score_t" : "20",
+L 09/13/2026 - 04:19:38: "score_ct" : "20",
+L 09/13/2026 - 04:19:38: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:19:38: "server" : "cupcake",
+L 09/13/2026 - 04:19:38: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:19:38: "players" : {
+L 09/13/2026 - 04:19:38: "player_0" : "            80924469,      2,  10000,     23,     22,      2,2603.00,  86.96,   1.05,     65,     16,      0,      0,      0,      0,      0,      9,     16,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:19:38: "player_1" : "          1080094440,      3,  10000,      3,      7,      2, 581.00,   0.00,   0.43,     15,      2,      0,      0,      0,      0,      0,      2,      1,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:19:38: "player_2" : "           104794797,      3,  10000,     30,     21,      1,3501.00,  73.33,   1.43,     88,     18,      0,      0,      0,      0,      0,     23,     18,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:19:38: "player_3" : "            87305029,      2,  10000,     12,     12,      3,1359.00, 100.00,   1.00,     34,      4,      0,      0,      0,      0,      0,      2,      5,      1,      0,      0,0.000000,0.000000,      0,      2,      0"
+L 09/13/2026 - 04:19:38: "player_4" : "          1076778384,      0,  10000,      1,      8,      1, 145.00, 100.00,   0.12,      4,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:19:38: }}JSON_END
+L 09/13/2026 - 04:19:38: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:19:38: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:19:38: MatchStatus: Score: 20:20 on map "aim_ak_bench" RoundsPlayed: 40
+L 09/13/2026 - 04:19:38: World triggered "Round_Start"
+L 09/13/2026 - 04:19:41: rcon from "169.150.232.56:46924": command "status_json"
+L 09/13/2026 - 04:19:42: rcon from "169.150.232.56:46924": command "status"
+L 09/13/2026 - 04:19:51: rcon from "169.150.232.56:35176": command "status_json"
+L 09/13/2026 - 04:19:51: rcon from "169.150.232.56:35176": command "status"
+L 09/13/2026 - 04:19:52: rcon from "169.150.247.207:40866": command "status"
+L 09/13/2026 - 04:19:52: rcon from "169.150.247.207:40878": command "status_json"
+L 09/13/2026 - 04:19:53: "Fraggy<3><[U:1:87305029]><TERRORIST>" [732 214 172] killed "Pheonix<2><[U:1:104794797]><CT>" [63 -698 64] with "ak47"
+L 09/13/2026 - 04:20:01: "Sheldor<1><[U:1:1080094440]><CT>" [-722 -557 64] killed "Fraggy<3><[U:1:87305029]><TERRORIST>" [-126 -22 64] with "ak47"
+L 09/13/2026 - 04:20:01: "Pheonix<2><[U:1:104794797]><CT>" assisted killing "Fraggy<3><[U:1:87305029]><TERRORIST>"
+L 09/13/2026 - 04:20:01: rcon from "169.150.232.56:36900": command "status_json"
+L 09/13/2026 - 04:20:01: rcon from "169.150.232.56:36900": command "status"
+L 09/13/2026 - 04:20:12: rcon from "169.150.232.56:39238": command "status_json"
+L 09/13/2026 - 04:20:12: rcon from "169.150.232.56:39238": command "status"
+L 09/13/2026 - 04:20:12: "Sheldor<1><[U:1:1080094440]><CT>" [192 -748 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [634 478 64] with "ak47" (headshot)
+L 09/13/2026 - 04:20:12: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "21") (T "20")
+L 09/13/2026 - 04:20:12: Team "CT" scored "21" with "4" players
+L 09/13/2026 - 04:20:12: Team "TERRORIST" scored "20" with "4" players
+L 09/13/2026 - 04:20:12: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:20:12: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:20:12: MatchStatus: Score: 21:20 on map "aim_ak_bench" RoundsPlayed: 41
+L 09/13/2026 - 04:20:12: World triggered "Round_End"
+L 09/13/2026 - 04:20:19: Starting Freeze period
+L 09/13/2026 - 04:20:19: JSON_BEGIN{
+L 09/13/2026 - 04:20:19: "name": "round_stats",
+L 09/13/2026 - 04:20:19: "round_number" : "42",
+L 09/13/2026 - 04:20:19: "score_t" : "20",
+L 09/13/2026 - 04:20:19: "score_ct" : "21",
+L 09/13/2026 - 04:20:19: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:20:19: "server" : "cupcake",
+L 09/13/2026 - 04:20:19: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:20:19: "players" : {
+L 09/13/2026 - 04:20:19: "player_0" : "            80924469,      2,  10000,     23,     23,      2,2603.00,  86.96,   1.00,     63,     16,      0,      0,      0,      0,      0,      9,     16,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:20:19: "player_1" : "          1080094440,      3,  10000,      5,      7,      2, 707.00,  20.00,   0.71,     17,      3,      0,      0,      0,      0,      0,      4,      1,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:20:19: "player_2" : "           104794797,      3,  10000,     30,     22,      2,3575.00,  73.33,   1.36,     87,     18,      0,      0,      0,      0,      0,     23,     18,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:20:19: "player_3" : "            87305029,      2,  10000,     13,     13,      3,1459.00,  92.31,   1.00,     36,      4,      0,      0,      0,      0,      0,      2,      6,      1,      0,      0,0.000000,0.000000,      0,      2,      0"
+L 09/13/2026 - 04:20:19: "player_4" : "          1076778384,      0,  10000,      1,      8,      1, 145.00, 100.00,   0.12,      4,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:20:19: }}JSON_END
+L 09/13/2026 - 04:20:19: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:20:19: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:20:19: MatchStatus: Score: 21:20 on map "aim_ak_bench" RoundsPlayed: 41
+L 09/13/2026 - 04:20:19: World triggered "Round_Start"
+L 09/13/2026 - 04:20:21: rcon from "169.150.232.56:37644": command "status_json"
+L 09/13/2026 - 04:20:22: rcon from "169.150.232.56:37644": command "status"
+L 09/13/2026 - 04:20:25: "Pheonix<2><[U:1:104794797]><CT>" [118 -690 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [615 533 64] with "ak47" (headshot)
+L 09/13/2026 - 04:20:29: "Sheldor<1><[U:1:1080094440]><CT>" [-621 -681 64] killed "Fraggy<3><[U:1:87305029]><TERRORIST>" [-129 478 64] with "ak47" (headshot)
+L 09/13/2026 - 04:20:29: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "22") (T "20")
+L 09/13/2026 - 04:20:29: Team "CT" scored "22" with "4" players
+L 09/13/2026 - 04:20:29: Team "TERRORIST" scored "20" with "4" players
+L 09/13/2026 - 04:20:29: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:20:29: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:20:29: MatchStatus: Score: 22:20 on map "aim_ak_bench" RoundsPlayed: 42
+L 09/13/2026 - 04:20:29: World triggered "Round_End"
+L 09/13/2026 - 04:20:31: rcon from "169.150.232.56:37080": command "status_json"
+L 09/13/2026 - 04:20:32: rcon from "169.150.232.56:37080": command "status"
+L 09/13/2026 - 04:20:36: Starting Freeze period
+L 09/13/2026 - 04:20:36: JSON_BEGIN{
+L 09/13/2026 - 04:20:36: "name": "round_stats",
+L 09/13/2026 - 04:20:36: "round_number" : "43",
+L 09/13/2026 - 04:20:36: "score_t" : "20",
+L 09/13/2026 - 04:20:36: "score_ct" : "22",
+L 09/13/2026 - 04:20:36: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:20:36: "server" : "cupcake",
+L 09/13/2026 - 04:20:36: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:20:36: "players" : {
+L 09/13/2026 - 04:20:36: "player_0" : "            80924469,      2,  10000,     23,     24,      2,2603.00,  86.96,   0.96,     62,     16,      0,      0,      0,      0,      0,      9,     16,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:20:36: "player_1" : "          1080094440,      3,  10000,      6,      7,      2, 807.00,  33.33,   0.86,     19,      4,      0,      0,      0,      0,      0,      4,      1,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:20:36: "player_2" : "           104794797,      3,  10000,     31,     22,      2,3675.00,  74.19,   1.41,     88,     18,      0,      0,      0,      0,      0,     23,     19,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:20:36: "player_3" : "            87305029,      2,  10000,     13,     14,      3,1543.00,  92.31,   0.93,     37,      4,      0,      0,      0,      0,      0,      2,      6,      1,      0,      0,0.000000,0.000000,      0,      2,      0"
+L 09/13/2026 - 04:20:36: "player_4" : "          1076778384,      0,  10000,      1,      8,      1, 145.00, 100.00,   0.12,      3,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:20:36: }}JSON_END
+L 09/13/2026 - 04:20:36: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:20:36: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:20:36: MatchStatus: Score: 22:20 on map "aim_ak_bench" RoundsPlayed: 42
+L 09/13/2026 - 04:20:36: World triggered "Round_Start"
+L 09/13/2026 - 04:20:41: rcon from "169.150.232.56:45018": command "status_json"
+L 09/13/2026 - 04:20:42: rcon from "169.150.232.56:45018": command "status"
+L 09/13/2026 - 04:20:43: rcon from "185.180.15.34:57534": command "status"
+L 09/13/2026 - 04:20:44: "pichekistha<0><[U:1:80924469]><TERRORIST>" [221 592 64] killed "Pheonix<2><[U:1:104794797]><CT>" [257 -693 64] with "ak47" (headshot)
+L 09/13/2026 - 04:20:51: rcon from "169.150.232.56:40730": command "status_json"
+L 09/13/2026 - 04:20:51: rcon from "169.150.232.56:40730": command "status"
+L 09/13/2026 - 04:20:54: "Sheldor<1><[U:1:1080094440]><CT>" [701 -594 64] killed "Fraggy<3><[U:1:87305029]><TERRORIST>" [-542 143 64] with "ak47" (headshot)
+L 09/13/2026 - 04:21:01: rcon from "169.150.232.56:51204": command "status_json"
+L 09/13/2026 - 04:21:02: rcon from "169.150.232.56:51204": command "status"
+L 09/13/2026 - 04:21:09: "Sheldor<1><[U:1:1080094440]><CT>" [184 -832 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [613 536 64] with "ak47"
+L 09/13/2026 - 04:21:09: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "23") (T "20")
+L 09/13/2026 - 04:21:09: Team "CT" scored "23" with "4" players
+L 09/13/2026 - 04:21:09: Team "TERRORIST" scored "20" with "4" players
+L 09/13/2026 - 04:21:09: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:21:09: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:21:09: MatchStatus: Score: 23:20 on map "aim_ak_bench" RoundsPlayed: 43
+L 09/13/2026 - 04:21:09: World triggered "Round_End"
+L 09/13/2026 - 04:21:11: rcon from "169.150.232.56:39736": command "status_json"
+L 09/13/2026 - 04:21:11: rcon from "169.150.232.56:39736": command "status"
+L 09/13/2026 - 04:21:16: Starting Freeze period
+L 09/13/2026 - 04:21:16: JSON_BEGIN{
+L 09/13/2026 - 04:21:16: "name": "round_stats",
+L 09/13/2026 - 04:21:16: "round_number" : "44",
+L 09/13/2026 - 04:21:16: "score_t" : "20",
+L 09/13/2026 - 04:21:16: "score_ct" : "23",
+L 09/13/2026 - 04:21:16: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:21:16: "server" : "cupcake",
+L 09/13/2026 - 04:21:16: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:21:16: "players" : {
+L 09/13/2026 - 04:21:16: "player_0" : "            80924469,      2,  10000,     24,     25,      2,2703.00,  87.50,   0.96,     63,     16,      0,      0,      0,      0,      0,      9,     17,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:21:16: "player_1" : "          1080094440,      3,  10000,      8,      7,      2,1007.00,  37.50,   1.14,     23,      5,      0,      0,      0,      0,      0,      6,      1,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:21:16: "player_2" : "           104794797,      3,  10000,     31,     23,      2,3675.00,  74.19,   1.35,     85,     18,      0,      0,      0,      0,      0,     23,     19,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:21:16: "player_3" : "            87305029,      2,  10000,     13,     15,      3,1626.00,  92.31,   0.87,     38,      4,      0,      0,      0,      0,      0,      2,      6,      1,      0,      0,0.000000,0.000000,      0,      2,      0"
+L 09/13/2026 - 04:21:16: "player_4" : "          1076778384,      0,  10000,      1,      8,      1, 145.00, 100.00,   0.12,      3,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:21:16: }}JSON_END
+L 09/13/2026 - 04:21:16: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:21:16: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:21:16: MatchStatus: Score: 23:20 on map "aim_ak_bench" RoundsPlayed: 43
+L 09/13/2026 - 04:21:16: World triggered "Round_Start"
+L 09/13/2026 - 04:21:20: "Sheldor<1><[U:1:1080094440]><CT>" [-278 -706 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [-253 607 64] with "ak47" (headshot)
+L 09/13/2026 - 04:21:21: rcon from "169.150.232.56:58920": command "status_json"
+L 09/13/2026 - 04:21:21: rcon from "169.150.232.56:58920": command "status"
+L 09/13/2026 - 04:21:26: "Fraggy<3><[U:1:87305029]><TERRORIST>" [336 522 64] killed "Sheldor<1><[U:1:1080094440]><CT>" [-407 -736 64] with "ak47"
+L 09/13/2026 - 04:21:29: "Pheonix<2><[U:1:104794797]><CT>" [196 -673 64] killed "Fraggy<3><[U:1:87305029]><TERRORIST>" [592 545 64] with "ak47"
+L 09/13/2026 - 04:21:29: "Sheldor<1><[U:1:1080094440]><CT>" assisted killing "Fraggy<3><[U:1:87305029]><TERRORIST>"
+L 09/13/2026 - 04:21:29: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "24") (T "20")
+L 09/13/2026 - 04:21:29: Team "CT" scored "24" with "4" players
+L 09/13/2026 - 04:21:29: Team "TERRORIST" scored "20" with "4" players
+L 09/13/2026 - 04:21:29: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:21:29: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:21:29: MatchStatus: Score: 24:20 on map "aim_ak_bench" RoundsPlayed: 44
+L 09/13/2026 - 04:21:29: World triggered "Round_End"
+L 09/13/2026 - 04:21:31: rcon from "169.150.232.56:37070": command "status_json"
+L 09/13/2026 - 04:21:32: rcon from "169.150.232.56:37070": command "status"
+L 09/13/2026 - 04:21:36: Starting Freeze period
+L 09/13/2026 - 04:21:36: JSON_BEGIN{
+L 09/13/2026 - 04:21:36: "name": "round_stats",
+L 09/13/2026 - 04:21:36: "round_number" : "45",
+L 09/13/2026 - 04:21:36: "score_t" : "20",
+L 09/13/2026 - 04:21:36: "score_ct" : "24",
+L 09/13/2026 - 04:21:36: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:21:36: "server" : "cupcake",
+L 09/13/2026 - 04:21:36: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:21:36: "players" : {
+L 09/13/2026 - 04:21:36: "player_0" : "            80924469,      2,  10000,     24,     26,      2,2703.00,  87.50,   0.92,     61,     16,      0,      0,      0,      0,      0,      9,     17,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:21:36: "player_1" : "          1080094440,      3,  10000,      9,      8,      3,1145.00,  44.44,   1.12,     26,      6,      0,      0,      0,      0,      0,      6,      2,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:21:36: "player_2" : "           104794797,      3,  10000,     32,     23,      2,3737.00,  71.88,   1.39,     85,     18,      0,      0,      0,      0,      0,     24,     19,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:21:36: "player_3" : "            87305029,      2,  10000,     14,     16,      3,1777.00,  85.71,   0.88,     40,      4,      0,      0,      0,      0,      0,      3,      6,      1,      0,      0,0.000000,0.000000,      0,      2,      0"
+L 09/13/2026 - 04:21:36: "player_4" : "          1076778384,      0,  10000,      1,      8,      1, 145.00, 100.00,   0.12,      3,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:21:36: }}JSON_END
+L 09/13/2026 - 04:21:36: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:21:36: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:21:36: MatchStatus: Score: 24:20 on map "aim_ak_bench" RoundsPlayed: 44
+L 09/13/2026 - 04:21:36: World triggered "Round_Start"
+L 09/13/2026 - 04:21:41: rcon from "169.150.232.56:35944": command "status_json"
+L 09/13/2026 - 04:21:41: rcon from "169.150.232.56:35944": command "status"
+L 09/13/2026 - 04:21:43: "pichekistha<0><[U:1:80924469]><TERRORIST>" [-143 551 64] killed "Pheonix<2><[U:1:104794797]><CT>" [-297 -785 64] with "ak47" (headshot)
+L 09/13/2026 - 04:21:44: "Sheldor<1><[U:1:1080094440]><CT>" [-588 -661 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [-132 550 64] with "ak47"
+L 09/13/2026 - 04:21:51: rcon from "169.150.232.56:54570": command "status_json"
+L 09/13/2026 - 04:21:52: rcon from "169.150.232.56:54570": command "status"
+L 09/13/2026 - 04:21:58: "Sheldor<1><[U:1:1080094440]><CT>" [-574 -539 64] killed "Fraggy<3><[U:1:87305029]><TERRORIST>" [-41 163 64] with "ak47"
+L 09/13/2026 - 04:21:58: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "25") (T "20")
+L 09/13/2026 - 04:21:58: Team "CT" scored "25" with "4" players
+L 09/13/2026 - 04:21:58: Team "TERRORIST" scored "20" with "4" players
+L 09/13/2026 - 04:21:58: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:21:58: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:21:58: MatchStatus: Score: 25:20 on map "aim_ak_bench" RoundsPlayed: 45
+L 09/13/2026 - 04:21:58: World triggered "Round_End"
+L 09/13/2026 - 04:22:01: rcon from "169.150.232.56:41852": command "status_json"
+L 09/13/2026 - 04:22:01: rcon from "169.150.232.56:41852": command "status"
+L 09/13/2026 - 04:22:05: Starting Freeze period
+L 09/13/2026 - 04:22:05: JSON_BEGIN{
+L 09/13/2026 - 04:22:05: "name": "round_stats",
+L 09/13/2026 - 04:22:05: "round_number" : "46",
+L 09/13/2026 - 04:22:05: "score_t" : "20",
+L 09/13/2026 - 04:22:05: "score_ct" : "25",
+L 09/13/2026 - 04:22:05: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:22:05: "server" : "cupcake",
+L 09/13/2026 - 04:22:05: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:22:05: "players" : {
+L 09/13/2026 - 04:22:05: "player_0" : "            80924469,      2,  10000,     25,     27,      2,2803.00,  88.00,   0.93,     62,     16,      0,      0,      0,      0,      0,      9,     18,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:22:05: "player_1" : "          1080094440,      3,  10000,     11,      8,      3,1345.00,  36.36,   1.38,     30,      7,      0,      0,      0,      0,      0,      8,      2,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:22:05: "player_2" : "           104794797,      3,  10000,     32,     24,      2,3737.00,  71.88,   1.33,     83,     18,      0,      0,      0,      0,      0,     24,     19,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:22:05: "player_3" : "            87305029,      2,  10000,     14,     17,      3,1802.00,  85.71,   0.82,     40,      4,      0,      0,      0,      0,      0,      3,      6,      1,      0,      0,0.000000,0.000000,      0,      2,      0"
+L 09/13/2026 - 04:22:05: "player_4" : "          1076778384,      0,  10000,      1,      8,      1, 145.00, 100.00,   0.12,      3,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:22:05: }}JSON_END
+L 09/13/2026 - 04:22:05: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:22:05: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:22:05: MatchStatus: Score: 25:20 on map "aim_ak_bench" RoundsPlayed: 45
+L 09/13/2026 - 04:22:05: World triggered "Round_Start"
+L 09/13/2026 - 04:22:10: "Fraggy<3><[U:1:87305029]><TERRORIST>" [-253 329 64] killed "Pheonix<2><[U:1:104794797]><CT>" [323 -660 64] with "ak47" (headshot)
+L 09/13/2026 - 04:22:10: "Sheldor<1><[U:1:1080094440]><CT>" [-249 -722 64] killed "Fraggy<3><[U:1:87305029]><TERRORIST>" [-249 329 64] with "ak47"
+L 09/13/2026 - 04:22:10: "Pheonix<2><[U:1:104794797]><CT>" assisted killing "Fraggy<3><[U:1:87305029]><TERRORIST>"
+L 09/13/2026 - 04:22:11: rcon from "169.150.232.56:43820": command "status_json"
+L 09/13/2026 - 04:22:12: rcon from "169.150.232.56:43820": command "status"
+L 09/13/2026 - 04:22:16: "Sheldor<1><[U:1:1080094440]><CT>" [-552 -308 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [-732 250 134] with "ak47" (headshot)
+L 09/13/2026 - 04:22:16: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "26") (T "20")
+L 09/13/2026 - 04:22:16: Team "CT" scored "26" with "4" players
+L 09/13/2026 - 04:22:16: Team "TERRORIST" scored "20" with "4" players
+L 09/13/2026 - 04:22:16: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:22:16: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:22:16: MatchStatus: Score: 26:20 on map "aim_ak_bench" RoundsPlayed: 46
+L 09/13/2026 - 04:22:16: World triggered "Round_End"
+L 09/13/2026 - 04:22:21: rcon from "169.150.232.56:42276": command "status_json"
+L 09/13/2026 - 04:22:22: rcon from "169.150.232.56:42276": command "status"
+L 09/13/2026 - 04:22:23: Starting Freeze period
+L 09/13/2026 - 04:22:23: JSON_BEGIN{
+L 09/13/2026 - 04:22:23: "name": "round_stats",
+L 09/13/2026 - 04:22:23: "round_number" : "47",
+L 09/13/2026 - 04:22:23: "score_t" : "20",
+L 09/13/2026 - 04:22:23: "score_ct" : "26",
+L 09/13/2026 - 04:22:23: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:22:23: "server" : "cupcake",
+L 09/13/2026 - 04:22:23: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:22:23: "players" : {
+L 09/13/2026 - 04:22:23: "player_0" : "            80924469,      2,  10000,     25,     28,      2,2803.00,  88.00,   0.89,     61,     16,      0,      0,      0,      0,      0,      9,     18,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:22:23: "player_1" : "          1080094440,      3,  10000,     13,      8,      3,1519.00,  38.46,   1.62,     33,      8,      0,      0,      0,      0,      0,     10,      2,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:22:23: "player_2" : "           104794797,      3,  10000,     32,     25,      3,3763.00,  71.88,   1.28,     82,     18,      0,      0,      0,      0,      0,     24,     19,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:22:23: "player_3" : "            87305029,      2,  10000,     15,     18,      3,1902.00,  86.67,   0.83,     41,      4,      0,      0,      0,      0,      0,      3,      7,      1,      0,      0,0.000000,0.000000,      0,      2,      0"
+L 09/13/2026 - 04:22:23: "player_4" : "          1076778384,      0,  10000,      1,      8,      1, 145.00, 100.00,   0.12,      3,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:22:23: }}JSON_END
+L 09/13/2026 - 04:22:23: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:22:23: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:22:23: MatchStatus: Score: 26:20 on map "aim_ak_bench" RoundsPlayed: 46
+L 09/13/2026 - 04:22:23: World triggered "Round_Start"
+L 09/13/2026 - 04:22:30: "pichekistha<0><[U:1:80924469]><TERRORIST>" [587 493 64] killed "Pheonix<2><[U:1:104794797]><CT>" [210 -668 64] with "ak47" (headshot)
+L 09/13/2026 - 04:22:31: rcon from "169.150.232.56:51266": command "status_json"
+L 09/13/2026 - 04:22:32: rcon from "169.150.232.56:51266": command "status"
+L 09/13/2026 - 04:22:35: "Fraggy<3><[U:1:87305029]><TERRORIST>" [330 278 64] killed "Sheldor<1><[U:1:1080094440]><CT>" [-605 -221 64] with "ak47"
+L 09/13/2026 - 04:22:35: "pichekistha<0><[U:1:80924469]><TERRORIST>" assisted killing "Sheldor<1><[U:1:1080094440]><CT>"
+L 09/13/2026 - 04:22:35: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "26") (T "21")
+L 09/13/2026 - 04:22:35: Team "CT" scored "26" with "4" players
+L 09/13/2026 - 04:22:35: Team "TERRORIST" scored "21" with "4" players
+L 09/13/2026 - 04:22:35: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:22:35: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:22:35: MatchStatus: Score: 26:21 on map "aim_ak_bench" RoundsPlayed: 47
+L 09/13/2026 - 04:22:35: World triggered "Round_End"
+L 09/13/2026 - 04:22:41: rcon from "169.150.232.56:50980": command "status_json"
+L 09/13/2026 - 04:22:42: rcon from "169.150.232.56:50980": command "status"
+L 09/13/2026 - 04:22:42: Starting Freeze period
+L 09/13/2026 - 04:22:42: JSON_BEGIN{
+L 09/13/2026 - 04:22:42: "name": "round_stats",
+L 09/13/2026 - 04:22:42: "round_number" : "48",
+L 09/13/2026 - 04:22:42: "score_t" : "21",
+L 09/13/2026 - 04:22:42: "score_ct" : "26",
+L 09/13/2026 - 04:22:42: "map" : "aim_ak_bench",
+L 09/13/2026 - 04:22:42: "server" : "cupcake",
+L 09/13/2026 - 04:22:42: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/13/2026 - 04:22:42: "players" : {
+L 09/13/2026 - 04:22:42: "player_0" : "            80924469,      2,  10000,     26,     28,      3,2956.00,  88.46,   0.93,     63,     17,      0,      0,      0,      0,      0,      9,     19,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:22:42: "player_1" : "          1080094440,      3,  10000,     13,      9,      3,1544.00,  38.46,   1.44,     33,      8,      0,      0,      0,      0,      0,     10,      2,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:22:42: "player_2" : "           104794797,      3,  10000,     32,     26,      3,3796.00,  71.88,   1.23,     81,     18,      0,      0,      0,      0,      0,     24,     19,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:22:42: "player_3" : "            87305029,      2,  10000,     16,     18,      3,1949.00,  81.25,   0.89,     41,      4,      0,      0,      0,      0,      0,      3,      7,      1,      0,      0,0.000000,0.000000,      0,      2,      0"
+L 09/13/2026 - 04:22:42: "player_4" : "          1076778384,      0,  10000,      1,      8,      1, 145.00, 100.00,   0.12,      3,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/13/2026 - 04:22:42: }}JSON_END
+L 09/13/2026 - 04:22:42: MatchStatus: Team "CT" is unset.
+L 09/13/2026 - 04:22:42: MatchStatus: Team "TERRORIST" is unset.
+L 09/13/2026 - 04:22:42: MatchStatus: Score: 26:21 on map "aim_ak_bench" RoundsPlayed: 47
+L 09/13/2026 - 04:22:42: World triggered "Round_Start"
+L 09/13/2026 - 04:22:44: "Pheonix<2><[U:1:104794797]><CT>" [110 -654 64] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [648 517 64] with "ak47"
+L 09/13/2026 - 04:22:46: "pichekistha<0><[U:1:80924469]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/13/2026 - 04:22:46: "pichekistha<0><[U:1:80924469]>" switched from team <TERRORIST> to <Unassigned>
+L 09/13/2026 - 04:22:46: "Sheldor<1><[U:1:1080094440]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/13/2026 - 04:22:46: "Sheldor<1><[U:1:1080094440]>" switched from team <CT> to <Unassigned>
+L 09/13/2026 - 04:22:46: "Sheldor<1><[U:1:1080094440]><Unassigned>" [496 -672 64] committed suicide with "world"
+L 09/13/2026 - 04:22:46: "Pheonix<2><[U:1:104794797]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/13/2026 - 04:22:46: "Pheonix<2><[U:1:104794797]>" switched from team <CT> to <Unassigned>
+L 09/13/2026 - 04:22:46: "Pheonix<2><[U:1:104794797]><Unassigned>" [290 -672 64] committed suicide with "world"
+L 09/13/2026 - 04:22:46: "Fraggy<3><[U:1:87305029]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/13/2026 - 04:22:46: "Fraggy<3><[U:1:87305029]>" switched from team <TERRORIST> to <Unassigned>
+L 09/13/2026 - 04:22:46: "Fraggy<3><[U:1:87305029]><Unassigned>" [-592 492 64] committed suicide with "world"
+L 09/13/2026 - 04:22:46: Log file closed

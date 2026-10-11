@@ -1,0 +1,315 @@
+L 09/24/2026 - 07:41:48: Log file started (file "logs/2026_09_24_074148.log") (game "csgo") (version "10924")
+L 09/24/2026 - 07:41:48: Loading map "de_shortdust"
+L 09/24/2026 - 07:41:48: server cvars start
+L 09/24/2026 - 07:41:48: "tv_relaypassword" = ""
+L 09/24/2026 - 07:41:48: "tv_password" = ""
+L 09/24/2026 - 07:41:48: "tv_password1" = ""
+L 09/24/2026 - 07:41:48: "tv_advertise_watchable" = "false"
+L 09/24/2026 - 07:41:48: "sv_voiceenable" = "true"
+L 09/24/2026 - 07:41:48: "sv_password" = "kodikura"
+L 09/24/2026 - 07:41:48: "sv_tags" = "dathost,dathost.com"
+L 09/24/2026 - 07:41:48: "sv_steamgroup" = ""
+L 09/24/2026 - 07:41:48: "sv_cheats" = "false"
+L 09/24/2026 - 07:41:48: "sv_debug_overlays_broadcast" = "false"
+L 09/24/2026 - 07:41:48: "tv_enable_dynamic" = "false"
+L 09/24/2026 - 07:41:48: "tv_enable" = "false"
+L 09/24/2026 - 07:41:48: "tv_enable1" = "false"
+L 09/24/2026 - 07:41:48: "sv_alltalk" = "false"
+L 09/24/2026 - 07:41:48: "mp_friendlyfire" = "true"
+L 09/24/2026 - 07:41:48: "sv_stopspeed" = "80"
+L 09/24/2026 - 07:41:48: "sv_noclipaccelerate" = "5"
+L 09/24/2026 - 07:41:48: "sv_noclipspeed" = "1200"
+L 09/24/2026 - 07:41:48: "sv_noclipspeedscaleonshift" = "0.5"
+L 09/24/2026 - 07:41:48: "sv_noclipfriction" = "4"
+L 09/24/2026 - 07:41:48: "sv_specaccelerate" = "5"
+L 09/24/2026 - 07:41:48: "sv_specspeed" = "1200"
+L 09/24/2026 - 07:41:48: "sv_specnoclip" = "true"
+L 09/24/2026 - 07:41:48: "sv_maxspeed" = "320"
+L 09/24/2026 - 07:41:48: "sv_accelerate" = "5.5"
+L 09/24/2026 - 07:41:48: "sv_airaccelerate" = "12"
+L 09/24/2026 - 07:41:48: "sv_wateraccelerate" = "10"
+L 09/24/2026 - 07:41:48: "sv_waterfriction" = "1"
+L 09/24/2026 - 07:41:48: "sv_footsteps" = "1"
+L 09/24/2026 - 07:41:48: "sv_rollspeed" = "200"
+L 09/24/2026 - 07:41:48: "sv_rollangle" = "0"
+L 09/24/2026 - 07:41:48: "sv_friction" = "5.2"
+L 09/24/2026 - 07:41:48: "sv_bounce" = "0"
+L 09/24/2026 - 07:41:48: "sv_stepsize" = "18"
+L 09/24/2026 - 07:41:48: "sv_mover_pogofrequency" = "10"
+L 09/24/2026 - 07:41:48: "sv_mover_pogodampingratio" = "1"
+L 09/24/2026 - 07:41:48: "sv_mover_maxslope" = "0.7"
+L 09/24/2026 - 07:41:48: "r_JeepViewDampenFreq" = "7"
+L 09/24/2026 - 07:41:48: "r_JeepViewDampenDamp" = "1"
+L 09/24/2026 - 07:41:48: "r_JeepViewZHeight" = "10"
+L 09/24/2026 - 07:41:48: "r_AirboatViewDampenFreq" = "7"
+L 09/24/2026 - 07:41:48: "r_AirboatViewDampenDamp" = "1"
+L 09/24/2026 - 07:41:48: "r_AirboatViewZHeight" = "0"
+L 09/24/2026 - 07:41:48: "sv_allchat" = "true"
+L 09/24/2026 - 07:41:48: "buddha" = "false"
+L 09/24/2026 - 07:41:48: "buddha_ignore_bots" = "false"
+L 09/24/2026 - 07:41:48: "buddha_reset_hp" = "1"
+L 09/24/2026 - 07:41:48: "mp_teamplay" = "false"
+L 09/24/2026 - 07:41:48: "mp_forcerespawn" = "true"
+L 09/24/2026 - 07:41:48: "decalfrequency" = "10"
+L 09/24/2026 - 07:41:48: "mp_fadetoblack" = "false"
+L 09/24/2026 - 07:41:48: "sv_accelerate_use_weapon_speed" = "true"
+L 09/24/2026 - 07:41:48: "sv_accelerate_debug_speed" = "false"
+L 09/24/2026 - 07:41:48: "mp_weaponstay" = "false"
+L 09/24/2026 - 07:41:48: "sv_autobuyammo" = "false"
+L 09/24/2026 - 07:41:48: "mp_promoted_item_enabled" = "false"
+L 09/24/2026 - 07:41:48: "cash_team_terrorist_win_bomb" = "2700"
+L 09/24/2026 - 07:41:48: "cash_team_elimination_hostage_map_t" = "2000"
+L 09/24/2026 - 07:41:48: "cash_team_elimination_hostage_map_ct" = "2300"
+L 09/24/2026 - 07:41:48: "cash_team_elimination_bomb_map" = "2700"
+L 09/24/2026 - 07:41:48: "cash_team_win_by_time_running_out_hostage" = "2000"
+L 09/24/2026 - 07:41:48: "cash_team_win_by_time_running_out_bomb" = "2700"
+L 09/24/2026 - 07:41:48: "cash_team_win_by_defusing_bomb" = "2700"
+L 09/24/2026 - 07:41:48: "cash_team_win_by_hostage_rescue" = "3000"
+L 09/24/2026 - 07:41:48: "cash_team_loser_bonus" = "2400"
+L 09/24/2026 - 07:41:48: "cash_team_loser_bonus_consecutive_rounds" = "0"
+L 09/24/2026 - 07:41:48: "cash_team_winner_bonus_consecutive_rounds" = "0"
+L 09/24/2026 - 07:41:48: "cash_team_rescued_hostage" = "0"
+L 09/24/2026 - 07:41:48: "cash_team_hostage_alive" = "0"
+L 09/24/2026 - 07:41:48: "cash_team_planted_bomb_but_defused" = "200"
+L 09/24/2026 - 07:41:48: "cash_team_hostage_interaction" = "500"
+L 09/24/2026 - 07:41:48: "cash_team_bonus_shorthanded" = "0"
+L 09/24/2026 - 07:41:48: "cash_player_killed_teammate" = "-300"
+L 09/24/2026 - 07:41:48: "cash_player_killed_enemy_factor" = "0.5"
+L 09/24/2026 - 07:41:48: "cash_player_killed_enemy_default" = "200"
+L 09/24/2026 - 07:41:48: "cash_player_bomb_planted" = "200"
+L 09/24/2026 - 07:41:48: "cash_player_bomb_defused" = "200"
+L 09/24/2026 - 07:41:48: "cash_player_rescued_hostage" = "1000"
+L 09/24/2026 - 07:41:48: "cash_player_interact_with_hostage" = "300"
+L 09/24/2026 - 07:41:48: "cash_player_damage_hostage" = "-30"
+L 09/24/2026 - 07:41:48: "cash_player_killed_hostage" = "-1000"
+L 09/24/2026 - 07:41:48: "cash_player_respawn_amount" = "0"
+L 09/24/2026 - 07:41:48: "cash_player_get_killed" = "0"
+L 09/24/2026 - 07:41:48: "cash_team_per_dead_enemy" = "50"
+L 09/24/2026 - 07:41:48: "cash_player_drop_on_death" = "0"
+L 09/24/2026 - 07:41:48: "cash_player_drop_on_death_stack_value" = "250"
+L 09/24/2026 - 07:41:48: "sv_competitive_minspec" = "true"
+L 09/24/2026 - 07:41:48: "mp_teammates_are_enemies" = "false"
+L 09/24/2026 - 07:41:48: "mp_buy_anywhere" = "0"
+L 09/24/2026 - 07:41:48: "mp_buy_during_immunity" = "0"
+L 09/24/2026 - 07:41:48: "sv_kick_ban_duration" = "15"
+L 09/24/2026 - 07:41:48: "sv_deadtalk" = "false"
+L 09/24/2026 - 07:41:48: "sv_spec_hear" = "3"
+L 09/24/2026 - 07:41:48: "mp_c4timer" = "40"
+L 09/24/2026 - 07:41:48: "mp_roundtime" = "3"
+L 09/24/2026 - 07:41:48: "mp_roundtime_hostage" = "2"
+L 09/24/2026 - 07:41:48: "mp_roundtime_defuse" = "2.25"
+L 09/24/2026 - 07:41:48: "mp_team_intro_time" = "6.5"
+L 09/24/2026 - 07:41:48: "mp_freezetime" = "5"
+L 09/24/2026 - 07:41:48: "mp_limitteams" = "2"
+L 09/24/2026 - 07:41:48: "mp_autoteambalance" = "true"
+L 09/24/2026 - 07:41:48: "mp_maxrounds" = "15"
+L 09/24/2026 - 07:41:48: "mp_winlimit" = "0"
+L 09/24/2026 - 07:41:48: "mp_tournament" = "false"
+L 09/24/2026 - 07:41:48: "mp_timelimit" = "0"
+L 09/24/2026 - 07:41:48: "mp_fraglimit" = "0"
+L 09/24/2026 - 07:41:48: "nextmode" = ""
+L 09/24/2026 - 07:41:48: "nextlevel" = ""
+L 09/24/2026 - 07:41:48: "sv_teamid_overhead_always_prohibit" = "false"
+L 09/24/2026 - 07:41:48: "sv_show_team_equipment_prohibit" = "false"
+L 09/24/2026 - 07:41:48: "sv_teamid_overhead" = "true"
+L 09/24/2026 - 07:41:48: "sv_gravity" = "800"
+L 09/24/2026 - 07:41:48: "sv_vote_issue_kick_allowed" = "true"
+L 09/24/2026 - 07:41:48: "sv_vote_kick_ban_duration" = "15"
+L 09/24/2026 - 07:41:48: "sv_vote_issue_loadbackup_allowed" = "true"
+L 09/24/2026 - 07:41:48: "sv_vote_issue_loadbackup_spec_only" = "false"
+L 09/24/2026 - 07:41:48: "sv_vote_issue_pause_match_spec_only" = "false"
+L 09/24/2026 - 07:41:48: "metamod_version" = "2.0.0-dev+1410"
+L 09/24/2026 - 07:41:48: server cvars end
+L 09/24/2026 - 07:41:49: server_cvar: "mp_friendlyfire" "false"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_team_terrorist_win_bomb" "3500"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_team_elimination_hostage_map_t" "1000"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_team_elimination_hostage_map_ct" "2000"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_team_elimination_bomb_map" "3250"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_team_win_by_time_running_out_hostage" "3250"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_team_win_by_time_running_out_bomb" "3250"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_team_win_by_defusing_bomb" "3250"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_team_win_by_hostage_rescue" "3500"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_team_loser_bonus" "1400"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_team_loser_bonus_consecutive_rounds" "500"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_team_planted_bomb_but_defused" "600"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_player_killed_enemy_factor" "1"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_player_killed_enemy_default" "300"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_player_bomb_planted" "300"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_player_bomb_defused" "300"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_player_interact_with_hostage" "150"
+L 09/24/2026 - 07:41:49: server_cvar: "mp_roundtime" "5"
+L 09/24/2026 - 07:41:49: server_cvar: "mp_roundtime_hostage" "0"
+L 09/24/2026 - 07:41:49: server_cvar: "mp_roundtime_defuse" "0"
+L 09/24/2026 - 07:41:49: server_cvar: "mp_freezetime" "6"
+L 09/24/2026 - 07:41:49: server_cvar: "mp_maxrounds" "0"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_player_bomb_defused" "200"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_player_bomb_planted" "200"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_player_interact_with_hostage" "300"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_player_killed_enemy_default" "200"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_player_killed_enemy_factor" "0.5"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_team_elimination_bomb_map" "2700"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_team_elimination_hostage_map_t" "2000"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_team_elimination_hostage_map_ct" "2300"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_team_loser_bonus" "2400"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_team_loser_bonus_consecutive_rounds" "0"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_team_planted_bomb_but_defused" "200"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_team_terrorist_win_bomb" "2700"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_team_win_by_defusing_bomb" "2700"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_team_win_by_hostage_rescue" "3000"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_team_win_by_time_running_out_hostage" "2000"
+L 09/24/2026 - 07:41:49: server_cvar: "cash_team_win_by_time_running_out_bomb" "2700"
+L 09/24/2026 - 07:41:49: server_cvar: "mp_freezetime" "5"
+L 09/24/2026 - 07:41:49: server_cvar: "mp_friendlyfire" "true"
+L 09/24/2026 - 07:41:49: server_cvar: "mp_maxrounds" "15"
+L 09/24/2026 - 07:41:49: server_cvar: "mp_roundtime" "3"
+L 09/24/2026 - 07:41:49: server_cvar: "mp_roundtime_hostage" "2"
+L 09/24/2026 - 07:41:49: server_cvar: "mp_roundtime_defuse" "2.25"
+L 09/24/2026 - 07:41:49: Started:  ""
+L 09/24/2026 - 07:41:49: World triggered "Warmup_Start"
+L 09/24/2026 - 07:41:49: "Sheldor<0><[U:1:1080094440]><>" connected, address "68.67.249.31:47058"
+L 09/24/2026 - 07:41:49: "Fraggy<4><[U:1:87305029]><>" connected, address "98.247.74.188:65209"
+L 09/24/2026 - 07:41:50: "prasaadem<1><[U:1:1075176373]><>" connected, address "23.118.107.196:61545"
+L 09/24/2026 - 07:41:50: "whitefe@ther<3><[U:1:186183274]><>" connected, address "50.34.37.89:54406"
+L 09/24/2026 - 07:41:50: "Sheldor<65280><[U:1:1080094440]><>" STEAM USERID validated
+L 09/24/2026 - 07:41:50: "Fraggy<4><[U:1:87305029]><>" STEAM USERID validated
+L 09/24/2026 - 07:41:50: "prasaadem<65281><[U:1:1075176373]><>" STEAM USERID validated
+L 09/24/2026 - 07:41:50: "Beni Lava<5><[U:1:145395478]><>" connected, address "97.126.183.239:50755"
+L 09/24/2026 - 07:41:50: "kiiiiiira<6><[U:1:335158966]><>" connected, address "50.123.107.113:57572"
+L 09/24/2026 - 07:41:51: "Sheldor<0><[U:1:1080094440]><>" entered the game
+L 09/24/2026 - 07:41:51: "prasaadem<1><[U:1:1075176373]><>" entered the game
+L 09/24/2026 - 07:41:51: "pichekistha<2><[U:1:80924469]><>" connected, address "71.63.169.247:50681"
+L 09/24/2026 - 07:41:51: "whitefe@ther<3><[U:1:186183274]><>" STEAM USERID validated
+L 09/24/2026 - 07:41:51: "whitefe@ther<3><[U:1:186183274]><>" entered the game
+L 09/24/2026 - 07:41:52: "Beni Lava<5><[U:1:145395478]><>" STEAM USERID validated
+L 09/24/2026 - 07:41:52: "kiiiiiira<6><[U:1:335158966]><>" STEAM USERID validated
+L 09/24/2026 - 07:41:52: "Fraggy<4><[U:1:87305029]><>" entered the game
+L 09/24/2026 - 07:41:52: "Beni Lava<5><[U:1:145395478]><>" entered the game
+L 09/24/2026 - 07:41:52: "pichekistha<65282><[U:1:80924469]><>" STEAM USERID validated
+L 09/24/2026 - 07:41:52: "kiiiiiira<6><[U:1:335158966]><>" entered the game
+L 09/24/2026 - 07:41:53: "pichekistha<2><[U:1:80924469]><>" entered the game
+L 09/24/2026 - 07:41:53: "KaiZen<7><[U:1:837983112]><>" connected, address "106.192.33.226:39009"
+L 09/24/2026 - 07:41:55: "KaiZen<7><[U:1:837983112]><>" STEAM USERID validated
+L 09/24/2026 - 07:41:56: rcon from "169.150.232.56:53572": command "status_json"
+L 09/24/2026 - 07:41:56: rcon from "169.150.232.56:53572": command "status"
+L 09/24/2026 - 07:41:59: "Fraggy<4><[U:1:87305029]>" switched from team <Unassigned> to <CT>
+L 09/24/2026 - 07:41:59: World triggered "Game_Commencing"
+L 09/24/2026 - 07:41:59: Starting Freeze period
+L 09/24/2026 - 07:41:59: JSON_BEGIN{
+L 09/24/2026 - 07:41:59: "name": "round_stats",
+L 09/24/2026 - 07:41:59: "round_number" : "1",
+L 09/24/2026 - 07:41:59: "score_t" : "0",
+L 09/24/2026 - 07:41:59: "score_ct" : "0",
+L 09/24/2026 - 07:41:59: "map" : "de_shortdust",
+L 09/24/2026 - 07:41:59: "server" : "cupcake",
+L 09/24/2026 - 07:41:59: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/24/2026 - 07:41:59: "players" : {
+L 09/24/2026 - 07:41:59: "player_0" : "          1080094440,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/24/2026 - 07:41:59: "player_1" : "          1075176373,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/24/2026 - 07:41:59: "player_2" : "            80924469,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/24/2026 - 07:41:59: "player_3" : "           186183274,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/24/2026 - 07:41:59: "player_4" : "            87305029,      3,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/24/2026 - 07:41:59: "player_5" : "           145395478,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/24/2026 - 07:41:59: "player_6" : "           335158966,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/24/2026 - 07:41:59: "player_7" : "           837983112,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/24/2026 - 07:41:59: }}JSON_END
+L 09/24/2026 - 07:41:59: World triggered "Match_Start" on "de_shortdust"
+L 09/24/2026 - 07:41:59: MatchStatus: Team "CT" is unset.
+L 09/24/2026 - 07:41:59: MatchStatus: Team "TERRORIST" is unset.
+L 09/24/2026 - 07:41:59: MatchStatus: Score: 0:0 on map "de_shortdust" RoundsPlayed: -1
+L 09/24/2026 - 07:41:59: "kiiiiiira<6><[U:1:335158966]>" switched from team <Unassigned> to <TERRORIST>
+L 09/24/2026 - 07:41:59: "pichekistha<2><[U:1:80924469]>" switched from team <Unassigned> to <TERRORIST>
+L 09/24/2026 - 07:42:00: "Sheldor<0><[U:1:1080094440]>" switched from team <Unassigned> to <CT>
+L 09/24/2026 - 07:42:00: "kiiiiiira<6><[U:1:335158966]><TERRORIST>" purchased "ak47"
+L 09/24/2026 - 07:42:00: "Fraggy<4><[U:1:87305029]><CT>" purchased "nova"
+L 09/24/2026 - 07:42:00: "prasaadem<1><[U:1:1075176373]>" switched from team <Unassigned> to <CT>
+L 09/24/2026 - 07:42:00: "kiiiiiira<6><[U:1:335158966]><TERRORIST>" purchased "smokegrenade"
+L 09/24/2026 - 07:42:01: "KaiZen<7><[U:1:837983112]><>" entered the game
+L 09/24/2026 - 07:42:01: World triggered "Warmup_Start"
+L 09/24/2026 - 07:42:01: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "tec9"
+L 09/24/2026 - 07:42:01: "kiiiiiira<6><[U:1:335158966]><TERRORIST>" purchased "flashbang"
+L 09/24/2026 - 07:42:02: "Beni Lava<5><[U:1:145395478]>" switched from team <Unassigned> to <TERRORIST>
+L 09/24/2026 - 07:42:04: "Beni Lava<5><[U:1:145395478]><TERRORIST>" purchased "ak47"
+L 09/24/2026 - 07:42:04: "Beni Lava<5><[U:1:145395478]><TERRORIST>" purchased "hegrenade"
+L 09/24/2026 - 07:42:05: "Beni Lava<5><[U:1:145395478]><TERRORIST>" purchased "flashbang"
+L 09/24/2026 - 07:42:06: rcon from "169.150.232.56:34872": command "status_json"
+L 09/24/2026 - 07:42:06: rcon from "169.150.232.56:34872": command "status"
+L 09/24/2026 - 07:42:07: "prasaadem<1><[U:1:1075176373]><CT>" purchased "deagle"
+L 09/24/2026 - 07:42:08: "whitefe@ther<3><[U:1:186183274]>" switched from team <Unassigned> to <CT>
+L 09/24/2026 - 07:42:09: "KaiZen<7><[U:1:837983112]>" switched from team <Unassigned> to <TERRORIST>
+L 09/24/2026 - 07:42:12: Starting Freeze period
+L 09/24/2026 - 07:42:12: JSON_BEGIN{
+L 09/24/2026 - 07:42:12: "name": "round_stats",
+L 09/24/2026 - 07:42:12: "round_number" : "1",
+L 09/24/2026 - 07:42:12: "score_t" : "0",
+L 09/24/2026 - 07:42:12: "score_ct" : "0",
+L 09/24/2026 - 07:42:12: "map" : "de_shortdust",
+L 09/24/2026 - 07:42:12: "server" : "cupcake",
+L 09/24/2026 - 07:42:12: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/24/2026 - 07:42:12: "players" : {
+L 09/24/2026 - 07:42:12: "player_0" : "          1080094440,      3,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/24/2026 - 07:42:12: "player_1" : "          1075176373,      3,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/24/2026 - 07:42:12: "player_2" : "            80924469,      2,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/24/2026 - 07:42:12: "player_3" : "           186183274,      3,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/24/2026 - 07:42:12: "player_4" : "            87305029,      3,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/24/2026 - 07:42:12: "player_5" : "           145395478,      2,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/24/2026 - 07:42:12: "player_6" : "           335158966,      2,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/24/2026 - 07:42:12: "player_7" : "           837983112,      2,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/24/2026 - 07:42:12: }}JSON_END
+L 09/24/2026 - 07:42:12: World triggered "Match_Start" on "de_shortdust"
+L 09/24/2026 - 07:42:12: "Beni Lava<5><[U:1:145395478]><TERRORIST>" triggered "Got_The_Bomb"
+L 09/24/2026 - 07:42:12: MatchStatus: Team "CT" is unset.
+L 09/24/2026 - 07:42:12: MatchStatus: Team "TERRORIST" is unset.
+L 09/24/2026 - 07:42:12: MatchStatus: Score: 0:0 on map "de_shortdust" RoundsPlayed: 0
+L 09/24/2026 - 07:42:13: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "tec9"
+L 09/24/2026 - 07:42:15: "KaiZen<7><[U:1:837983112]><TERRORIST>" purchased "tec9"
+L 09/24/2026 - 07:42:15: "kiiiiiira<6><[U:1:335158966]><TERRORIST>" purchased "tec9"
+L 09/24/2026 - 07:42:15: "prasaadem<1><[U:1:1075176373]><CT>" purchased "deagle"
+L 09/24/2026 - 07:42:15: "KaiZen<7><[U:1:837983112]><TERRORIST>" purchased "smokegrenade"
+L 09/24/2026 - 07:42:16: "KaiZen<7><[U:1:837983112]><TERRORIST>" purchased "flashbang"
+L 09/24/2026 - 07:42:16: rcon from "169.150.232.56:40028": command "status_json"
+L 09/24/2026 - 07:42:16: rcon from "169.150.232.56:40028": command "status"
+L 09/24/2026 - 07:42:17: "Sheldor<0><[U:1:1080094440]><CT>" purchased "deagle"
+L 09/24/2026 - 07:42:17: World triggered "Round_Start"
+L 09/24/2026 - 07:42:17: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "cz75a"
+L 09/24/2026 - 07:42:17: "Sheldor<0><[U:1:1080094440]><CT>" purchased "flashbang"
+L 09/24/2026 - 07:42:17: "Beni Lava<5><[U:1:145395478]><TERRORIST>" purchased "tec9"
+L 09/24/2026 - 07:42:22: "whitefe@ther<3><[U:1:186183274]><CT>" purchased "flashbang"
+L 09/24/2026 - 07:42:23: "Sheldor<0><[U:1:1080094440]><CT>" sv_throw_flashgrenade 80.006 325.038 75.772 0.000 0.000 0.000 -459.666 447.698 497.287 600.000 348.000 0.000 43
+L 09/24/2026 - 07:42:24: "Sheldor<0><[U:1:1080094440]><CT>" threw flashbang [-609 904 455] flashbang entindex 818)
+L 09/24/2026 - 07:42:24: "KaiZen<7><[U:1:837983112]><TERRORIST>" blinded for 4.00 by "Sheldor<0><[U:1:1080094440]><CT>" from flashbang entindex 818 
+L 09/24/2026 - 07:42:26: rcon from "169.150.232.56:33006": command "status_json"
+L 09/24/2026 - 07:42:26: rcon from "169.150.232.56:33006": command "status"
+L 09/24/2026 - 07:42:26: "kiiiiiira<6><[U:1:335158966]><TERRORIST>" [48 1461 32] killed "prasaadem<1><[U:1:1075176373]><CT>" [546 1207 32] with "tec9" (headshot)
+L 09/24/2026 - 07:42:26: "Beni Lava<5><[U:1:145395478]><TERRORIST>" assisted killing "prasaadem<1><[U:1:1075176373]><CT>"
+L 09/24/2026 - 07:42:32: "KaiZen<7><[U:1:837983112]><TERRORIST>" [-709 631 -138] killed "whitefe@ther<3><[U:1:186183274]><CT>" [-205 666 -14] with "tec9" (headshot)
+L 09/24/2026 - 07:42:33: "Sheldor<0><[U:1:1080094440]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/24/2026 - 07:42:33: "Sheldor<0><[U:1:1080094440]>" switched from team <CT> to <Unassigned>
+L 09/24/2026 - 07:42:33: "Sheldor<0><[U:1:1080094440]><Unassigned>" [48 256 0] committed suicide with "world"
+L 09/24/2026 - 07:42:33: "prasaadem<1><[U:1:1075176373]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/24/2026 - 07:42:33: "prasaadem<1><[U:1:1075176373]>" switched from team <CT> to <Unassigned>
+L 09/24/2026 - 07:42:33: "pichekistha<2><[U:1:80924469]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/24/2026 - 07:42:33: "pichekistha<2><[U:1:80924469]>" switched from team <TERRORIST> to <Unassigned>
+L 09/24/2026 - 07:42:33: "pichekistha<2><[U:1:80924469]><Unassigned>" [-47 1714 32] committed suicide with "world"
+L 09/24/2026 - 07:42:33: "whitefe@ther<3><[U:1:186183274]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/24/2026 - 07:42:33: "whitefe@ther<3><[U:1:186183274]>" switched from team <CT> to <Unassigned>
+L 09/24/2026 - 07:42:33: "Fraggy<4><[U:1:87305029]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/24/2026 - 07:42:33: "Fraggy<4><[U:1:87305029]>" switched from team <CT> to <Unassigned>
+L 09/24/2026 - 07:42:33: "Fraggy<4><[U:1:87305029]><Unassigned>" [-53 -119 46] committed suicide with "world"
+L 09/24/2026 - 07:42:33: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "0") (T "1")
+L 09/24/2026 - 07:42:33: Team "CT" scored "0" with "1" players
+L 09/24/2026 - 07:42:33: Team "TERRORIST" scored "1" with "3" players
+L 09/24/2026 - 07:42:33: MatchStatus: Team "CT" is unset.
+L 09/24/2026 - 07:42:33: MatchStatus: Team "TERRORIST" is unset.
+L 09/24/2026 - 07:42:33: MatchStatus: Score: 0:1 on map "de_shortdust" RoundsPlayed: 1
+L 09/24/2026 - 07:42:33: World triggered "Round_End"
+L 09/24/2026 - 07:42:33: "Beni Lava<5><[U:1:145395478]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/24/2026 - 07:42:33: "Beni Lava<5><[U:1:145395478]>" switched from team <TERRORIST> to <Unassigned>
+L 09/24/2026 - 07:42:33: "Beni Lava<5><[U:1:145395478]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 09/24/2026 - 07:42:33: "Beni Lava<5><[U:1:145395478]><Unassigned>" [-126 1178 32] committed suicide with "world"
+L 09/24/2026 - 07:42:33: "kiiiiiira<6><[U:1:335158966]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/24/2026 - 07:42:33: "kiiiiiira<6><[U:1:335158966]>" switched from team <TERRORIST> to <Unassigned>
+L 09/24/2026 - 07:42:33: "kiiiiiira<6><[U:1:335158966]><Unassigned>" [666 622 -3] committed suicide with "world"
+L 09/24/2026 - 07:42:33: "KaiZen<7><[U:1:837983112]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/24/2026 - 07:42:33: "KaiZen<7><[U:1:837983112]>" switched from team <TERRORIST> to <Unassigned>
+L 09/24/2026 - 07:42:33: "KaiZen<7><[U:1:837983112]><Unassigned>" [-674 713 -118] committed suicide with "world"
+L 09/24/2026 - 07:42:33: Log file closed

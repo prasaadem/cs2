@@ -1,0 +1,193 @@
+L 10/08/2026 - 07:49:51: Log file started (file "logs/2026_10_08_074951_001.log") (game "csgo") (version "10924")
+L 10/08/2026 - 07:49:51: server_cvar: "sv_tags" "dathost,dathost.com"
+L 10/08/2026 - 07:49:51: server_cvar: "sv_tags" "dathost.com, dathost"
+L 10/08/2026 - 07:49:51: server_cvar: "cash_player_bomb_defused" "200"
+L 10/08/2026 - 07:49:51: server_cvar: "cash_player_bomb_planted" "200"
+L 10/08/2026 - 07:49:51: server_cvar: "cash_player_interact_with_hostage" "300"
+L 10/08/2026 - 07:49:51: server_cvar: "cash_player_killed_enemy_default" "200"
+L 10/08/2026 - 07:49:51: server_cvar: "cash_player_killed_enemy_factor" "0.5"
+L 10/08/2026 - 07:49:51: server_cvar: "cash_team_elimination_bomb_map" "2700"
+L 10/08/2026 - 07:49:51: server_cvar: "cash_team_elimination_hostage_map_t" "2000"
+L 10/08/2026 - 07:49:51: server_cvar: "cash_team_elimination_hostage_map_ct" "2300"
+L 10/08/2026 - 07:49:51: server_cvar: "cash_team_loser_bonus" "2400"
+L 10/08/2026 - 07:49:51: server_cvar: "cash_team_loser_bonus_consecutive_rounds" "0"
+L 10/08/2026 - 07:49:51: server_cvar: "cash_team_planted_bomb_but_defused" "200"
+L 10/08/2026 - 07:49:51: server_cvar: "cash_team_terrorist_win_bomb" "2700"
+L 10/08/2026 - 07:49:51: server_cvar: "cash_team_win_by_defusing_bomb" "2700"
+L 10/08/2026 - 07:49:51: server_cvar: "cash_team_win_by_hostage_rescue" "3000"
+L 10/08/2026 - 07:49:51: server_cvar: "cash_team_win_by_time_running_out_hostage" "2000"
+L 10/08/2026 - 07:49:51: server_cvar: "cash_team_win_by_time_running_out_bomb" "2700"
+L 10/08/2026 - 07:49:51: server_cvar: "mp_freezetime" "5"
+L 10/08/2026 - 07:49:51: server_cvar: "mp_friendlyfire" "true"
+L 10/08/2026 - 07:49:51: server_cvar: "mp_maxrounds" "15"
+L 10/08/2026 - 07:49:51: server_cvar: "mp_roundtime" "3"
+L 10/08/2026 - 07:49:51: server_cvar: "mp_roundtime_hostage" "2"
+L 10/08/2026 - 07:49:51: server_cvar: "mp_roundtime_defuse" "2.25"
+L 10/08/2026 - 07:49:51: Started:  ""
+L 10/08/2026 - 07:49:51: World triggered "Warmup_Start"
+L 10/08/2026 - 07:49:53: "KaiZen<3><[U:1:837983112]><>" entered the game
+L 10/08/2026 - 07:49:53: "Rat<0><[U:1:892155064]><>" entered the game
+L 10/08/2026 - 07:49:53: "mcdreamy111<8><[U:1:156268658]><>" entered the game
+L 10/08/2026 - 07:49:53: "Ground5<9><[U:1:183841098]><>" entered the game
+L 10/08/2026 - 07:49:53: rcon from "169.150.232.56:60584": command "status_json"
+L 10/08/2026 - 07:49:53: "whitefe@ther<5><[U:1:186183274]><>" entered the game
+L 10/08/2026 - 07:49:53: rcon from "169.150.232.56:60584": command "status"
+L 10/08/2026 - 07:49:53: "Sheldor<1><[U:1:1080094440]><>" entered the game
+L 10/08/2026 - 07:49:53: "blazingshack<10><[U:1:1085341771]><>" entered the game
+L 10/08/2026 - 07:49:53: "kiiiiiira<7><[U:1:335158966]><>" entered the game
+L 10/08/2026 - 07:49:53: "BigHero<6><[U:1:887890842]><>" entered the game
+L 10/08/2026 - 07:49:54: "pichekistha<2><[U:1:80924469]><>" entered the game
+L 10/08/2026 - 07:49:54: "Fraggy<4><[U:1:87305029]><>" entered the game
+L 10/08/2026 - 07:49:57: "Ground5<9><[U:1:183841098]>" switched from team <Unassigned> to <CT>
+L 10/08/2026 - 07:49:57: World triggered "Game_Commencing"
+L 10/08/2026 - 07:49:57: Starting Freeze period
+L 10/08/2026 - 07:49:57: JSON_BEGIN{
+L 10/08/2026 - 07:49:57: "name": "round_stats",
+L 10/08/2026 - 07:49:57: "round_number" : "1",
+L 10/08/2026 - 07:49:57: "score_t" : "0",
+L 10/08/2026 - 07:49:57: "score_ct" : "0",
+L 10/08/2026 - 07:49:57: "map" : "cs_office",
+L 10/08/2026 - 07:49:57: "server" : "cupcake",
+L 10/08/2026 - 07:49:57: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 10/08/2026 - 07:49:57: "players" : {
+L 10/08/2026 - 07:49:57: "player_0" : "           892155064,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 07:49:57: "player_1" : "          1080094440,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 07:49:57: "player_2" : "            80924469,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 07:49:57: "player_3" : "           837983112,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 07:49:57: "player_4" : "            87305029,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 07:49:57: "player_5" : "           186183274,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 07:49:57: "player_6" : "           887890842,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 07:49:57: "player_7" : "           335158966,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 07:49:57: "player_8" : "           156268658,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 07:49:57: "player_9" : "           183841098,      3,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 07:49:57: "player_10" : "          1085341771,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 07:49:57: }}JSON_END
+L 10/08/2026 - 07:49:57: World triggered "Match_Start" on "cs_office"
+L 10/08/2026 - 07:49:57: MatchStatus: Team "CT" is unset.
+L 10/08/2026 - 07:49:57: MatchStatus: Team "TERRORIST" is unset.
+L 10/08/2026 - 07:49:57: MatchStatus: Score: 0:0 on map "cs_office" RoundsPlayed: -1
+L 10/08/2026 - 07:49:59: World triggered "Warmup_Start"
+L 10/08/2026 - 07:49:59: "pichekistha<2><[U:1:80924469]>" switched from team <Unassigned> to <TERRORIST>
+L 10/08/2026 - 07:49:59: "Ground5<9><[U:1:183841098]><CT>" purchased "fiveseven"
+L 10/08/2026 - 07:50:00: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "bizon"
+L 10/08/2026 - 07:50:02: "KaiZen<3><[U:1:837983112]>" switched from team <Unassigned> to <CT>
+L 10/08/2026 - 07:50:03: rcon from "169.150.232.56:54870": command "status_json"
+L 10/08/2026 - 07:50:03: rcon from "169.150.232.56:54870": command "status"
+L 10/08/2026 - 07:50:03: "Sheldor<1><[U:1:1080094440]>" switched from team <Unassigned> to <CT>
+L 10/08/2026 - 07:50:03: "KaiZen<3><[U:1:837983112]><CT>" purchased "m4a1"
+L 10/08/2026 - 07:50:04: "KaiZen<3><[U:1:837983112]><CT>" purchased "smokegrenade"
+L 10/08/2026 - 07:50:04: "KaiZen<3><[U:1:837983112]><CT>" purchased "flashbang"
+L 10/08/2026 - 07:50:06: "pichekistha<2><[U:1:80924469]><TERRORIST>" [972 -289 -160] killed other "prop_dynamic<248>" [857 -1003 -96] with "bizon"
+L 10/08/2026 - 07:50:06: "pichekistha<2><[U:1:80924469]><TERRORIST>" [971 -298 -160] killed other "prop_dynamic<803>" [917 -1003 -96] with "bizon"
+L 10/08/2026 - 07:50:06: "mcdreamy111<8><[U:1:156268658]>" switched from team <Unassigned> to <TERRORIST>
+L 10/08/2026 - 07:50:06: "pichekistha<2><[U:1:80924469]><TERRORIST>" [969 -308 -160] killed other "prop_dynamic<981>" [977 -1003 -96] with "bizon"
+L 10/08/2026 - 07:50:06: "pichekistha<2><[U:1:80924469]><TERRORIST>" [969 -308 -160] killed other "prop_dynamic<764>" [1039 -1003 -96] with "bizon"
+L 10/08/2026 - 07:50:06: "pichekistha<2><[U:1:80924469]><TERRORIST>" [969 -308 -160] killed other "prop_dynamic<871>" [1099 -1003 -96] with "bizon"
+L 10/08/2026 - 07:50:08: "Fraggy<4><[U:1:87305029]>" switched from team <Unassigned> to <TERRORIST>
+L 10/08/2026 - 07:50:09: "mcdreamy111<8><[U:1:156268658]><TERRORIST>" purchased "ssg08"
+L 10/08/2026 - 07:50:09: "pichekistha<2><[U:1:80924469]><TERRORIST>" [979 -831 -160] killed other "prop_dynamic<144>" [1159 -1003 -96] with "bizon"
+L 10/08/2026 - 07:50:09: "Fraggy<4><[U:1:87305029]><TERRORIST>" purchased "sawedoff"
+L 10/08/2026 - 07:50:10: "Rat<0><[U:1:892155064]>" switched from team <Unassigned> to <TERRORIST>
+L 10/08/2026 - 07:50:10: "whitefe@ther<5><[U:1:186183274]>" switched from team <Unassigned> to <CT>
+L 10/08/2026 - 07:50:10: "BigHero<6><[U:1:887890842]>" switched from team <Unassigned> to <CT>
+L 10/08/2026 - 07:50:10: "blazingshack<10><[U:1:1085341771]>" switched from team <Unassigned> to <TERRORIST>
+L 10/08/2026 - 07:50:10: "KaiZen<3><[U:1:837983112]><CT>" [-983 -848 -326] killed other "prop_dynamic<919>" [-263 -439 -96] with "m4a1"
+L 10/08/2026 - 07:50:11: "kiiiiiira<7><[U:1:335158966]>" switched from team <Unassigned> to <CT>
+L 10/08/2026 - 07:50:11: "KaiZen<3><[U:1:837983112]><CT>" [-848 -780 -333] killed other "prop_dynamic<992>" [-263 -496 -96] with "m4a1"
+L 10/08/2026 - 07:50:11: "KaiZen<3><[U:1:837983112]><CT>" [-795 -753 -333] killed other "prop_dynamic<791>" [-263 -553 -96] with "m4a1" (penetrated)
+L 10/08/2026 - 07:50:11: "Ground5<9><[U:1:183841098]><CT>" [-624 -397 -176] killed other "prop_dynamic<671>" [-598 -344 -100] with "fiveseven"
+L 10/08/2026 - 07:50:12: "blazingshack<10><[U:1:1085341771]><TERRORIST>" purchased "xm1014"
+L 10/08/2026 - 07:50:12: "BigHero<6><[U:1:887890842]><CT>" purchased "deagle"
+L 10/08/2026 - 07:50:12: "blazingshack<10><[U:1:1085341771]><TERRORIST>" purchased "hegrenade"
+L 10/08/2026 - 07:50:12: rcon from "169.150.232.56:49568": command "status_json"
+L 10/08/2026 - 07:50:12: rcon from "169.150.232.56:49568": command "status"
+L 10/08/2026 - 07:50:13: "blazingshack<10><[U:1:1085341771]><TERRORIST>" purchased "flashbang"
+L 10/08/2026 - 07:50:13: "blazingshack<10><[U:1:1085341771]><TERRORIST>" purchased "molotov"
+L 10/08/2026 - 07:50:18: "mcdreamy111<8><[U:1:156268658]><TERRORIST>" [642 113 -160] killed "Ground5<9><[U:1:183841098]><CT>" [276 68 -160] with "ssg08" (headshot)
+L 10/08/2026 - 07:50:18: "mcdreamy111<8><[U:1:156268658]><TERRORIST>" [642 113 -160] killed "Sheldor<1><[U:1:1080094440]><CT>" [203 58 -160] with "ssg08" (headshot penetrated)
+L 10/08/2026 - 07:50:20: "whitefe@ther<5><[U:1:186183274]><CT>" purchased "m4a1"
+L 10/08/2026 - 07:50:22: "kiiiiiira<7><[U:1:335158966]><CT>" purchased "awp"
+L 10/08/2026 - 07:50:22: "blazingshack<10><[U:1:1085341771]><TERRORIST>" sv_throw_hegrenade 645.465 141.884 -94.049 0.000 0.000 0.000 -871.714 -254.515 82.312 600.000 -801.000 0.000 44 3.000
+L 10/08/2026 - 07:50:22: rcon from "169.150.232.56:39622": command "status_json"
+L 10/08/2026 - 07:50:22: rcon from "169.150.232.56:39622": command "status"
+L 10/08/2026 - 07:50:23: "Ground5<9><[U:1:183841098]><CT>" purchased "negev"
+L 10/08/2026 - 07:50:24: "blazingshack<10><[U:1:1085341771]><TERRORIST>" threw hegrenade [174 -105 -157]
+L 10/08/2026 - 07:50:24: "KaiZen<3><[U:1:837983112]><CT>" [61 -74 -160] killed "mcdreamy111<8><[U:1:156268658]><TERRORIST>" [356 171 -160] with "usp_silencer"
+L 10/08/2026 - 07:50:26: "blazingshack<10><[U:1:1085341771]><TERRORIST>" sv_throw_molotov 639.463 199.581 -94.768 0.000 0.000 0.000 -641.044 -206.433 51.986 600.000 -104.000 0.000 46
+L 10/08/2026 - 07:50:26: Molotov projectile spawned at 639.463135 199.581223 -94.767754, velocity -641.043884 -206.432922 51.985504
+L 10/08/2026 - 07:50:26: "blazingshack<10><[U:1:1085341771]><TERRORIST>" threw molotov [119 32 -158]
+L 10/08/2026 - 07:50:27: "Fraggy<4><[U:1:87305029]><TERRORIST>" [94 -2137 -336] killed "kiiiiiira<7><[U:1:335158966]><CT>" [60 -2059 -336] with "sawedoff"
+L 10/08/2026 - 07:50:28: "whitefe@ther<5><[U:1:186183274]><CT>" purchased "fiveseven"
+L 10/08/2026 - 07:50:28: "blazingshack<10><[U:1:1085341771]><TERRORIST>" [699 60 -160] killed "KaiZen<3><[U:1:837983112]><CT>" [221 90 -160] with "xm1014" (headshot)
+L 10/08/2026 - 07:50:29: "BigHero<6><[U:1:887890842]><CT>" [678 -402 -160] killed other "prop_dynamic<171>" [672 1061 -102] with "deagle"
+L 10/08/2026 - 07:50:29: "BigHero<6><[U:1:887890842]><CT>" [678 -402 -160] killed "blazingshack<10><[U:1:1085341771]><TERRORIST>" [701 124 -160] with "deagle"
+L 10/08/2026 - 07:50:29: "KaiZen<3><[U:1:837983112]><CT>" assisted killing "blazingshack<10><[U:1:1085341771]><TERRORIST>"
+L 10/08/2026 - 07:50:30: "mcdreamy111<8><[U:1:156268658]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_DISCONNECT_BY_USER")
+L 10/08/2026 - 07:50:30: "mcdreamy111<8><[U:1:156268658]>" switched from team <TERRORIST> to <Unassigned>
+L 10/08/2026 - 07:50:30: "mcdreamy111<8><[U:1:156268658]><Unassigned>" [1542 601 -160] committed suicide with "world"
+L 10/08/2026 - 07:50:31: "pichekistha<2><[U:1:80924469]><TERRORIST>" [-35 -1980 -336] killed "Ground5<9><[U:1:183841098]><CT>" [-559 -2007 -328] with "bizon"
+L 10/08/2026 - 07:50:31: "kiiiiiira<7><[U:1:335158966]><CT>" purchased "xm1014"
+L 10/08/2026 - 07:50:32: "pichekistha<2><[U:1:80924469]><TERRORIST>" [-52 -1949 -336] killed "whitefe@ther<5><[U:1:186183274]><CT>" [-346 -2012 -336] with "bizon" (headshot)
+L 10/08/2026 - 07:50:32: "Fraggy<4><[U:1:87305029]><TERRORIST>" assisted killing "whitefe@ther<5><[U:1:186183274]><CT>"
+L 10/08/2026 - 07:50:32: rcon from "169.150.232.56:33400": command "status_json"
+L 10/08/2026 - 07:50:32: rcon from "169.150.232.56:33400": command "status"
+L 10/08/2026 - 07:50:36: "Fraggy<4><[U:1:87305029]><TERRORIST>" [-117 -1857 -336] killed "kiiiiiira<7><[U:1:335158966]><CT>" [-159 -1759 -336] with "sawedoff" (headshot)
+L 10/08/2026 - 07:50:36: "blazingshack<10><[U:1:1085341771]><TERRORIST>" purchased "xm1014"
+L 10/08/2026 - 07:50:36: "Ground5<9><[U:1:183841098]>" switched from team <CT> to <TERRORIST>
+L 10/08/2026 - 07:50:36: "Ground5<9><[U:1:183841098]><TERRORIST>" [-888 -1888 -336] committed suicide with "world"
+L 10/08/2026 - 07:50:36: "blazingshack<10><[U:1:1085341771]><TERRORIST>" purchased "hegrenade"
+L 10/08/2026 - 07:50:36: "whitefe@ther<5><[U:1:186183274]>" switched from team <CT> to <TERRORIST>
+L 10/08/2026 - 07:50:36: "whitefe@ther<5><[U:1:186183274]><TERRORIST>" [-888 -1888 -336] committed suicide with "world"
+L 10/08/2026 - 07:50:37: "blazingshack<10><[U:1:1085341771]><TERRORIST>" purchased "molotov"
+L 10/08/2026 - 07:50:37: "blazingshack<10><[U:1:1085341771]><TERRORIST>" purchased "flashbang"
+L 10/08/2026 - 07:50:38: "pichekistha<2><[U:1:80924469]><TERRORIST>" [-361 -1993 -336] killed "KaiZen<3><[U:1:837983112]><CT>" [-817 -1712 -336] with "bizon" (headshot)
+L 10/08/2026 - 07:50:38: "Fraggy<4><[U:1:87305029]><TERRORIST>" assisted killing "KaiZen<3><[U:1:837983112]><CT>"
+L 10/08/2026 - 07:50:39: "Ground5<9><[U:1:183841098]><TERRORIST>" purchased "awp"
+L 10/08/2026 - 07:50:39: "kiiiiiira<7><[U:1:335158966]><CT>" purchased "mp5sd"
+L 10/08/2026 - 07:50:40: rcon from "185.180.15.34:49754": command "status"
+L 10/08/2026 - 07:50:40: "pichekistha<2><[U:1:80924469]><TERRORIST>" [-361 -1993 -336] killed "kiiiiiira<7><[U:1:335158966]><CT>" [-863 -1864 -336] with "bizon" (headshot)
+L 10/08/2026 - 07:50:40: "Fraggy<4><[U:1:87305029]><TERRORIST>" assisted killing "kiiiiiira<7><[U:1:335158966]><CT>"
+L 10/08/2026 - 07:50:42: "whitefe@ther<5><[U:1:186183274]><TERRORIST>" purchased "tec9"
+L 10/08/2026 - 07:50:42: rcon from "169.150.232.56:40714": command "status_json"
+L 10/08/2026 - 07:50:42: rcon from "169.150.232.56:40714": command "status"
+L 10/08/2026 - 07:50:44: "kiiiiiira<7><[U:1:335158966]><CT>" [-760 -1916 -336] killed "pichekistha<2><[U:1:80924469]><TERRORIST>" [-399 -1759 -336] with "hkp2000" (headshot)
+L 10/08/2026 - 07:50:44: "whitefe@ther<5><[U:1:186183274]><TERRORIST>" [1408 740 -160] killed other "prop_dynamic<367>" [1416 1061 -102] with "tec9"
+L 10/08/2026 - 07:50:45: "whitefe@ther<5><[U:1:186183274]><TERRORIST>" [1467 913 -160] killed other "prop_dynamic<746>" [1456 1061 -102] with "tec9"
+L 10/08/2026 - 07:50:45: "Ground5<9><[U:1:183841098]><TERRORIST>" [1413 930 -160] killed "BigHero<6><[U:1:887890842]><CT>" [1075 937 -160] with "awp"
+L 10/08/2026 - 07:50:46: "whitefe@ther<5><[U:1:186183274]><TERRORIST>" [1502 952 -160] killed other "prop_dynamic<1011>" [1496 1061 -102] with "tec9"
+L 10/08/2026 - 07:50:47: "Fraggy<4><[U:1:87305029]><TERRORIST>" [-162 -1961 -336] killed "kiiiiiira<7><[U:1:335158966]><CT>" [-412 -1992 -336] with "sawedoff" (headshot)
+L 10/08/2026 - 07:50:49: "BigHero<6><[U:1:887890842]><CT>" purchased "deagle"
+L 10/08/2026 - 07:50:51: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "bizon"
+L 10/08/2026 - 07:50:52: rcon from "169.150.232.56:38212": command "status_json"
+L 10/08/2026 - 07:50:52: rcon from "169.150.232.56:38212": command "status"
+L 10/08/2026 - 07:50:52: "kiiiiiira<7><[U:1:335158966]><CT>" [-617 -1801 -336] killed "Fraggy<4><[U:1:87305029]><TERRORIST>" [-166 -1763 -336] with "hkp2000"
+L 10/08/2026 - 07:50:56: "Rat<0><[U:1:892155064]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/08/2026 - 07:50:56: "Rat<0><[U:1:892155064]>" switched from team <TERRORIST> to <Unassigned>
+L 10/08/2026 - 07:50:56: "Rat<0><[U:1:892155064]><Unassigned>" [1507 662 -160] committed suicide with "world"
+L 10/08/2026 - 07:50:56: "Sheldor<1><[U:1:1080094440]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/08/2026 - 07:50:56: "Sheldor<1><[U:1:1080094440]>" switched from team <CT> to <Unassigned>
+L 10/08/2026 - 07:50:56: "Sheldor<1><[U:1:1080094440]><Unassigned>" [-1096 -1497 -336] committed suicide with "world"
+L 10/08/2026 - 07:50:56: "pichekistha<2><[U:1:80924469]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/08/2026 - 07:50:56: "pichekistha<2><[U:1:80924469]>" switched from team <TERRORIST> to <Unassigned>
+L 10/08/2026 - 07:50:56: "pichekistha<2><[U:1:80924469]><Unassigned>" [960 927 -160] committed suicide with "world"
+L 10/08/2026 - 07:50:56: "KaiZen<3><[U:1:837983112]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/08/2026 - 07:50:56: "KaiZen<3><[U:1:837983112]>" switched from team <CT> to <Unassigned>
+L 10/08/2026 - 07:50:56: "KaiZen<3><[U:1:837983112]><Unassigned>" [-291 -2007 -336] committed suicide with "world"
+L 10/08/2026 - 07:50:56: "Fraggy<4><[U:1:87305029]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/08/2026 - 07:50:56: "Fraggy<4><[U:1:87305029]>" switched from team <TERRORIST> to <Unassigned>
+L 10/08/2026 - 07:50:56: "whitefe@ther<5><[U:1:186183274]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/08/2026 - 07:50:56: "whitefe@ther<5><[U:1:186183274]>" switched from team <TERRORIST> to <Unassigned>
+L 10/08/2026 - 07:50:56: "whitefe@ther<5><[U:1:186183274]><Unassigned>" [677 586 -160] committed suicide with "world"
+L 10/08/2026 - 07:50:56: "BigHero<6><[U:1:887890842]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/08/2026 - 07:50:56: "BigHero<6><[U:1:887890842]>" switched from team <CT> to <Unassigned>
+L 10/08/2026 - 07:50:56: "BigHero<6><[U:1:887890842]><Unassigned>" [-541 -1868 -336] committed suicide with "world"
+L 10/08/2026 - 07:50:56: "kiiiiiira<7><[U:1:335158966]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/08/2026 - 07:50:56: "kiiiiiira<7><[U:1:335158966]>" switched from team <CT> to <Unassigned>
+L 10/08/2026 - 07:50:56: "kiiiiiira<7><[U:1:335158966]><Unassigned>" [-97 -1904 -336] committed suicide with "world"
+L 10/08/2026 - 07:50:56: "Ground5<9><[U:1:183841098]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/08/2026 - 07:50:56: "Ground5<9><[U:1:183841098]>" switched from team <TERRORIST> to <Unassigned>
+L 10/08/2026 - 07:50:56: "Ground5<9><[U:1:183841098]><Unassigned>" [730 676 -160] committed suicide with "world"
+L 10/08/2026 - 07:50:56: "blazingshack<10><[U:1:1085341771]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/08/2026 - 07:50:56: "blazingshack<10><[U:1:1085341771]>" switched from team <TERRORIST> to <Unassigned>
+L 10/08/2026 - 07:50:56: "blazingshack<10><[U:1:1085341771]><Unassigned>" [-922 -936 -307] committed suicide with "world"
+L 10/08/2026 - 07:50:56: Log file closed

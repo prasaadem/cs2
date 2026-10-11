@@ -1,0 +1,1046 @@
+L 10/11/2026 - 05:06:05: Log file started (file "logs/2026_10_11_050605.log") (game "csgo") (version "10924")
+L 10/11/2026 - 05:06:05: Loading map "de_foroglio"
+L 10/11/2026 - 05:06:05: server cvars start
+L 10/11/2026 - 05:06:05: "tv_relaypassword" = ""
+L 10/11/2026 - 05:06:05: "tv_password" = ""
+L 10/11/2026 - 05:06:05: "tv_password1" = ""
+L 10/11/2026 - 05:06:05: "tv_advertise_watchable" = "false"
+L 10/11/2026 - 05:06:05: "sv_voiceenable" = "true"
+L 10/11/2026 - 05:06:05: "sv_password" = "kodikura"
+L 10/11/2026 - 05:06:05: "sv_tags" = "dathost,dathost.com"
+L 10/11/2026 - 05:06:05: "sv_steamgroup" = ""
+L 10/11/2026 - 05:06:05: "sv_cheats" = "false"
+L 10/11/2026 - 05:06:05: "sv_debug_overlays_broadcast" = "false"
+L 10/11/2026 - 05:06:05: "tv_enable_dynamic" = "false"
+L 10/11/2026 - 05:06:05: "tv_enable" = "false"
+L 10/11/2026 - 05:06:05: "tv_enable1" = "false"
+L 10/11/2026 - 05:06:05: "sv_alltalk" = "false"
+L 10/11/2026 - 05:06:05: "mp_friendlyfire" = "true"
+L 10/11/2026 - 05:06:05: "sv_stopspeed" = "80"
+L 10/11/2026 - 05:06:05: "sv_noclipaccelerate" = "5"
+L 10/11/2026 - 05:06:05: "sv_noclipspeed" = "1200"
+L 10/11/2026 - 05:06:05: "sv_noclipspeedscaleonshift" = "0.5"
+L 10/11/2026 - 05:06:05: "sv_noclipfriction" = "4"
+L 10/11/2026 - 05:06:05: "sv_specaccelerate" = "5"
+L 10/11/2026 - 05:06:05: "sv_specspeed" = "1200"
+L 10/11/2026 - 05:06:05: "sv_specnoclip" = "true"
+L 10/11/2026 - 05:06:05: "sv_maxspeed" = "320"
+L 10/11/2026 - 05:06:05: "sv_accelerate" = "5.5"
+L 10/11/2026 - 05:06:05: "sv_airaccelerate" = "12"
+L 10/11/2026 - 05:06:05: "sv_wateraccelerate" = "10"
+L 10/11/2026 - 05:06:05: "sv_waterfriction" = "1"
+L 10/11/2026 - 05:06:05: "sv_friction" = "5.2"
+L 10/11/2026 - 05:06:05: "sv_bounce" = "0"
+L 10/11/2026 - 05:06:05: "r_JeepViewDampenFreq" = "7"
+L 10/11/2026 - 05:06:05: "r_JeepViewDampenDamp" = "1"
+L 10/11/2026 - 05:06:05: "r_JeepViewZHeight" = "10"
+L 10/11/2026 - 05:06:05: "r_AirboatViewDampenFreq" = "7"
+L 10/11/2026 - 05:06:05: "r_AirboatViewDampenDamp" = "1"
+L 10/11/2026 - 05:06:05: "r_AirboatViewZHeight" = "0"
+L 10/11/2026 - 05:06:05: "sv_allchat" = "true"
+L 10/11/2026 - 05:06:05: "buddha" = "false"
+L 10/11/2026 - 05:06:05: "buddha_ignore_bots" = "false"
+L 10/11/2026 - 05:06:05: "buddha_reset_hp" = "1"
+L 10/11/2026 - 05:06:05: "sv_accelerate_use_weapon_speed" = "true"
+L 10/11/2026 - 05:06:05: "sv_accelerate_debug_speed" = "false"
+L 10/11/2026 - 05:06:05: "sv_autobuyammo" = "false"
+L 10/11/2026 - 05:06:05: "mp_promoted_item_enabled" = "false"
+L 10/11/2026 - 05:06:05: "cash_team_terrorist_win_bomb" = "2700"
+L 10/11/2026 - 05:06:05: "cash_team_elimination_hostage_map_t" = "2000"
+L 10/11/2026 - 05:06:05: "cash_team_elimination_hostage_map_ct" = "2300"
+L 10/11/2026 - 05:06:05: "cash_team_elimination_bomb_map" = "2700"
+L 10/11/2026 - 05:06:05: "cash_team_win_by_time_running_out_hostage" = "2000"
+L 10/11/2026 - 05:06:05: "cash_team_win_by_time_running_out_bomb" = "2700"
+L 10/11/2026 - 05:06:05: "cash_team_win_by_defusing_bomb" = "2700"
+L 10/11/2026 - 05:06:05: "cash_team_win_by_hostage_rescue" = "3000"
+L 10/11/2026 - 05:06:05: "cash_team_loser_bonus" = "2400"
+L 10/11/2026 - 05:06:05: "cash_team_loser_bonus_consecutive_rounds" = "0"
+L 10/11/2026 - 05:06:05: "cash_team_winner_bonus_consecutive_rounds" = "0"
+L 10/11/2026 - 05:06:05: "cash_team_rescued_hostage" = "0"
+L 10/11/2026 - 05:06:05: "cash_team_hostage_alive" = "0"
+L 10/11/2026 - 05:06:05: "cash_team_planted_bomb_but_defused" = "200"
+L 10/11/2026 - 05:06:05: "cash_team_hostage_interaction" = "500"
+L 10/11/2026 - 05:06:05: "cash_team_bonus_shorthanded" = "0"
+L 10/11/2026 - 05:06:05: "cash_player_killed_teammate" = "-300"
+L 10/11/2026 - 05:06:05: "cash_player_killed_enemy_factor" = "0.5"
+L 10/11/2026 - 05:06:05: "cash_player_killed_enemy_default" = "200"
+L 10/11/2026 - 05:06:05: "cash_player_bomb_planted" = "200"
+L 10/11/2026 - 05:06:05: "cash_player_bomb_defused" = "200"
+L 10/11/2026 - 05:06:05: "cash_player_rescued_hostage" = "1000"
+L 10/11/2026 - 05:06:05: "cash_player_interact_with_hostage" = "300"
+L 10/11/2026 - 05:06:05: "cash_player_damage_hostage" = "-30"
+L 10/11/2026 - 05:06:05: "cash_player_killed_hostage" = "-1000"
+L 10/11/2026 - 05:06:05: "cash_player_respawn_amount" = "0"
+L 10/11/2026 - 05:06:05: "cash_player_get_killed" = "0"
+L 10/11/2026 - 05:06:05: "cash_team_per_dead_enemy" = "50"
+L 10/11/2026 - 05:06:05: "sv_competitive_minspec" = "true"
+L 10/11/2026 - 05:06:05: "mp_teammates_are_enemies" = "false"
+L 10/11/2026 - 05:06:05: "mp_buy_anywhere" = "0"
+L 10/11/2026 - 05:06:05: "mp_buy_during_immunity" = "0"
+L 10/11/2026 - 05:06:05: "sv_kick_ban_duration" = "15"
+L 10/11/2026 - 05:06:05: "sv_deadtalk" = "false"
+L 10/11/2026 - 05:06:05: "sv_spec_hear" = "3"
+L 10/11/2026 - 05:06:05: "mp_c4timer" = "40"
+L 10/11/2026 - 05:06:05: "mp_roundtime" = "3"
+L 10/11/2026 - 05:06:05: "mp_roundtime_hostage" = "2"
+L 10/11/2026 - 05:06:05: "mp_roundtime_defuse" = "2.25"
+L 10/11/2026 - 05:06:05: "mp_team_intro_time" = "6.5"
+L 10/11/2026 - 05:06:05: "mp_freezetime" = "0"
+L 10/11/2026 - 05:06:05: "mp_limitteams" = "0"
+L 10/11/2026 - 05:06:05: "mp_autoteambalance" = "false"
+L 10/11/2026 - 05:06:05: "mp_maxrounds" = "9999"
+L 10/11/2026 - 05:06:05: "mp_timelimit" = "0"
+L 10/11/2026 - 05:06:05: "mp_fraglimit" = "0"
+L 10/11/2026 - 05:06:05: "nextmode" = ""
+L 10/11/2026 - 05:06:05: "nextlevel" = ""
+L 10/11/2026 - 05:06:05: "sv_teamid_overhead_always_prohibit" = "false"
+L 10/11/2026 - 05:06:05: "sv_show_team_equipment_prohibit" = "false"
+L 10/11/2026 - 05:06:05: "sv_teamid_overhead" = "true"
+L 10/11/2026 - 05:06:05: "sv_gravity" = "800"
+L 10/11/2026 - 05:06:05: "sv_vote_issue_kick_allowed" = "true"
+L 10/11/2026 - 05:06:05: "sv_vote_kick_ban_duration" = "15"
+L 10/11/2026 - 05:06:05: "sv_vote_issue_loadbackup_allowed" = "true"
+L 10/11/2026 - 05:06:05: "sv_vote_issue_loadbackup_spec_only" = "false"
+L 10/11/2026 - 05:06:05: "sv_vote_issue_pause_match_spec_only" = "false"
+L 10/11/2026 - 05:06:05: server cvars end
+L 10/11/2026 - 05:06:05: server_cvar: "mp_friendlyfire" "false"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_team_terrorist_win_bomb" "3500"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_team_elimination_hostage_map_t" "1000"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_team_elimination_hostage_map_ct" "2000"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_team_elimination_bomb_map" "3250"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_team_win_by_time_running_out_hostage" "3250"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_team_win_by_time_running_out_bomb" "3250"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_team_win_by_defusing_bomb" "3250"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_team_win_by_hostage_rescue" "3500"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_team_loser_bonus" "1400"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_team_loser_bonus_consecutive_rounds" "500"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_team_planted_bomb_but_defused" "600"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_player_killed_enemy_factor" "1"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_player_killed_enemy_default" "300"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_player_bomb_planted" "300"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_player_bomb_defused" "300"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_player_interact_with_hostage" "150"
+L 10/11/2026 - 05:06:05: server_cvar: "mp_roundtime" "5"
+L 10/11/2026 - 05:06:05: server_cvar: "mp_roundtime_hostage" "0"
+L 10/11/2026 - 05:06:05: server_cvar: "mp_roundtime_defuse" "0"
+L 10/11/2026 - 05:06:05: server_cvar: "mp_freezetime" "6"
+L 10/11/2026 - 05:06:05: server_cvar: "mp_limitteams" "2"
+L 10/11/2026 - 05:06:05: server_cvar: "mp_autoteambalance" "true"
+L 10/11/2026 - 05:06:05: server_cvar: "mp_maxrounds" "0"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_player_bomb_defused" "200"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_player_bomb_planted" "200"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_player_interact_with_hostage" "300"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_player_killed_enemy_default" "200"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_player_killed_enemy_factor" "0.5"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_team_elimination_bomb_map" "2700"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_team_elimination_hostage_map_t" "2000"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_team_elimination_hostage_map_ct" "2300"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_team_loser_bonus" "2400"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_team_loser_bonus_consecutive_rounds" "0"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_team_planted_bomb_but_defused" "200"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_team_terrorist_win_bomb" "2700"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_team_win_by_defusing_bomb" "2700"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_team_win_by_hostage_rescue" "3000"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_team_win_by_time_running_out_hostage" "2000"
+L 10/11/2026 - 05:06:05: server_cvar: "cash_team_win_by_time_running_out_bomb" "2700"
+L 10/11/2026 - 05:06:05: server_cvar: "mp_freezetime" "5"
+L 10/11/2026 - 05:06:05: server_cvar: "mp_friendlyfire" "true"
+L 10/11/2026 - 05:06:05: server_cvar: "mp_maxrounds" "15"
+L 10/11/2026 - 05:06:05: server_cvar: "mp_roundtime" "3"
+L 10/11/2026 - 05:06:05: server_cvar: "mp_roundtime_hostage" "2"
+L 10/11/2026 - 05:06:05: server_cvar: "mp_roundtime_defuse" "2.25"
+L 10/11/2026 - 05:06:05: Started:  ""
+L 10/11/2026 - 05:06:06: World triggered "Warmup_Start"
+L 10/11/2026 - 05:06:06: "pichekistha<2><[U:1:80924469]><>" connected, address "71.63.169.247:58743"
+L 10/11/2026 - 05:06:06: "Sheldor<0><[U:1:1080094440]><>" connected, address "68.67.249.31:19149"
+L 10/11/2026 - 05:06:06: "whitefe@ther<1><[U:1:186183274]><>" connected, address "50.34.50.170:64034"
+L 10/11/2026 - 05:06:07: "It's Thief<3><[U:1:859176345]><>" connected, address "49.43.234.16:59087"
+L 10/11/2026 - 05:06:07: rcon from "169.150.232.56:46954": command "status_json"
+L 10/11/2026 - 05:06:07: rcon from "169.150.232.56:46954": command "status"
+L 10/11/2026 - 05:06:07: "pichekistha<65282><[U:1:80924469]><>" STEAM USERID validated
+L 10/11/2026 - 05:06:07: "Sheldor<65280><[U:1:1080094440]><>" STEAM USERID validated
+L 10/11/2026 - 05:06:08: "whitefe@ther<65281><[U:1:186183274]><>" STEAM USERID validated
+L 10/11/2026 - 05:06:08: "It's Thief<65283><[U:1:859176345]><>" STEAM USERID validated
+L 10/11/2026 - 05:06:09: "whitefe@ther<1><[U:1:186183274]><>" entered the game
+L 10/11/2026 - 05:06:09: "Sheldor<0><[U:1:1080094440]><>" entered the game
+L 10/11/2026 - 05:06:10: "It's Thief<3><[U:1:859176345]><>" entered the game
+L 10/11/2026 - 05:06:15: "It's Thief<3><[U:1:859176345]>" switched from team <Unassigned> to <TERRORIST>
+L 10/11/2026 - 05:06:15: World triggered "Game_Commencing"
+L 10/11/2026 - 05:06:15: Starting Freeze period
+L 10/11/2026 - 05:06:15: JSON_BEGIN{
+L 10/11/2026 - 05:06:15: "name": "round_stats",
+L 10/11/2026 - 05:06:15: "round_number" : "1",
+L 10/11/2026 - 05:06:15: "score_t" : "0",
+L 10/11/2026 - 05:06:15: "score_ct" : "0",
+L 10/11/2026 - 05:06:15: "map" : "de_foroglio",
+L 10/11/2026 - 05:06:15: "server" : "cupcake",
+L 10/11/2026 - 05:06:15: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 10/11/2026 - 05:06:15: "players" : {
+L 10/11/2026 - 05:06:15: "player_0" : "          1080094440,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/11/2026 - 05:06:15: "player_1" : "           186183274,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/11/2026 - 05:06:15: "player_2" : "            80924469,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/11/2026 - 05:06:15: "player_3" : "           859176345,      2,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/11/2026 - 05:06:15: }}JSON_END
+L 10/11/2026 - 05:06:15: World triggered "Match_Start" on "de_foroglio"
+L 10/11/2026 - 05:06:15: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:06:15: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:06:15: MatchStatus: Score: 0:0 on map "de_foroglio" RoundsPlayed: -1
+L 10/11/2026 - 05:06:17: World triggered "Warmup_Start"
+L 10/11/2026 - 05:06:17: rcon from "169.150.232.56:32980": command "status_json"
+L 10/11/2026 - 05:06:17: rcon from "169.150.232.56:32980": command "status"
+L 10/11/2026 - 05:06:18: "It's Thief<3><[U:1:859176345]><TERRORIST>" purchased "sg556"
+L 10/11/2026 - 05:06:21: "Sheldor<0><[U:1:1080094440]>" switched from team <Unassigned> to <CT>
+L 10/11/2026 - 05:06:22: "pichekistha<2><[U:1:80924469]><>" entered the game
+L 10/11/2026 - 05:06:25: "pichekistha<2><[U:1:80924469]>" switched from team <Unassigned> to <TERRORIST>
+L 10/11/2026 - 05:06:26: "whitefe@ther<1><[U:1:186183274]>" switched from team <Unassigned> to <CT>
+L 10/11/2026 - 05:06:27: rcon from "169.150.232.56:40164": command "status_json"
+L 10/11/2026 - 05:06:27: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "bizon"
+L 10/11/2026 - 05:06:27: rcon from "169.150.232.56:40164": command "status"
+L 10/11/2026 - 05:06:31: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "fiveseven"
+L 10/11/2026 - 05:06:35: Starting Freeze period
+L 10/11/2026 - 05:06:35: JSON_BEGIN{
+L 10/11/2026 - 05:06:35: "name": "round_stats",
+L 10/11/2026 - 05:06:35: "round_number" : "1",
+L 10/11/2026 - 05:06:35: "score_t" : "0",
+L 10/11/2026 - 05:06:35: "score_ct" : "0",
+L 10/11/2026 - 05:06:35: "map" : "de_foroglio",
+L 10/11/2026 - 05:06:35: "server" : "cupcake",
+L 10/11/2026 - 05:06:35: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 10/11/2026 - 05:06:35: "players" : {
+L 10/11/2026 - 05:06:35: "player_0" : "          1080094440,      3,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/11/2026 - 05:06:35: "player_1" : "           186183274,      3,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/11/2026 - 05:06:35: "player_2" : "            80924469,      2,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/11/2026 - 05:06:35: "player_3" : "           859176345,      2,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/11/2026 - 05:06:35: }}JSON_END
+L 10/11/2026 - 05:06:35: World triggered "Match_Start" on "de_foroglio"
+L 10/11/2026 - 05:06:35: "It's Thief<3><[U:1:859176345]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/11/2026 - 05:06:35: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:06:35: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:06:35: MatchStatus: Score: 0:0 on map "de_foroglio" RoundsPlayed: 0
+L 10/11/2026 - 05:06:36: "It's Thief<3><[U:1:859176345]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 10/11/2026 - 05:06:36: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/11/2026 - 05:06:36: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "tec9"
+L 10/11/2026 - 05:06:37: rcon from "169.150.232.56:55174": command "status_json"
+L 10/11/2026 - 05:06:37: rcon from "169.150.232.56:55174": command "status"
+L 10/11/2026 - 05:06:38: "It's Thief<3><[U:1:859176345]><TERRORIST>" purchased "tec9"
+L 10/11/2026 - 05:06:39: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "fiveseven"
+L 10/11/2026 - 05:06:40: "Sheldor<0><[U:1:1080094440]><CT>" purchased "deagle"
+L 10/11/2026 - 05:06:40: World triggered "Round_Start"
+L 10/11/2026 - 05:06:40: "Sheldor<0><[U:1:1080094440]><CT>" purchased "flashbang"
+L 10/11/2026 - 05:06:47: rcon from "169.150.232.56:44656": command "status_json"
+L 10/11/2026 - 05:06:47: rcon from "169.150.232.56:44656": command "status"
+L 10/11/2026 - 05:06:52: "Sheldor<0><[U:1:1080094440]><CT>" [411 -1698 224] killed "It's Thief<3><[U:1:859176345]><TERRORIST>" [-279 -2082 224] with "deagle" (headshot)
+L 10/11/2026 - 05:06:55: "pichekistha<2><[U:1:80924469]><TERRORIST>" [-238 -2037 224] killed "Sheldor<0><[U:1:1080094440]><CT>" [407 -1727 224] with "tec9"
+L 10/11/2026 - 05:06:57: rcon from "169.150.232.56:36508": command "status_json"
+L 10/11/2026 - 05:06:57: rcon from "169.150.232.56:36508": command "status"
+L 10/11/2026 - 05:07:02: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Bomb_Begin_Plant" at bombsite A
+L 10/11/2026 - 05:07:07: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 10/11/2026 - 05:07:07: "whitefe@ther<1><[U:1:186183274]><CT>" [189 -1471 176] killed "pichekistha<2><[U:1:80924469]><TERRORIST>" [44 -1841 224] with "fiveseven" (headshot)
+L 10/11/2026 - 05:07:07: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "1") (T "0")
+L 10/11/2026 - 05:07:07: Team "CT" scored "1" with "3" players
+L 10/11/2026 - 05:07:07: Team "TERRORIST" scored "0" with "3" players
+L 10/11/2026 - 05:07:07: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:07:07: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:07:07: MatchStatus: Score: 1:0 on map "de_foroglio" RoundsPlayed: 1
+L 10/11/2026 - 05:07:07: World triggered "Round_End"
+L 10/11/2026 - 05:07:07: rcon from "169.150.232.56:38940": command "status_json"
+L 10/11/2026 - 05:07:07: rcon from "169.150.232.56:38940": command "status"
+L 10/11/2026 - 05:07:17: Starting Freeze period
+L 10/11/2026 - 05:07:17: JSON_BEGIN{
+L 10/11/2026 - 05:07:17: "name": "round_stats",
+L 10/11/2026 - 05:07:17: "round_number" : "2",
+L 10/11/2026 - 05:07:17: "score_t" : "0",
+L 10/11/2026 - 05:07:17: "score_ct" : "1",
+L 10/11/2026 - 05:07:17: "map" : "de_foroglio",
+L 10/11/2026 - 05:07:17: "server" : "cupcake",
+L 10/11/2026 - 05:07:17: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 10/11/2026 - 05:07:17: "players" : {
+L 10/11/2026 - 05:07:17: "player_0" : "          1080094440,      3,   2950,      1,      1,      0, 100.00, 100.00,   1.00,    100,      1,      0,      0,      0,      0,      0,      0,      1,      1,      0,      0,0.000000,0.000000,      1,      1,      0"
+L 10/11/2026 - 05:07:17: "player_1" : "           186183274,      3,   3350,      1,      0,      0, 100.00, 100.00,   0.00,    100,      0,      0,      0,      0,      0,      0,      1,      0,      1,      0,      0,0.000000,0.000000,      1,      1,      0"
+L 10/11/2026 - 05:07:17: "player_2" : "            80924469,      2,   3050,      1,      1,      0, 124.00,   0.00,   1.00,    124,      0,      0,      0,      0,      0,      0,      1,      0,      1,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 10/11/2026 - 05:07:17: "player_3" : "           859176345,      2,   2900,      0,      1,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/11/2026 - 05:07:17: }}JSON_END
+L 10/11/2026 - 05:07:17: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/11/2026 - 05:07:17: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:07:17: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:07:17: MatchStatus: Score: 1:0 on map "de_foroglio" RoundsPlayed: 1
+L 10/11/2026 - 05:07:17: rcon from "169.150.232.56:46764": command "status_json"
+L 10/11/2026 - 05:07:17: rcon from "169.150.232.56:46764": command "status"
+L 10/11/2026 - 05:07:19: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "hegrenade"
+L 10/11/2026 - 05:07:19: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "incgrenade"
+L 10/11/2026 - 05:07:20: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "galilar"
+L 10/11/2026 - 05:07:20: "Sheldor<0><[U:1:1080094440]><CT>" purchased "ssg08"
+L 10/11/2026 - 05:07:20: "It's Thief<3><[U:1:859176345]><TERRORIST>" purchased "p90"
+L 10/11/2026 - 05:07:21: "Sheldor<0><[U:1:1080094440]><CT>" purchased "deagle"
+L 10/11/2026 - 05:07:21: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "smokegrenade"
+L 10/11/2026 - 05:07:21: "Sheldor<0><[U:1:1080094440]><CT>" purchased "flashbang"
+L 10/11/2026 - 05:07:21: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "molotov"
+L 10/11/2026 - 05:07:21: "Sheldor<0><[U:1:1080094440]><CT>" purchased "smokegrenade"
+L 10/11/2026 - 05:07:22: World triggered "Round_Start"
+L 10/11/2026 - 05:07:26: "Sheldor<0><[U:1:1080094440]><CT>" sv_throw_flashgrenade 730.845 -1473.443 199.634 0.000 0.000 0.000 417.332 -796.772 322.078 600.000 951.000 0.000 43
+L 10/11/2026 - 05:07:27: rcon from "169.150.232.56:49806": command "status_json"
+L 10/11/2026 - 05:07:27: rcon from "169.150.232.56:49806": command "status"
+L 10/11/2026 - 05:07:28: "Sheldor<0><[U:1:1080094440]><CT>" threw flashbang [1333 -2633 343] flashbang entindex 399)
+L 10/11/2026 - 05:07:28: "pichekistha<2><[U:1:80924469]><TERRORIST>" blinded for 0.61 by "Sheldor<0><[U:1:1080094440]><CT>" from flashbang entindex 399 
+L 10/11/2026 - 05:07:28: "It's Thief<3><[U:1:859176345]><TERRORIST>" blinded for 1.34 by "Sheldor<0><[U:1:1080094440]><CT>" from flashbang entindex 399 
+L 10/11/2026 - 05:07:29: "whitefe@ther<1><[U:1:186183274]><CT>" sv_throw_molotov 192.922 -1534.595 246.139 0.000 0.000 0.000 -600.845 -734.016 207.471 600.000 1192.000 0.000 48
+L 10/11/2026 - 05:07:29: Molotov projectile spawned at 192.921844 -1534.594971 246.139084, velocity -600.845154 -734.015625 207.470612
+L 10/11/2026 - 05:07:30: "whitefe@ther<1><[U:1:186183274]><CT>" threw molotov [-233 -2270 226]
+L 10/11/2026 - 05:07:30: "pichekistha<2><[U:1:80924469]><TERRORIST>" sv_throw_smokegrenade -306.620 -2312.493 407.866 0.000 0.000 0.000 355.297 602.024 10.330 600.000 -69.000 0.000 45 2
+L 10/11/2026 - 05:07:34: "pichekistha<2><[U:1:80924469]><TERRORIST>" threw smokegrenade [285 -1395 178]
+L 10/11/2026 - 05:07:37: "pichekistha<2><[U:1:80924469]><TERRORIST>" [-261 -1997 224] killed "whitefe@ther<1><[U:1:186183274]><CT>" [119 -1750 224] with "galilar"
+L 10/11/2026 - 05:07:37: rcon from "169.150.232.56:39688": command "status_json"
+L 10/11/2026 - 05:07:37: rcon from "169.150.232.56:39688": command "status"
+L 10/11/2026 - 05:07:41: "pichekistha<2><[U:1:80924469]><TERRORIST>" sv_throw_molotov -396.324 -1922.611 290.452 0.000 0.000 0.000 665.785 40.713 103.428 600.000 -623.000 0.000 46
+L 10/11/2026 - 05:07:41: Molotov projectile spawned at -396.323578 -1922.610596 290.451630, velocity 665.785339 40.713474 103.427612
+L 10/11/2026 - 05:07:42: "pichekistha<2><[U:1:80924469]><TERRORIST>" threw molotov [293 -1880 226]
+L 10/11/2026 - 05:07:43: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Bomb_Begin_Plant" at bombsite A
+L 10/11/2026 - 05:07:47: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Planted_The_Bomb" at bombsite A
+L 10/11/2026 - 05:07:47: rcon from "169.150.232.56:55116": command "status_json"
+L 10/11/2026 - 05:07:47: rcon from "169.150.232.56:55116": command "status"
+L 10/11/2026 - 05:07:52: "pichekistha<2><[U:1:80924469]><TERRORIST>" sv_throw_hegrenade 102.035 -1492.617 246.660 0.000 0.000 0.000 415.369 -451.837 280.958 600.000 391.000 0.000 44 3.000
+L 10/11/2026 - 05:07:53: "pichekistha<2><[U:1:80924469]><TERRORIST>" threw hegrenade [706 -2071 310]
+L 10/11/2026 - 05:07:57: rcon from "169.150.232.56:41230": command "status_json"
+L 10/11/2026 - 05:07:57: rcon from "169.150.232.56:41230": command "status"
+L 10/11/2026 - 05:07:57: "It's Thief<3><[U:1:859176345]><TERRORIST>" [141 -1373 176] killed "Sheldor<0><[U:1:1080094440]><CT>" [652 -2106 304] with "p90"
+L 10/11/2026 - 05:07:57: "pichekistha<2><[U:1:80924469]><TERRORIST>" assisted killing "Sheldor<0><[U:1:1080094440]><CT>"
+L 10/11/2026 - 05:07:57: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "1") (T "1")
+L 10/11/2026 - 05:07:57: Team "CT" scored "1" with "4" players
+L 10/11/2026 - 05:07:57: Team "TERRORIST" scored "1" with "4" players
+L 10/11/2026 - 05:07:57: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:07:57: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:07:57: MatchStatus: Score: 1:1 on map "de_foroglio" RoundsPlayed: 2
+L 10/11/2026 - 05:07:57: World triggered "Round_End"
+L 10/11/2026 - 05:08:07: rcon from "169.150.232.56:53884": command "status_json"
+L 10/11/2026 - 05:08:07: rcon from "169.150.232.56:53884": command "status"
+L 10/11/2026 - 05:08:07: Starting Freeze period
+L 10/11/2026 - 05:08:07: JSON_BEGIN{
+L 10/11/2026 - 05:08:07: "name": "round_stats",
+L 10/11/2026 - 05:08:07: "round_number" : "3",
+L 10/11/2026 - 05:08:07: "score_t" : "1",
+L 10/11/2026 - 05:08:07: "score_ct" : "1",
+L 10/11/2026 - 05:08:07: "map" : "de_foroglio",
+L 10/11/2026 - 05:08:07: "server" : "cupcake",
+L 10/11/2026 - 05:08:07: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 10/11/2026 - 05:08:07: "players" : {
+L 10/11/2026 - 05:08:07: "player_0" : "          1080094440,      3,   2450,      1,      2,      0, 142.00, 100.00,   0.50,     71,      1,      0,      0,      0,      0,      0,      0,      1,      1,      0,      0,0.000000,0.000000,      1,      1,      0"
+L 10/11/2026 - 05:08:07: "player_1" : "           186183274,      3,   4950,      1,      1,      0, 124.00, 100.00,   1.00,     62,      0,      0,      0,      0,      0,      0,      1,      0,      1,      0,      0,0.000000,0.000000,      1,      1,      0"
+L 10/11/2026 - 05:08:07: "player_2" : "            80924469,      2,   3600,      2,      1,      1, 319.00,   0.00,   2.00,    160,      1,      0,     21,      0,      0,      0,      1,      1,      1,      0,      0,0.000000,21.000000,      0,      2,      0"
+L 10/11/2026 - 05:08:07: "player_3" : "           859176345,      2,   3400,      1,      1,      0,   5.00,   0.00,   1.00,      2,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 10/11/2026 - 05:08:07: }}JSON_END
+L 10/11/2026 - 05:08:07: "It's Thief<3><[U:1:859176345]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/11/2026 - 05:08:07: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:08:07: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:08:07: MatchStatus: Score: 1:1 on map "de_foroglio" RoundsPlayed: 2
+L 10/11/2026 - 05:08:09: "Sheldor<0><[U:1:1080094440]><CT>" purchased "ssg08"
+L 10/11/2026 - 05:08:09: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "smokegrenade"
+L 10/11/2026 - 05:08:09: "Sheldor<0><[U:1:1080094440]><CT>" purchased "deagle"
+L 10/11/2026 - 05:08:09: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "smokegrenade"
+L 10/11/2026 - 05:08:10: "It's Thief<3><[U:1:859176345]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 10/11/2026 - 05:08:10: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/11/2026 - 05:08:10: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "molotov"
+L 10/11/2026 - 05:08:11: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "m4a1"
+L 10/11/2026 - 05:08:11: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "hegrenade"
+L 10/11/2026 - 05:08:12: World triggered "Round_Start"
+L 10/11/2026 - 05:08:13: "It's Thief<3><[U:1:859176345]><TERRORIST>" purchased "molotov"
+L 10/11/2026 - 05:08:16: "whitefe@ther<1><[U:1:186183274]><CT>" sv_throw_smokegrenade 595.230 -1195.360 196.094 0.000 0.000 0.000 -489.527 -507.337 433.159 600.000 45.000 0.000 45 3
+L 10/11/2026 - 05:08:17: rcon from "169.150.232.56:33214": command "status_json"
+L 10/11/2026 - 05:08:17: rcon from "169.150.232.56:33214": command "status"
+L 10/11/2026 - 05:08:20: "whitefe@ther<1><[U:1:186183274]><CT>" threw smokegrenade [-203 -2367 364]
+L 10/11/2026 - 05:08:27: rcon from "169.150.232.56:45238": command "status_json"
+L 10/11/2026 - 05:08:27: rcon from "169.150.232.56:45238": command "status"
+L 10/11/2026 - 05:08:27: "whitefe@ther<1><[U:1:186183274]><CT>" [-71 -1918 224] killed "It's Thief<3><[U:1:859176345]><TERRORIST>" [-168 -2079 224] with "m4a1" (headshot)
+L 10/11/2026 - 05:08:28: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 10/11/2026 - 05:08:28: "whitefe@ther<1><[U:1:186183274]><CT>" [-41 -1935 224] killed "pichekistha<2><[U:1:80924469]><TERRORIST>" [-239 -2065 224] with "m4a1" (headshot)
+L 10/11/2026 - 05:08:28: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "2") (T "1")
+L 10/11/2026 - 05:08:28: Team "CT" scored "2" with "4" players
+L 10/11/2026 - 05:08:28: Team "TERRORIST" scored "1" with "4" players
+L 10/11/2026 - 05:08:28: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:08:28: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:08:28: MatchStatus: Score: 2:1 on map "de_foroglio" RoundsPlayed: 3
+L 10/11/2026 - 05:08:28: World triggered "Round_End"
+L 10/11/2026 - 05:08:37: rcon from "169.150.232.56:47360": command "status_json"
+L 10/11/2026 - 05:08:37: rcon from "169.150.232.56:47360": command "status"
+L 10/11/2026 - 05:08:38: Starting Freeze period
+L 10/11/2026 - 05:08:38: JSON_BEGIN{
+L 10/11/2026 - 05:08:38: "name": "round_stats",
+L 10/11/2026 - 05:08:38: "round_number" : "4",
+L 10/11/2026 - 05:08:38: "score_t" : "1",
+L 10/11/2026 - 05:08:38: "score_ct" : "2",
+L 10/11/2026 - 05:08:38: "map" : "de_foroglio",
+L 10/11/2026 - 05:08:38: "server" : "cupcake",
+L 10/11/2026 - 05:08:38: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 10/11/2026 - 05:08:38: "players" : {
+L 10/11/2026 - 05:08:38: "player_0" : "          1080094440,      3,   2750,      1,      2,      0, 142.00, 100.00,   0.50,     47,      1,      0,      0,      0,      0,      0,      0,      1,      1,      0,      0,0.000000,0.000000,      1,      1,      0"
+L 10/11/2026 - 05:08:38: "player_1" : "           186183274,      3,   4750,      3,      1,      0, 324.00, 100.00,   3.00,    108,      1,      0,      0,      0,      0,      0,      1,      1,      1,      0,      0,0.000000,0.000000,      3,      2,      0"
+L 10/11/2026 - 05:08:38: "player_2" : "            80924469,      2,   5000,      2,      2,      1, 341.00,   0.00,   1.00,    114,      1,      0,     21,      0,      0,      0,      1,      1,      1,      0,      0,0.000000,21.000000,      0,      2,      0"
+L 10/11/2026 - 05:08:38: "player_3" : "           859176345,      2,   5400,      1,      2,      0,  67.00,   0.00,   0.50,     22,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 10/11/2026 - 05:08:38: }}JSON_END
+L 10/11/2026 - 05:08:38: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/11/2026 - 05:08:38: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:08:38: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:08:38: MatchStatus: Score: 2:1 on map "de_foroglio" RoundsPlayed: 3
+L 10/11/2026 - 05:08:40: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "smokegrenade"
+L 10/11/2026 - 05:08:40: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "galilar"
+L 10/11/2026 - 05:08:40: "Sheldor<0><[U:1:1080094440]><CT>" purchased "flashbang"
+L 10/11/2026 - 05:08:41: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "smokegrenade"
+L 10/11/2026 - 05:08:41: "It's Thief<3><[U:1:859176345]><TERRORIST>" purchased "p90"
+L 10/11/2026 - 05:08:41: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "hegrenade"
+L 10/11/2026 - 05:08:41: "Sheldor<0><[U:1:1080094440]><CT>" purchased "taser"
+L 10/11/2026 - 05:08:41: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "molotov"
+L 10/11/2026 - 05:08:41: "It's Thief<3><[U:1:859176345]><TERRORIST>" purchased "molotov"
+L 10/11/2026 - 05:08:42: "Sheldor<0><[U:1:1080094440]><CT>" purchased "smokegrenade"
+L 10/11/2026 - 05:08:42: "Sheldor<0><[U:1:1080094440]><CT>" purchased "hegrenade"
+L 10/11/2026 - 05:08:43: World triggered "Round_Start"
+L 10/11/2026 - 05:08:47: "whitefe@ther<1><[U:1:186183274]><CT>" sv_throw_smokegrenade 666.978 -1214.823 203.919 0.000 0.000 0.000 -496.484 -465.210 476.029 600.000 504.000 0.000 45 3
+L 10/11/2026 - 05:08:47: rcon from "169.150.232.56:51040": command "status_json"
+L 10/11/2026 - 05:08:47: rcon from "169.150.232.56:51040": command "status"
+L 10/11/2026 - 05:08:52: "whitefe@ther<1><[U:1:186183274]><CT>" threw smokegrenade [-204 -2332 357]
+L 10/11/2026 - 05:08:52: "It's Thief<3><[U:1:859176345]><TERRORIST>" sv_throw_molotov -321.583 -2282.435 404.979 0.000 0.000 0.000 397.905 541.264 -65.804 600.000 -888.000 0.000 46
+L 10/11/2026 - 05:08:52: Molotov projectile spawned at -321.582733 -2282.435303 404.979431, velocity 397.904541 541.264160 -65.803635
+L 10/11/2026 - 05:08:52: "pichekistha<2><[U:1:80924469]><TERRORIST>" sv_throw_smokegrenade -312.291 -2312.570 408.533 0.000 0.000 0.000 293.245 605.729 52.195 600.000 -1019.000 0.000 45 2
+L 10/11/2026 - 05:08:53: "It's Thief<3><[U:1:859176345]><TERRORIST>" threw molotov [25 -1811 226]
+L 10/11/2026 - 05:08:55: "pichekistha<2><[U:1:80924469]><TERRORIST>" threw smokegrenade [66 -2036 226]
+L 10/11/2026 - 05:08:57: rcon from "169.150.232.56:34272": command "status_json"
+L 10/11/2026 - 05:08:57: rcon from "169.150.232.56:34272": command "status"
+L 10/11/2026 - 05:08:59: "whitefe@ther<1><[U:1:186183274]><CT>" sv_throw_hegrenade 304.108 -1578.273 289.260 0.000 0.000 0.000 0.000 0.000 -1.000 600.000 770.000 0.000 44 3.000
+L 10/11/2026 - 05:08:59: "pichekistha<2><[U:1:80924469]><TERRORIST>" [-268 -2009 224] killed "whitefe@ther<1><[U:1:186183274]><CT>" [317 -1568 225] with "galilar" (throughsmoke)
+L 10/11/2026 - 05:08:59: "Sheldor<0><[U:1:1080094440]><CT>" sv_throw_hegrenade 161.430 -1550.818 240.557 0.000 0.000 0.000 -250.241 -396.891 178.953 600.000 -568.000 0.000 44 3.000
+L 10/11/2026 - 05:09:01: "whitefe@ther<1><[U:1:186183274]><CT>" threw hegrenade [304 -1578 227]
+L 10/11/2026 - 05:09:01: "Sheldor<0><[U:1:1080094440]><CT>" threw hegrenade [-148 -1969 230]
+L 10/11/2026 - 05:09:05: "pichekistha<2><[U:1:80924469]><TERRORIST>" sv_throw_hegrenade -230.207 -2086.164 291.657 0.000 0.000 0.000 433.797 493.606 154.267 600.000 -1177.000 0.000 44 3.000
+L 10/11/2026 - 05:09:07: "pichekistha<2><[U:1:80924469]><TERRORIST>" threw hegrenade [243 -1389 181]
+L 10/11/2026 - 05:09:07: rcon from "169.150.232.56:33274": command "status_json"
+L 10/11/2026 - 05:09:07: rcon from "169.150.232.56:33274": command "status"
+L 10/11/2026 - 05:09:10: "Sheldor<0><[U:1:1080094440]><CT>" [411 -1584 224] killed "It's Thief<3><[U:1:859176345]><TERRORIST>" [25 -1523 176] with "deagle" (headshot)
+L 10/11/2026 - 05:09:17: rcon from "169.150.232.56:60960": command "status_json"
+L 10/11/2026 - 05:09:17: rcon from "169.150.232.56:60960": command "status"
+L 10/11/2026 - 05:09:18: "pichekistha<2><[U:1:80924469]><TERRORIST>" [375 -1540 225] killed "Sheldor<0><[U:1:1080094440]><CT>" [66 -1778 225] with "galilar"
+L 10/11/2026 - 05:09:18: "It's Thief<3><[U:1:859176345]><TERRORIST>" assisted killing "Sheldor<0><[U:1:1080094440]><CT>"
+L 10/11/2026 - 05:09:18: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "2") (T "2")
+L 10/11/2026 - 05:09:18: Team "CT" scored "2" with "4" players
+L 10/11/2026 - 05:09:18: Team "TERRORIST" scored "2" with "4" players
+L 10/11/2026 - 05:09:18: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:09:18: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:09:18: MatchStatus: Score: 2:2 on map "de_foroglio" RoundsPlayed: 4
+L 10/11/2026 - 05:09:18: World triggered "Round_End"
+L 10/11/2026 - 05:09:22: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Bomb_Begin_Plant" at bombsite A
+L 10/11/2026 - 05:09:25: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Planted_The_Bomb" at bombsite A
+L 10/11/2026 - 05:09:27: rcon from "169.150.232.56:54136": command "status_json"
+L 10/11/2026 - 05:09:27: rcon from "169.150.232.56:54136": command "status"
+L 10/11/2026 - 05:09:28: Starting Freeze period
+L 10/11/2026 - 05:09:28: JSON_BEGIN{
+L 10/11/2026 - 05:09:28: "name": "round_stats",
+L 10/11/2026 - 05:09:28: "round_number" : "5",
+L 10/11/2026 - 05:09:28: "score_t" : "2",
+L 10/11/2026 - 05:09:28: "score_ct" : "2",
+L 10/11/2026 - 05:09:28: "map" : "de_foroglio",
+L 10/11/2026 - 05:09:28: "server" : "cupcake",
+L 10/11/2026 - 05:09:28: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 10/11/2026 - 05:09:28: "players" : {
+L 10/11/2026 - 05:09:28: "player_0" : "          1080094440,      3,   4300,      2,      3,      0, 261.00, 100.00,   0.67,     65,      1,      0,     19,      0,      0,      0,      1,      1,      2,      0,      0,0.000000,19.000000,      1,      1,      0"
+L 10/11/2026 - 05:09:28: "player_1" : "           186183274,      3,   6850,      3,      2,      0, 324.00, 100.00,   1.50,     81,      1,      0,      0,      0,      0,      0,      1,      1,      1,      0,      0,0.000000,0.000000,      3,      2,      0"
+L 10/11/2026 - 05:09:28: "player_2" : "            80924469,      2,   5400,      4,      2,      1, 505.00,   0.00,   2.00,    126,      2,      0,     21,      0,      0,      0,      2,      2,      1,      0,      0,0.000000,21.000000,      0,      2,      0"
+L 10/11/2026 - 05:09:28: "player_3" : "           859176345,      2,   5350,      1,      3,      1, 103.00,   0.00,   0.33,     26,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 10/11/2026 - 05:09:28: }}JSON_END
+L 10/11/2026 - 05:09:28: "It's Thief<3><[U:1:859176345]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/11/2026 - 05:09:28: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:09:28: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:09:28: MatchStatus: Score: 2:2 on map "de_foroglio" RoundsPlayed: 4
+L 10/11/2026 - 05:09:29: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "m4a1"
+L 10/11/2026 - 05:09:30: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "taser"
+L 10/11/2026 - 05:09:30: "Sheldor<0><[U:1:1080094440]><CT>" purchased "ssg08"
+L 10/11/2026 - 05:09:30: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "hegrenade"
+L 10/11/2026 - 05:09:31: "Sheldor<0><[U:1:1080094440]><CT>" purchased "deagle"
+L 10/11/2026 - 05:09:31: "It's Thief<3><[U:1:859176345]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 10/11/2026 - 05:09:31: "Sheldor<0><[U:1:1080094440]><CT>" purchased "taser"
+L 10/11/2026 - 05:09:31: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/11/2026 - 05:09:31: "Sheldor<0><[U:1:1080094440]><CT>" purchased "flashbang"
+L 10/11/2026 - 05:09:32: "Sheldor<0><[U:1:1080094440]><CT>" purchased "smokegrenade"
+L 10/11/2026 - 05:09:32: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "smokegrenade"
+L 10/11/2026 - 05:09:32: "Sheldor<0><[U:1:1080094440]><CT>" purchased "hegrenade"
+L 10/11/2026 - 05:09:32: "It's Thief<3><[U:1:859176345]><TERRORIST>" purchased "p90"
+L 10/11/2026 - 05:09:33: "It's Thief<3><[U:1:859176345]><TERRORIST>" purchased "molotov"
+L 10/11/2026 - 05:09:33: World triggered "Round_Start"
+L 10/11/2026 - 05:09:36: "whitefe@ther<1><[U:1:186183274]><CT>" sv_throw_smokegrenade 687.156 -1133.136 221.559 0.000 0.000 0.000 -390.937 -397.319 668.927 600.000 -643.000 0.000 45 3
+L 10/11/2026 - 05:09:37: rcon from "169.150.232.56:55290": command "status_json"
+L 10/11/2026 - 05:09:37: rcon from "169.150.232.56:55290": command "status"
+L 10/11/2026 - 05:09:38: "It's Thief<3><[U:1:859176345]><TERRORIST>" sv_throw_molotov 143.002 -2786.900 373.627 0.000 0.000 0.000 33.626 786.606 394.299 600.000 176.000 0.000 46
+L 10/11/2026 - 05:09:38: Molotov projectile spawned at 143.001938 -2786.899658 373.626709, velocity 33.626106 786.605530 394.298767
+L 10/11/2026 - 05:09:40: "It's Thief<3><[U:1:859176345]><TERRORIST>" threw molotov [211 -1201 518]
+L 10/11/2026 - 05:09:42: "pichekistha<2><[U:1:80924469]><TERRORIST>" sv_throw_smokegrenade -264.124 -2284.011 412.781 0.000 0.000 0.000 236.057 629.993 54.874 600.000 -461.000 0.000 45 3
+L 10/11/2026 - 05:09:42: "whitefe@ther<1><[U:1:186183274]><CT>" threw smokegrenade [-823 -2743 518]
+L 10/11/2026 - 05:09:45: "pichekistha<2><[U:1:80924469]><TERRORIST>" threw smokegrenade [28 -2009 226]
+L 10/11/2026 - 05:09:47: rcon from "169.150.232.56:42828": command "status_json"
+L 10/11/2026 - 05:09:47: rcon from "169.150.232.56:42828": command "status"
+L 10/11/2026 - 05:09:50: "Sheldor<0><[U:1:1080094440]><CT>" sv_throw_hegrenade 213.970 -1428.671 245.734 0.000 0.000 0.000 -444.967 -677.383 241.909 600.000 -747.000 0.000 44 3.000
+L 10/11/2026 - 05:09:52: "Sheldor<0><[U:1:1080094440]><CT>" threw hegrenade [-241 -2256 266]
+L 10/11/2026 - 05:09:52: "Sheldor<0><[U:1:1080094440]><CT>" sv_throw_flashgrenade 117.748 -1548.827 242.329 0.000 0.000 0.000 -408.276 -733.230 98.265 600.000 -1025.000 0.000 43
+L 10/11/2026 - 05:09:54: "Sheldor<0><[U:1:1080094440]><CT>" threw flashbang [-269 -1971 226] flashbang entindex 134)
+L 10/11/2026 - 05:09:54: "pichekistha<2><[U:1:80924469]><TERRORIST>" blinded for 3.57 by "Sheldor<0><[U:1:1080094440]><CT>" from flashbang entindex 134 
+L 10/11/2026 - 05:09:54: "It's Thief<3><[U:1:859176345]><TERRORIST>" blinded for 0.79 by "Sheldor<0><[U:1:1080094440]><CT>" from flashbang entindex 134 
+L 10/11/2026 - 05:09:54: "whitefe@ther<1><[U:1:186183274]><CT>" blinded for 4.65 by "Sheldor<0><[U:1:1080094440]><CT>" from flashbang entindex 134 
+L 10/11/2026 - 05:09:57: "Sheldor<0><[U:1:1080094440]><CT>" sv_throw_smokegrenade -86.690 -1432.818 238.240 0.000 0.000 0.000 831.169 24.698 -74.252 600.000 1061.000 0.000 45 3
+L 10/11/2026 - 05:09:57: rcon from "169.150.232.56:60854": command "status_json"
+L 10/11/2026 - 05:09:57: rcon from "169.150.232.56:60854": command "status"
+L 10/11/2026 - 05:09:59: "Sheldor<0><[U:1:1080094440]><CT>" threw smokegrenade [736 -1408 130]
+L 10/11/2026 - 05:10:01: "pichekistha<2><[U:1:80924469]><TERRORIST>" sv_throw_hegrenade -224.858 -2051.812 288.907 0.000 0.000 0.000 422.745 524.832 38.254 600.000 -72.000 0.000 44 3.000
+L 10/11/2026 - 05:10:03: "pichekistha<2><[U:1:80924469]><TERRORIST>" threw hegrenade [270 -1440 182]
+L 10/11/2026 - 05:10:06: "It's Thief<3><[U:1:859176345]><TERRORIST>" [-282 -1831 329] killed "Sheldor<0><[U:1:1080094440]><CT>" [-31 -1823 224] with "p90" (headshot)
+L 10/11/2026 - 05:10:07: rcon from "169.150.232.56:50906": command "status_json"
+L 10/11/2026 - 05:10:07: rcon from "169.150.232.56:50906": command "status"
+L 10/11/2026 - 05:10:10: "It's Thief<3><[U:1:859176345]><TERRORIST>" [-351 -1998 224] killed "whitefe@ther<1><[U:1:186183274]><CT>" [-115 -1839 224] with "p90"
+L 10/11/2026 - 05:10:10: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "2") (T "3")
+L 10/11/2026 - 05:10:10: Team "CT" scored "2" with "4" players
+L 10/11/2026 - 05:10:10: Team "TERRORIST" scored "3" with "4" players
+L 10/11/2026 - 05:10:10: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:10:10: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:10:10: MatchStatus: Score: 2:3 on map "de_foroglio" RoundsPlayed: 5
+L 10/11/2026 - 05:10:10: World triggered "Round_End"
+L 10/11/2026 - 05:10:16: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Bomb_Begin_Plant" at bombsite A
+L 10/11/2026 - 05:10:17: rcon from "169.150.232.56:55138": command "status_json"
+L 10/11/2026 - 05:10:17: rcon from "169.150.232.56:55138": command "status"
+L 10/11/2026 - 05:10:20: Starting Freeze period
+L 10/11/2026 - 05:10:20: JSON_BEGIN{
+L 10/11/2026 - 05:10:20: "name": "round_stats",
+L 10/11/2026 - 05:10:20: "round_number" : "6",
+L 10/11/2026 - 05:10:20: "score_t" : "3",
+L 10/11/2026 - 05:10:20: "score_ct" : "2",
+L 10/11/2026 - 05:10:20: "map" : "de_foroglio",
+L 10/11/2026 - 05:10:20: "server" : "cupcake",
+L 10/11/2026 - 05:10:20: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 10/11/2026 - 05:10:20: "players" : {
+L 10/11/2026 - 05:10:20: "player_0" : "          1080094440,      3,   3300,      2,      4,      0, 349.00, 100.00,   0.50,     70,      1,      2,     36,      0,      0,      0,      1,      1,      2,      0,      0,0.000000,36.000000,      1,      1,      0"
+L 10/11/2026 - 05:10:20: "player_1" : "           186183274,      3,   5850,      3,      3,      0, 324.00, 100.00,   1.00,     65,      1,      0,      0,      0,      0,      0,      1,      1,      1,      0,      0,0.000000,0.000000,      3,      2,      0"
+L 10/11/2026 - 05:10:20: "player_2" : "            80924469,      2,   7800,      4,      2,      1, 507.00,   0.00,   2.00,    101,      2,      0,     23,      0,      0,      0,      2,      2,      1,      0,      0,0.000000,23.000000,      0,      2,      0"
+L 10/11/2026 - 05:10:20: "player_3" : "           859176345,      2,   5600,      3,      3,      1, 301.00,  33.33,   1.00,     60,      1,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 10/11/2026 - 05:10:20: }}JSON_END
+L 10/11/2026 - 05:10:20: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/11/2026 - 05:10:20: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:10:20: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:10:20: MatchStatus: Score: 2:3 on map "de_foroglio" RoundsPlayed: 5
+L 10/11/2026 - 05:10:21: "Sheldor<0><[U:1:1080094440]><CT>" purchased "deagle"
+L 10/11/2026 - 05:10:21: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "smokegrenade"
+L 10/11/2026 - 05:10:21: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "taser"
+L 10/11/2026 - 05:10:21: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "hegrenade"
+L 10/11/2026 - 05:10:21: "Sheldor<0><[U:1:1080094440]><CT>" purchased "ssg08"
+L 10/11/2026 - 05:10:22: "Sheldor<0><[U:1:1080094440]><CT>" purchased "taser"
+L 10/11/2026 - 05:10:22: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "m4a1"
+L 10/11/2026 - 05:10:22: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "smokegrenade"
+L 10/11/2026 - 05:10:22: "Sheldor<0><[U:1:1080094440]><CT>" purchased "flashbang"
+L 10/11/2026 - 05:10:23: "Sheldor<0><[U:1:1080094440]><CT>" purchased "smokegrenade"
+L 10/11/2026 - 05:10:25: World triggered "Round_Start"
+L 10/11/2026 - 05:10:25: "It's Thief<3><[U:1:859176345]><TERRORIST>" purchased "molotov"
+L 10/11/2026 - 05:10:27: rcon from "169.150.232.56:49962": command "status_json"
+L 10/11/2026 - 05:10:27: rcon from "169.150.232.56:49962": command "status"
+L 10/11/2026 - 05:10:27: "whitefe@ther<1><[U:1:186183274]><CT>" sv_throw_smokegrenade 626.933 -1192.721 195.531 0.000 0.000 0.000 -510.814 -524.870 434.218 600.000 807.000 0.000 45 3
+L 10/11/2026 - 05:10:30: "whitefe@ther<1><[U:1:186183274]><CT>" threw smokegrenade [-332 -2219 401]
+L 10/11/2026 - 05:10:31: "Sheldor<0><[U:1:1080094440]><CT>" sv_throw_flashgrenade 990.828 -1756.429 214.886 0.000 0.000 0.000 0.878 -322.662 297.305 600.000 548.000 0.000 43
+L 10/11/2026 - 05:10:33: "Sheldor<0><[U:1:1080094440]><CT>" threw flashbang [992 -2281 276] flashbang entindex 189)
+L 10/11/2026 - 05:10:33: "It's Thief<3><[U:1:859176345]><TERRORIST>" sv_throw_molotov -203.755 -2077.814 290.364 0.000 0.000 0.000 579.200 735.553 99.724 600.000 -183.000 0.000 46
+L 10/11/2026 - 05:10:33: Molotov projectile spawned at -203.755035 -2077.814209 290.363831, velocity 579.199951 735.553040 99.724464
+L 10/11/2026 - 05:10:34: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 10/11/2026 - 05:10:34: "Sheldor<0><[U:1:1080094440]><CT>" [1114 -1930 160] killed "pichekistha<2><[U:1:80924469]><TERRORIST>" [936 -2469 258] with "ssg08" (headshot)
+L 10/11/2026 - 05:10:35: "It's Thief<3><[U:1:859176345]><TERRORIST>" threw molotov [524 -1492 130]
+L 10/11/2026 - 05:10:37: rcon from "185.180.15.34:51210": command "status"
+L 10/11/2026 - 05:10:37: rcon from "169.150.232.56:39008": command "status_json"
+L 10/11/2026 - 05:10:37: rcon from "169.150.232.56:39008": command "status"
+L 10/11/2026 - 05:10:38: "It's Thief<3><[U:1:859176345]><TERRORIST>" [-304 -1936 224] killed "whitefe@ther<1><[U:1:186183274]><CT>" [3 -2027 224] with "p90" (headshot)
+L 10/11/2026 - 05:10:42: "Sheldor<0><[U:1:1080094440]><CT>" sv_throw_hegrenade 303.257 -2675.864 351.519 0.000 0.000 0.000 -325.626 728.637 61.806 600.000 -1064.000 0.000 44 3.000
+L 10/11/2026 - 05:10:43: "Sheldor<0><[U:1:1080094440]><CT>" threw hegrenade [89 -2280 388]
+L 10/11/2026 - 05:10:47: rcon from "169.150.232.56:41440": command "status_json"
+L 10/11/2026 - 05:10:47: rcon from "169.150.232.56:41440": command "status"
+L 10/11/2026 - 05:10:48: "It's Thief<3><[U:1:859176345]><TERRORIST>" [367 -2896 317] killed "Sheldor<0><[U:1:1080094440]><CT>" [458 -2451 299] with "p90" (headshot)
+L 10/11/2026 - 05:10:48: "pichekistha<2><[U:1:80924469]><TERRORIST>" assisted killing "Sheldor<0><[U:1:1080094440]><CT>"
+L 10/11/2026 - 05:10:48: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "2") (T "4")
+L 10/11/2026 - 05:10:48: Team "CT" scored "2" with "4" players
+L 10/11/2026 - 05:10:48: Team "TERRORIST" scored "4" with "4" players
+L 10/11/2026 - 05:10:48: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:10:48: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:10:48: MatchStatus: Score: 2:4 on map "de_foroglio" RoundsPlayed: 6
+L 10/11/2026 - 05:10:48: World triggered "Round_End"
+L 10/11/2026 - 05:10:55: "It's Thief<3><[U:1:859176345]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/11/2026 - 05:10:57: rcon from "169.150.232.56:55552": command "status_json"
+L 10/11/2026 - 05:10:57: rcon from "169.150.232.56:55552": command "status"
+L 10/11/2026 - 05:10:58: Starting Freeze period
+L 10/11/2026 - 05:10:58: JSON_BEGIN{
+L 10/11/2026 - 05:10:58: "name": "round_stats",
+L 10/11/2026 - 05:10:58: "round_number" : "7",
+L 10/11/2026 - 05:10:58: "score_t" : "4",
+L 10/11/2026 - 05:10:58: "score_ct" : "2",
+L 10/11/2026 - 05:10:58: "map" : "de_foroglio",
+L 10/11/2026 - 05:10:58: "server" : "cupcake",
+L 10/11/2026 - 05:10:58: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 10/11/2026 - 05:10:58: "players" : {
+L 10/11/2026 - 05:10:58: "player_0" : "          1080094440,      3,   2750,      3,      5,      0, 461.00, 100.00,   0.60,     77,      1,      2,     47,      0,      0,      0,      1,      2,      2,      1,      0,0.000000,47.000000,      2,      2,      0"
+L 10/11/2026 - 05:10:58: "player_1" : "           186183274,      3,   4850,      3,      4,      0, 369.00, 100.00,   0.75,     62,      1,      0,      0,      0,      0,      0,      1,      1,      1,      0,      0,0.000000,0.000000,      3,      2,      0"
+L 10/11/2026 - 05:10:58: "player_2" : "            80924469,      2,   9900,      4,      3,      2, 558.00,   0.00,   1.33,     93,      2,      0,     23,      0,      0,      0,      2,      2,      1,      0,      0,0.000000,23.000000,      0,      2,      0"
+L 10/11/2026 - 05:10:58: "player_3" : "           859176345,      2,   8200,      5,      3,      1, 450.00,  60.00,   1.67,     75,      2,      0,      0,      0,      0,      0,      2,      1,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 10/11/2026 - 05:10:58: }}JSON_END
+L 10/11/2026 - 05:10:58: "It's Thief<3><[U:1:859176345]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/11/2026 - 05:10:58: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:10:58: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:10:58: MatchStatus: Score: 2:4 on map "de_foroglio" RoundsPlayed: 6
+L 10/11/2026 - 05:11:00: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "galilar"
+L 10/11/2026 - 05:11:00: "Sheldor<0><[U:1:1080094440]><CT>" purchased "ssg08"
+L 10/11/2026 - 05:11:00: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "smokegrenade"
+L 10/11/2026 - 05:11:00: "It's Thief<3><[U:1:859176345]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 10/11/2026 - 05:11:00: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/11/2026 - 05:11:00: "Sheldor<0><[U:1:1080094440]><CT>" purchased "deagle"
+L 10/11/2026 - 05:11:00: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "molotov"
+L 10/11/2026 - 05:11:01: "Sheldor<0><[U:1:1080094440]><CT>" purchased "taser"
+L 10/11/2026 - 05:11:01: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "taser"
+L 10/11/2026 - 05:11:01: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "hegrenade"
+L 10/11/2026 - 05:11:01: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "smokegrenade"
+L 10/11/2026 - 05:11:01: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "m4a1"
+L 10/11/2026 - 05:11:02: "It's Thief<3><[U:1:859176345]><TERRORIST>" purchased "molotov"
+L 10/11/2026 - 05:11:03: "Sheldor<0><[U:1:1080094440]><CT>" purchased "decoy"
+L 10/11/2026 - 05:11:03: World triggered "Round_Start"
+L 10/11/2026 - 05:11:06: "Sheldor<0><[U:1:1080094440]><CT>" sv_throw_decoygrenade 640.813 -1054.324 190.007 0.000 0.000 0.000 -445.752 -621.620 480.257 600.000 1119.000 0.000 47
+L 10/11/2026 - 05:11:07: "whitefe@ther<1><[U:1:186183274]><CT>" sv_throw_smokegrenade 664.148 -1162.962 195.136 0.000 0.000 0.000 -450.722 -484.556 451.258 600.000 1133.000 0.000 45 3
+L 10/11/2026 - 05:11:07: rcon from "169.150.232.56:41400": command "status_json"
+L 10/11/2026 - 05:11:07: rcon from "169.150.232.56:41400": command "status"
+L 10/11/2026 - 05:11:10: "whitefe@ther<1><[U:1:186183274]><CT>" threw smokegrenade [-350 -2296 345]
+L 10/11/2026 - 05:11:11: "It's Thief<3><[U:1:859176345]><TERRORIST>" sv_throw_molotov -297.837 -2249.035 406.314 0.000 0.000 0.000 544.365 749.552 46.430 600.000 -640.000 0.000 46
+L 10/11/2026 - 05:11:11: Molotov projectile spawned at -297.836823 -2249.034912 406.313568, velocity 544.364929 749.552490 46.430050
+L 10/11/2026 - 05:11:11: "pichekistha<2><[U:1:80924469]><TERRORIST>" sv_throw_smokegrenade -320.121 -2298.725 408.884 0.000 0.000 0.000 273.275 612.140 78.936 600.000 489.000 0.000 45 2
+L 10/11/2026 - 05:11:13: "It's Thief<3><[U:1:859176345]><TERRORIST>" threw molotov [428 -1398 178]
+L 10/11/2026 - 05:11:14: "pichekistha<2><[U:1:80924469]><TERRORIST>" threw smokegrenade [34 -2009 226]
+L 10/11/2026 - 05:11:15: "It's Thief<3><[U:1:859176345]><TERRORIST>" [-269 -1946 224] killed "whitefe@ther<1><[U:1:186183274]><CT>" [-101 -1954 225] with "p90" (throughsmoke)
+L 10/11/2026 - 05:11:17: rcon from "169.150.232.56:42674": command "status_json"
+L 10/11/2026 - 05:11:17: rcon from "169.150.232.56:42674": command "status"
+L 10/11/2026 - 05:11:19: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 10/11/2026 - 05:11:19: "Sheldor<0><[U:1:1080094440]><CT>" [561 -1833 185] killed "pichekistha<2><[U:1:80924469]><TERRORIST>" [-142 -1827 224] with "ssg08" (headshot)
+L 10/11/2026 - 05:11:27: rcon from "169.150.232.56:36016": command "status_json"
+L 10/11/2026 - 05:11:27: rcon from "169.150.232.56:36016": command "status"
+L 10/11/2026 - 05:11:28: "Sheldor<0><[U:1:1080094440]><CT>" threw decoy [179 -1613 215]
+L 10/11/2026 - 05:11:30: rcon from "169.150.247.207:38332": command "status"
+L 10/11/2026 - 05:11:30: rcon from "169.150.247.207:38338": command "status_json"
+L 10/11/2026 - 05:11:37: rcon from "169.150.232.56:50046": command "status_json"
+L 10/11/2026 - 05:11:37: rcon from "169.150.232.56:50046": command "status"
+L 10/11/2026 - 05:11:47: rcon from "169.150.232.56:35206": command "status_json"
+L 10/11/2026 - 05:11:47: rcon from "169.150.232.56:35206": command "status"
+L 10/11/2026 - 05:11:48: "Sheldor<0><[U:1:1080094440]><CT>" [1006 -1555 140] killed "It's Thief<3><[U:1:859176345]><TERRORIST>" [681 -1736 164] with "deagle" (headshot)
+L 10/11/2026 - 05:11:48: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "3") (T "4")
+L 10/11/2026 - 05:11:48: Team "CT" scored "3" with "4" players
+L 10/11/2026 - 05:11:48: Team "TERRORIST" scored "4" with "4" players
+L 10/11/2026 - 05:11:48: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:11:48: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:11:48: MatchStatus: Score: 3:4 on map "de_foroglio" RoundsPlayed: 7
+L 10/11/2026 - 05:11:48: World triggered "Round_End"
+L 10/11/2026 - 05:11:57: rcon from "169.150.232.56:37302": command "status_json"
+L 10/11/2026 - 05:11:57: rcon from "169.150.232.56:37302": command "status"
+L 10/11/2026 - 05:11:58: Starting Freeze period
+L 10/11/2026 - 05:11:58: JSON_BEGIN{
+L 10/11/2026 - 05:11:58: "name": "round_stats",
+L 10/11/2026 - 05:11:58: "round_number" : "8",
+L 10/11/2026 - 05:11:58: "score_t" : "4",
+L 10/11/2026 - 05:11:58: "score_ct" : "3",
+L 10/11/2026 - 05:11:58: "map" : "de_foroglio",
+L 10/11/2026 - 05:11:58: "server" : "cupcake",
+L 10/11/2026 - 05:11:58: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 10/11/2026 - 05:11:58: "players" : {
+L 10/11/2026 - 05:11:58: "player_0" : "          1080094440,      3,   3100,      5,      5,      0, 661.00, 100.00,   1.00,     94,      2,      2,     47,      0,      0,      0,      3,      2,      3,      2,      0,0.000000,47.000000,      4,      2,      0"
+L 10/11/2026 - 05:11:58: "player_1" : "           186183274,      3,   4150,      3,      5,      0, 369.00, 100.00,   0.60,     53,      1,      0,      0,      0,      0,      0,      1,      1,      1,      0,      0,0.000000,0.000000,      3,      2,      0"
+L 10/11/2026 - 05:11:58: "player_2" : "            80924469,      2,   9500,      4,      4,      2, 580.00,   0.00,   1.00,     83,      2,      0,     23,      0,      0,      0,      2,      2,      1,      0,      0,0.000000,23.000000,      0,      2,      0"
+L 10/11/2026 - 05:11:58: "player_3" : "           859176345,      2,  10000,      6,      4,      1, 616.00,  50.00,   1.50,     88,      2,      0,      0,      0,      0,      0,      2,      2,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 10/11/2026 - 05:11:58: }}JSON_END
+L 10/11/2026 - 05:11:58: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/11/2026 - 05:11:58: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:11:58: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:11:58: MatchStatus: Score: 3:4 on map "de_foroglio" RoundsPlayed: 7
+L 10/11/2026 - 05:12:00: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "galilar"
+L 10/11/2026 - 05:12:00: "Sheldor<0><[U:1:1080094440]><CT>" purchased "flashbang"
+L 10/11/2026 - 05:12:00: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "smokegrenade"
+L 10/11/2026 - 05:12:00: "Sheldor<0><[U:1:1080094440]><CT>" purchased "hegrenade"
+L 10/11/2026 - 05:12:00: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "hegrenade"
+L 10/11/2026 - 05:12:01: "Sheldor<0><[U:1:1080094440]><CT>" purchased "smokegrenade"
+L 10/11/2026 - 05:12:01: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "molotov"
+L 10/11/2026 - 05:12:01: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "m4a1"
+L 10/11/2026 - 05:12:02: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "smokegrenade"
+L 10/11/2026 - 05:12:02: "It's Thief<3><[U:1:859176345]><TERRORIST>" purchased "p90"
+L 10/11/2026 - 05:12:02: "It's Thief<3><[U:1:859176345]><TERRORIST>" purchased "molotov"
+L 10/11/2026 - 05:12:03: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "taser"
+L 10/11/2026 - 05:12:03: World triggered "Round_Start"
+L 10/11/2026 - 05:12:07: "whitefe@ther<1><[U:1:186183274]><CT>" sv_throw_smokegrenade 696.490 -1184.647 194.990 0.000 0.000 0.000 -363.003 -340.420 456.035 600.000 -300.000 0.000 45 3
+L 10/11/2026 - 05:12:07: rcon from "169.150.232.56:47664": command "status_json"
+L 10/11/2026 - 05:12:07: rcon from "169.150.232.56:47664": command "status"
+L 10/11/2026 - 05:12:11: "whitefe@ther<1><[U:1:186183274]><CT>" threw smokegrenade [-312 -2230 226]
+L 10/11/2026 - 05:12:11: "It's Thief<3><[U:1:859176345]><TERRORIST>" sv_throw_molotov 1053.976 -2342.468 280.507 0.000 0.000 0.000 106.900 839.656 49.686 600.000 -637.000 0.000 46
+L 10/11/2026 - 05:12:11: Molotov projectile spawned at 1053.976196 -2342.467773 280.506744, velocity 106.899643 839.656494 49.686237
+L 10/11/2026 - 05:12:13: "pichekistha<2><[U:1:80924469]><TERRORIST>" sv_throw_smokegrenade -328.937 -2312.898 408.229 0.000 0.000 0.000 396.081 599.701 60.228 600.000 545.000 0.000 45 2
+L 10/11/2026 - 05:12:13: "It's Thief<3><[U:1:859176345]><TERRORIST>" threw molotov [996 -1571 141]
+L 10/11/2026 - 05:12:13: "Sheldor<0><[U:1:1080094440]><CT>" sv_throw_flashgrenade 1143.925 -1603.575 216.582 0.000 0.000 0.000 -155.686 -647.458 110.385 600.000 -952.000 0.000 43
+L 10/11/2026 - 05:12:15: "Sheldor<0><[U:1:1080094440]><CT>" threw flashbang [1195 -1789 158] flashbang entindex 474)
+L 10/11/2026 - 05:12:15: "It's Thief<3><[U:1:859176345]><TERRORIST>" blinded for 4.76 by "Sheldor<0><[U:1:1080094440]><CT>" from flashbang entindex 474 
+L 10/11/2026 - 05:12:16: "Sheldor<0><[U:1:1080094440]><CT>" [1384 -1685 153] killed "It's Thief<3><[U:1:859176345]><TERRORIST>" [1324 -2029 163] with "deagle" (headshot)
+L 10/11/2026 - 05:12:16: "pichekistha<2><[U:1:80924469]><TERRORIST>" threw smokegrenade [393 -1424 178]
+L 10/11/2026 - 05:12:17: rcon from "169.150.232.56:54444": command "status_json"
+L 10/11/2026 - 05:12:17: rcon from "169.150.232.56:54444": command "status"
+L 10/11/2026 - 05:12:20: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 10/11/2026 - 05:12:20: "whitefe@ther<1><[U:1:186183274]><CT>" [-367 -1933 224] killed "pichekistha<2><[U:1:80924469]><TERRORIST>" [-334 -1918 224] with "taser"
+L 10/11/2026 - 05:12:20: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "4") (T "4")
+L 10/11/2026 - 05:12:20: Team "CT" scored "4" with "4" players
+L 10/11/2026 - 05:12:20: Team "TERRORIST" scored "4" with "4" players
+L 10/11/2026 - 05:12:20: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:12:20: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:12:20: MatchStatus: Score: 4:4 on map "de_foroglio" RoundsPlayed: 8
+L 10/11/2026 - 05:12:20: World triggered "Round_End"
+L 10/11/2026 - 05:12:27: rcon from "169.150.232.56:53352": command "status_json"
+L 10/11/2026 - 05:12:27: rcon from "169.150.232.56:53352": command "status"
+L 10/11/2026 - 05:12:30: Starting Freeze period
+L 10/11/2026 - 05:12:30: JSON_BEGIN{
+L 10/11/2026 - 05:12:30: "name": "round_stats",
+L 10/11/2026 - 05:12:30: "round_number" : "9",
+L 10/11/2026 - 05:12:30: "score_t" : "4",
+L 10/11/2026 - 05:12:30: "score_ct" : "4",
+L 10/11/2026 - 05:12:30: "map" : "de_foroglio",
+L 10/11/2026 - 05:12:30: "server" : "cupcake",
+L 10/11/2026 - 05:12:30: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 10/11/2026 - 05:12:30: "players" : {
+L 10/11/2026 - 05:12:30: "player_0" : "          1080094440,      3,   5150,      6,      5,      0, 761.00, 100.00,   1.20,     95,      3,      3,     47,      0,      0,      0,      3,      3,      4,      2,      0,0.000000,47.000000,      4,      2,      0"
+L 10/11/2026 - 05:12:30: "player_1" : "           186183274,      3,   3500,      4,      5,      0, 469.00,  75.00,   0.80,     59,      1,      0,      0,      0,      0,      0,      1,      1,      1,      0,      0,0.000000,0.000000,      4,      3,      0"
+L 10/11/2026 - 05:12:30: "player_2" : "            80924469,      2,   9100,      4,      5,      2, 580.00,   0.00,   0.80,     72,      2,      0,     23,      0,      0,      0,      2,      2,      1,      0,      0,0.000000,23.000000,      0,      2,      0"
+L 10/11/2026 - 05:12:30: "player_3" : "           859176345,      2,   9650,      6,      5,      1, 623.00,  50.00,   1.20,     78,      2,      0,      7,      0,      0,      0,      2,      2,      0,      0,      0,7.000000,0.000000,      0,      1,      0"
+L 10/11/2026 - 05:12:30: }}JSON_END
+L 10/11/2026 - 05:12:30: "It's Thief<3><[U:1:859176345]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/11/2026 - 05:12:30: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:12:30: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:12:30: MatchStatus: Score: 4:4 on map "de_foroglio" RoundsPlayed: 8
+L 10/11/2026 - 05:12:31: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "galilar"
+L 10/11/2026 - 05:12:31: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "smokegrenade"
+L 10/11/2026 - 05:12:31: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "smokegrenade"
+L 10/11/2026 - 05:12:32: "Sheldor<0><[U:1:1080094440]><CT>" purchased "flashbang"
+L 10/11/2026 - 05:12:32: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "hegrenade"
+L 10/11/2026 - 05:12:32: "It's Thief<3><[U:1:859176345]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 10/11/2026 - 05:12:32: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/11/2026 - 05:12:32: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "molotov"
+L 10/11/2026 - 05:12:34: "It's Thief<3><[U:1:859176345]><TERRORIST>" purchased "sg556"
+L 10/11/2026 - 05:12:35: World triggered "Round_Start"
+L 10/11/2026 - 05:12:35: "It's Thief<3><[U:1:859176345]><TERRORIST>" purchased "p90"
+L 10/11/2026 - 05:12:36: "It's Thief<3><[U:1:859176345]><TERRORIST>" purchased "molotov"
+L 10/11/2026 - 05:12:37: rcon from "169.150.232.56:41374": command "status_json"
+L 10/11/2026 - 05:12:37: rcon from "169.150.232.56:41374": command "status"
+L 10/11/2026 - 05:12:38: "whitefe@ther<1><[U:1:186183274]><CT>" sv_throw_smokegrenade 702.099 -1209.891 202.009 0.000 0.000 0.000 -369.750 -329.336 458.746 600.000 918.000 0.000 45 3
+L 10/11/2026 - 05:12:41: "pichekistha<2><[U:1:80924469]><TERRORIST>" sv_throw_molotov 706.881 -2681.590 354.177 0.000 0.000 0.000 694.016 672.224 69.321 600.000 -464.000 0.000 46
+L 10/11/2026 - 05:12:41: Molotov projectile spawned at 706.881042 -2681.590332 354.176605, velocity 694.015747 672.223938 69.321358
+L 10/11/2026 - 05:12:41: "Sheldor<0><[U:1:1080094440]><CT>" sv_throw_smokegrenade 61.649 -1782.106 272.060 0.000 0.000 0.000 -391.564 -310.769 -58.565 600.000 -510.000 0.000 45 3
+L 10/11/2026 - 05:12:42: "pichekistha<2><[U:1:80924469]><TERRORIST>" threw molotov [1211 -1837 163]
+L 10/11/2026 - 05:12:42: "Sheldor<0><[U:1:1080094440]><CT>" threw smokegrenade [-206 -1995 226]
+L 10/11/2026 - 05:12:42: "whitefe@ther<1><[U:1:186183274]><CT>" threw smokegrenade [-219 -2191 226]
+L 10/11/2026 - 05:12:44: "It's Thief<3><[U:1:859176345]><TERRORIST>" sv_throw_molotov 973.135 -2518.993 324.101 0.000 0.000 0.000 -7.430 904.946 154.841 600.000 -367.000 0.000 46
+L 10/11/2026 - 05:12:44: Molotov projectile spawned at 973.135254 -2518.992920 324.100952, velocity -7.430326 904.945801 154.840897
+L 10/11/2026 - 05:12:46: "It's Thief<3><[U:1:859176345]><TERRORIST>" threw molotov [829 -2268 298]
+L 10/11/2026 - 05:12:47: rcon from "169.150.232.56:59752": command "status_json"
+L 10/11/2026 - 05:12:47: rcon from "169.150.232.56:59752": command "status"
+L 10/11/2026 - 05:12:57: rcon from "169.150.232.56:57168": command "status_json"
+L 10/11/2026 - 05:12:57: rcon from "169.150.232.56:57168": command "status"
+L 10/11/2026 - 05:12:57: "Sheldor<0><[U:1:1080094440]><CT>" sv_throw_hegrenade -184.232 -1855.805 388.238 0.000 0.000 0.000 752.144 -152.470 146.592 600.000 -603.000 0.000 44 3.000
+L 10/11/2026 - 05:12:59: "Sheldor<0><[U:1:1080094440]><CT>" threw hegrenade [779 -2064 306]
+L 10/11/2026 - 05:13:06: "Sheldor<0><[U:1:1080094440]><CT>" sv_throw_flashgrenade -176.054 -2057.130 290.873 0.000 0.000 0.000 334.181 723.912 121.218 600.000 -898.000 0.000 43
+L 10/11/2026 - 05:13:07: rcon from "169.150.232.56:42046": command "status_json"
+L 10/11/2026 - 05:13:07: rcon from "169.150.232.56:42046": command "status"
+L 10/11/2026 - 05:13:08: "Sheldor<0><[U:1:1080094440]><CT>" threw flashbang [72 -2015 227] flashbang entindex 125)
+L 10/11/2026 - 05:13:08: "pichekistha<2><[U:1:80924469]><TERRORIST>" blinded for 4.27 by "Sheldor<0><[U:1:1080094440]><CT>" from flashbang entindex 125 
+L 10/11/2026 - 05:13:09: "whitefe@ther<1><[U:1:186183274]><CT>" [-250 -1916 224] killed "It's Thief<3><[U:1:859176345]><TERRORIST>" [561 -1855 186] with "m4a1" (headshot)
+L 10/11/2026 - 05:13:09: "Sheldor<0><[U:1:1080094440]><CT>" assisted killing "It's Thief<3><[U:1:859176345]><TERRORIST>"
+L 10/11/2026 - 05:13:17: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 10/11/2026 - 05:13:17: "whitefe@ther<1><[U:1:186183274]><CT>" [-229 -2059 224] killed "pichekistha<2><[U:1:80924469]><TERRORIST>" [16 -1859 224] with "m4a1" (headshot)
+L 10/11/2026 - 05:13:17: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "5") (T "4")
+L 10/11/2026 - 05:13:17: Team "CT" scored "5" with "4" players
+L 10/11/2026 - 05:13:17: Team "TERRORIST" scored "4" with "4" players
+L 10/11/2026 - 05:13:17: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:13:17: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:13:17: MatchStatus: Score: 5:4 on map "de_foroglio" RoundsPlayed: 9
+L 10/11/2026 - 05:13:17: World triggered "Round_End"
+L 10/11/2026 - 05:13:17: rcon from "169.150.232.56:39252": command "status_json"
+L 10/11/2026 - 05:13:17: rcon from "169.150.232.56:39252": command "status"
+L 10/11/2026 - 05:13:27: Starting Freeze period
+L 10/11/2026 - 05:13:27: JSON_BEGIN{
+L 10/11/2026 - 05:13:27: "name": "round_stats",
+L 10/11/2026 - 05:13:27: "round_number" : "10",
+L 10/11/2026 - 05:13:27: "score_t" : "4",
+L 10/11/2026 - 05:13:27: "score_ct" : "5",
+L 10/11/2026 - 05:13:27: "map" : "de_foroglio",
+L 10/11/2026 - 05:13:27: "server" : "cupcake",
+L 10/11/2026 - 05:13:27: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 10/11/2026 - 05:13:27: "players" : {
+L 10/11/2026 - 05:13:27: "player_0" : "          1080094440,      3,   7650,      6,      5,      1, 833.00, 100.00,   1.20,     93,      3,      4,     47,      0,      0,      0,      3,      3,      4,      2,      0,0.000000,47.000000,      4,      2,      0"
+L 10/11/2026 - 05:13:27: "player_1" : "           186183274,      3,   6200,      6,      5,      0, 590.00,  83.33,   1.20,     66,      2,      0,      0,      0,      0,      0,      1,      2,      1,      0,      0,0.000000,0.000000,      6,      3,      0"
+L 10/11/2026 - 05:13:27: "player_2" : "            80924469,      2,   8700,      4,      6,      2, 648.00,   0.00,   0.67,     72,      2,      0,     23,      0,      0,      0,      2,      2,      1,      0,      0,0.000000,23.000000,      0,      2,      0"
+L 10/11/2026 - 05:13:27: "player_3" : "           859176345,      2,   9300,      6,      6,      1, 679.00,  50.00,   1.00,     75,      2,      0,      7,      0,      0,      0,      2,      2,      0,      0,      0,7.000000,0.000000,      0,      1,      0"
+L 10/11/2026 - 05:13:27: }}JSON_END
+L 10/11/2026 - 05:13:27: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/11/2026 - 05:13:27: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:13:27: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:13:27: MatchStatus: Score: 5:4 on map "de_foroglio" RoundsPlayed: 9
+L 10/11/2026 - 05:13:27: rcon from "169.150.232.56:34374": command "status_json"
+L 10/11/2026 - 05:13:27: rcon from "169.150.232.56:34374": command "status"
+L 10/11/2026 - 05:13:28: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "galilar"
+L 10/11/2026 - 05:13:28: "It's Thief<3><[U:1:859176345]><TERRORIST>" purchased "p90"
+L 10/11/2026 - 05:13:29: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "smokegrenade"
+L 10/11/2026 - 05:13:29: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "hegrenade"
+L 10/11/2026 - 05:13:29: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "hegrenade"
+L 10/11/2026 - 05:13:29: "It's Thief<3><[U:1:859176345]><TERRORIST>" purchased "molotov"
+L 10/11/2026 - 05:13:29: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "molotov"
+L 10/11/2026 - 05:13:32: World triggered "Round_Start"
+L 10/11/2026 - 05:13:32: "Sheldor<0><[U:1:1080094440]><CT>" purchased "flashbang"
+L 10/11/2026 - 05:13:32: "Sheldor<0><[U:1:1080094440]><CT>" purchased "smokegrenade"
+L 10/11/2026 - 05:13:32: "Sheldor<0><[U:1:1080094440]><CT>" purchased "hegrenade"
+L 10/11/2026 - 05:13:35: "whitefe@ther<1><[U:1:186183274]><CT>" sv_throw_smokegrenade 705.612 -1227.958 206.012 0.000 0.000 0.000 -381.175 -325.221 452.285 600.000 790.000 0.000 45 2
+L 10/11/2026 - 05:13:37: rcon from "169.150.232.56:53400": command "status_json"
+L 10/11/2026 - 05:13:37: rcon from "169.150.232.56:53400": command "status"
+L 10/11/2026 - 05:13:38: "Sheldor<0><[U:1:1080094440]><CT>" sv_throw_smokegrenade 189.949 -1546.162 271.401 0.000 0.000 0.000 -572.478 -791.109 194.249 600.000 416.000 0.000 45 3
+L 10/11/2026 - 05:13:39: "It's Thief<3><[U:1:859176345]><TERRORIST>" sv_throw_molotov -259.983 -2199.200 396.059 0.000 0.000 0.000 575.156 726.958 -186.892 600.000 1070.000 0.000 46
+L 10/11/2026 - 05:13:39: Molotov projectile spawned at -259.982941 -2199.199707 396.059082, velocity 575.155884 726.957886 -186.891846
+L 10/11/2026 - 05:13:39: "whitefe@ther<1><[U:1:186183274]><CT>" threw smokegrenade [-200 -2188 226]
+L 10/11/2026 - 05:13:39: "pichekistha<2><[U:1:80924469]><TERRORIST>" sv_throw_smokegrenade -282.359 -2298.505 411.132 0.000 0.000 0.000 255.163 622.107 59.157 600.000 -1087.000 0.000 45 2
+L 10/11/2026 - 05:13:40: "It's Thief<3><[U:1:859176345]><TERRORIST>" threw molotov [86 -1762 226]
+L 10/11/2026 - 05:13:41: "Sheldor<0><[U:1:1080094440]><CT>" threw smokegrenade [-185 -2176 226]
+L 10/11/2026 - 05:13:41: "pichekistha<2><[U:1:80924469]><TERRORIST>" threw smokegrenade [-1 -1980 226]
+L 10/11/2026 - 05:13:45: "pichekistha<2><[U:1:80924469]><TERRORIST>" sv_throw_hegrenade 126.933 -2253.814 291.528 0.000 0.000 0.000 -559.847 346.481 148.821 600.000 -22.000 0.000 44 3.000
+L 10/11/2026 - 05:13:47: "pichekistha<2><[U:1:80924469]><TERRORIST>" threw hegrenade [-425 -1807 234]
+L 10/11/2026 - 05:13:47: rcon from "169.150.232.56:35152": command "status_json"
+L 10/11/2026 - 05:13:47: rcon from "169.150.232.56:35152": command "status"
+L 10/11/2026 - 05:13:57: rcon from "169.150.232.56:32952": command "status_json"
+L 10/11/2026 - 05:13:57: rcon from "169.150.232.56:32952": command "status"
+L 10/11/2026 - 05:14:02: "pichekistha<2><[U:1:80924469]><TERRORIST>" [-309 -2327 345] killed "Sheldor<0><[U:1:1080094440]><CT>" [-290 -2198 224] with "galilar"
+L 10/11/2026 - 05:14:04: "It's Thief<3><[U:1:859176345]><TERRORIST>" [-296 -1889 315] killed "whitefe@ther<1><[U:1:186183274]><CT>" [-109 -1893 225] with "p90"
+L 10/11/2026 - 05:14:04: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "5") (T "5")
+L 10/11/2026 - 05:14:04: Team "CT" scored "5" with "4" players
+L 10/11/2026 - 05:14:04: Team "TERRORIST" scored "5" with "4" players
+L 10/11/2026 - 05:14:04: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:14:04: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:14:04: MatchStatus: Score: 5:5 on map "de_foroglio" RoundsPlayed: 10
+L 10/11/2026 - 05:14:04: World triggered "Round_End"
+L 10/11/2026 - 05:14:07: rcon from "169.150.232.56:60238": command "status_json"
+L 10/11/2026 - 05:14:07: rcon from "169.150.232.56:60238": command "status"
+L 10/11/2026 - 05:14:13: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Bomb_Begin_Plant" at bombsite A
+L 10/11/2026 - 05:14:14: Starting Freeze period
+L 10/11/2026 - 05:14:14: JSON_BEGIN{
+L 10/11/2026 - 05:14:14: "name": "round_stats",
+L 10/11/2026 - 05:14:14: "round_number" : "11",
+L 10/11/2026 - 05:14:14: "score_t" : "5",
+L 10/11/2026 - 05:14:14: "score_ct" : "5",
+L 10/11/2026 - 05:14:14: "map" : "de_foroglio",
+L 10/11/2026 - 05:14:14: "server" : "cupcake",
+L 10/11/2026 - 05:14:14: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 10/11/2026 - 05:14:14: "players" : {
+L 10/11/2026 - 05:14:14: "player_0" : "          1080094440,      3,   9250,      6,      6,      1, 834.00, 100.00,   1.00,     83,      3,      4,     47,      0,      0,      0,      3,      3,      4,      2,      0,0.000000,47.000000,      4,      2,      0"
+L 10/11/2026 - 05:14:14: "player_1" : "           186183274,      3,   8300,      6,      6,      0, 590.00,  83.33,   1.00,     59,      2,      0,      0,      0,      0,      0,      1,      2,      1,      0,      0,0.000000,0.000000,      6,      3,      0"
+L 10/11/2026 - 05:14:14: "player_2" : "            80924469,      2,   8750,      5,      6,      2, 748.00,   0.00,   0.83,     75,      3,      0,     23,      0,      0,      0,      2,      3,      1,      0,      0,0.000000,23.000000,      0,      2,      0"
+L 10/11/2026 - 05:14:14: "player_3" : "           859176345,      2,   9400,      7,      6,      1, 779.00,  42.86,   1.17,     78,      2,      0,      7,      0,      0,      0,      2,      2,      0,      0,      0,7.000000,0.000000,      0,      1,      0"
+L 10/11/2026 - 05:14:14: }}JSON_END
+L 10/11/2026 - 05:14:14: "It's Thief<3><[U:1:859176345]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/11/2026 - 05:14:14: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:14:14: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:14:14: MatchStatus: Score: 5:5 on map "de_foroglio" RoundsPlayed: 10
+L 10/11/2026 - 05:14:16: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "m4a1"
+L 10/11/2026 - 05:14:16: "Sheldor<0><[U:1:1080094440]><CT>" purchased "deagle"
+L 10/11/2026 - 05:14:16: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "smokegrenade"
+L 10/11/2026 - 05:14:16: "Sheldor<0><[U:1:1080094440]><CT>" purchased "taser"
+L 10/11/2026 - 05:14:16: "It's Thief<3><[U:1:859176345]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 10/11/2026 - 05:14:17: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/11/2026 - 05:14:17: "Sheldor<0><[U:1:1080094440]><CT>" purchased "ssg08"
+L 10/11/2026 - 05:14:17: rcon from "169.150.232.56:41006": command "status_json"
+L 10/11/2026 - 05:14:17: rcon from "169.150.232.56:41006": command "status"
+L 10/11/2026 - 05:14:17: "Sheldor<0><[U:1:1080094440]><CT>" purchased "flashbang"
+L 10/11/2026 - 05:14:18: "Sheldor<0><[U:1:1080094440]><CT>" purchased "smokegrenade"
+L 10/11/2026 - 05:14:18: "Sheldor<0><[U:1:1080094440]><CT>" purchased "hegrenade"
+L 10/11/2026 - 05:14:18: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "taser"
+L 10/11/2026 - 05:14:18: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "smokegrenade"
+L 10/11/2026 - 05:14:18: "It's Thief<3><[U:1:859176345]><TERRORIST>" purchased "molotov"
+L 10/11/2026 - 05:14:19: World triggered "Round_Start"
+L 10/11/2026 - 05:14:23: "whitefe@ther<1><[U:1:186183274]><CT>" sv_throw_smokegrenade 710.703 -1481.266 199.140 0.000 0.000 0.000 480.148 -773.375 301.235 600.000 41.000 0.000 45 3
+L 10/11/2026 - 05:14:26: "whitefe@ther<1><[U:1:186183274]><CT>" threw smokegrenade [1355 -2422 258]
+L 10/11/2026 - 05:14:27: "It's Thief<3><[U:1:859176345]><TERRORIST>" sv_throw_molotov -277.114 -2213.339 406.532 0.000 0.000 0.000 566.397 744.380 47.234 600.000 -852.000 0.000 46
+L 10/11/2026 - 05:14:27: Molotov projectile spawned at -277.114380 -2213.339111 406.531769, velocity 566.397095 744.379517 47.234039
+L 10/11/2026 - 05:14:27: rcon from "169.150.232.56:53104": command "status_json"
+L 10/11/2026 - 05:14:27: rcon from "169.150.232.56:53104": command "status"
+L 10/11/2026 - 05:14:28: "pichekistha<2><[U:1:80924469]><TERRORIST>" sv_throw_smokegrenade -332.516 -2304.986 408.419 0.000 0.000 0.000 308.862 596.298 68.252 600.000 -388.000 0.000 45 2
+L 10/11/2026 - 05:14:29: "It's Thief<3><[U:1:859176345]><TERRORIST>" threw molotov [519 -1477 130]
+L 10/11/2026 - 05:14:31: "Sheldor<0><[U:1:1080094440]><CT>" sv_throw_flashgrenade 1121.575 -1606.996 222.562 0.000 0.000 0.000 -796.419 -135.538 431.744 600.000 217.000 0.000 43
+L 10/11/2026 - 05:14:31: "pichekistha<2><[U:1:80924469]><TERRORIST>" threw smokegrenade [75 -2022 226]
+L 10/11/2026 - 05:14:32: "Sheldor<0><[U:1:1080094440]><CT>" threw flashbang [-173 -1827 502] flashbang entindex 258)
+L 10/11/2026 - 05:14:32: "pichekistha<2><[U:1:80924469]><TERRORIST>" blinded for 1.95 by "Sheldor<0><[U:1:1080094440]><CT>" from flashbang entindex 258 
+L 10/11/2026 - 05:14:32: "It's Thief<3><[U:1:859176345]><TERRORIST>" blinded for 0.99 by "Sheldor<0><[U:1:1080094440]><CT>" from flashbang entindex 258 
+L 10/11/2026 - 05:14:34: "Sheldor<0><[U:1:1080094440]><CT>" sv_throw_hegrenade 512.845 -1841.734 253.236 0.000 0.000 0.000 -764.073 -101.738 163.801 600.000 910.000 0.000 44 3.000
+L 10/11/2026 - 05:14:35: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Bomb_Begin_Plant" at bombsite A
+L 10/11/2026 - 05:14:35: "Sheldor<0><[U:1:1080094440]><CT>" threw hegrenade [-404 -1995 230]
+L 10/11/2026 - 05:14:37: rcon from "169.150.232.56:44740": command "status_json"
+L 10/11/2026 - 05:14:37: rcon from "169.150.232.56:44740": command "status"
+L 10/11/2026 - 05:14:38: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Planted_The_Bomb" at bombsite A
+L 10/11/2026 - 05:14:39: "It's Thief<3><[U:1:859176345]><TERRORIST>" [163 -1520 176] killed "Sheldor<0><[U:1:1080094440]><CT>" [632 -1300 128] with "p90"
+L 10/11/2026 - 05:14:47: rcon from "169.150.232.56:52168": command "status_json"
+L 10/11/2026 - 05:14:47: rcon from "169.150.232.56:52168": command "status"
+L 10/11/2026 - 05:14:56: "whitefe@ther<1><[U:1:186183274]><CT>" triggered "Begin_Bomb_Defuse_With_Kit"
+L 10/11/2026 - 05:14:57: rcon from "169.150.232.56:42106": command "status_json"
+L 10/11/2026 - 05:14:57: rcon from "169.150.232.56:42106": command "status"
+L 10/11/2026 - 05:15:03: "pichekistha<2><[U:1:80924469]><TERRORIST>" sv_throw_molotov 389.573 -1545.780 273.625 0.000 0.000 0.000 -475.652 -460.022 133.264 600.000 -895.000 0.000 46
+L 10/11/2026 - 05:15:03: Molotov projectile spawned at 389.572937 -1545.780151 273.625153, velocity -475.652496 -460.022125 133.264236
+L 10/11/2026 - 05:15:03: "It's Thief<3><[U:1:859176345]><TERRORIST>" [126 -1770 224] killed "whitefe@ther<1><[U:1:186183274]><CT>" [125 -2001 224] with "p90" (headshot)
+L 10/11/2026 - 05:15:03: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "5") (T "6")
+L 10/11/2026 - 05:15:03: Team "CT" scored "5" with "4" players
+L 10/11/2026 - 05:15:03: Team "TERRORIST" scored "6" with "4" players
+L 10/11/2026 - 05:15:03: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:15:03: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:15:03: MatchStatus: Score: 5:6 on map "de_foroglio" RoundsPlayed: 11
+L 10/11/2026 - 05:15:03: World triggered "Round_End"
+L 10/11/2026 - 05:15:04: "pichekistha<2><[U:1:80924469]><TERRORIST>" threw molotov [-46 -1985 226]
+L 10/11/2026 - 05:15:07: rcon from "169.150.232.56:46266": command "status_json"
+L 10/11/2026 - 05:15:07: rcon from "169.150.232.56:46266": command "status"
+L 10/11/2026 - 05:15:13: Starting Freeze period
+L 10/11/2026 - 05:15:13: JSON_BEGIN{
+L 10/11/2026 - 05:15:13: "name": "round_stats",
+L 10/11/2026 - 05:15:13: "round_number" : "12",
+L 10/11/2026 - 05:15:13: "score_t" : "6",
+L 10/11/2026 - 05:15:13: "score_ct" : "5",
+L 10/11/2026 - 05:15:13: "map" : "de_foroglio",
+L 10/11/2026 - 05:15:13: "server" : "cupcake",
+L 10/11/2026 - 05:15:13: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 10/11/2026 - 05:15:13: "players" : {
+L 10/11/2026 - 05:15:13: "player_0" : "          1080094440,      3,   8250,      6,      7,      1, 907.00, 100.00,   0.86,     82,      3,      5,     47,      0,      0,      0,      3,      3,      4,      2,      0,0.000000,47.000000,      4,      2,      0"
+L 10/11/2026 - 05:15:13: "player_1" : "           186183274,      3,   7300,      6,      7,      0, 590.00,  83.33,   0.86,     54,      2,      0,      0,      0,      0,      0,      1,      2,      1,      0,      0,0.000000,0.000000,      6,      3,      0"
+L 10/11/2026 - 05:15:13: "player_2" : "            80924469,      2,  10000,      5,      6,      2, 748.00,   0.00,   0.83,     68,      3,      0,     23,      0,      0,      0,      2,      3,      1,      0,      0,0.000000,23.000000,      0,      2,      0"
+L 10/11/2026 - 05:15:13: "player_3" : "           859176345,      2,  10000,      9,      6,      1, 979.00,  44.44,   1.50,     89,      3,      0,      7,      0,      0,      0,      2,      3,      0,      0,      0,7.000000,0.000000,      0,      1,      0"
+L 10/11/2026 - 05:15:13: }}JSON_END
+L 10/11/2026 - 05:15:13: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/11/2026 - 05:15:13: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:15:13: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:15:13: MatchStatus: Score: 5:6 on map "de_foroglio" RoundsPlayed: 11
+L 10/11/2026 - 05:15:14: "Sheldor<0><[U:1:1080094440]><CT>" purchased "awp"
+L 10/11/2026 - 05:15:15: "Sheldor<0><[U:1:1080094440]><CT>" purchased "deagle"
+L 10/11/2026 - 05:15:15: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "m4a1"
+L 10/11/2026 - 05:15:15: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "smokegrenade"
+L 10/11/2026 - 05:15:16: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "incgrenade"
+L 10/11/2026 - 05:15:16: "Sheldor<0><[U:1:1080094440]><CT>" purchased "taser"
+L 10/11/2026 - 05:15:16: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "flashbang"
+L 10/11/2026 - 05:15:16: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "smokegrenade"
+L 10/11/2026 - 05:15:17: "Sheldor<0><[U:1:1080094440]><CT>" purchased "flashbang"
+L 10/11/2026 - 05:15:17: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "molotov"
+L 10/11/2026 - 05:15:17: "Sheldor<0><[U:1:1080094440]><CT>" purchased "smokegrenade"
+L 10/11/2026 - 05:15:17: "Sheldor<0><[U:1:1080094440]><CT>" purchased "hegrenade"
+L 10/11/2026 - 05:15:17: rcon from "169.150.232.56:38404": command "status_json"
+L 10/11/2026 - 05:15:17: rcon from "169.150.232.56:38404": command "status"
+L 10/11/2026 - 05:15:18: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "taser"
+L 10/11/2026 - 05:15:18: World triggered "Round_Start"
+L 10/11/2026 - 05:15:19: "It's Thief<3><[U:1:859176345]><TERRORIST>" purchased "molotov"
+L 10/11/2026 - 05:15:22: "whitefe@ther<1><[U:1:186183274]><CT>" sv_throw_smokegrenade 705.094 -1225.825 205.648 0.000 0.000 0.000 -383.386 -329.250 447.476 600.000 -622.000 0.000 45 3
+L 10/11/2026 - 05:15:26: "whitefe@ther<1><[U:1:186183274]><CT>" threw smokegrenade [-207 -2186 226]
+L 10/11/2026 - 05:15:27: "pichekistha<2><[U:1:80924469]><TERRORIST>" sv_throw_smokegrenade -323.663 -2311.579 408.229 0.000 0.000 0.000 289.634 607.130 55.945 600.000 213.000 0.000 45 2
+L 10/11/2026 - 05:15:27: "It's Thief<3><[U:1:859176345]><TERRORIST>" sv_throw_molotov -278.979 -2216.504 364.668 0.000 0.000 0.000 482.451 610.112 -402.570 600.000 -428.000 0.000 46
+L 10/11/2026 - 05:15:27: Molotov projectile spawned at -278.978760 -2216.503662 364.667786, velocity 482.451111 610.112305 -402.570496
+L 10/11/2026 - 05:15:27: rcon from "169.150.232.56:51264": command "status_json"
+L 10/11/2026 - 05:15:27: rcon from "169.150.232.56:51264": command "status"
+L 10/11/2026 - 05:15:27: "It's Thief<3><[U:1:859176345]><TERRORIST>" threw molotov [-142 -2044 226]
+L 10/11/2026 - 05:15:30: "pichekistha<2><[U:1:80924469]><TERRORIST>" threw smokegrenade [50 -2031 226]
+L 10/11/2026 - 05:15:30: "Sheldor<0><[U:1:1080094440]><CT>" sv_throw_hegrenade 159.409 -1505.160 242.816 0.000 0.000 0.000 -469.936 -730.324 118.816 600.000 -485.000 0.000 44 3.000
+L 10/11/2026 - 05:15:30: "pichekistha<2><[U:1:80924469]><TERRORIST>" sv_throw_hegrenade -325.279 -2313.649 407.233 0.000 0.000 0.000 477.575 566.699 16.240 600.000 499.000 0.000 44 3.000
+L 10/11/2026 - 05:15:31: "Sheldor<0><[U:1:1080094440]><CT>" threw hegrenade [-278 -2274 226]
+L 10/11/2026 - 05:15:32: "pichekistha<2><[U:1:80924469]><TERRORIST>" threw hegrenade [-280 -2262 233]
+L 10/11/2026 - 05:15:34: "pichekistha<2><[U:1:80924469]><TERRORIST>" [-210 -2324 358] killed "whitefe@ther<1><[U:1:186183274]><CT>" [-304 -1961 224] with "galilar" (headshot throughsmoke)
+L 10/11/2026 - 05:15:37: rcon from "169.150.232.56:32902": command "status_json"
+L 10/11/2026 - 05:15:37: rcon from "169.150.232.56:32902": command "status"
+L 10/11/2026 - 05:15:37: rcon from "185.180.15.34:52856": command "status"
+L 10/11/2026 - 05:15:44: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 10/11/2026 - 05:15:44: "Sheldor<0><[U:1:1080094440]><CT>" [415 -1380 179] killed "pichekistha<2><[U:1:80924469]><TERRORIST>" [-11 -1696 207] with "awp"
+L 10/11/2026 - 05:15:47: rcon from "169.150.232.56:36198": command "status_json"
+L 10/11/2026 - 05:15:47: rcon from "169.150.232.56:36198": command "status"
+L 10/11/2026 - 05:15:47: "It's Thief<3><[U:1:859176345]><TERRORIST>" [178 -1452 176] killed "Sheldor<0><[U:1:1080094440]><CT>" [398 -1377 202] with "p90"
+L 10/11/2026 - 05:15:47: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "5") (T "7")
+L 10/11/2026 - 05:15:47: Team "CT" scored "5" with "4" players
+L 10/11/2026 - 05:15:47: Team "TERRORIST" scored "7" with "4" players
+L 10/11/2026 - 05:15:47: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:15:47: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:15:47: MatchStatus: Score: 5:7 on map "de_foroglio" RoundsPlayed: 12
+L 10/11/2026 - 05:15:47: World triggered "Round_End"
+L 10/11/2026 - 05:15:57: rcon from "169.150.232.56:52340": command "status_json"
+L 10/11/2026 - 05:15:57: rcon from "169.150.232.56:52340": command "status"
+L 10/11/2026 - 05:15:57: Starting Freeze period
+L 10/11/2026 - 05:15:57: JSON_BEGIN{
+L 10/11/2026 - 05:15:57: "name": "round_stats",
+L 10/11/2026 - 05:15:57: "round_number" : "13",
+L 10/11/2026 - 05:15:57: "score_t" : "7",
+L 10/11/2026 - 05:15:57: "score_ct" : "5",
+L 10/11/2026 - 05:15:57: "map" : "de_foroglio",
+L 10/11/2026 - 05:15:57: "server" : "cupcake",
+L 10/11/2026 - 05:15:57: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 10/11/2026 - 05:15:57: "players" : {
+L 10/11/2026 - 05:15:57: "player_0" : "          1080094440,      3,   4250,      7,      8,      1,1062.00,  85.71,   0.88,     88,      3,      5,     56,      0,      0,      0,      4,      3,      4,      3,      0,0.000000,56.000000,      5,      3,      0"
+L 10/11/2026 - 05:15:57: "player_1" : "           186183274,      3,   5600,      6,      8,      0, 590.00,  83.33,   0.75,     49,      2,      0,      0,      0,      0,      0,      1,      2,      1,      0,      0,0.000000,0.000000,      6,      3,      0"
+L 10/11/2026 - 05:15:57: "player_2" : "            80924469,      2,  10000,      6,      7,      2, 848.00,  16.67,   0.86,     71,      4,      0,     24,      0,      0,      0,      2,      4,      1,      0,      0,0.000000,24.000000,      0,      2,      0"
+L 10/11/2026 - 05:15:57: "player_3" : "           859176345,      2,  10000,     10,      6,      1,1079.00,  40.00,   1.67,     90,      3,      0,      7,      0,      0,      0,      3,      3,      0,      0,      0,7.000000,0.000000,      0,      1,      0"
+L 10/11/2026 - 05:15:57: }}JSON_END
+L 10/11/2026 - 05:15:57: "It's Thief<3><[U:1:859176345]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/11/2026 - 05:15:57: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:15:57: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:15:57: MatchStatus: Score: 5:7 on map "de_foroglio" RoundsPlayed: 12
+L 10/11/2026 - 05:15:59: "Sheldor<0><[U:1:1080094440]><CT>" purchased "m4a1_silencer"
+L 10/11/2026 - 05:15:59: "Sheldor<0><[U:1:1080094440]><CT>" purchased "flashbang"
+L 10/11/2026 - 05:16:00: "Sheldor<0><[U:1:1080094440]><CT>" purchased "smokegrenade"
+L 10/11/2026 - 05:16:00: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "galilar"
+L 10/11/2026 - 05:16:00: "Sheldor<0><[U:1:1080094440]><CT>" purchased "hegrenade"
+L 10/11/2026 - 05:16:00: "It's Thief<3><[U:1:859176345]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 10/11/2026 - 05:16:00: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/11/2026 - 05:16:00: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "smokegrenade"
+L 10/11/2026 - 05:16:01: "Sheldor<0><[U:1:1080094440]><CT>" purchased "fiveseven"
+L 10/11/2026 - 05:16:01: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "m4a1"
+L 10/11/2026 - 05:16:01: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "hegrenade"
+L 10/11/2026 - 05:16:01: "pichekistha<2><[U:1:80924469]><TERRORIST>" purchased "molotov"
+L 10/11/2026 - 05:16:01: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "smokegrenade"
+L 10/11/2026 - 05:16:02: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "hegrenade"
+L 10/11/2026 - 05:16:02: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "incgrenade"
+L 10/11/2026 - 05:16:02: World triggered "Round_Start"
+L 10/11/2026 - 05:16:05: "whitefe@ther<1><[U:1:186183274]><CT>" purchased "taser"
+L 10/11/2026 - 05:16:07: rcon from "169.150.232.56:40668": command "status_json"
+L 10/11/2026 - 05:16:07: rcon from "169.150.232.56:40668": command "status"
+L 10/11/2026 - 05:16:09: "whitefe@ther<1><[U:1:186183274]><CT>" sv_throw_smokegrenade 679.790 -1214.991 203.439 0.000 0.000 0.000 -356.239 -343.454 459.084 600.000 -284.000 0.000 45 3
+L 10/11/2026 - 05:16:10: "It's Thief<3><[U:1:859176345]><TERRORIST>" sv_throw_molotov -211.915 -2072.684 288.858 0.000 0.000 0.000 580.966 699.661 36.192 600.000 -1193.000 0.000 48
+L 10/11/2026 - 05:16:10: Molotov projectile spawned at -211.915482 -2072.683838 288.857880, velocity 580.966309 699.660889 36.191574
+L 10/11/2026 - 05:16:10: "pichekistha<2><[U:1:80924469]><TERRORIST>" sv_throw_smokegrenade -332.723 -2309.045 408.609 0.000 0.000 0.000 296.130 601.760 76.267 600.000 1113.000 0.000 45 2
+L 10/11/2026 - 05:16:11: "Sheldor<0><[U:1:1080094440]><CT>" sv_throw_flashgrenade 384.049 -1640.494 288.428 0.000 0.000 0.000 -401.613 11.620 176.277 600.000 224.000 0.000 43
+L 10/11/2026 - 05:16:11: "It's Thief<3><[U:1:859176345]><TERRORIST>" threw molotov [342 -1406 178]
+L 10/11/2026 - 05:16:12: "Sheldor<0><[U:1:1080094440]><CT>" threw flashbang [73 -1625 203] flashbang entindex 316)
+L 10/11/2026 - 05:16:12: "whitefe@ther<1><[U:1:186183274]><CT>" blinded for 0.74 by "Sheldor<0><[U:1:1080094440]><CT>" from flashbang entindex 316 
+L 10/11/2026 - 05:16:13: "whitefe@ther<1><[U:1:186183274]><CT>" threw smokegrenade [-239 -2237 226]
+L 10/11/2026 - 05:16:13: "pichekistha<2><[U:1:80924469]><TERRORIST>" threw smokegrenade [60 -2015 226]
+L 10/11/2026 - 05:16:14: "Sheldor<0><[U:1:1080094440]><CT>" [415 -1722 224] killed "It's Thief<3><[U:1:859176345]><TERRORIST>" [-253 -1967 224] with "m4a1_silencer" (throughsmoke)
+L 10/11/2026 - 05:16:14: "pichekistha<2><[U:1:80924469]><TERRORIST>" [-289 -2007 224] killed "Sheldor<0><[U:1:1080094440]><CT>" [410 -1709 224] with "galilar" (headshot throughsmoke)
+L 10/11/2026 - 05:16:14: "It's Thief<3><[U:1:859176345]><TERRORIST>" assisted killing "Sheldor<0><[U:1:1080094440]><CT>"
+L 10/11/2026 - 05:16:17: rcon from "169.150.232.56:42676": command "status_json"
+L 10/11/2026 - 05:16:17: rcon from "169.150.232.56:42676": command "status"
+L 10/11/2026 - 05:16:27: rcon from "169.150.232.56:38434": command "status_json"
+L 10/11/2026 - 05:16:27: rcon from "169.150.232.56:38434": command "status"
+L 10/11/2026 - 05:16:30: "prasaadem<4><[U:1:1075176373]><>" connected, address "23.118.107.196:64851"
+L 10/11/2026 - 05:16:31: "pichekistha<2><[U:1:80924469]><TERRORIST>" [-172 -1816 230] killed "whitefe@ther<1><[U:1:186183274]><CT>" [334 -1760 224] with "galilar"
+L 10/11/2026 - 05:16:31: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "5") (T "8")
+L 10/11/2026 - 05:16:31: Team "CT" scored "5" with "4" players
+L 10/11/2026 - 05:16:31: Team "TERRORIST" scored "8" with "4" players
+L 10/11/2026 - 05:16:31: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:16:31: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:16:31: MatchStatus: Score: 5:8 on map "de_foroglio" RoundsPlayed: 13
+L 10/11/2026 - 05:16:31: World triggered "Round_End"
+L 10/11/2026 - 05:16:31: ACCOLADE, FINAL: {uniqueweaponkills},	Sheldor<0>,	VALUE: 4.000000,	POS: 1,	SCORE: 35.000000
+L 10/11/2026 - 05:16:31: ACCOLADE, FINAL: {hsp},	whitefe@ther<1>,	VALUE: 83.333336,	POS: 1,	SCORE: 57.037041
+L 10/11/2026 - 05:16:31: ACCOLADE, FINAL: {mvps},	pichekistha<2>,	VALUE: 5.000000,	POS: 1,	SCORE: 30.769232
+L 10/11/2026 - 05:16:31: ACCOLADE, FINAL: {hsp},	It's Thief<3>,	VALUE: 40.000000,	POS: 1,	SCORE: 23.333334
+L 10/11/2026 - 05:16:31: MatchStatus: Team "CT" is unset.
+L 10/11/2026 - 05:16:31: MatchStatus: Team "TERRORIST" is unset.
+L 10/11/2026 - 05:16:31: MatchStatus: Score: 5:8 on map "de_foroglio" RoundsPlayed: 13
+L 10/11/2026 - 05:16:31: Game Over: casual  de_foroglio score 5:8 after 10 min
+L 10/11/2026 - 05:16:32: "prasaadem<4><[U:1:1075176373]><>" STEAM USERID validated
+L 10/11/2026 - 05:16:34: "prasaadem<4><[U:1:1075176373]><>" entered the game
+L 10/11/2026 - 05:16:37: rcon from "169.150.232.56:49882": command "status_json"
+L 10/11/2026 - 05:16:37: rcon from "169.150.232.56:49882": command "status"
+L 10/11/2026 - 05:16:45: "Sheldor<0><[U:1:1080094440]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/11/2026 - 05:16:45: "Sheldor<0><[U:1:1080094440]>" switched from team <CT> to <Unassigned>
+L 10/11/2026 - 05:16:45: "whitefe@ther<1><[U:1:186183274]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/11/2026 - 05:16:45: "whitefe@ther<1><[U:1:186183274]>" switched from team <CT> to <Unassigned>
+L 10/11/2026 - 05:16:45: "pichekistha<2><[U:1:80924469]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/11/2026 - 05:16:45: "pichekistha<2><[U:1:80924469]>" switched from team <TERRORIST> to <Unassigned>
+L 10/11/2026 - 05:16:45: "pichekistha<2><[U:1:80924469]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 10/11/2026 - 05:16:45: "pichekistha<2><[U:1:80924469]><Unassigned>" [-172 -1816 230] committed suicide with "world"
+L 10/11/2026 - 05:16:45: "It's Thief<3><[U:1:859176345]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/11/2026 - 05:16:45: "It's Thief<3><[U:1:859176345]>" switched from team <TERRORIST> to <Unassigned>
+L 10/11/2026 - 05:16:45: "prasaadem<4><[U:1:1075176373]><Unassigned>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/11/2026 - 05:16:45: Log file closed

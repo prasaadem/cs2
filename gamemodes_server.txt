@@ -1,0 +1,65 @@
+"Gamemodes_Server.txt"
+{
+	
+	"mapgroups" // Add custom mapgroups to your server here
+	{
+		"mg_custom" // Example mapgroup named mg_custom
+		{
+			"name" "mg_custom"
+			"maps" // Maps are added one per row, needs to use the same format
+			{
+				"de_inferno"		""
+				"de_mirage"			""
+				"de_dust2"			""
+			}
+		}
+	}
+
+	"gameTypes" // Maxplayers for each mode; server slots defines the upper limit. 
+	{
+		"classic"
+		{
+			"gameModes"
+			{
+				"casual" // Casual (default: 20)
+				{
+				    "maxplayers" "20"
+				}
+
+				"competitive" // Competitive (default: 10)
+				{
+				    "maxplayers" "14"
+				}
+
+				"scrimcomp2v2" // Wingman (default: 4)
+				{
+				    "maxplayers" "4"
+				}
+			}	
+		}
+
+		"gungame"
+		{
+			"gameModes"
+			{
+				"deathmatch" // Deathmatch (default: 16)
+				{
+				    "maxplayers" "16"
+				}
+			}
+		}
+
+		"custom"
+		{
+			"gameModes"
+			{
+				"custom" // Custom (default: 100)
+				{
+				    "maxplayers" "100"
+				}
+			}
+		}
+
+	}
+
+}

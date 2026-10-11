@@ -1,0 +1,14 @@
+2026-09-20 04:32:28.636 +00:00 [INFO] (cssharp:Core) CounterStrikeSharp is starting up...
+2026-09-20 04:32:28.727 +00:00 [INFO] (cssharp:CoreConfig) Successfully loaded core configuration
+2026-09-20 04:32:28.732 +00:00 [INFO] (cssharp:GameDataProvider) Successfully loaded 46 game data entries from /home/dathost/cs2_linux/game/csgo/addons/counterstrikesharp/gamedata/gamedata.json
+2026-09-20 04:32:28.735 +00:00 [INFO] (cssharp:Core) Loading Admins from /home/dathost/cs2_linux/game/csgo/addons/counterstrikesharp/configs/admins.json
+2026-09-20 04:32:28.742 +00:00 [INFO] (cssharp:AdminManager) Loaded admin data with 0 admins.
+2026-09-20 04:32:28.742 +00:00 [INFO] (cssharp:Core) Loading Admin Groups from /home/dathost/cs2_linux/game/csgo/addons/counterstrikesharp/configs/admin_groups.json
+2026-09-20 04:32:28.743 +00:00 [INFO] (cssharp:Core) Loading Admin Command Overrides from /home/dathost/cs2_linux/game/csgo/addons/counterstrikesharp/configs/admin_overrides.json
+2026-09-20 06:09:20.471 +00:00 [INFO] (cssharp:Core) CounterStrikeSharp is starting up...
+2026-09-20 06:09:20.563 +00:00 [INFO] (cssharp:CoreConfig) Successfully loaded core configuration
+2026-09-20 06:09:20.569 +00:00 [INFO] (cssharp:GameDataProvider) Successfully loaded 46 game data entries from /home/dathost/cs2_linux/game/csgo/addons/counterstrikesharp/gamedata/gamedata.json
+2026-09-20 06:09:20.572 +00:00 [INFO] (cssharp:Core) Loading Admins from /home/dathost/cs2_linux/game/csgo/addons/counterstrikesharp/configs/admins.json
+2026-09-20 06:09:20.579 +00:00 [INFO] (cssharp:AdminManager) Loaded admin data with 0 admins.
+2026-09-20 06:09:20.580 +00:00 [INFO] (cssharp:Core) Loading Admin Groups from /home/dathost/cs2_linux/game/csgo/addons/counterstrikesharp/configs/admin_groups.json
+2026-09-20 06:09:20.580 +00:00 [INFO] (cssharp:Core) Loading Admin Command Overrides from /home/dathost/cs2_linux/game/csgo/addons/counterstrikesharp/configs/admin_overrides.json

@@ -1,0 +1,472 @@
+L 10/08/2026 - 04:17:28: Log file started (file "logs/2026_10_08_041728.log") (game "csgo") (version "10924")
+L 10/08/2026 - 04:17:28: Loading map "fy_pool_day"
+L 10/08/2026 - 04:17:28: server cvars start
+L 10/08/2026 - 04:17:28: "tv_relaypassword" = ""
+L 10/08/2026 - 04:17:28: "tv_password" = ""
+L 10/08/2026 - 04:17:28: "tv_password1" = ""
+L 10/08/2026 - 04:17:28: "tv_advertise_watchable" = "false"
+L 10/08/2026 - 04:17:28: "sv_voiceenable" = "true"
+L 10/08/2026 - 04:17:28: "sv_password" = "kodikura"
+L 10/08/2026 - 04:17:28: "sv_tags" = "dathost,dathost.com"
+L 10/08/2026 - 04:17:28: "sv_steamgroup" = ""
+L 10/08/2026 - 04:17:28: "sv_cheats" = "false"
+L 10/08/2026 - 04:17:28: "sv_debug_overlays_broadcast" = "false"
+L 10/08/2026 - 04:17:28: "tv_enable_dynamic" = "false"
+L 10/08/2026 - 04:17:28: "tv_enable" = "false"
+L 10/08/2026 - 04:17:28: "tv_enable1" = "false"
+L 10/08/2026 - 04:17:28: "sv_alltalk" = "false"
+L 10/08/2026 - 04:17:28: "mp_friendlyfire" = "true"
+L 10/08/2026 - 04:17:28: "sv_stopspeed" = "80"
+L 10/08/2026 - 04:17:28: "sv_noclipaccelerate" = "5"
+L 10/08/2026 - 04:17:28: "sv_noclipspeed" = "1200"
+L 10/08/2026 - 04:17:28: "sv_noclipspeedscaleonshift" = "0.5"
+L 10/08/2026 - 04:17:28: "sv_noclipfriction" = "4"
+L 10/08/2026 - 04:17:28: "sv_specaccelerate" = "5"
+L 10/08/2026 - 04:17:28: "sv_specspeed" = "1200"
+L 10/08/2026 - 04:17:28: "sv_specnoclip" = "true"
+L 10/08/2026 - 04:17:28: "sv_maxspeed" = "320"
+L 10/08/2026 - 04:17:28: "sv_accelerate" = "5.5"
+L 10/08/2026 - 04:17:28: "sv_airaccelerate" = "12"
+L 10/08/2026 - 04:17:28: "sv_wateraccelerate" = "10"
+L 10/08/2026 - 04:17:28: "sv_waterfriction" = "1"
+L 10/08/2026 - 04:17:28: "sv_friction" = "5.2"
+L 10/08/2026 - 04:17:28: "sv_bounce" = "0"
+L 10/08/2026 - 04:17:28: "r_JeepViewDampenFreq" = "7"
+L 10/08/2026 - 04:17:28: "r_JeepViewDampenDamp" = "1"
+L 10/08/2026 - 04:17:28: "r_JeepViewZHeight" = "10"
+L 10/08/2026 - 04:17:28: "r_AirboatViewDampenFreq" = "7"
+L 10/08/2026 - 04:17:28: "r_AirboatViewDampenDamp" = "1"
+L 10/08/2026 - 04:17:28: "r_AirboatViewZHeight" = "0"
+L 10/08/2026 - 04:17:28: "sv_allchat" = "true"
+L 10/08/2026 - 04:17:28: "buddha" = "false"
+L 10/08/2026 - 04:17:28: "buddha_ignore_bots" = "false"
+L 10/08/2026 - 04:17:28: "buddha_reset_hp" = "1"
+L 10/08/2026 - 04:17:28: "sv_accelerate_use_weapon_speed" = "true"
+L 10/08/2026 - 04:17:28: "sv_accelerate_debug_speed" = "false"
+L 10/08/2026 - 04:17:28: "sv_autobuyammo" = "false"
+L 10/08/2026 - 04:17:28: "mp_promoted_item_enabled" = "false"
+L 10/08/2026 - 04:17:28: "cash_team_terrorist_win_bomb" = "2700"
+L 10/08/2026 - 04:17:28: "cash_team_elimination_hostage_map_t" = "2000"
+L 10/08/2026 - 04:17:28: "cash_team_elimination_hostage_map_ct" = "2300"
+L 10/08/2026 - 04:17:28: "cash_team_elimination_bomb_map" = "2700"
+L 10/08/2026 - 04:17:28: "cash_team_win_by_time_running_out_hostage" = "2000"
+L 10/08/2026 - 04:17:28: "cash_team_win_by_time_running_out_bomb" = "2700"
+L 10/08/2026 - 04:17:28: "cash_team_win_by_defusing_bomb" = "2700"
+L 10/08/2026 - 04:17:28: "cash_team_win_by_hostage_rescue" = "3000"
+L 10/08/2026 - 04:17:28: "cash_team_loser_bonus" = "2400"
+L 10/08/2026 - 04:17:28: "cash_team_loser_bonus_consecutive_rounds" = "0"
+L 10/08/2026 - 04:17:28: "cash_team_winner_bonus_consecutive_rounds" = "0"
+L 10/08/2026 - 04:17:28: "cash_team_rescued_hostage" = "0"
+L 10/08/2026 - 04:17:28: "cash_team_hostage_alive" = "0"
+L 10/08/2026 - 04:17:28: "cash_team_planted_bomb_but_defused" = "200"
+L 10/08/2026 - 04:17:28: "cash_team_hostage_interaction" = "500"
+L 10/08/2026 - 04:17:28: "cash_team_bonus_shorthanded" = "0"
+L 10/08/2026 - 04:17:28: "cash_player_killed_teammate" = "-300"
+L 10/08/2026 - 04:17:28: "cash_player_killed_enemy_factor" = "0.5"
+L 10/08/2026 - 04:17:28: "cash_player_killed_enemy_default" = "200"
+L 10/08/2026 - 04:17:28: "cash_player_bomb_planted" = "200"
+L 10/08/2026 - 04:17:28: "cash_player_bomb_defused" = "200"
+L 10/08/2026 - 04:17:28: "cash_player_rescued_hostage" = "1000"
+L 10/08/2026 - 04:17:28: "cash_player_interact_with_hostage" = "300"
+L 10/08/2026 - 04:17:28: "cash_player_damage_hostage" = "-30"
+L 10/08/2026 - 04:17:28: "cash_player_killed_hostage" = "-1000"
+L 10/08/2026 - 04:17:28: "cash_player_respawn_amount" = "0"
+L 10/08/2026 - 04:17:28: "cash_player_get_killed" = "0"
+L 10/08/2026 - 04:17:28: "cash_team_per_dead_enemy" = "50"
+L 10/08/2026 - 04:17:28: "sv_competitive_minspec" = "true"
+L 10/08/2026 - 04:17:28: "mp_teammates_are_enemies" = "false"
+L 10/08/2026 - 04:17:28: "mp_buy_anywhere" = "0"
+L 10/08/2026 - 04:17:28: "mp_buy_during_immunity" = "0"
+L 10/08/2026 - 04:17:28: "sv_kick_ban_duration" = "15"
+L 10/08/2026 - 04:17:28: "sv_deadtalk" = "false"
+L 10/08/2026 - 04:17:28: "sv_spec_hear" = "3"
+L 10/08/2026 - 04:17:28: "mp_c4timer" = "40"
+L 10/08/2026 - 04:17:28: "mp_roundtime" = "3"
+L 10/08/2026 - 04:17:28: "mp_roundtime_hostage" = "2"
+L 10/08/2026 - 04:17:28: "mp_roundtime_defuse" = "2.25"
+L 10/08/2026 - 04:17:28: "mp_team_intro_time" = "6.5"
+L 10/08/2026 - 04:17:28: "mp_freezetime" = "5"
+L 10/08/2026 - 04:17:28: "mp_limitteams" = "2"
+L 10/08/2026 - 04:17:28: "mp_autoteambalance" = "true"
+L 10/08/2026 - 04:17:28: "mp_maxrounds" = "15"
+L 10/08/2026 - 04:17:28: "mp_timelimit" = "0"
+L 10/08/2026 - 04:17:28: "mp_fraglimit" = "0"
+L 10/08/2026 - 04:17:28: "nextmode" = ""
+L 10/08/2026 - 04:17:28: "nextlevel" = ""
+L 10/08/2026 - 04:17:28: "sv_teamid_overhead_always_prohibit" = "false"
+L 10/08/2026 - 04:17:28: "sv_show_team_equipment_prohibit" = "false"
+L 10/08/2026 - 04:17:28: "sv_teamid_overhead" = "true"
+L 10/08/2026 - 04:17:28: "sv_gravity" = "800"
+L 10/08/2026 - 04:17:28: "sv_vote_issue_kick_allowed" = "true"
+L 10/08/2026 - 04:17:28: "sv_vote_kick_ban_duration" = "15"
+L 10/08/2026 - 04:17:28: "sv_vote_issue_loadbackup_allowed" = "true"
+L 10/08/2026 - 04:17:28: "sv_vote_issue_loadbackup_spec_only" = "false"
+L 10/08/2026 - 04:17:28: "sv_vote_issue_pause_match_spec_only" = "false"
+L 10/08/2026 - 04:17:28: server cvars end
+L 10/08/2026 - 04:17:28: server_cvar: "mp_friendlyfire" "false"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_team_terrorist_win_bomb" "3500"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_team_elimination_hostage_map_t" "1000"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_team_elimination_hostage_map_ct" "2000"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_team_elimination_bomb_map" "3250"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_team_win_by_time_running_out_hostage" "3250"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_team_win_by_time_running_out_bomb" "3250"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_team_win_by_defusing_bomb" "3250"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_team_win_by_hostage_rescue" "3500"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_team_loser_bonus" "1400"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_team_loser_bonus_consecutive_rounds" "500"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_team_planted_bomb_but_defused" "600"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_player_killed_enemy_factor" "1"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_player_killed_enemy_default" "300"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_player_bomb_planted" "300"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_player_bomb_defused" "300"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_player_interact_with_hostage" "150"
+L 10/08/2026 - 04:17:28: server_cvar: "mp_roundtime" "5"
+L 10/08/2026 - 04:17:28: server_cvar: "mp_roundtime_hostage" "0"
+L 10/08/2026 - 04:17:28: server_cvar: "mp_roundtime_defuse" "0"
+L 10/08/2026 - 04:17:28: server_cvar: "mp_freezetime" "6"
+L 10/08/2026 - 04:17:28: server_cvar: "mp_maxrounds" "0"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_player_bomb_defused" "200"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_player_bomb_planted" "200"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_player_interact_with_hostage" "300"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_player_killed_enemy_default" "200"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_player_killed_enemy_factor" "0.5"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_team_elimination_bomb_map" "2700"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_team_elimination_hostage_map_t" "2000"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_team_elimination_hostage_map_ct" "2300"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_team_loser_bonus" "2400"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_team_loser_bonus_consecutive_rounds" "0"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_team_planted_bomb_but_defused" "200"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_team_terrorist_win_bomb" "2700"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_team_win_by_defusing_bomb" "2700"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_team_win_by_hostage_rescue" "3000"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_team_win_by_time_running_out_hostage" "2000"
+L 10/08/2026 - 04:17:28: server_cvar: "cash_team_win_by_time_running_out_bomb" "2700"
+L 10/08/2026 - 04:17:28: server_cvar: "mp_freezetime" "5"
+L 10/08/2026 - 04:17:28: server_cvar: "mp_friendlyfire" "true"
+L 10/08/2026 - 04:17:28: server_cvar: "mp_maxrounds" "15"
+L 10/08/2026 - 04:17:28: server_cvar: "mp_roundtime" "3"
+L 10/08/2026 - 04:17:28: server_cvar: "mp_roundtime_hostage" "2"
+L 10/08/2026 - 04:17:28: server_cvar: "mp_roundtime_defuse" "2.25"
+L 10/08/2026 - 04:17:28: Started:  ""
+L 10/08/2026 - 04:17:28: World triggered "Warmup_Start"
+L 10/08/2026 - 04:17:29: "Pheonix<4><[U:1:104794797]><>" connected, address "107.192.216.137:56529"
+L 10/08/2026 - 04:17:29: "MAXROY<2><[U:1:867967831]><>" connected, address "71.202.113.229:62675"
+L 10/08/2026 - 04:17:29: "pichekistha<0><[U:1:80924469]><>" connected, address "71.63.169.247:59166"
+L 10/08/2026 - 04:17:29: "blazingshack<3><[U:1:1085341771]><>" connected, address "108.207.247.230:52561"
+L 10/08/2026 - 04:17:29: "Fraggy<1><[U:1:87305029]><>" connected, address "98.247.74.188:62541"
+L 10/08/2026 - 04:17:30: "pichekistha<0><[U:1:80924469]><>" entered the game
+L 10/08/2026 - 04:17:30: "Pheonix<65284><[U:1:104794797]><>" STEAM USERID validated
+L 10/08/2026 - 04:17:30: "MAXROY<65282><[U:1:867967831]><>" STEAM USERID validated
+L 10/08/2026 - 04:17:30: "pichekistha<65280><[U:1:80924469]><>" STEAM USERID validated
+L 10/08/2026 - 04:17:30: "MAXROY<2><[U:1:867967831]><>" entered the game
+L 10/08/2026 - 04:17:30: "blazingshack<65283><[U:1:1085341771]><>" STEAM USERID validated
+L 10/08/2026 - 04:17:30: "Pheonix<4><[U:1:104794797]><>" entered the game
+L 10/08/2026 - 04:17:31: "Fraggy<65281><[U:1:87305029]><>" STEAM USERID validated
+L 10/08/2026 - 04:17:32: "Fraggy<1><[U:1:87305029]><>" entered the game
+L 10/08/2026 - 04:17:32: "blazingshack<3><[U:1:1085341771]><>" entered the game
+L 10/08/2026 - 04:17:32: rcon from "169.150.232.56:33746": command "status_json"
+L 10/08/2026 - 04:17:32: rcon from "169.150.232.56:33746": command "status"
+L 10/08/2026 - 04:17:33: "Pheonix<4><[U:1:104794797]>" switched from team <Unassigned> to <TERRORIST>
+L 10/08/2026 - 04:17:33: World triggered "Game_Commencing"
+L 10/08/2026 - 04:17:33: Starting Freeze period
+L 10/08/2026 - 04:17:33: JSON_BEGIN{
+L 10/08/2026 - 04:17:33: "name": "round_stats",
+L 10/08/2026 - 04:17:33: "round_number" : "1",
+L 10/08/2026 - 04:17:33: "score_t" : "0",
+L 10/08/2026 - 04:17:33: "score_ct" : "0",
+L 10/08/2026 - 04:17:33: "map" : "fy_pool_day",
+L 10/08/2026 - 04:17:33: "server" : "cupcake",
+L 10/08/2026 - 04:17:33: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 10/08/2026 - 04:17:33: "players" : {
+L 10/08/2026 - 04:17:33: "player_0" : "            80924469,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 04:17:33: "player_1" : "            87305029,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 04:17:33: "player_2" : "           867967831,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 04:17:33: "player_3" : "          1085341771,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 04:17:33: "player_4" : "           104794797,      2,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 04:17:33: }}JSON_END
+L 10/08/2026 - 04:17:33: World triggered "Match_Start" on "fy_pool_day"
+L 10/08/2026 - 04:17:33: MatchStatus: Team "CT" is unset.
+L 10/08/2026 - 04:17:33: MatchStatus: Team "TERRORIST" is unset.
+L 10/08/2026 - 04:17:33: MatchStatus: Score: 0:0 on map "fy_pool_day" RoundsPlayed: -1
+L 10/08/2026 - 04:17:34: "pichekistha<0><[U:1:80924469]>" switched from team <Unassigned> to <TERRORIST>
+L 10/08/2026 - 04:17:34: "MAXROY<2><[U:1:867967831]>" switched from team <Unassigned> to <CT>
+L 10/08/2026 - 04:17:35: World triggered "Warmup_Start"
+L 10/08/2026 - 04:17:35: "Fraggy<1><[U:1:87305029]>" switched from team <Unassigned> to <CT>
+L 10/08/2026 - 04:17:41: "Pheonix<4><[U:1:104794797]><TERRORIST>" [-302 1082 0] killed other "prop_dynamic<562>" [-352 -176 144] with "ak47"
+L 10/08/2026 - 04:17:42: rcon from "169.150.232.56:41714": command "status_json"
+L 10/08/2026 - 04:17:42: rcon from "169.150.232.56:41714": command "status"
+L 10/08/2026 - 04:17:42: "Fraggy<1><[U:1:87305029]><CT>" [90 166 0] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [173 174 0] with "mag7" (headshot)
+L 10/08/2026 - 04:17:43: "MAXROY<2><[U:1:867967831]><CT>" [-304 -123 0] killed "Pheonix<4><[U:1:104794797]><TERRORIST>" [-365 1082 0] with "awp" (headshot)
+L 10/08/2026 - 04:17:49: "blazingshack<3><[U:1:1085341771]>" switched from team <Unassigned> to <CT>
+L 10/08/2026 - 04:17:50: "Fraggy<1><[U:1:87305029]><CT>" [194 857 0] killed other "prop_dynamic<518>" [34 1196 58] with "mag7" (penetrated)
+L 10/08/2026 - 04:17:50: "Fraggy<1><[U:1:87305029]><CT>" [194 857 0] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [121 1023 0] with "mag7" (headshot)
+L 10/08/2026 - 04:17:50: "Fraggy<1><[U:1:87305029]><CT>" [194 857 0] killed other "prop_dynamic<636>" [-46 1372 104] with "mag7" (penetrated)
+L 10/08/2026 - 04:17:50: "Fraggy<1><[U:1:87305029]><CT>" [194 857 0] killed other "prop_dynamic<519>" [3 1338 58] with "mag7"
+L 10/08/2026 - 04:17:50: "Fraggy<1><[U:1:87305029]><CT>" [194 857 0] killed other "prop_dynamic<637>" [-46 1372 32] with "mag7"
+L 10/08/2026 - 04:17:51: "BigHero<5><[U:1:887890842]><>" connected, address "50.123.107.246:61974"
+L 10/08/2026 - 04:17:51: "Sheldor<6><[U:1:1080094440]><>" connected, address "68.67.249.31:19194"
+L 10/08/2026 - 04:17:52: rcon from "169.150.232.56:41898": command "status_json"
+L 10/08/2026 - 04:17:52: rcon from "169.150.232.56:41898": command "status"
+L 10/08/2026 - 04:17:53: "BigHero<5><[U:1:887890842]><>" STEAM USERID validated
+L 10/08/2026 - 04:17:53: "Sheldor<6><[U:1:1080094440]><>" STEAM USERID validated
+L 10/08/2026 - 04:17:53: "BigHero<5><[U:1:887890842]><>" entered the game
+L 10/08/2026 - 04:17:55: "Sheldor<6><[U:1:1080094440]><>" entered the game
+L 10/08/2026 - 04:17:57: "MAXROY<2><[U:1:867967831]><CT>" [-482 -132 0] killed "Pheonix<4><[U:1:104794797]><TERRORIST>" [-618 171 0] with "awp" (noscope)
+L 10/08/2026 - 04:17:57: "Fraggy<1><[U:1:87305029]><CT>" [-70 964 176] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [32 1093 0] with "mag7" (headshot)
+L 10/08/2026 - 04:17:58: "BigHero<5><[U:1:887890842]>" switched from team <Unassigned> to <TERRORIST>
+L 10/08/2026 - 04:18:00: "Sheldor<6><[U:1:1080094440]>" switched from team <Unassigned> to <Spectator>
+L 10/08/2026 - 04:18:02: rcon from "169.150.232.56:49252": command "status_json"
+L 10/08/2026 - 04:18:02: rcon from "169.150.232.56:49252": command "status"
+L 10/08/2026 - 04:18:07: "MAXROY<2><[U:1:867967831]><CT>" [192 -25 0] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [156 1009 0] with "awp"
+L 10/08/2026 - 04:18:07: "MAXROY<2><[U:1:867967831]><CT>" [192 -25 0] killed other "prop_dynamic<644>" [174 1372 104] with "awp" (penetrated)
+L 10/08/2026 - 04:18:09: "blazingshack<3><[U:1:1085341771]><CT>" [-642 783 0] killed "BigHero<5><[U:1:887890842]><TERRORIST>" [-552 808 0] with "ak47" (headshot)
+L 10/08/2026 - 04:18:12: "blazingshack<3><[U:1:1085341771]><CT>" [-656 1101 0] killed "Pheonix<4><[U:1:104794797]><TERRORIST>" [129 1129 0] with "ak47" (headshot)
+L 10/08/2026 - 04:18:12: rcon from "169.150.232.56:39520": command "status_json"
+L 10/08/2026 - 04:18:12: rcon from "169.150.232.56:39520": command "status"
+L 10/08/2026 - 04:18:17: "Pheonix<4><[U:1:104794797]><TERRORIST>" [-14 1139 0] killed "blazingshack<3><[U:1:1085341771]><CT>" [-581 1063 0] with "glock"
+L 10/08/2026 - 04:18:18: "Fraggy<1><[U:1:87305029]><CT>" [190 980 0] killed other "prop_dynamic<517>" [94 1196 58] with "mag7"
+L 10/08/2026 - 04:18:19: "MAXROY<2><[U:1:867967831]><CT>" [420 590 -42] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [137 966 0] with "awp"
+L 10/08/2026 - 04:18:19: "Fraggy<1><[U:1:87305029]><CT>" assisted killing "pichekistha<0><[U:1:80924469]><TERRORIST>"
+L 10/08/2026 - 04:18:20: "Pheonix<4><[U:1:104794797]><TERRORIST>" [-38 1040 0] killed "Fraggy<1><[U:1:87305029]><CT>" [202 982 0] with "sg556"
+L 10/08/2026 - 04:18:21: "MAXROY<2><[U:1:867967831]><CT>" [428 618 -42] killed "Pheonix<4><[U:1:104794797]><TERRORIST>" [17 1117 0] with "awp"
+L 10/08/2026 - 04:18:22: rcon from "169.150.232.56:40186": command "status_json"
+L 10/08/2026 - 04:18:22: rcon from "169.150.232.56:40186": command "status"
+L 10/08/2026 - 04:18:26: "MAXROY<2><[U:1:867967831]><CT>" [196 99 0] killed "BigHero<5><[U:1:887890842]><TERRORIST>" [167 1115 0] with "awp"
+L 10/08/2026 - 04:18:29: "Pheonix<4><[U:1:104794797]><TERRORIST>" [-451 -43 0] killed "Fraggy<1><[U:1:87305029]><CT>" [-419 -15 0] with "xm1014" (headshot)
+L 10/08/2026 - 04:18:30: "blazingshack<3><[U:1:1085341771]><CT>" [-138 208 29] killed "Pheonix<4><[U:1:104794797]><TERRORIST>" [-451 -43 0] with "p90" (headshot)
+L 10/08/2026 - 04:18:30: "Fraggy<1><[U:1:87305029]><CT>" assisted killing "Pheonix<4><[U:1:104794797]><TERRORIST>"
+L 10/08/2026 - 04:18:32: "pichekistha<0><[U:1:80924469]><TERRORIST>" [170 997 0] killed other "prop_dynamic<530>" [528 320 128] with "p90"
+L 10/08/2026 - 04:18:32: rcon from "169.150.232.56:56194": command "status_json"
+L 10/08/2026 - 04:18:32: rcon from "169.150.232.56:56194": command "status"
+L 10/08/2026 - 04:18:34: "pichekistha<0><[U:1:80924469]><TERRORIST>" [268 897 0] killed "MAXROY<2><[U:1:867967831]><CT>" [428 392 0] with "p90"
+L 10/08/2026 - 04:18:40: "blazingshack<3><[U:1:1085341771]><CT>" [-193 160 0] killed other "prop_dynamic<655>" [-682 450 58] with "p90"
+L 10/08/2026 - 04:18:40: "blazingshack<3><[U:1:1085341771]><CT>" [-190 164 0] killed other "prop_dynamic<656>" [-682 510 58] with "p90"
+L 10/08/2026 - 04:18:41: "blazingshack<3><[U:1:1085341771]><CT>" [-234 113 0] killed "BigHero<5><[U:1:887890842]><TERRORIST>" [-416 379 0] with "p90" (headshot)
+L 10/08/2026 - 04:18:41: "MAXROY<2><[U:1:867967831]><CT>" [17 -101 0] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [425 397 0] with "scar20" (noscope)
+L 10/08/2026 - 04:18:42: rcon from "169.150.232.56:39426": command "status_json"
+L 10/08/2026 - 04:18:42: rcon from "169.150.232.56:39426": command "status"
+L 10/08/2026 - 04:18:47: "Fraggy<1><[U:1:87305029]><CT>" [-612 1078 0] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [-358 1078 0] with "xm1014" (headshot)
+L 10/08/2026 - 04:18:50: "Fraggy<1><[U:1:87305029]><CT>" [-622 870 0] killed "BigHero<5><[U:1:887890842]><TERRORIST>" [-552 808 0] with "usp_silencer" (headshot)
+L 10/08/2026 - 04:18:52: rcon from "169.150.232.56:56246": command "status_json"
+L 10/08/2026 - 04:18:52: rcon from "169.150.232.56:56246": command "status"
+L 10/08/2026 - 04:18:53: "pichekistha<0><[U:1:80924469]><TERRORIST>" [-548 1073 0] killed "Fraggy<1><[U:1:87305029]><CT>" [-600 810 0] with "glock" (headshot)
+L 10/08/2026 - 04:18:53: "BigHero<5><[U:1:887890842]><TERRORIST>" assisted killing "Fraggy<1><[U:1:87305029]><CT>"
+L 10/08/2026 - 04:18:54: "Pheonix<4><[U:1:104794797]><TERRORIST>" [336 743 0] killed "MAXROY<2><[U:1:867967831]><CT>" [449 407 0] with "awp"
+L 10/08/2026 - 04:19:01: "pichekistha<0><[U:1:80924469]><TERRORIST>" [-316 317 0] killed "MAXROY<2><[U:1:867967831]><CT>" [-424 -76 0] with "xm1014" (headshot)
+L 10/08/2026 - 04:19:02: rcon from "169.150.232.56:46322": command "status_json"
+L 10/08/2026 - 04:19:02: rcon from "169.150.232.56:46322": command "status"
+L 10/08/2026 - 04:19:03: "blazingshack<3><[U:1:1085341771]><CT>" [-251 112 0] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [-361 263 0] with "p90"
+L 10/08/2026 - 04:19:07: World triggered "Warmup_End"
+L 10/08/2026 - 04:19:07: Starting Freeze period
+L 10/08/2026 - 04:19:07: JSON_BEGIN{
+L 10/08/2026 - 04:19:07: "name": "round_stats",
+L 10/08/2026 - 04:19:07: "round_number" : "1",
+L 10/08/2026 - 04:19:07: "score_t" : "0",
+L 10/08/2026 - 04:19:07: "score_ct" : "0",
+L 10/08/2026 - 04:19:07: "map" : "fy_pool_day",
+L 10/08/2026 - 04:19:07: "server" : "cupcake",
+L 10/08/2026 - 04:19:07: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 10/08/2026 - 04:19:07: "players" : {
+L 10/08/2026 - 04:19:07: "player_0" : "            80924469,      2,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 04:19:07: "player_1" : "            87305029,      3,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 04:19:07: "player_2" : "           867967831,      3,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 04:19:07: "player_3" : "          1085341771,      3,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 04:19:07: "player_4" : "           104794797,      2,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 04:19:07: "player_5" : "           887890842,      2,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 04:19:07: "player_6" : "          1080094440,      1,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 04:19:07: }}JSON_END
+L 10/08/2026 - 04:19:07: World triggered "Match_Start" on "fy_pool_day"
+L 10/08/2026 - 04:19:07: "Pheonix<4><[U:1:104794797]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/08/2026 - 04:19:07: MatchStatus: Team "CT" is unset.
+L 10/08/2026 - 04:19:07: MatchStatus: Team "TERRORIST" is unset.
+L 10/08/2026 - 04:19:07: MatchStatus: Score: 0:0 on map "fy_pool_day" RoundsPlayed: 0
+L 10/08/2026 - 04:19:12: World triggered "Round_Start"
+L 10/08/2026 - 04:19:12: rcon from "169.150.232.56:59766": command "status_json"
+L 10/08/2026 - 04:19:12: rcon from "169.150.232.56:59766": command "status"
+L 10/08/2026 - 04:19:22: rcon from "169.150.232.56:35850": command "status_json"
+L 10/08/2026 - 04:19:22: rcon from "169.150.232.56:35850": command "status"
+L 10/08/2026 - 04:19:31: "BigHero<5><[U:1:887890842]><TERRORIST>" [-303 1126 0] killed "Fraggy<1><[U:1:87305029]><CT>" [-374 729 0] with "g3sg1"
+L 10/08/2026 - 04:19:32: rcon from "169.150.232.56:46992": command "status_json"
+L 10/08/2026 - 04:19:32: rcon from "169.150.232.56:46992": command "status"
+L 10/08/2026 - 04:19:34: "MAXROY<2><[U:1:867967831]><CT>" [-332 -116 0] killed "BigHero<5><[U:1:887890842]><TERRORIST>" [-315 1117 0] with "sg556"
+L 10/08/2026 - 04:19:34: "Fraggy<1><[U:1:87305029]><CT>" assisted killing "BigHero<5><[U:1:887890842]><TERRORIST>"
+L 10/08/2026 - 04:19:40: "Pheonix<4><[U:1:104794797]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 10/08/2026 - 04:19:40: "MAXROY<2><[U:1:867967831]><CT>" [-629 205 0] killed "Pheonix<4><[U:1:104794797]><TERRORIST>" [-560 580 0] with "sg556" (headshot)
+L 10/08/2026 - 04:19:42: rcon from "169.150.232.56:58796": command "status_json"
+L 10/08/2026 - 04:19:42: rcon from "169.150.232.56:58796": command "status"
+L 10/08/2026 - 04:19:42: "prasaadem<7><[U:1:1075176373]><>" connected, address "23.118.107.196:56300"
+L 10/08/2026 - 04:19:44: "prasaadem<7><[U:1:1075176373]><>" STEAM USERID validated
+L 10/08/2026 - 04:19:45: "prasaadem<7><[U:1:1075176373]><>" entered the game
+L 10/08/2026 - 04:19:49: "MAXROY<2><[U:1:867967831]><CT>" [-567 341 0] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [-621 1008 0] with "ak47" (headshot)
+L 10/08/2026 - 04:19:49: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "1") (T "0")
+L 10/08/2026 - 04:19:49: Team "CT" scored "1" with "4" players
+L 10/08/2026 - 04:19:49: Team "TERRORIST" scored "0" with "5" players
+L 10/08/2026 - 04:19:49: MatchStatus: Team "CT" is unset.
+L 10/08/2026 - 04:19:49: MatchStatus: Team "TERRORIST" is unset.
+L 10/08/2026 - 04:19:49: MatchStatus: Score: 1:0 on map "fy_pool_day" RoundsPlayed: 1
+L 10/08/2026 - 04:19:49: World triggered "Round_End"
+L 10/08/2026 - 04:19:50: "prasaadem<7><[U:1:1075176373]>" switched from team <Unassigned> to <TERRORIST>
+L 10/08/2026 - 04:19:52: rcon from "169.150.232.56:44500": command "status_json"
+L 10/08/2026 - 04:19:52: rcon from "169.150.232.56:44500": command "status"
+L 10/08/2026 - 04:19:54: "blazingshack<3><[U:1:1085341771]><CT>" [-156 717 0] killed other "prop_physics_multiplayer<403>" [-138 756 24] with "knife"
+L 10/08/2026 - 04:19:59: Starting Freeze period
+L 10/08/2026 - 04:19:59: JSON_BEGIN{
+L 10/08/2026 - 04:19:59: "name": "round_stats",
+L 10/08/2026 - 04:19:59: "round_number" : "2",
+L 10/08/2026 - 04:19:59: "score_t" : "0",
+L 10/08/2026 - 04:19:59: "score_ct" : "1",
+L 10/08/2026 - 04:19:59: "map" : "fy_pool_day",
+L 10/08/2026 - 04:19:59: "server" : "cupcake",
+L 10/08/2026 - 04:19:59: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 10/08/2026 - 04:19:59: "players" : {
+L 10/08/2026 - 04:19:59: "player_0" : "            80924469,      2,   3400,      0,      1,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 04:19:59: "player_1" : "            87305029,      3,   3700,      0,      1,      1,  72.00,   0.00,   0.00,     72,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      1"
+L 10/08/2026 - 04:19:59: "player_2" : "           867967831,      3,   4150,      3,      0,      0, 228.00,  66.67,   0.00,    228,      1,      0,      0,      1,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      1,      2,      0"
+L 10/08/2026 - 04:19:59: "player_3" : "          1085341771,      3,   3700,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 04:19:59: "player_4" : "           104794797,      2,   3400,      0,      1,      0,  27.00,   0.00,   0.00,     27,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 04:19:59: "player_5" : "           887890842,      2,   3550,      1,      1,      0, 100.00,   0.00,   1.00,    100,      0,      0,      0,      0,      0,      0,      0,      1,      0,      1,      0,0.000000,0.000000,      0,      1,      0"
+L 10/08/2026 - 04:19:59: "player_6" : "          1080094440,      1,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 04:19:59: "player_7" : "          1075176373,      2,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 04:19:59: }}JSON_END
+L 10/08/2026 - 04:19:59: "BigHero<5><[U:1:887890842]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/08/2026 - 04:19:59: MatchStatus: Team "CT" is unset.
+L 10/08/2026 - 04:19:59: MatchStatus: Team "TERRORIST" is unset.
+L 10/08/2026 - 04:19:59: MatchStatus: Score: 1:0 on map "fy_pool_day" RoundsPlayed: 1
+L 10/08/2026 - 04:20:02: rcon from "169.150.232.56:49944": command "status_json"
+L 10/08/2026 - 04:20:02: rcon from "169.150.232.56:49944": command "status"
+L 10/08/2026 - 04:20:04: World triggered "Round_Start"
+L 10/08/2026 - 04:20:05: "Pheonix<4><[U:1:104794797]><TERRORIST>" [114 862 0] killed "Fraggy<1><[U:1:87305029]><CT>" [123 -18 0] with "awp"
+L 10/08/2026 - 04:20:08: "BigHero<5><[U:1:887890842]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 10/08/2026 - 04:20:08: "blazingshack<3><[U:1:1085341771]><CT>" [-276 80 0] killed "BigHero<5><[U:1:887890842]><TERRORIST>" [-337 1120 0] with "awp"
+L 10/08/2026 - 04:20:08: "pichekistha<0><[U:1:80924469]><TERRORIST>" [-398 1099 0] killed "blazingshack<3><[U:1:1085341771]><CT>" [-275 80 0] with "sg556"
+L 10/08/2026 - 04:20:08: "prasaadem<7><[U:1:1075176373]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/08/2026 - 04:20:12: "MAXROY<2><[U:1:867967831]><CT>" [458 385 0] killed other "prop_dynamic<846>" [94 1196 58] with "ak47" (penetrated)
+L 10/08/2026 - 04:20:12: "MAXROY<2><[U:1:867967831]><CT>" [458 385 0] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [258 884 0] with "ak47" (headshot)
+L 10/08/2026 - 04:20:12: rcon from "169.150.232.56:59120": command "status_json"
+L 10/08/2026 - 04:20:12: rcon from "169.150.232.56:59120": command "status"
+L 10/08/2026 - 04:20:19: "prasaadem<7><[U:1:1075176373]><TERRORIST>" [213 1133 0] killed "MAXROY<2><[U:1:867967831]><CT>" [127 -5 0] with "g3sg1"
+L 10/08/2026 - 04:20:19: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "1") (T "1")
+L 10/08/2026 - 04:20:19: Team "CT" scored "1" with "5" players
+L 10/08/2026 - 04:20:19: Team "TERRORIST" scored "1" with "8" players
+L 10/08/2026 - 04:20:19: MatchStatus: Team "CT" is unset.
+L 10/08/2026 - 04:20:19: MatchStatus: Team "TERRORIST" is unset.
+L 10/08/2026 - 04:20:19: MatchStatus: Score: 1:1 on map "fy_pool_day" RoundsPlayed: 2
+L 10/08/2026 - 04:20:19: World triggered "Round_End"
+L 10/08/2026 - 04:20:19: "prasaadem<7><[U:1:1075176373]><TERRORIST>" [213 1133 0] killed other "prop_dynamic<844>" [94 -174 58] with "g3sg1" (penetrated)
+L 10/08/2026 - 04:20:22: rcon from "169.150.232.56:37404": command "status_json"
+L 10/08/2026 - 04:20:22: rcon from "169.150.232.56:37404": command "status"
+L 10/08/2026 - 04:20:29: Starting Freeze period
+L 10/08/2026 - 04:20:29: JSON_BEGIN{
+L 10/08/2026 - 04:20:29: "name": "round_stats",
+L 10/08/2026 - 04:20:29: "round_number" : "3",
+L 10/08/2026 - 04:20:29: "score_t" : "1",
+L 10/08/2026 - 04:20:29: "score_ct" : "1",
+L 10/08/2026 - 04:20:29: "map" : "fy_pool_day",
+L 10/08/2026 - 04:20:29: "server" : "cupcake",
+L 10/08/2026 - 04:20:29: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 10/08/2026 - 04:20:29: "players" : {
+L 10/08/2026 - 04:20:29: "player_0" : "            80924469,      2,   6250,      1,      2,      0, 100.00,   0.00,   0.50,     50,      1,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 10/08/2026 - 04:20:29: "player_1" : "            87305029,      3,   6100,      0,      2,      1,  72.00,   0.00,   0.00,     36,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      1"
+L 10/08/2026 - 04:20:29: "player_2" : "           867967831,      3,   6700,      4,      1,      0, 354.00,  75.00,   4.00,    177,      1,      0,      0,      1,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      1,      2,      0"
+L 10/08/2026 - 04:20:29: "player_3" : "          1085341771,      3,   6150,      1,      1,      0, 182.00,   0.00,   1.00,     91,      0,      0,      0,      0,      0,      0,      0,      0,      0,      1,      0,0.000000,0.000000,      1,      1,      0"
+L 10/08/2026 - 04:20:29: "player_4" : "           104794797,      2,   6150,      1,      1,      0, 127.00,   0.00,   1.00,     64,      0,      0,      0,      0,      0,      0,      0,      1,      0,      1,      0,0.000000,0.000000,      0,      1,      0"
+L 10/08/2026 - 04:20:29: "player_5" : "           887890842,      2,   6250,      1,      2,      0, 100.00,   0.00,   0.50,     50,      0,      0,      0,      0,      0,      0,      0,      1,      0,      1,      0,0.000000,0.000000,      0,      1,      0"
+L 10/08/2026 - 04:20:29: "player_6" : "          1080094440,      1,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 04:20:29: "player_7" : "          1075176373,      2,   3850,      1,      0,      0, 100.00,   0.00,   0.00,     50,      0,      0,      0,      0,      0,      0,      0,      0,      0,      1,      0,0.000000,0.000000,      0,      1,      0"
+L 10/08/2026 - 04:20:29: }}JSON_END
+L 10/08/2026 - 04:20:29: "pichekistha<0><[U:1:80924469]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/08/2026 - 04:20:29: MatchStatus: Team "CT" is unset.
+L 10/08/2026 - 04:20:29: MatchStatus: Team "TERRORIST" is unset.
+L 10/08/2026 - 04:20:29: MatchStatus: Score: 1:1 on map "fy_pool_day" RoundsPlayed: 2
+L 10/08/2026 - 04:20:32: rcon from "169.150.232.56:50846": command "status_json"
+L 10/08/2026 - 04:20:32: rcon from "169.150.232.56:50846": command "status"
+L 10/08/2026 - 04:20:34: World triggered "Round_Start"
+L 10/08/2026 - 04:20:36: "Fraggy<1><[U:1:87305029]><CT>" [-393 -12 0] killed "Pheonix<4><[U:1:104794797]><TERRORIST>" [-294 1026 0] with "scar20" (headshot)
+L 10/08/2026 - 04:20:38: "pichekistha<0><[U:1:80924469]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 10/08/2026 - 04:20:38: "MAXROY<2><[U:1:867967831]><CT>" [114 -91 0] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [148 875 0] with "awp"
+L 10/08/2026 - 04:20:39: rcon from "185.180.15.34:37578": command "status"
+L 10/08/2026 - 04:20:41: "blazingshack<3><[U:1:1085341771]><CT>" [-630 331 0] killed "BigHero<5><[U:1:887890842]><TERRORIST>" [-582 555 0] with "xm1014" (headshot)
+L 10/08/2026 - 04:20:42: rcon from "169.150.232.56:33758": command "status_json"
+L 10/08/2026 - 04:20:42: rcon from "169.150.232.56:33758": command "status"
+L 10/08/2026 - 04:20:52: rcon from "169.150.232.56:54356": command "status_json"
+L 10/08/2026 - 04:20:52: rcon from "169.150.232.56:54356": command "status"
+L 10/08/2026 - 04:21:02: rcon from "169.150.232.56:51840": command "status_json"
+L 10/08/2026 - 04:21:02: rcon from "169.150.232.56:51840": command "status"
+L 10/08/2026 - 04:21:03: "prasaadem<7><[U:1:1075176373]><TERRORIST>" [-446 1061 0] killed "MAXROY<2><[U:1:867967831]><CT>" [-108 1058 40] with "awp"
+L 10/08/2026 - 04:21:03: "prasaadem<7><[U:1:1075176373]><TERRORIST>" [-446 1061 0] killed other "prop_dynamic<661>" [368 1024 144] with "awp" (penetrated)
+L 10/08/2026 - 04:21:03: "Sheldor<6><[U:1:1080094440]>" switched from team <Spectator> to <CT>
+L 10/08/2026 - 04:21:03: "blazingshack<3><[U:1:1085341771]><CT>" [-472 1093 0] killed "prasaadem<7><[U:1:1075176373]><TERRORIST>" [-446 1061 0] with "knife"
+L 10/08/2026 - 04:21:03: "Fraggy<1><[U:1:87305029]><CT>" assisted killing "prasaadem<7><[U:1:1075176373]><TERRORIST>"
+L 10/08/2026 - 04:21:03: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "2") (T "1")
+L 10/08/2026 - 04:21:03: Team "CT" scored "2" with "8" players
+L 10/08/2026 - 04:21:03: Team "TERRORIST" scored "1" with "8" players
+L 10/08/2026 - 04:21:03: MatchStatus: Team "CT" is unset.
+L 10/08/2026 - 04:21:03: MatchStatus: Team "TERRORIST" is unset.
+L 10/08/2026 - 04:21:03: MatchStatus: Score: 2:1 on map "fy_pool_day" RoundsPlayed: 3
+L 10/08/2026 - 04:21:03: World triggered "Round_End"
+L 10/08/2026 - 04:21:08: "Fraggy<1><[U:1:87305029]><CT>" [-146 728 0] killed other "prop_physics_multiplayer<309>" [-138 756 24] with "knife"
+L 10/08/2026 - 04:21:08: "Fraggy<1><[U:1:87305029]><CT>" [-36 736 0] killed other "prop_physics_multiplayer<835>" [-25 761 4] with "knife"
+L 10/08/2026 - 04:21:10: "Fraggy<1><[U:1:87305029]><CT>" [13 750 0] killed other "prop_physics_multiplayer<831>" [12 760 0] with "knife"
+L 10/08/2026 - 04:21:11: "Fraggy<1><[U:1:87305029]><CT>" [0 741 0] killed other "prop_physics_multiplayer<833>" [-33 754 5] with "knife"
+L 10/08/2026 - 04:21:12: "Fraggy<1><[U:1:87305029]><CT>" [-32 734 0] killed other "prop_physics_multiplayer<837>" [-57 752 3] with "knife"
+L 10/08/2026 - 04:21:12: "Fraggy<1><[U:1:87305029]><CT>" [-90 727 0] killed other "prop_physics_multiplayer<827>" [-126 747 3] with "knife"
+L 10/08/2026 - 04:21:12: rcon from "169.150.232.56:51502": command "status_json"
+L 10/08/2026 - 04:21:12: rcon from "169.150.232.56:51502": command "status"
+L 10/08/2026 - 04:21:13: Starting Freeze period
+L 10/08/2026 - 04:21:13: JSON_BEGIN{
+L 10/08/2026 - 04:21:13: "name": "round_stats",
+L 10/08/2026 - 04:21:13: "round_number" : "4",
+L 10/08/2026 - 04:21:13: "score_t" : "1",
+L 10/08/2026 - 04:21:13: "score_ct" : "2",
+L 10/08/2026 - 04:21:13: "map" : "fy_pool_day",
+L 10/08/2026 - 04:21:13: "server" : "cupcake",
+L 10/08/2026 - 04:21:13: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 10/08/2026 - 04:21:13: "players" : {
+L 10/08/2026 - 04:21:13: "player_0" : "            80924469,      2,   8650,      1,      3,      0, 100.00,   0.00,   0.33,     33,      1,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 10/08/2026 - 04:21:13: "player_1" : "            87305029,      3,   8950,      1,      2,      2, 251.00, 100.00,   0.50,     84,      0,      0,      0,      0,      0,      0,      0,      1,      0,      1,      0,0.000000,0.000000,      0,      1,      1"
+L 10/08/2026 - 04:21:13: "player_2" : "           867967831,      3,   9450,      5,      2,      0, 454.00,  60.00,   2.50,    151,      1,      0,      0,      1,      0,      0,      1,      0,      0,      1,      0,0.000000,0.000000,      2,      3,      0"
+L 10/08/2026 - 04:21:13: "player_3" : "          1085341771,      3,   9900,      3,      1,      0, 303.00,  33.33,   3.00,    101,      1,      0,      0,      0,      0,      0,      0,      0,      0,      1,      0,0.000000,0.000000,      1,      3,      0"
+L 10/08/2026 - 04:21:13: "player_4" : "           104794797,      2,   8550,      1,      2,      0, 127.00,   0.00,   0.50,     42,      0,      0,      0,      0,      0,      0,      0,      1,      0,      1,      0,0.000000,0.000000,      0,      1,      0"
+L 10/08/2026 - 04:21:13: "player_5" : "           887890842,      2,   8650,      1,      3,      0, 155.00,   0.00,   0.33,     52,      0,      0,      0,      0,      0,      0,      0,      1,      0,      1,      0,0.000000,0.000000,      0,      1,      0"
+L 10/08/2026 - 04:21:13: "player_6" : "          1080094440,      3,   3700,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 10/08/2026 - 04:21:13: "player_7" : "          1075176373,      2,   6300,      2,      1,      0, 200.00,   0.00,   2.00,     67,      0,      0,      0,      0,      0,      0,      1,      0,      0,      2,      0,0.000000,0.000000,      0,      2,      0"
+L 10/08/2026 - 04:21:13: }}JSON_END
+L 10/08/2026 - 04:21:13: "Pheonix<4><[U:1:104794797]><TERRORIST>" triggered "Got_The_Bomb"
+L 10/08/2026 - 04:21:13: MatchStatus: Team "CT" is unset.
+L 10/08/2026 - 04:21:13: MatchStatus: Team "TERRORIST" is unset.
+L 10/08/2026 - 04:21:13: MatchStatus: Score: 2:1 on map "fy_pool_day" RoundsPlayed: 3
+L 10/08/2026 - 04:21:18: World triggered "Round_Start"
+L 10/08/2026 - 04:21:19: "blazingshack<3><[U:1:1085341771]><CT>" sv_throw_hegrenade 150.348 12.481 64.663 0.000 0.000 0.000 43.970 773.169 27.966 600.000 -836.000 0.000 44 3.000
+L 10/08/2026 - 04:21:20: "Fraggy<1><[U:1:87305029]><CT>" [221 -76 0] killed other "prop_physics_multiplayer<129>" [208 388 24] with "scar20"
+L 10/08/2026 - 04:21:21: "blazingshack<3><[U:1:1085341771]><CT>" threw hegrenade [196 820 3]
+L 10/08/2026 - 04:21:21: "blazingshack<3><[U:1:1085341771]><CT>" [146 12 0] killed other "prop_dynamic<723>" [368 800 144] with "hegrenade"
+L 10/08/2026 - 04:21:21: "blazingshack<3><[U:1:1085341771]><CT>" [146 12 0] killed other "prop_dynamic<724>" [368 864 144] with "hegrenade"
+L 10/08/2026 - 04:21:21: "blazingshack<3><[U:1:1085341771]><CT>" [146 12 0] killed other "prop_dynamic<725>" [368 928 144] with "hegrenade"
+L 10/08/2026 - 04:21:21: "Fraggy<1><[U:1:87305029]><CT>" [221 -76 0] killed other "prop_dynamic<126>" [94 1196 58] with "scar20"
+L 10/08/2026 - 04:21:22: "BigHero<5><[U:1:887890842]><TERRORIST>" [145 1097 0] killed other "prop_dynamic<105>" [192 -176 144] with "aug"
+L 10/08/2026 - 04:21:22: "BigHero<5><[U:1:887890842]><TERRORIST>" [153 1098 0] killed "Fraggy<1><[U:1:87305029]><CT>" [221 -76 0] with "aug" (headshot)
+L 10/08/2026 - 04:21:22: "pichekistha<0><[U:1:80924469]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/08/2026 - 04:21:22: "pichekistha<0><[U:1:80924469]>" switched from team <TERRORIST> to <Unassigned>
+L 10/08/2026 - 04:21:22: "pichekistha<0><[U:1:80924469]><Unassigned>" [-285 775 0] committed suicide with "world"
+L 10/08/2026 - 04:21:22: "Fraggy<1><[U:1:87305029]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/08/2026 - 04:21:22: "Fraggy<1><[U:1:87305029]>" switched from team <CT> to <Unassigned>
+L 10/08/2026 - 04:21:22: "MAXROY<2><[U:1:867967831]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/08/2026 - 04:21:22: "MAXROY<2><[U:1:867967831]>" switched from team <CT> to <Unassigned>
+L 10/08/2026 - 04:21:22: "MAXROY<2><[U:1:867967831]><Unassigned>" [-632 -57 0] committed suicide with "world"
+L 10/08/2026 - 04:21:22: "blazingshack<3><[U:1:1085341771]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/08/2026 - 04:21:22: "blazingshack<3><[U:1:1085341771]>" switched from team <CT> to <Unassigned>
+L 10/08/2026 - 04:21:22: "blazingshack<3><[U:1:1085341771]><Unassigned>" [25 119 0] committed suicide with "world"
+L 10/08/2026 - 04:21:22: "Pheonix<4><[U:1:104794797]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/08/2026 - 04:21:22: "Pheonix<4><[U:1:104794797]>" switched from team <TERRORIST> to <Unassigned>
+L 10/08/2026 - 04:21:22: "Pheonix<4><[U:1:104794797]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 10/08/2026 - 04:21:22: "Pheonix<4><[U:1:104794797]><Unassigned>" [-297 1105 0] committed suicide with "world"
+L 10/08/2026 - 04:21:22: "BigHero<5><[U:1:887890842]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/08/2026 - 04:21:22: "BigHero<5><[U:1:887890842]>" switched from team <TERRORIST> to <Unassigned>
+L 10/08/2026 - 04:21:22: "BigHero<5><[U:1:887890842]><Unassigned>" [154 1098 0] committed suicide with "world"
+L 10/08/2026 - 04:21:22: "Sheldor<6><[U:1:1080094440]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/08/2026 - 04:21:22: "Sheldor<6><[U:1:1080094440]>" switched from team <CT> to <Unassigned>
+L 10/08/2026 - 04:21:22: "Sheldor<6><[U:1:1080094440]><Unassigned>" [64 144 0] committed suicide with "world"
+L 10/08/2026 - 04:21:22: "prasaadem<7><[U:1:1075176373]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 10/08/2026 - 04:21:22: "prasaadem<7><[U:1:1075176373]>" switched from team <TERRORIST> to <Unassigned>
+L 10/08/2026 - 04:21:22: "prasaadem<7><[U:1:1075176373]><Unassigned>" [-300 1105 0] committed suicide with "world"
+L 10/08/2026 - 04:21:22: Log file closed

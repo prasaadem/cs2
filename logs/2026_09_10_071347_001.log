@@ -1,0 +1,53 @@
+L 09/10/2026 - 07:13:47: Log file started (file "logs/2026_09_10_071347_001.log") (game "csgo") (version "10896")
+L 09/10/2026 - 07:13:47: server_cvar: "sv_tags" "dathost,dathost.com"
+L 09/10/2026 - 07:13:47: server_cvar: "sv_tags" "dathost.com, dathost"
+L 09/10/2026 - 07:13:47: server_cvar: "cash_player_bomb_defused" "200"
+L 09/10/2026 - 07:13:47: server_cvar: "cash_player_bomb_planted" "200"
+L 09/10/2026 - 07:13:47: server_cvar: "cash_player_interact_with_hostage" "300"
+L 09/10/2026 - 07:13:47: server_cvar: "cash_player_killed_enemy_default" "200"
+L 09/10/2026 - 07:13:47: server_cvar: "cash_player_killed_enemy_factor" "0.5"
+L 09/10/2026 - 07:13:47: server_cvar: "cash_team_elimination_bomb_map" "2700"
+L 09/10/2026 - 07:13:47: server_cvar: "cash_team_elimination_hostage_map_t" "2000"
+L 09/10/2026 - 07:13:47: server_cvar: "cash_team_elimination_hostage_map_ct" "2300"
+L 09/10/2026 - 07:13:47: server_cvar: "cash_team_loser_bonus" "2400"
+L 09/10/2026 - 07:13:47: server_cvar: "cash_team_loser_bonus_consecutive_rounds" "0"
+L 09/10/2026 - 07:13:47: server_cvar: "cash_team_planted_bomb_but_defused" "200"
+L 09/10/2026 - 07:13:47: server_cvar: "cash_team_terrorist_win_bomb" "2700"
+L 09/10/2026 - 07:13:47: server_cvar: "cash_team_win_by_defusing_bomb" "2700"
+L 09/10/2026 - 07:13:47: server_cvar: "cash_team_win_by_hostage_rescue" "3000"
+L 09/10/2026 - 07:13:47: server_cvar: "cash_team_win_by_time_running_out_hostage" "2000"
+L 09/10/2026 - 07:13:47: server_cvar: "cash_team_win_by_time_running_out_bomb" "2700"
+L 09/10/2026 - 07:13:47: server_cvar: "mp_freezetime" "5"
+L 09/10/2026 - 07:13:47: server_cvar: "mp_friendlyfire" "true"
+L 09/10/2026 - 07:13:47: server_cvar: "mp_maxrounds" "15"
+L 09/10/2026 - 07:13:47: server_cvar: "mp_roundtime" "3"
+L 09/10/2026 - 07:13:47: server_cvar: "mp_roundtime_hostage" "2"
+L 09/10/2026 - 07:13:47: server_cvar: "mp_roundtime_defuse" "2.25"
+L 09/10/2026 - 07:13:47: rcon from "169.150.232.56:47094": command "status_json"
+L 09/10/2026 - 07:13:47: rcon from "169.150.232.56:47094": command "status"
+L 09/10/2026 - 07:13:47: Started:  ""
+L 09/10/2026 - 07:13:48: World triggered "Warmup_Start"
+L 09/10/2026 - 07:13:51: "mcdreamy111<5><[U:1:156268658]><>" entered the game
+L 09/10/2026 - 07:13:51: "KaiZen<9><[U:1:837983112]><>" entered the game
+L 09/10/2026 - 07:13:51: "whitefe@ther<1><[U:1:186183274]><>" entered the game
+L 09/10/2026 - 07:13:51: "prasaadem<4><[U:1:1075176373]><>" entered the game
+L 09/10/2026 - 07:13:51: "Rat<7><[U:1:892155064]><>" entered the game
+L 09/10/2026 - 07:13:51: "Sheldor<0><[U:1:1080094440]><>" entered the game
+L 09/10/2026 - 07:13:51: "kiiiiiira<6><[U:1:335158966]><>" entered the game
+L 09/10/2026 - 07:13:51: "Beni Lava<3><[U:1:145395478]><>" entered the game
+L 09/10/2026 - 07:13:51: "BigHero<8><[U:1:887890842]><>" entered the game
+L 09/10/2026 - 07:13:52: "Fraggy<10><[U:1:87305029]><>" entered the game
+L 09/10/2026 - 07:13:52: "Ironman<11><[U:1:1080906432]><>" entered the game
+L 09/10/2026 - 07:13:56: "Sheldor<0><[U:1:1080094440]><Unassigned>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/10/2026 - 07:13:56: "whitefe@ther<1><[U:1:186183274]><Unassigned>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/10/2026 - 07:13:56: "pichekistha<2><[U:1:80924469]><Unassigned>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/10/2026 - 07:13:56: "Beni Lava<3><[U:1:145395478]><Unassigned>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/10/2026 - 07:13:56: "prasaadem<4><[U:1:1075176373]><Unassigned>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/10/2026 - 07:13:56: "mcdreamy111<5><[U:1:156268658]><Unassigned>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/10/2026 - 07:13:56: "kiiiiiira<6><[U:1:335158966]><Unassigned>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/10/2026 - 07:13:56: "Rat<7><[U:1:892155064]><Unassigned>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/10/2026 - 07:13:56: "BigHero<8><[U:1:887890842]><Unassigned>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/10/2026 - 07:13:56: "KaiZen<9><[U:1:837983112]><Unassigned>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/10/2026 - 07:13:56: "Fraggy<10><[U:1:87305029]><Unassigned>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/10/2026 - 07:13:56: "Ironman<11><[U:1:1080906432]><Unassigned>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/10/2026 - 07:13:56: Log file closed

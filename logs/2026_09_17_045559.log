@@ -1,0 +1,801 @@
+L 09/17/2026 - 04:55:59: Log file started (file "logs/2026_09_17_045559.log") (game "csgo") (version "10896")
+L 09/17/2026 - 04:55:59: Loading map "de_shortdust"
+L 09/17/2026 - 04:55:59: server cvars start
+L 09/17/2026 - 04:55:59: "tv_relaypassword" = ""
+L 09/17/2026 - 04:55:59: "tv_password" = ""
+L 09/17/2026 - 04:55:59: "tv_password1" = ""
+L 09/17/2026 - 04:55:59: "tv_advertise_watchable" = "false"
+L 09/17/2026 - 04:55:59: "sv_voiceenable" = "true"
+L 09/17/2026 - 04:55:59: "sv_password" = "kodikura"
+L 09/17/2026 - 04:55:59: "sv_tags" = "dathost,dathost.com"
+L 09/17/2026 - 04:55:59: "sv_steamgroup" = ""
+L 09/17/2026 - 04:55:59: "sv_cheats" = "false"
+L 09/17/2026 - 04:55:59: "sv_debug_overlays_broadcast" = "false"
+L 09/17/2026 - 04:55:59: "tv_enable_dynamic" = "false"
+L 09/17/2026 - 04:55:59: "tv_enable" = "false"
+L 09/17/2026 - 04:55:59: "tv_enable1" = "false"
+L 09/17/2026 - 04:55:59: "sv_alltalk" = "false"
+L 09/17/2026 - 04:55:59: "mp_friendlyfire" = "true"
+L 09/17/2026 - 04:55:59: "sv_stopspeed" = "80"
+L 09/17/2026 - 04:55:59: "sv_noclipaccelerate" = "5"
+L 09/17/2026 - 04:55:59: "sv_noclipspeed" = "1200"
+L 09/17/2026 - 04:55:59: "sv_noclipspeedscaleonshift" = "0.5"
+L 09/17/2026 - 04:55:59: "sv_noclipfriction" = "4"
+L 09/17/2026 - 04:55:59: "sv_specaccelerate" = "5"
+L 09/17/2026 - 04:55:59: "sv_specspeed" = "1200"
+L 09/17/2026 - 04:55:59: "sv_specnoclip" = "true"
+L 09/17/2026 - 04:55:59: "sv_maxspeed" = "320"
+L 09/17/2026 - 04:55:59: "sv_accelerate" = "5.5"
+L 09/17/2026 - 04:55:59: "sv_airaccelerate" = "12"
+L 09/17/2026 - 04:55:59: "sv_wateraccelerate" = "10"
+L 09/17/2026 - 04:55:59: "sv_waterfriction" = "1"
+L 09/17/2026 - 04:55:59: "sv_footsteps" = "1"
+L 09/17/2026 - 04:55:59: "sv_rollspeed" = "200"
+L 09/17/2026 - 04:55:59: "sv_rollangle" = "0"
+L 09/17/2026 - 04:55:59: "sv_friction" = "5.2"
+L 09/17/2026 - 04:55:59: "sv_bounce" = "0"
+L 09/17/2026 - 04:55:59: "sv_stepsize" = "18"
+L 09/17/2026 - 04:55:59: "sv_mover_pogofrequency" = "10"
+L 09/17/2026 - 04:55:59: "sv_mover_pogodampingratio" = "1"
+L 09/17/2026 - 04:55:59: "sv_mover_maxslope" = "0.7"
+L 09/17/2026 - 04:55:59: "r_JeepViewDampenFreq" = "7"
+L 09/17/2026 - 04:55:59: "r_JeepViewDampenDamp" = "1"
+L 09/17/2026 - 04:55:59: "r_JeepViewZHeight" = "10"
+L 09/17/2026 - 04:55:59: "r_AirboatViewDampenFreq" = "7"
+L 09/17/2026 - 04:55:59: "r_AirboatViewDampenDamp" = "1"
+L 09/17/2026 - 04:55:59: "r_AirboatViewZHeight" = "0"
+L 09/17/2026 - 04:55:59: "sv_allchat" = "true"
+L 09/17/2026 - 04:55:59: "buddha" = "false"
+L 09/17/2026 - 04:55:59: "buddha_ignore_bots" = "false"
+L 09/17/2026 - 04:55:59: "buddha_reset_hp" = "1"
+L 09/17/2026 - 04:55:59: "mp_teamplay" = "false"
+L 09/17/2026 - 04:55:59: "mp_forcerespawn" = "true"
+L 09/17/2026 - 04:55:59: "decalfrequency" = "10"
+L 09/17/2026 - 04:55:59: "mp_fadetoblack" = "false"
+L 09/17/2026 - 04:55:59: "mp_weaponstay" = "false"
+L 09/17/2026 - 04:55:59: "sv_autobuyammo" = "false"
+L 09/17/2026 - 04:55:59: "mp_promoted_item_enabled" = "false"
+L 09/17/2026 - 04:55:59: "sv_accelerate_use_weapon_speed" = "true"
+L 09/17/2026 - 04:55:59: "sv_accelerate_debug_speed" = "false"
+L 09/17/2026 - 04:55:59: "cash_team_terrorist_win_bomb" = "2700"
+L 09/17/2026 - 04:55:59: "cash_team_elimination_hostage_map_t" = "2000"
+L 09/17/2026 - 04:55:59: "cash_team_elimination_hostage_map_ct" = "2300"
+L 09/17/2026 - 04:55:59: "cash_team_elimination_bomb_map" = "2700"
+L 09/17/2026 - 04:55:59: "cash_team_win_by_time_running_out_hostage" = "2000"
+L 09/17/2026 - 04:55:59: "cash_team_win_by_time_running_out_bomb" = "2700"
+L 09/17/2026 - 04:55:59: "cash_team_win_by_defusing_bomb" = "2700"
+L 09/17/2026 - 04:55:59: "cash_team_win_by_hostage_rescue" = "3000"
+L 09/17/2026 - 04:55:59: "cash_team_loser_bonus" = "2400"
+L 09/17/2026 - 04:55:59: "cash_team_loser_bonus_consecutive_rounds" = "0"
+L 09/17/2026 - 04:55:59: "cash_team_winner_bonus_consecutive_rounds" = "0"
+L 09/17/2026 - 04:55:59: "cash_team_rescued_hostage" = "0"
+L 09/17/2026 - 04:55:59: "cash_team_hostage_alive" = "0"
+L 09/17/2026 - 04:55:59: "cash_team_planted_bomb_but_defused" = "200"
+L 09/17/2026 - 04:55:59: "cash_team_hostage_interaction" = "500"
+L 09/17/2026 - 04:55:59: "cash_team_bonus_shorthanded" = "0"
+L 09/17/2026 - 04:55:59: "cash_player_killed_teammate" = "-300"
+L 09/17/2026 - 04:55:59: "cash_player_killed_enemy_factor" = "0.5"
+L 09/17/2026 - 04:55:59: "cash_player_killed_enemy_default" = "200"
+L 09/17/2026 - 04:55:59: "cash_player_bomb_planted" = "200"
+L 09/17/2026 - 04:55:59: "cash_player_bomb_defused" = "200"
+L 09/17/2026 - 04:55:59: "cash_player_rescued_hostage" = "1000"
+L 09/17/2026 - 04:55:59: "cash_player_interact_with_hostage" = "300"
+L 09/17/2026 - 04:55:59: "cash_player_damage_hostage" = "-30"
+L 09/17/2026 - 04:55:59: "cash_player_killed_hostage" = "-1000"
+L 09/17/2026 - 04:55:59: "cash_player_respawn_amount" = "0"
+L 09/17/2026 - 04:55:59: "cash_player_get_killed" = "0"
+L 09/17/2026 - 04:55:59: "cash_team_per_dead_enemy" = "50"
+L 09/17/2026 - 04:55:59: "cash_player_drop_on_death" = "0"
+L 09/17/2026 - 04:55:59: "cash_player_drop_on_death_stack_value" = "250"
+L 09/17/2026 - 04:55:59: "sv_competitive_minspec" = "true"
+L 09/17/2026 - 04:55:59: "mp_teammates_are_enemies" = "false"
+L 09/17/2026 - 04:55:59: "mp_buy_anywhere" = "0"
+L 09/17/2026 - 04:55:59: "mp_buy_during_immunity" = "0"
+L 09/17/2026 - 04:55:59: "sv_kick_ban_duration" = "15"
+L 09/17/2026 - 04:55:59: "sv_deadtalk" = "false"
+L 09/17/2026 - 04:55:59: "sv_spec_hear" = "3"
+L 09/17/2026 - 04:55:59: "mp_c4timer" = "40"
+L 09/17/2026 - 04:55:59: "mp_roundtime" = "60"
+L 09/17/2026 - 04:55:59: "mp_roundtime_hostage" = "2"
+L 09/17/2026 - 04:55:59: "mp_roundtime_defuse" = "2.25"
+L 09/17/2026 - 04:55:59: "mp_team_intro_time" = "6.5"
+L 09/17/2026 - 04:55:59: "mp_freezetime" = "0"
+L 09/17/2026 - 04:55:59: "mp_limitteams" = "2"
+L 09/17/2026 - 04:55:59: "mp_autoteambalance" = "true"
+L 09/17/2026 - 04:55:59: "mp_maxrounds" = "15"
+L 09/17/2026 - 04:55:59: "mp_winlimit" = "0"
+L 09/17/2026 - 04:55:59: "mp_tournament" = "false"
+L 09/17/2026 - 04:55:59: "mp_timelimit" = "0"
+L 09/17/2026 - 04:55:59: "mp_fraglimit" = "0"
+L 09/17/2026 - 04:55:59: "nextmode" = ""
+L 09/17/2026 - 04:55:59: "nextlevel" = ""
+L 09/17/2026 - 04:55:59: "sv_teamid_overhead_always_prohibit" = "false"
+L 09/17/2026 - 04:55:59: "sv_show_team_equipment_prohibit" = "false"
+L 09/17/2026 - 04:55:59: "sv_teamid_overhead" = "true"
+L 09/17/2026 - 04:55:59: "sv_gravity" = "800"
+L 09/17/2026 - 04:55:59: "sv_vote_issue_kick_allowed" = "true"
+L 09/17/2026 - 04:55:59: "sv_vote_kick_ban_duration" = "15"
+L 09/17/2026 - 04:55:59: "sv_vote_issue_loadbackup_allowed" = "true"
+L 09/17/2026 - 04:55:59: "sv_vote_issue_loadbackup_spec_only" = "false"
+L 09/17/2026 - 04:55:59: "sv_vote_issue_pause_match_spec_only" = "false"
+L 09/17/2026 - 04:55:59: "metamod_version" = "2.0.0-dev+1410"
+L 09/17/2026 - 04:55:59: server cvars end
+L 09/17/2026 - 04:55:59: server_cvar: "mp_friendlyfire" "false"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_team_terrorist_win_bomb" "3500"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_team_elimination_hostage_map_t" "1000"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_team_elimination_hostage_map_ct" "2000"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_team_elimination_bomb_map" "3250"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_team_win_by_time_running_out_hostage" "3250"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_team_win_by_time_running_out_bomb" "3250"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_team_win_by_defusing_bomb" "3250"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_team_win_by_hostage_rescue" "3500"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_team_loser_bonus" "1400"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_team_loser_bonus_consecutive_rounds" "500"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_team_planted_bomb_but_defused" "600"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_player_killed_enemy_factor" "1"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_player_killed_enemy_default" "300"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_player_bomb_planted" "300"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_player_bomb_defused" "300"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_player_interact_with_hostage" "150"
+L 09/17/2026 - 04:55:59: server_cvar: "mp_roundtime" "5"
+L 09/17/2026 - 04:55:59: server_cvar: "mp_roundtime_hostage" "0"
+L 09/17/2026 - 04:55:59: server_cvar: "mp_roundtime_defuse" "0"
+L 09/17/2026 - 04:55:59: server_cvar: "mp_freezetime" "6"
+L 09/17/2026 - 04:55:59: server_cvar: "mp_maxrounds" "0"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_player_bomb_defused" "200"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_player_bomb_planted" "200"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_player_interact_with_hostage" "300"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_player_killed_enemy_default" "200"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_player_killed_enemy_factor" "0.5"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_team_elimination_bomb_map" "2700"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_team_elimination_hostage_map_t" "2000"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_team_elimination_hostage_map_ct" "2300"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_team_loser_bonus" "2400"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_team_loser_bonus_consecutive_rounds" "0"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_team_planted_bomb_but_defused" "200"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_team_terrorist_win_bomb" "2700"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_team_win_by_defusing_bomb" "2700"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_team_win_by_hostage_rescue" "3000"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_team_win_by_time_running_out_hostage" "2000"
+L 09/17/2026 - 04:55:59: server_cvar: "cash_team_win_by_time_running_out_bomb" "2700"
+L 09/17/2026 - 04:55:59: server_cvar: "mp_freezetime" "5"
+L 09/17/2026 - 04:55:59: server_cvar: "mp_friendlyfire" "true"
+L 09/17/2026 - 04:55:59: server_cvar: "mp_maxrounds" "15"
+L 09/17/2026 - 04:55:59: server_cvar: "mp_roundtime" "3"
+L 09/17/2026 - 04:55:59: server_cvar: "mp_roundtime_hostage" "2"
+L 09/17/2026 - 04:55:59: server_cvar: "mp_roundtime_defuse" "2.25"
+L 09/17/2026 - 04:55:59: Started:  ""
+L 09/17/2026 - 04:56:00: World triggered "Warmup_Start"
+L 09/17/2026 - 04:56:00: "bazooka39<8><[U:1:1076778384]><>" connected, address "104.190.138.219:55978"
+L 09/17/2026 - 04:56:00: "blazingshack<6><[U:1:1085341771]><>" connected, address "108.207.247.230:54385"
+L 09/17/2026 - 04:56:00: "BigHero<4><[U:1:887890842]><>" connected, address "50.47.214.62:59416"
+L 09/17/2026 - 04:56:00: "Beni Lava<2><[U:1:145395478]><>" connected, address "97.126.183.239:55315"
+L 09/17/2026 - 04:56:00: "pichekistha<0><[U:1:80924469]><>" connected, address "71.34.75.84:58934"
+L 09/17/2026 - 04:56:00: "kiiiiiira<7><[U:1:335158966]><>" connected, address "50.123.107.113:65078"
+L 09/17/2026 - 04:56:00: "Sheldor<1><[U:1:1080094440]><>" connected, address "68.67.249.31:46927"
+L 09/17/2026 - 04:56:00: "prasaadem<3><[U:1:1075176373]><>" connected, address "23.118.107.196:65492"
+L 09/17/2026 - 04:56:00: "Pheonix<5><[U:1:104794797]><>" connected, address "107.192.216.137:64611"
+L 09/17/2026 - 04:56:01: "bazooka39<65288><[U:1:1076778384]><>" STEAM USERID validated
+L 09/17/2026 - 04:56:01: "blazingshack<65286><[U:1:1085341771]><>" STEAM USERID validated
+L 09/17/2026 - 04:56:01: "BigHero<65284><[U:1:887890842]><>" STEAM USERID validated
+L 09/17/2026 - 04:56:01: "Beni Lava<65282><[U:1:145395478]><>" STEAM USERID validated
+L 09/17/2026 - 04:56:01: "pichekistha<65280><[U:1:80924469]><>" STEAM USERID validated
+L 09/17/2026 - 04:56:01: "kiiiiiira<65287><[U:1:335158966]><>" STEAM USERID validated
+L 09/17/2026 - 04:56:01: "Sheldor<65281><[U:1:1080094440]><>" STEAM USERID validated
+L 09/17/2026 - 04:56:01: "prasaadem<65283><[U:1:1075176373]><>" STEAM USERID validated
+L 09/17/2026 - 04:56:01: "bazooka39<8><[U:1:1076778384]><>" entered the game
+L 09/17/2026 - 04:56:01: "Sheldor<1><[U:1:1080094440]><>" entered the game
+L 09/17/2026 - 04:56:02: "Pheonix<65285><[U:1:104794797]><>" STEAM USERID validated
+L 09/17/2026 - 04:56:02: "prasaadem<3><[U:1:1075176373]><>" entered the game
+L 09/17/2026 - 04:56:02: "BigHero<4><[U:1:887890842]><>" entered the game
+L 09/17/2026 - 04:56:02: "Beni Lava<2><[U:1:145395478]><>" entered the game
+L 09/17/2026 - 04:56:02: "blazingshack<6><[U:1:1085341771]><>" entered the game
+L 09/17/2026 - 04:56:02: "Pheonix<5><[U:1:104794797]><>" entered the game
+L 09/17/2026 - 04:56:02: "kiiiiiira<7><[U:1:335158966]><>" entered the game
+L 09/17/2026 - 04:56:03: "pichekistha<0><[U:1:80924469]><>" entered the game
+L 09/17/2026 - 04:56:04: rcon from "169.150.232.56:45138": command "status_json"
+L 09/17/2026 - 04:56:04: rcon from "169.150.232.56:45138": command "status"
+L 09/17/2026 - 04:56:05: "bazooka39<8><[U:1:1076778384]>" switched from team <Unassigned> to <TERRORIST>
+L 09/17/2026 - 04:56:05: World triggered "Game_Commencing"
+L 09/17/2026 - 04:56:05: Starting Freeze period
+L 09/17/2026 - 04:56:05: JSON_BEGIN{
+L 09/17/2026 - 04:56:05: "name": "round_stats",
+L 09/17/2026 - 04:56:05: "round_number" : "1",
+L 09/17/2026 - 04:56:05: "score_t" : "0",
+L 09/17/2026 - 04:56:05: "score_ct" : "0",
+L 09/17/2026 - 04:56:05: "map" : "de_shortdust",
+L 09/17/2026 - 04:56:05: "server" : "cupcake",
+L 09/17/2026 - 04:56:05: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/17/2026 - 04:56:05: "players" : {
+L 09/17/2026 - 04:56:05: "player_0" : "            80924469,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:56:05: "player_1" : "          1080094440,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:56:05: "player_2" : "           145395478,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:56:05: "player_3" : "          1075176373,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:56:05: "player_4" : "           887890842,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:56:05: "player_5" : "           104794797,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:56:05: "player_6" : "          1085341771,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:56:05: "player_7" : "           335158966,      0,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:56:05: "player_8" : "          1076778384,      2,  10000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:56:05: }}JSON_END
+L 09/17/2026 - 04:56:05: World triggered "Match_Start" on "de_shortdust"
+L 09/17/2026 - 04:56:05: MatchStatus: Team "CT" is unset.
+L 09/17/2026 - 04:56:05: MatchStatus: Team "TERRORIST" is unset.
+L 09/17/2026 - 04:56:05: MatchStatus: Score: 0:0 on map "de_shortdust" RoundsPlayed: -1
+L 09/17/2026 - 04:56:06: "Pheonix<5><[U:1:104794797]>" switched from team <Unassigned> to <TERRORIST>
+L 09/17/2026 - 04:56:07: "kiiiiiira<7><[U:1:335158966]>" switched from team <Unassigned> to <CT>
+L 09/17/2026 - 04:56:07: "pichekistha<0><[U:1:80924469]>" switched from team <Unassigned> to <TERRORIST>
+L 09/17/2026 - 04:56:07: World triggered "Warmup_Start"
+L 09/17/2026 - 04:56:08: "bazooka39<8><[U:1:1076778384]><TERRORIST>" purchased "cz75a"
+L 09/17/2026 - 04:56:08: "Beni Lava<2><[U:1:145395478]>" switched from team <Unassigned> to <CT>
+L 09/17/2026 - 04:56:08: "Pheonix<5><[U:1:104794797]><TERRORIST>" purchased "deagle"
+L 09/17/2026 - 04:56:08: "kiiiiiira<7><[U:1:335158966]><CT>" purchased "awp"
+L 09/17/2026 - 04:56:08: "blazingshack<6><[U:1:1085341771]>" switched from team <Unassigned> to <TERRORIST>
+L 09/17/2026 - 04:56:08: "kiiiiiira<7><[U:1:335158966]><CT>" purchased "incgrenade"
+L 09/17/2026 - 04:56:09: "bazooka39<8><[U:1:1076778384]><TERRORIST>" purchased "molotov"
+L 09/17/2026 - 04:56:09: "kiiiiiira<7><[U:1:335158966]><CT>" purchased "hegrenade"
+L 09/17/2026 - 04:56:09: "bazooka39<8><[U:1:1076778384]><TERRORIST>" purchased "hegrenade"
+L 09/17/2026 - 04:56:09: "kiiiiiira<7><[U:1:335158966]><CT>" purchased "smokegrenade"
+L 09/17/2026 - 04:56:09: "prasaadem<3><[U:1:1075176373]>" switched from team <Unassigned> to <CT>
+L 09/17/2026 - 04:56:10: "BigHero<4><[U:1:887890842]>" switched from team <Unassigned> to <TERRORIST>
+L 09/17/2026 - 04:56:10: "blazingshack<6><[U:1:1085341771]><TERRORIST>" purchased "xm1014"
+L 09/17/2026 - 04:56:10: "blazingshack<6><[U:1:1085341771]><TERRORIST>" purchased "hegrenade"
+L 09/17/2026 - 04:56:11: "blazingshack<6><[U:1:1085341771]><TERRORIST>" purchased "molotov"
+L 09/17/2026 - 04:56:11: "Beni Lava<2><[U:1:145395478]><CT>" purchased "m4a1_silencer"
+L 09/17/2026 - 04:56:11: "blazingshack<6><[U:1:1085341771]><TERRORIST>" purchased "smokegrenade"
+L 09/17/2026 - 04:56:11: "Beni Lava<2><[U:1:145395478]><CT>" purchased "ssg08"
+L 09/17/2026 - 04:56:12: "BigHero<4><[U:1:887890842]><TERRORIST>" purchased "deagle"
+L 09/17/2026 - 04:56:14: "Beni Lava<2><[U:1:145395478]><CT>" purchased "awp"
+L 09/17/2026 - 04:56:14: rcon from "169.150.232.56:49632": command "status_json"
+L 09/17/2026 - 04:56:14: rcon from "169.150.232.56:49632": command "status"
+L 09/17/2026 - 04:56:16: "bazooka39<8><[U:1:1076778384]><TERRORIST>" sv_throw_hegrenade -788.918 659.229 -93.613 0.000 0.000 0.000 886.507 -210.368 299.585 600.000 1131.000 0.000 44 3.000
+L 09/17/2026 - 04:56:17: "kiiiiiira<7><[U:1:335158966]><CT>" sv_throw_molotov 9.565 857.619 83.518 0.000 0.000 0.000 -53.081 765.782 182.849 600.000 858.000 0.000 48
+L 09/17/2026 - 04:56:17: Molotov projectile spawned at 9.565084 857.619263 83.518074, velocity -53.081413 765.782410 182.848541
+L 09/17/2026 - 04:56:18: "kiiiiiira<7><[U:1:335158966]><CT>" threw molotov [-63 1906 34]
+L 09/17/2026 - 04:56:18: "bazooka39<8><[U:1:1076778384]><TERRORIST>" threw hegrenade [18 494 7]
+L 09/17/2026 - 04:56:19: "Sheldor<1><[U:1:1080094440]>" switched from team <Unassigned> to <CT>
+L 09/17/2026 - 04:56:19: "bazooka39<8><[U:1:1076778384]><TERRORIST>" sv_throw_molotov -787.444 711.600 -88.264 0.000 0.000 0.000 932.708 29.646 249.944 600.000 -79.000 0.000 46
+L 09/17/2026 - 04:56:19: Molotov projectile spawned at -787.444458 711.599915 -88.264236, velocity 932.708008 29.645561 249.943802
+L 09/17/2026 - 04:56:19: "prasaadem<3><[U:1:1075176373]><CT>" purchased "deagle"
+L 09/17/2026 - 04:56:20: "bazooka39<8><[U:1:1076778384]><TERRORIST>" threw molotov [146 741 2]
+L 09/17/2026 - 04:56:20: "blazingshack<6><[U:1:1085341771]><TERRORIST>" sv_throw_hegrenade -907.453 1447.432 68.012 0.000 0.000 0.000 957.953 -57.648 169.244 600.000 -677.000 0.000 44 3.000
+L 09/17/2026 - 04:56:20: Starting Freeze period
+L 09/17/2026 - 04:56:20: JSON_BEGIN{
+L 09/17/2026 - 04:56:20: "name": "round_stats",
+L 09/17/2026 - 04:56:20: "round_number" : "1",
+L 09/17/2026 - 04:56:20: "score_t" : "0",
+L 09/17/2026 - 04:56:20: "score_ct" : "0",
+L 09/17/2026 - 04:56:20: "map" : "de_shortdust",
+L 09/17/2026 - 04:56:20: "server" : "cupcake",
+L 09/17/2026 - 04:56:20: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/17/2026 - 04:56:20: "players" : {
+L 09/17/2026 - 04:56:20: "player_0" : "            80924469,      2,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:56:20: "player_1" : "          1080094440,      3,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:56:20: "player_2" : "           145395478,      3,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:56:20: "player_3" : "          1075176373,      3,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:56:20: "player_4" : "           887890842,      2,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:56:20: "player_5" : "           104794797,      2,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:56:20: "player_6" : "          1085341771,      2,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:56:20: "player_7" : "           335158966,      3,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:56:20: "player_8" : "          1076778384,      2,   1000,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:56:20: }}JSON_END
+L 09/17/2026 - 04:56:20: World triggered "Match_Start" on "de_shortdust"
+L 09/17/2026 - 04:56:20: "bazooka39<8><[U:1:1076778384]><TERRORIST>" triggered "Got_The_Bomb"
+L 09/17/2026 - 04:56:20: MatchStatus: Team "CT" is unset.
+L 09/17/2026 - 04:56:20: MatchStatus: Team "TERRORIST" is unset.
+L 09/17/2026 - 04:56:20: MatchStatus: Score: 0:0 on map "de_shortdust" RoundsPlayed: 0
+L 09/17/2026 - 04:56:22: "BigHero<4><[U:1:887890842]><TERRORIST>" purchased "deagle"
+L 09/17/2026 - 04:56:23: "Beni Lava<2><[U:1:145395478]><CT>" purchased "fiveseven"
+L 09/17/2026 - 04:56:23: "prasaadem<3><[U:1:1075176373]><CT>" purchased "deagle"
+L 09/17/2026 - 04:56:24: "bazooka39<8><[U:1:1076778384]><TERRORIST>" purchased "cz75a"
+L 09/17/2026 - 04:56:24: "kiiiiiira<7><[U:1:335158966]><CT>" purchased "p250"
+L 09/17/2026 - 04:56:24: rcon from "169.150.232.56:43390": command "status_json"
+L 09/17/2026 - 04:56:24: rcon from "169.150.232.56:43390": command "status"
+L 09/17/2026 - 04:56:24: "Beni Lava<2><[U:1:145395478]><CT>" purchased "flashbang"
+L 09/17/2026 - 04:56:25: "Beni Lava<2><[U:1:145395478]><CT>" purchased "hegrenade"
+L 09/17/2026 - 04:56:25: "Pheonix<5><[U:1:104794797]><TERRORIST>" purchased "tec9"
+L 09/17/2026 - 04:56:25: "bazooka39<8><[U:1:1076778384]><TERRORIST>" purchased "molotov"
+L 09/17/2026 - 04:56:25: World triggered "Round_Start"
+L 09/17/2026 - 04:56:25: "kiiiiiira<7><[U:1:335158966]><CT>" purchased "flashbang"
+L 09/17/2026 - 04:56:26: "Pheonix<5><[U:1:104794797]><TERRORIST>" purchased "flashbang"
+L 09/17/2026 - 04:56:26: "Sheldor<1><[U:1:1080094440]><CT>" purchased "deagle"
+L 09/17/2026 - 04:56:27: "Sheldor<1><[U:1:1080094440]><CT>" purchased "flashbang"
+L 09/17/2026 - 04:56:28: "Beni Lava<2><[U:1:145395478]><CT>" sv_throw_flashgrenade 54.683 -226.928 76.633 0.000 0.000 0.000 -575.306 471.006 514.216 600.000 103.000 0.000 43
+L 09/17/2026 - 04:56:28: "blazingshack<6><[U:1:1085341771]><TERRORIST>" purchased "tec9"
+L 09/17/2026 - 04:56:29: "blazingshack<6><[U:1:1085341771]><TERRORIST>" purchased "hegrenade"
+L 09/17/2026 - 04:56:29: "blazingshack<6><[U:1:1085341771]><TERRORIST>" purchased "flashbang"
+L 09/17/2026 - 04:56:29: "Beni Lava<2><[U:1:145395478]><CT>" threw flashbang [-880 538 490] flashbang entindex 359)
+L 09/17/2026 - 04:56:32: "Pheonix<5><[U:1:104794797]><TERRORIST>" sv_throw_flashgrenade -121.794 1792.460 99.339 0.000 0.000 0.000 191.902 -924.366 140.853 600.000 757.000 0.000 43
+L 09/17/2026 - 04:56:33: "bazooka39<8><[U:1:1076778384]><TERRORIST>" sv_throw_molotov -108.238 1778.054 102.208 0.000 0.000 0.000 209.045 -680.540 261.882 600.000 -612.000 0.000 46
+L 09/17/2026 - 04:56:33: Molotov projectile spawned at -108.237915 1778.053711 102.207573, velocity 209.044525 -680.540405 261.881897
+L 09/17/2026 - 04:56:33: "Sheldor<1><[U:1:1080094440]><CT>" sv_throw_flashgrenade 0.442 390.958 68.331 0.000 0.000 0.000 -720.654 422.428 160.446 600.000 -140.000 0.000 43
+L 09/17/2026 - 04:56:34: "Pheonix<5><[U:1:104794797]><TERRORIST>" threw flashbang [-6 1172 48] flashbang entindex 295)
+L 09/17/2026 - 04:56:34: "prasaadem<3><[U:1:1075176373]><CT>" blinded for 4.83 by "Pheonix<5><[U:1:104794797]><TERRORIST>" from flashbang entindex 295 
+L 09/17/2026 - 04:56:34: "pichekistha<0><[U:1:80924469]><TERRORIST>" purchased "tec9"
+L 09/17/2026 - 04:56:34: rcon from "169.150.232.56:52434": command "status_json"
+L 09/17/2026 - 04:56:34: rcon from "169.150.232.56:52434": command "status"
+L 09/17/2026 - 04:56:35: "bazooka39<8><[U:1:1076778384]><TERRORIST>" threw molotov [59 1222 35]
+L 09/17/2026 - 04:56:35: "kiiiiiira<7><[U:1:335158966]><CT>" sv_throw_flashgrenade 581.268 1220.922 94.986 0.000 0.000 0.000 -842.156 231.843 -42.771 600.000 -131.000 0.000 43
+L 09/17/2026 - 04:56:35: "Sheldor<1><[U:1:1080094440]><CT>" threw flashbang [-784 959 11] flashbang entindex 351)
+L 09/17/2026 - 04:56:35: "blazingshack<6><[U:1:1085341771]><TERRORIST>" blinded for 0.70 by "Sheldor<1><[U:1:1080094440]><CT>" from flashbang entindex 351 
+L 09/17/2026 - 04:56:36: "kiiiiiira<7><[U:1:335158966]><CT>" threw flashbang [79 1359 45] flashbang entindex 239)
+L 09/17/2026 - 04:56:40: "blazingshack<6><[U:1:1085341771]><TERRORIST>" sv_throw_hegrenade -995.495 1455.714 68.393 0.000 0.000 0.000 224.856 -792.444 185.342 600.000 43.000 0.000 44 3.000
+L 09/17/2026 - 04:56:40: "BigHero<4><[U:1:887890842]><TERRORIST>" [-1238 1369 0] killed "Beni Lava<2><[U:1:145395478]><CT>" [-697 768 36] with "deagle" (headshot)
+L 09/17/2026 - 04:56:41: "blazingshack<6><[U:1:1085341771]><TERRORIST>" threw hegrenade [-689 395 73]
+L 09/17/2026 - 04:56:44: rcon from "169.150.232.56:53330": command "status_json"
+L 09/17/2026 - 04:56:44: rcon from "169.150.232.56:53330": command "status"
+L 09/17/2026 - 04:56:46: "blazingshack<6><[U:1:1085341771]><TERRORIST>" [-838 853 0] killed "Sheldor<1><[U:1:1080094440]><CT>" [-72 438 0] with "tec9"
+L 09/17/2026 - 04:56:49: "BigHero<4><[U:1:887890842]><TERRORIST>" [-153 1270 32] killed "prasaadem<3><[U:1:1075176373]><CT>" [258 1237 32] with "deagle"
+L 09/17/2026 - 04:56:49: "bazooka39<8><[U:1:1076778384]><TERRORIST>" assisted killing "prasaadem<3><[U:1:1075176373]><CT>"
+L 09/17/2026 - 04:56:53: "bazooka39<8><[U:1:1076778384]><TERRORIST>" triggered "Bomb_Begin_Plant" at bombsite A
+L 09/17/2026 - 04:56:54: rcon from "169.150.232.56:46798": command "status_json"
+L 09/17/2026 - 04:56:54: rcon from "169.150.232.56:46798": command "status"
+L 09/17/2026 - 04:56:54: "blazingshack<6><[U:1:1085341771]><TERRORIST>" [153 534 -1] killed "kiiiiiira<7><[U:1:335158966]><CT>" [577 599 -2] with "tec9" (headshot)
+L 09/17/2026 - 04:56:54: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "0") (T "1")
+L 09/17/2026 - 04:56:54: Team "CT" scored "0" with "7" players
+L 09/17/2026 - 04:56:54: Team "TERRORIST" scored "1" with "5" players
+L 09/17/2026 - 04:56:54: MatchStatus: Team "CT" is unset.
+L 09/17/2026 - 04:56:54: MatchStatus: Team "TERRORIST" is unset.
+L 09/17/2026 - 04:56:54: MatchStatus: Score: 0:1 on map "de_shortdust" RoundsPlayed: 1
+L 09/17/2026 - 04:56:54: World triggered "Round_End"
+L 09/17/2026 - 04:56:56: "bazooka39<8><[U:1:1076778384]><TERRORIST>" triggered "Planted_The_Bomb" at bombsite A
+L 09/17/2026 - 04:57:04: rcon from "169.150.232.56:53992": command "status_json"
+L 09/17/2026 - 04:57:04: rcon from "169.150.232.56:53992": command "status"
+L 09/17/2026 - 04:57:04: Starting Freeze period
+L 09/17/2026 - 04:57:04: JSON_BEGIN{
+L 09/17/2026 - 04:57:04: "name": "round_stats",
+L 09/17/2026 - 04:57:04: "round_number" : "2",
+L 09/17/2026 - 04:57:04: "score_t" : "1",
+L 09/17/2026 - 04:57:04: "score_ct" : "0",
+L 09/17/2026 - 04:57:04: "map" : "de_shortdust",
+L 09/17/2026 - 04:57:04: "server" : "cupcake",
+L 09/17/2026 - 04:57:04: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/17/2026 - 04:57:04: "players" : {
+L 09/17/2026 - 04:57:04: "player_0" : "            80924469,      2,   3200,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:57:04: "player_1" : "          1080094440,      3,   2500,      0,      1,      0,   0.00,   0.00,   0.00,      0,      0,      1,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:57:04: "player_2" : "           145395478,      3,   2400,      0,      1,      0,  20.00,   0.00,   0.00,     20,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:57:04: "player_3" : "          1075176373,      3,   2700,      0,      1,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:57:04: "player_4" : "           887890842,      2,   3300,      2,      0,      0, 102.00,  50.00,   0.00,    102,      0,      0,      0,      0,      0,      0,      0,      1,      2,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/17/2026 - 04:57:04: "player_5" : "           104794797,      2,   3000,      0,      0,      0,  23.00,   0.00,   0.00,     23,      0,      1,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:57:04: "player_6" : "          1085341771,      2,   3000,      2,      0,      0, 177.00,  50.00,   0.00,    177,      1,      0,      2,      0,      0,      0,      0,      0,      2,      0,      0,0.000000,2.000000,      0,      1,      0"
+L 09/17/2026 - 04:57:04: "player_7" : "           335158966,      3,   2900,      0,      1,      0,  43.00,   0.00,   0.00,     43,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:57:04: "player_8" : "          1076778384,      2,   3000,      0,      0,      1,  98.00,   0.00,   0.00,     98,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:57:04: }}JSON_END
+L 09/17/2026 - 04:57:04: "pichekistha<0><[U:1:80924469]><TERRORIST>" triggered "Got_The_Bomb"
+L 09/17/2026 - 04:57:04: MatchStatus: Team "CT" is unset.
+L 09/17/2026 - 04:57:04: MatchStatus: Team "TERRORIST" is unset.
+L 09/17/2026 - 04:57:04: MatchStatus: Score: 0:1 on map "de_shortdust" RoundsPlayed: 1
+L 09/17/2026 - 04:57:05: "Pheonix<5><[U:1:104794797]><TERRORIST>" purchased "ak47"
+L 09/17/2026 - 04:57:06: "prasaadem<3><[U:1:1075176373]><CT>" purchased "p90"
+L 09/17/2026 - 04:57:06: "pichekistha<0><[U:1:80924469]><TERRORIST>" purchased "galilar"
+L 09/17/2026 - 04:57:06: "blazingshack<6><[U:1:1085341771]><TERRORIST>" purchased "xm1014"
+L 09/17/2026 - 04:57:06: "Pheonix<5><[U:1:104794797]><TERRORIST>" purchased "hegrenade"
+L 09/17/2026 - 04:57:07: "kiiiiiira<7><[U:1:335158966]><CT>" purchased "p90"
+L 09/17/2026 - 04:57:07: "Sheldor<1><[U:1:1080094440]><CT>" purchased "deagle"
+L 09/17/2026 - 04:57:07: "blazingshack<6><[U:1:1085341771]><TERRORIST>" purchased "hegrenade"
+L 09/17/2026 - 04:57:07: "pichekistha<0><[U:1:80924469]><TERRORIST>" purchased "smokegrenade"
+L 09/17/2026 - 04:57:07: "kiiiiiira<7><[U:1:335158966]><CT>" purchased "smokegrenade"
+L 09/17/2026 - 04:57:07: "Beni Lava<2><[U:1:145395478]><CT>" purchased "nova"
+L 09/17/2026 - 04:57:07: "Sheldor<1><[U:1:1080094440]><CT>" purchased "flashbang"
+L 09/17/2026 - 04:57:07: "pichekistha<0><[U:1:80924469]><TERRORIST>" purchased "molotov"
+L 09/17/2026 - 04:57:07: "kiiiiiira<7><[U:1:335158966]><CT>" purchased "flashbang"
+L 09/17/2026 - 04:57:08: "BigHero<4><[U:1:887890842]><TERRORIST>" purchased "ak47"
+L 09/17/2026 - 04:57:08: "Sheldor<1><[U:1:1080094440]><CT>" purchased "smokegrenade"
+L 09/17/2026 - 04:57:08: "bazooka39<8><[U:1:1076778384]><TERRORIST>" purchased "bizon"
+L 09/17/2026 - 04:57:08: "pichekistha<0><[U:1:80924469]><TERRORIST>" purchased "hegrenade"
+L 09/17/2026 - 04:57:08: "Pheonix<5><[U:1:104794797]><TERRORIST>" purchased "flashbang"
+L 09/17/2026 - 04:57:09: "bazooka39<8><[U:1:1076778384]><TERRORIST>" purchased "molotov"
+L 09/17/2026 - 04:57:09: World triggered "Round_Start"
+L 09/17/2026 - 04:57:10: "bazooka39<8><[U:1:1076778384]><TERRORIST>" purchased "smokegrenade"
+L 09/17/2026 - 04:57:14: rcon from "169.150.232.56:34358": command "status_json"
+L 09/17/2026 - 04:57:14: rcon from "169.150.232.56:34358": command "status"
+L 09/17/2026 - 04:57:14: "Sheldor<1><[U:1:1080094440]><CT>" sv_throw_flashgrenade 10.144 415.896 67.593 0.000 0.000 0.000 -858.310 447.028 131.794 600.000 -1160.000 0.000 43
+L 09/17/2026 - 04:57:15: "Pheonix<5><[U:1:104794797]><TERRORIST>" sv_throw_flashgrenade -110.604 1781.008 99.729 0.000 0.000 0.000 113.649 -944.658 157.297 600.000 -316.000 0.000 43
+L 09/17/2026 - 04:57:15: "pichekistha<0><[U:1:80924469]><TERRORIST>" sv_throw_smokegrenade -129.313 1787.196 97.656 0.000 0.000 0.000 426.220 -545.208 69.856 600.000 946.000 0.000 45 2
+L 09/17/2026 - 04:57:16: "kiiiiiira<7><[U:1:335158966]><CT>" sv_throw_smokegrenade 61.558 801.487 73.898 0.000 0.000 0.000 -471.355 793.261 88.626 600.000 -570.000 0.000 45 3
+L 09/17/2026 - 04:57:16: "Sheldor<1><[U:1:1080094440]><CT>" threw flashbang [-805 952 2] flashbang entindex 514)
+L 09/17/2026 - 04:57:16: "kiiiiiira<7><[U:1:335158966]><CT>" blinded for 0.63 by "Sheldor<1><[U:1:1080094440]><CT>" from flashbang entindex 514 
+L 09/17/2026 - 04:57:16: "blazingshack<6><[U:1:1085341771]><TERRORIST>" blinded for 0.70 by "Sheldor<1><[U:1:1080094440]><CT>" from flashbang entindex 514 
+L 09/17/2026 - 04:57:16: "BigHero<4><[U:1:887890842]><TERRORIST>" blinded for 0.71 by "Sheldor<1><[U:1:1080094440]><CT>" from flashbang entindex 514 
+L 09/17/2026 - 04:57:16: "prasaadem<3><[U:1:1075176373]><CT>" blinded for 0.44 by "Sheldor<1><[U:1:1080094440]><CT>" from flashbang entindex 514 
+L 09/17/2026 - 04:57:17: "bazooka39<8><[U:1:1076778384]><TERRORIST>" sv_throw_molotov -110.134 1809.261 101.823 0.000 0.000 0.000 199.657 -662.178 245.658 600.000 -491.000 0.000 46
+L 09/17/2026 - 04:57:17: Molotov projectile spawned at -110.133812 1809.260864 101.823006, velocity 199.657059 -662.178406 245.657928
+L 09/17/2026 - 04:57:17: "Pheonix<5><[U:1:104794797]><TERRORIST>" threw flashbang [28 940 41] flashbang entindex 516)
+L 09/17/2026 - 04:57:17: "kiiiiiira<7><[U:1:335158966]><CT>" blinded for 0.16 by "Pheonix<5><[U:1:104794797]><TERRORIST>" from flashbang entindex 516 
+L 09/17/2026 - 04:57:17: "Beni Lava<2><[U:1:145395478]><CT>" blinded for 1.04 by "Pheonix<5><[U:1:104794797]><TERRORIST>" from flashbang entindex 516 
+L 09/17/2026 - 04:57:17: "prasaadem<3><[U:1:1075176373]><CT>" blinded for 1.04 by "Pheonix<5><[U:1:104794797]><TERRORIST>" from flashbang entindex 516 
+L 09/17/2026 - 04:57:17: "Sheldor<1><[U:1:1080094440]><CT>" blinded for 1.66 by "Pheonix<5><[U:1:104794797]><TERRORIST>" from flashbang entindex 516 
+L 09/17/2026 - 04:57:17: "pichekistha<0><[U:1:80924469]><TERRORIST>" threw smokegrenade [373 1163 34]
+L 09/17/2026 - 04:57:17: "kiiiiiira<7><[U:1:335158966]><CT>" threw smokegrenade [-99 1246 34]
+L 09/17/2026 - 04:57:19: "bazooka39<8><[U:1:1076778384]><TERRORIST>" threw molotov [77 1171 34]
+L 09/17/2026 - 04:57:19: "pichekistha<0><[U:1:80924469]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 09/17/2026 - 04:57:19: "prasaadem<3><[U:1:1075176373]><CT>" [148 1441 32] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [-2 1823 32] with "p90" (headshot)
+L 09/17/2026 - 04:57:19: "bazooka39<8><[U:1:1076778384]><TERRORIST>" sv_throw_smokegrenade -183.463 1832.457 96.826 0.000 0.000 0.000 -245.380 -654.032 34.856 600.000 -1018.000 0.000 45 2
+L 09/17/2026 - 04:57:21: "Sheldor<1><[U:1:1080094440]><CT>" sv_throw_smokegrenade -597.815 427.966 31.870 0.000 0.000 0.000 -132.655 150.606 -26.957 600.000 396.000 0.000 45 3
+L 09/17/2026 - 04:57:21: "bazooka39<8><[U:1:1076778384]><TERRORIST>" threw smokegrenade [-324 1931 34]
+L 09/17/2026 - 04:57:21: "blazingshack<6><[U:1:1085341771]><TERRORIST>" sv_throw_hegrenade -916.944 1471.389 65.819 0.000 0.000 0.000 932.050 -61.391 76.736 600.000 247.000 0.000 44 3.000
+L 09/17/2026 - 04:57:22: "bazooka39<8><[U:1:1076778384]><TERRORIST>" [-264 1860 32] killed "prasaadem<3><[U:1:1075176373]><CT>" [-8 1683 32] with "bizon" (throughsmoke)
+L 09/17/2026 - 04:57:22: "Pheonix<5><[U:1:104794797]><TERRORIST>" assisted killing "prasaadem<3><[U:1:1075176373]><CT>"
+L 09/17/2026 - 04:57:22: "Sheldor<1><[U:1:1080094440]><CT>" threw smokegrenade [-664 485 2]
+L 09/17/2026 - 04:57:23: "blazingshack<6><[U:1:1085341771]><TERRORIST>" threw hegrenade [30 1409 34]
+L 09/17/2026 - 04:57:23: "bazooka39<8><[U:1:1076778384]><TERRORIST>" [-78 1711 32] killed "Beni Lava<2><[U:1:145395478]><CT>" [-24 1558 32] with "bizon"
+L 09/17/2026 - 04:57:23: "Pheonix<5><[U:1:104794797]><TERRORIST>" assisted killing "Beni Lava<2><[U:1:145395478]><CT>"
+L 09/17/2026 - 04:57:24: rcon from "169.150.232.56:43876": command "status_json"
+L 09/17/2026 - 04:57:24: rcon from "169.150.232.56:43876": command "status"
+L 09/17/2026 - 04:57:27: "BigHero<4><[U:1:887890842]><TERRORIST>" [-113 1531 32] killed "kiiiiiira<7><[U:1:335158966]><CT>" [622 1150 32] with "ak47" (headshot throughsmoke)
+L 09/17/2026 - 04:57:28: "bazooka39<8><[U:1:1076778384]><TERRORIST>" triggered "Got_The_Bomb"
+L 09/17/2026 - 04:57:29: "Sheldor<1><[U:1:1080094440]><CT>" [-420 414 0] killed "Pheonix<5><[U:1:104794797]><TERRORIST>" [-1220 1389 0] with "deagle" (headshot throughsmoke)
+L 09/17/2026 - 04:57:29: "Beni Lava<2><[U:1:145395478]><CT>" assisted killing "Pheonix<5><[U:1:104794797]><TERRORIST>"
+L 09/17/2026 - 04:57:32: "bazooka39<8><[U:1:1076778384]><TERRORIST>" sv_throw_molotov 73.075 1467.676 99.709 0.000 0.000 0.000 649.836 -509.475 156.460 600.000 -768.000 0.000 46
+L 09/17/2026 - 04:57:32: Molotov projectile spawned at 73.075417 1467.675659 99.708687, velocity 649.835938 -509.475403 156.460281
+L 09/17/2026 - 04:57:33: "bazooka39<8><[U:1:1076778384]><TERRORIST>" threw molotov [690 1324 34]
+L 09/17/2026 - 04:57:34: rcon from "169.150.232.56:50920": command "status_json"
+L 09/17/2026 - 04:57:34: rcon from "169.150.232.56:50920": command "status"
+L 09/17/2026 - 04:57:34: "bazooka39<8><[U:1:1076778384]><TERRORIST>" triggered "Bomb_Begin_Plant" at bombsite A
+L 09/17/2026 - 04:57:35: "BigHero<4><[U:1:887890842]><TERRORIST>" [1 1033 33] killed "Sheldor<1><[U:1:1080094440]><CT>" [137 128 0] with "ak47" (headshot)
+L 09/17/2026 - 04:57:35: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "0") (T "2")
+L 09/17/2026 - 04:57:35: Team "CT" scored "0" with "8" players
+L 09/17/2026 - 04:57:35: Team "TERRORIST" scored "2" with "7" players
+L 09/17/2026 - 04:57:35: MatchStatus: Team "CT" is unset.
+L 09/17/2026 - 04:57:35: MatchStatus: Team "TERRORIST" is unset.
+L 09/17/2026 - 04:57:35: MatchStatus: Score: 0:2 on map "de_shortdust" RoundsPlayed: 2
+L 09/17/2026 - 04:57:35: World triggered "Round_End"
+L 09/17/2026 - 04:57:38: "bazooka39<8><[U:1:1076778384]><TERRORIST>" triggered "Planted_The_Bomb" at bombsite A
+L 09/17/2026 - 04:57:44: rcon from "169.150.232.56:46600": command "status_json"
+L 09/17/2026 - 04:57:44: rcon from "169.150.232.56:46600": command "status"
+L 09/17/2026 - 04:57:45: Starting Freeze period
+L 09/17/2026 - 04:57:45: JSON_BEGIN{
+L 09/17/2026 - 04:57:45: "name": "round_stats",
+L 09/17/2026 - 04:57:45: "round_number" : "3",
+L 09/17/2026 - 04:57:45: "score_t" : "2",
+L 09/17/2026 - 04:57:45: "score_ct" : "0",
+L 09/17/2026 - 04:57:45: "map" : "de_shortdust",
+L 09/17/2026 - 04:57:45: "server" : "cupcake",
+L 09/17/2026 - 04:57:45: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/17/2026 - 04:57:45: "players" : {
+L 09/17/2026 - 04:57:45: "player_0" : "            80924469,      2,   3100,      0,      1,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:57:45: "player_1" : "          1080094440,      3,   3850,      1,      2,      0,  11.00, 100.00,   0.50,      6,      0,      3,      0,      0,      0,      0,      1,      0,      1,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/17/2026 - 04:57:45: "player_2" : "           145395478,      3,   3750,      0,      2,      1, 109.00,   0.00,   0.00,     54,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:57:45: "player_3" : "          1075176373,      3,   2900,      1,      2,      0, 100.00, 100.00,   0.50,     50,      0,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,0.000000,0.000000,      1,      1,      0"
+L 09/17/2026 - 04:57:45: "player_4" : "           887890842,      2,   3600,      4,      0,      0, 302.00,  75.00,   0.00,    151,      1,      0,      0,      0,      0,      0,      0,      1,      2,      0,      0,0.000000,0.000000,      0,      2,      1"
+L 09/17/2026 - 04:57:45: "player_5" : "           104794797,      2,   2800,      0,      1,      2, 172.00,   0.00,   0.00,     86,      0,      2,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:57:45: "player_6" : "          1085341771,      2,   3400,      2,      0,      0, 199.00,  50.00,   0.00,    100,      1,      0,     24,      0,      0,      0,      0,      0,      2,      0,      0,0.000000,24.000000,      0,      1,      0"
+L 09/17/2026 - 04:57:45: "player_7" : "           335158966,      3,   2450,      0,      2,      0,  43.00,   0.00,   0.00,     22,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:57:45: "player_8" : "          1076778384,      2,   4500,      2,      0,      1, 127.00,   0.00,   0.00,     64,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/17/2026 - 04:57:45: }}JSON_END
+L 09/17/2026 - 04:57:45: "blazingshack<6><[U:1:1085341771]><TERRORIST>" triggered "Got_The_Bomb"
+L 09/17/2026 - 04:57:45: MatchStatus: Team "CT" is unset.
+L 09/17/2026 - 04:57:45: MatchStatus: Team "TERRORIST" is unset.
+L 09/17/2026 - 04:57:45: MatchStatus: Score: 0:2 on map "de_shortdust" RoundsPlayed: 2
+L 09/17/2026 - 04:57:46: "Pheonix<5><[U:1:104794797]><TERRORIST>" purchased "ak47"
+L 09/17/2026 - 04:57:46: "pichekistha<0><[U:1:80924469]><TERRORIST>" purchased "galilar"
+L 09/17/2026 - 04:57:47: "kiiiiiira<7><[U:1:335158966]><CT>" purchased "p90"
+L 09/17/2026 - 04:57:47: "blazingshack<6><[U:1:1085341771]><TERRORIST>" purchased "hegrenade"
+L 09/17/2026 - 04:57:47: "prasaadem<3><[U:1:1075176373]><CT>" purchased "p90"
+L 09/17/2026 - 04:57:47: "pichekistha<0><[U:1:80924469]><TERRORIST>" purchased "smokegrenade"
+L 09/17/2026 - 04:57:47: "Sheldor<1><[U:1:1080094440]><CT>" purchased "m4a1_silencer"
+L 09/17/2026 - 04:57:47: "blazingshack<6><[U:1:1085341771]><TERRORIST>" purchased "molotov"
+L 09/17/2026 - 04:57:47: "pichekistha<0><[U:1:80924469]><TERRORIST>" purchased "hegrenade"
+L 09/17/2026 - 04:57:47: "Sheldor<1><[U:1:1080094440]><CT>" purchased "deagle"
+L 09/17/2026 - 04:57:47: "bazooka39<8><[U:1:1076778384]><TERRORIST>" purchased "molotov"
+L 09/17/2026 - 04:57:48: "pichekistha<0><[U:1:80924469]><TERRORIST>" purchased "molotov"
+L 09/17/2026 - 04:57:48: "Sheldor<1><[U:1:1080094440]><CT>" purchased "flashbang"
+L 09/17/2026 - 04:57:48: "bazooka39<8><[U:1:1076778384]><TERRORIST>" purchased "smokegrenade"
+L 09/17/2026 - 04:57:50: World triggered "Round_Start"
+L 09/17/2026 - 04:57:52: "Beni Lava<2><[U:1:145395478]><CT>" purchased "m4a1_silencer"
+L 09/17/2026 - 04:57:52: "Beni Lava<2><[U:1:145395478]><CT>" purchased "hegrenade"
+L 09/17/2026 - 04:57:52: "Beni Lava<2><[U:1:145395478]><CT>" purchased "flashbang"
+L 09/17/2026 - 04:57:53: "Beni Lava<2><[U:1:145395478]><CT>" purchased "smokegrenade"
+L 09/17/2026 - 04:57:54: rcon from "169.150.232.56:36794": command "status_json"
+L 09/17/2026 - 04:57:54: rcon from "169.150.232.56:36794": command "status"
+L 09/17/2026 - 04:57:56: "bazooka39<8><[U:1:1076778384]><TERRORIST>" sv_throw_molotov -123.503 1787.060 102.737 0.000 0.000 0.000 182.485 -777.860 284.213 600.000 144.000 0.000 46
+L 09/17/2026 - 04:57:56: Molotov projectile spawned at -123.503235 1787.060303 102.736908, velocity 182.485428 -777.859619 284.213440
+L 09/17/2026 - 04:57:56: "pichekistha<0><[U:1:80924469]><TERRORIST>" sv_throw_smokegrenade -154.600 1824.053 97.288 0.000 0.000 0.000 409.603 -533.758 54.338 600.000 -931.000 0.000 45 2
+L 09/17/2026 - 04:57:58: "Sheldor<1><[U:1:1080094440]><CT>" sv_throw_flashgrenade 669.566 951.883 97.486 0.000 0.000 0.000 -287.801 919.047 62.687 600.000 -18.000 0.000 43
+L 09/17/2026 - 04:57:58: "bazooka39<8><[U:1:1076778384]><TERRORIST>" sv_throw_smokegrenade -187.698 1881.529 98.854 0.000 0.000 0.000 424.442 -527.662 120.388 600.000 801.000 0.000 45 2
+L 09/17/2026 - 04:57:58: "bazooka39<8><[U:1:1076778384]><TERRORIST>" threw molotov [-51 1262 58]
+L 09/17/2026 - 04:57:58: "pichekistha<0><[U:1:80924469]><TERRORIST>" threw smokegrenade [323 1201 34]
+L 09/17/2026 - 04:57:59: "Sheldor<1><[U:1:1080094440]><CT>" threw flashbang [496 1280 36] flashbang entindex 902)
+L 09/17/2026 - 04:58:00: "bazooka39<8><[U:1:1076778384]><TERRORIST>" threw smokegrenade [421 1183 34]
+L 09/17/2026 - 04:58:03: "Pheonix<5><[U:1:104794797]><TERRORIST>" [-1016 1533 0] killed "prasaadem<3><[U:1:1075176373]><CT>" [-844 1316 0] with "ak47"
+L 09/17/2026 - 04:58:03: "pichekistha<0><[U:1:80924469]><TERRORIST>" sv_throw_molotov 57.720 1783.404 100.699 0.000 0.000 0.000 -124.284 -633.148 198.247 600.000 -567.000 0.000 46
+L 09/17/2026 - 04:58:03: Molotov projectile spawned at 57.720406 1783.403809 100.699188, velocity -124.284271 -633.148071 198.247147
+L 09/17/2026 - 04:58:04: "Beni Lava<2><[U:1:145395478]><CT>" [44 751 0] killed "BigHero<4><[U:1:887890842]><TERRORIST>" [-165 1516 32] with "m4a1_silencer"
+L 09/17/2026 - 04:58:04: rcon from "169.150.232.56:32868": command "status_json"
+L 09/17/2026 - 04:58:04: rcon from "169.150.232.56:32868": command "status"
+L 09/17/2026 - 04:58:04: "pichekistha<0><[U:1:80924469]><TERRORIST>" threw molotov [-104 959 87]
+L 09/17/2026 - 04:58:05: "blazingshack<6><[U:1:1085341771]><TERRORIST>" [-1559 1488 -36] killed "kiiiiiira<7><[U:1:335158966]><CT>" [-1543 1477 -108] with "xm1014"
+L 09/17/2026 - 04:58:12: "Beni Lava<2><[U:1:145395478]><CT>" sv_throw_flashgrenade 640.219 1154.672 98.875 0.000 0.000 0.000 -724.508 203.547 121.275 600.000 1189.000 0.000 43
+L 09/17/2026 - 04:58:13: "Beni Lava<2><[U:1:145395478]><CT>" threw flashbang [323 1329 48] flashbang entindex 912)
+L 09/17/2026 - 04:58:13: "pichekistha<0><[U:1:80924469]><TERRORIST>" blinded for 4.54 by "Beni Lava<2><[U:1:145395478]><CT>" from flashbang entindex 912 
+L 09/17/2026 - 04:58:13: "Pheonix<5><[U:1:104794797]><TERRORIST>" blinded for 4.61 by "Beni Lava<2><[U:1:145395478]><CT>" from flashbang entindex 912 
+L 09/17/2026 - 04:58:13: "Sheldor<1><[U:1:1080094440]><CT>" blinded for 5.23 by "Beni Lava<2><[U:1:145395478]><CT>" from flashbang entindex 912 
+L 09/17/2026 - 04:58:14: rcon from "169.150.232.56:45762": command "status_json"
+L 09/17/2026 - 04:58:14: rcon from "169.150.232.56:45762": command "status"
+L 09/17/2026 - 04:58:19: "blazingshack<6><[U:1:1085341771]><TERRORIST>" sv_throw_hegrenade -183.488 1275.908 99.011 0.000 0.000 0.000 658.315 -78.161 127.035 600.000 -767.000 0.000 44 3.000
+L 09/17/2026 - 04:58:21: "blazingshack<6><[U:1:1085341771]><TERRORIST>" threw hegrenade [713 1169 49]
+L 09/17/2026 - 04:58:21: "blazingshack<6><[U:1:1085341771]><TERRORIST>" [-240 1339 32] killed other "prop_physics_multiplayer<674>" [440 1156 36] with "hegrenade"
+L 09/17/2026 - 04:58:23: "Beni Lava<2><[U:1:145395478]><CT>" sv_throw_hegrenade 220.487 586.584 65.470 0.000 0.000 0.000 -331.747 579.639 97.913 600.000 1124.000 0.000 44 3.000
+L 09/17/2026 - 04:58:23: "Sheldor<1><[U:1:1080094440]><CT>" [517 1324 32] killed "Pheonix<5><[U:1:104794797]><TERRORIST>" [241 1319 32] with "m4a1_silencer"
+L 09/17/2026 - 04:58:23: "kiiiiiira<7><[U:1:335158966]><CT>" assisted killing "Pheonix<5><[U:1:104794797]><TERRORIST>"
+L 09/17/2026 - 04:58:24: "blazingshack<6><[U:1:1085341771]><TERRORIST>" sv_throw_molotov -349.467 1370.060 99.740 0.000 0.000 0.000 827.002 -231.435 157.766 600.000 -791.000 0.000 46
+L 09/17/2026 - 04:58:24: Molotov projectile spawned at -349.467194 1370.059692 99.739647, velocity 827.001526 -231.435455 157.766312
+L 09/17/2026 - 04:58:24: rcon from "169.150.232.56:42212": command "status_json"
+L 09/17/2026 - 04:58:24: rcon from "169.150.232.56:42212": command "status"
+L 09/17/2026 - 04:58:24: "Sheldor<1><[U:1:1080094440]><CT>" [515 1257 32] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [307 1252 32] with "m4a1_silencer"
+L 09/17/2026 - 04:58:24: "Beni Lava<2><[U:1:145395478]><CT>" threw hegrenade [-152 1237 35]
+L 09/17/2026 - 04:58:25: "blazingshack<6><[U:1:1085341771]><TERRORIST>" threw molotov [569 1163 34]
+L 09/17/2026 - 04:58:30: "blazingshack<6><[U:1:1085341771]><TERRORIST>" sv_throw_flashgrenade 77.879 1428.816 97.867 0.000 0.000 0.000 858.216 -455.992 78.779 600.000 -742.000 0.000 43
+L 09/17/2026 - 04:58:31: "blazingshack<6><[U:1:1085341771]><TERRORIST>" threw flashbang [605 1015 34] flashbang entindex 921)
+L 09/17/2026 - 04:58:34: rcon from "169.150.232.56:60114": command "status_json"
+L 09/17/2026 - 04:58:34: rcon from "169.150.232.56:60114": command "status"
+L 09/17/2026 - 04:58:39: "bazooka39<8><[U:1:1076778384]><TERRORIST>" [176 1078 32] killed "Sheldor<1><[U:1:1080094440]><CT>" [-394 489 35] with "bizon"
+L 09/17/2026 - 04:58:39: "blazingshack<6><[U:1:1085341771]><TERRORIST>" assisted killing "Sheldor<1><[U:1:1080094440]><CT>"
+L 09/17/2026 - 04:58:44: rcon from "169.150.232.56:57248": command "status_json"
+L 09/17/2026 - 04:58:44: rcon from "169.150.232.56:57248": command "status"
+L 09/17/2026 - 04:58:45: "blazingshack<6><[U:1:1085341771]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 09/17/2026 - 04:58:45: "Beni Lava<2><[U:1:145395478]><CT>" [-157 1051 32] killed "blazingshack<6><[U:1:1085341771]><TERRORIST>" [190 1356 32] with "m4a1_silencer"
+L 09/17/2026 - 04:58:48: "bazooka39<8><[U:1:1076778384]><TERRORIST>" [248 1267 32] killed "Beni Lava<2><[U:1:145395478]><CT>" [240 1207 32] with "galilar"
+L 09/17/2026 - 04:58:48: "BigHero<4><[U:1:887890842]><TERRORIST>" assisted killing "Beni Lava<2><[U:1:145395478]><CT>"
+L 09/17/2026 - 04:58:48: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "0") (T "3")
+L 09/17/2026 - 04:58:48: Team "CT" scored "0" with "8" players
+L 09/17/2026 - 04:58:48: Team "TERRORIST" scored "3" with "9" players
+L 09/17/2026 - 04:58:48: MatchStatus: Team "CT" is unset.
+L 09/17/2026 - 04:58:48: MatchStatus: Team "TERRORIST" is unset.
+L 09/17/2026 - 04:58:48: MatchStatus: Score: 0:3 on map "de_shortdust" RoundsPlayed: 3
+L 09/17/2026 - 04:58:48: World triggered "Round_End"
+L 09/17/2026 - 04:58:54: rcon from "169.150.232.56:35450": command "status_json"
+L 09/17/2026 - 04:58:54: rcon from "169.150.232.56:35450": command "status"
+L 09/17/2026 - 04:58:58: Starting Freeze period
+L 09/17/2026 - 04:58:58: JSON_BEGIN{
+L 09/17/2026 - 04:58:58: "name": "round_stats",
+L 09/17/2026 - 04:58:58: "round_number" : "4",
+L 09/17/2026 - 04:58:58: "score_t" : "3",
+L 09/17/2026 - 04:58:58: "score_ct" : "0",
+L 09/17/2026 - 04:58:58: "map" : "de_shortdust",
+L 09/17/2026 - 04:58:58: "server" : "cupcake",
+L 09/17/2026 - 04:58:58: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/17/2026 - 04:58:58: "players" : {
+L 09/17/2026 - 04:58:58: "player_0" : "            80924469,      2,   3000,      0,      2,      0,  23.00,   0.00,   0.00,      8,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:58:58: "player_1" : "          1080094440,      3,   2750,      3,      3,      0, 139.00,  33.33,   1.00,     46,      0,      3,      0,      0,      0,      0,      1,      0,      1,      0,      0,0.000000,0.000000,      0,      2,      0"
+L 09/17/2026 - 04:58:58: "player_2" : "           145395478,      3,   2750,      2,      3,      1, 388.00,   0.00,   0.67,    129,      0,      2,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      1,      1,      0"
+L 09/17/2026 - 04:58:58: "player_3" : "          1075176373,      3,   2950,      1,      3,      0, 112.00, 100.00,   0.33,     37,      0,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,0.000000,0.000000,      1,      1,      0"
+L 09/17/2026 - 04:58:58: "player_4" : "           887890842,      2,   6300,      4,      1,      1, 329.00,  75.00,   4.00,    110,      1,      0,      0,      0,      0,      0,      0,      1,      2,      0,      0,0.000000,0.000000,      0,      2,      1"
+L 09/17/2026 - 04:58:58: "player_5" : "           104794797,      2,   2950,      1,      2,      2, 272.00,   0.00,   0.50,     91,      0,      2,      0,      0,      0,      0,      0,      1,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/17/2026 - 04:58:58: "player_6" : "          1085341771,      2,   5700,      3,      1,      1, 337.00,  33.33,   3.00,    112,      1,      0,     61,      0,      0,      0,      0,      0,      2,      0,      0,37.000000,24.000000,      0,      2,      0"
+L 09/17/2026 - 04:58:58: "player_7" : "           335158966,      3,   2500,      0,      3,      1, 103.00,   0.00,   0.00,     34,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 04:58:58: "player_8" : "          1076778384,      2,   6950,      4,      0,      1, 239.00,   0.00,   0.00,     80,      1,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      0,      2,      0"
+L 09/17/2026 - 04:58:58: }}JSON_END
+L 09/17/2026 - 04:58:58: "Pheonix<5><[U:1:104794797]><TERRORIST>" triggered "Got_The_Bomb"
+L 09/17/2026 - 04:58:58: MatchStatus: Team "CT" is unset.
+L 09/17/2026 - 04:58:58: MatchStatus: Team "TERRORIST" is unset.
+L 09/17/2026 - 04:58:58: MatchStatus: Score: 0:3 on map "de_shortdust" RoundsPlayed: 3
+L 09/17/2026 - 04:59:00: "Pheonix<5><[U:1:104794797]><TERRORIST>" purchased "ak47"
+L 09/17/2026 - 04:59:00: "pichekistha<0><[U:1:80924469]><TERRORIST>" purchased "ak47"
+L 09/17/2026 - 04:59:00: "Pheonix<5><[U:1:104794797]><TERRORIST>" purchased "flashbang"
+L 09/17/2026 - 04:59:00: "prasaadem<3><[U:1:1075176373]><CT>" purchased "p90"
+L 09/17/2026 - 04:59:00: "Sheldor<1><[U:1:1080094440]><CT>" purchased "deagle"
+L 09/17/2026 - 04:59:01: "BigHero<4><[U:1:887890842]><TERRORIST>" purchased "awp"
+L 09/17/2026 - 04:59:01: "prasaadem<3><[U:1:1075176373]><CT>" purchased "incgrenade"
+L 09/17/2026 - 04:59:01: "Sheldor<1><[U:1:1080094440]><CT>" purchased "flashbang"
+L 09/17/2026 - 04:59:01: "Sheldor<1><[U:1:1080094440]><CT>" purchased "smokegrenade"
+L 09/17/2026 - 04:59:02: rcon from "169.150.247.207:56742": command "status"
+L 09/17/2026 - 04:59:03: rcon from "169.150.247.207:56748": command "status_json"
+L 09/17/2026 - 04:59:03: World triggered "Round_Start"
+L 09/17/2026 - 04:59:04: rcon from "169.150.232.56:42928": command "status_json"
+L 09/17/2026 - 04:59:04: rcon from "169.150.232.56:42928": command "status"
+L 09/17/2026 - 04:59:04: "pichekistha<0><[U:1:80924469]><TERRORIST>" purchased "p90"
+L 09/17/2026 - 04:59:04: "kiiiiiira<7><[U:1:335158966]><CT>" purchased "p90"
+L 09/17/2026 - 04:59:04: "bazooka39<8><[U:1:1076778384]><TERRORIST>" purchased "molotov"
+L 09/17/2026 - 04:59:05: "bazooka39<8><[U:1:1076778384]><TERRORIST>" purchased "smokegrenade"
+L 09/17/2026 - 04:59:06: "Beni Lava<2><[U:1:145395478]><CT>" purchased "deagle"
+L 09/17/2026 - 04:59:06: "pichekistha<0><[U:1:80924469]><TERRORIST>" purchased "smokegrenade"
+L 09/17/2026 - 04:59:07: "Beni Lava<2><[U:1:145395478]><CT>" purchased "hegrenade"
+L 09/17/2026 - 04:59:07: "Beni Lava<2><[U:1:145395478]><CT>" purchased "smokegrenade"
+L 09/17/2026 - 04:59:07: "Pheonix<5><[U:1:104794797]><TERRORIST>" sv_throw_flashgrenade -1098.309 1323.805 -117.595 0.000 0.000 0.000 421.922 -690.970 438.965 600.000 -813.000 0.000 43
+L 09/17/2026 - 04:59:09: "Pheonix<5><[U:1:104794797]><TERRORIST>" threw flashbang [-480 493 171] flashbang entindex 171)
+L 09/17/2026 - 04:59:09: "prasaadem<3><[U:1:1075176373]><CT>" blinded for 2.94 by "Pheonix<5><[U:1:104794797]><TERRORIST>" from flashbang entindex 171 
+L 09/17/2026 - 04:59:09: "Sheldor<1><[U:1:1080094440]><CT>" blinded for 0.86 by "Pheonix<5><[U:1:104794797]><TERRORIST>" from flashbang entindex 171 
+L 09/17/2026 - 04:59:10: "prasaadem<3><[U:1:1075176373]><CT>" sv_throw_molotov 13.313 880.036 89.674 0.000 0.000 0.000 -87.489 815.853 212.124 600.000 838.000 0.000 48
+L 09/17/2026 - 04:59:10: Molotov projectile spawned at 13.312677 880.036133 89.673874, velocity -87.489082 815.852966 212.123871
+L 09/17/2026 - 04:59:11: "mcdreamy111<9><[U:1:156268658]><>" connected, address "73.170.212.101:63598"
+L 09/17/2026 - 04:59:12: "prasaadem<3><[U:1:1075176373]><CT>" threw molotov [-119 1912 34]
+L 09/17/2026 - 04:59:12: "mcdreamy111<9><[U:1:156268658]><>" STEAM USERID validated
+L 09/17/2026 - 04:59:12: "blazingshack<6><[U:1:1085341771]><TERRORIST>" purchased "awp"
+L 09/17/2026 - 04:59:12: "mcdreamy111<9><[U:1:156268658]><>" entered the game
+L 09/17/2026 - 04:59:13: "blazingshack<6><[U:1:1085341771]><TERRORIST>" purchased "hegrenade"
+L 09/17/2026 - 04:59:13: "bazooka39<8><[U:1:1076778384]><TERRORIST>" sv_throw_molotov -305.043 1881.336 99.528 0.000 0.000 0.000 583.786 -311.501 148.830 600.000 618.000 0.000 46
+L 09/17/2026 - 04:59:13: Molotov projectile spawned at -305.043274 1881.335571 99.527832, velocity 583.786072 -311.501343 148.830307
+L 09/17/2026 - 04:59:14: rcon from "169.150.232.56:46870": command "status_json"
+L 09/17/2026 - 04:59:14: rcon from "169.150.232.56:46870": command "status"
+L 09/17/2026 - 04:59:14: "Beni Lava<2><[U:1:145395478]><CT>" sv_throw_hegrenade 118.509 313.664 67.070 0.000 0.000 0.000 -807.433 501.916 157.190 600.000 -624.000 0.000 44 3.000
+L 09/17/2026 - 04:59:14: "bazooka39<8><[U:1:1076778384]><TERRORIST>" threw molotov [-40 1559 34]
+L 09/17/2026 - 04:59:15: "Beni Lava<2><[U:1:145395478]><CT>" threw hegrenade [-790 988 9]
+L 09/17/2026 - 04:59:15: "Sheldor<1><[U:1:1080094440]><CT>" sv_throw_flashgrenade -60.507 838.067 76.638 0.000 0.000 0.000 264.541 656.060 170.921 600.000 526.000 0.000 43
+L 09/17/2026 - 04:59:17: "Sheldor<1><[U:1:1080094440]><CT>" threw flashbang [146 1438 41] flashbang entindex 114)
+L 09/17/2026 - 04:59:17: "BigHero<4><[U:1:887890842]><TERRORIST>" blinded for 3.20 by "Sheldor<1><[U:1:1080094440]><CT>" from flashbang entindex 114 
+L 09/17/2026 - 04:59:18: "Sheldor<1><[U:1:1080094440]><CT>" sv_throw_smokegrenade -283.340 844.202 68.790 0.000 0.000 0.000 -778.330 -11.611 -64.426 600.000 -659.000 0.000 45 3
+L 09/17/2026 - 04:59:19: "Sheldor<1><[U:1:1080094440]><CT>" threw smokegrenade [-866 835 2]
+L 09/17/2026 - 04:59:23: "bazooka39<8><[U:1:1076778384]><TERRORIST>" sv_throw_smokegrenade -231.212 1887.520 99.186 0.000 0.000 0.000 434.319 -498.924 134.414 600.000 -1007.000 0.000 45 2
+L 09/17/2026 - 04:59:24: rcon from "169.150.232.56:51372": command "status_json"
+L 09/17/2026 - 04:59:24: rcon from "169.150.232.56:51372": command "status"
+L 09/17/2026 - 04:59:25: "bazooka39<8><[U:1:1076778384]><TERRORIST>" threw smokegrenade [427 1177 34]
+L 09/17/2026 - 04:59:28: "Beni Lava<2><[U:1:145395478]><CT>" [168 602 -1] killed "BigHero<4><[U:1:887890842]><TERRORIST>" [-184 1383 32] with "deagle" (headshot)
+L 09/17/2026 - 04:59:29: "pichekistha<0><[U:1:80924469]><TERRORIST>" sv_throw_smokegrenade 29.688 1797.712 96.321 0.000 0.000 0.000 175.657 -651.603 13.553 600.000 951.000 0.000 45 2
+L 09/17/2026 - 04:59:29: "mcdreamy111<9><[U:1:156268658]>" switched from team <Unassigned> to <CT>
+L 09/17/2026 - 04:59:30: "pichekistha<0><[U:1:80924469]><TERRORIST>" threw smokegrenade [203 1179 34]
+L 09/17/2026 - 04:59:31: "kiiiiiira<7><[U:1:335158966]><CT>" [146 1324 32] killed "bazooka39<8><[U:1:1076778384]><TERRORIST>" [64 1425 32] with "p90" (headshot throughsmoke)
+L 09/17/2026 - 04:59:32: "pichekistha<0><[U:1:80924469]><TERRORIST>" [-70 1619 32] killed "kiiiiiira<7><[U:1:335158966]><CT>" [155 1429 32] with "m4a1_silencer" (headshot)
+L 09/17/2026 - 04:59:34: rcon from "169.150.232.56:43692": command "status_json"
+L 09/17/2026 - 04:59:34: "Pheonix<5><[U:1:104794797]><TERRORIST>" [-1167 1418 0] killed "prasaadem<3><[U:1:1075176373]><CT>" [-843 500 32] with "ak47" (headshot penetrated)
+L 09/17/2026 - 04:59:34: rcon from "169.150.232.56:43692": command "status"
+L 09/17/2026 - 04:59:35: "Beni Lava<2><[U:1:145395478]><CT>" sv_throw_smokegrenade 110.784 690.757 62.716 0.000 0.000 0.000 -260.047 620.088 59.085 600.000 401.000 0.000 45 3
+L 09/17/2026 - 04:59:37: "Beni Lava<2><[U:1:145395478]><CT>" threw smokegrenade [-120 1240 34]
+L 09/17/2026 - 04:59:44: rcon from "169.150.232.56:57328": command "status_json"
+L 09/17/2026 - 04:59:44: rcon from "169.150.232.56:57328": command "status"
+L 09/17/2026 - 04:59:46: "blazingshack<6><[U:1:1085341771]><TERRORIST>" sv_throw_hegrenade -822.940 1446.998 67.597 0.000 0.000 0.000 925.133 -63.269 151.766 600.000 996.000 0.000 44 3.000
+L 09/17/2026 - 04:59:48: "blazingshack<6><[U:1:1085341771]><TERRORIST>" threw hegrenade [184 1369 36]
+L 09/17/2026 - 04:59:48: "blazingshack<6><[U:1:1085341771]><TERRORIST>" [-826 1465 0] killed other "prop_physics_multiplayer<456>" [440 1156 36] with "hegrenade"
+L 09/17/2026 - 04:59:50: "Pheonix<5><[U:1:104794797]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 09/17/2026 - 04:59:50: "Sheldor<1><[U:1:1080094440]><CT>" [-1210 1336 0] killed "Pheonix<5><[U:1:104794797]><TERRORIST>" [-1304 972 32] with "deagle" (headshot)
+L 09/17/2026 - 04:59:54: rcon from "169.150.232.56:49950": command "status_json"
+L 09/17/2026 - 04:59:54: rcon from "169.150.232.56:49950": command "status"
+L 09/17/2026 - 04:59:55: "blazingshack<6><[U:1:1085341771]><TERRORIST>" [-1251 1372 0] killed "Sheldor<1><[U:1:1080094440]><CT>" [-1540 1377 -34] with "glock" (headshot)
+L 09/17/2026 - 04:59:58: "Beni Lava<2><[U:1:145395478]><CT>" [220 1264 32] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [110 1572 32] with "deagle" (headshot)
+L 09/17/2026 - 04:59:58: "kiiiiiira<7><[U:1:335158966]><CT>" assisted killing "pichekistha<0><[U:1:80924469]><TERRORIST>"
+L 09/17/2026 - 05:00:04: rcon from "169.150.232.56:39360": command "status_json"
+L 09/17/2026 - 05:00:04: rcon from "169.150.232.56:39360": command "status"
+L 09/17/2026 - 05:00:14: rcon from "169.150.232.56:42926": command "status_json"
+L 09/17/2026 - 05:00:14: rcon from "169.150.232.56:42926": command "status"
+L 09/17/2026 - 05:00:24: rcon from "169.150.232.56:47734": command "status_json"
+L 09/17/2026 - 05:00:24: rcon from "169.150.232.56:47734": command "status"
+L 09/17/2026 - 05:00:34: rcon from "169.150.232.56:56012": command "status_json"
+L 09/17/2026 - 05:00:34: rcon from "169.150.232.56:56012": command "status"
+L 09/17/2026 - 05:00:42: "blazingshack<6><[U:1:1085341771]><TERRORIST>" [-388 1443 32] killed "Beni Lava<2><[U:1:145395478]><CT>" [-1144 1447 0] with "awp"
+L 09/17/2026 - 05:00:42: Team "TERRORIST" triggered "SFUI_Notice_Terrorists_Win" (CT "0") (T "4")
+L 09/17/2026 - 05:00:42: Team "CT" scored "0" with "10" players
+L 09/17/2026 - 05:00:42: Team "TERRORIST" scored "4" with "10" players
+L 09/17/2026 - 05:00:42: MatchStatus: Team "CT" is unset.
+L 09/17/2026 - 05:00:42: MatchStatus: Team "TERRORIST" is unset.
+L 09/17/2026 - 05:00:42: MatchStatus: Score: 0:4 on map "de_shortdust" RoundsPlayed: 4
+L 09/17/2026 - 05:00:42: World triggered "Round_End"
+L 09/17/2026 - 05:00:43: rcon from "185.180.15.34:47674": command "status"
+L 09/17/2026 - 05:00:44: rcon from "169.150.232.56:34730": command "status_json"
+L 09/17/2026 - 05:00:44: rcon from "169.150.232.56:34730": command "status"
+L 09/17/2026 - 05:00:47: "blazingshack<6><[U:1:1085341771]><TERRORIST>" triggered "Got_The_Bomb"
+L 09/17/2026 - 05:00:52: Starting Freeze period
+L 09/17/2026 - 05:00:52: JSON_BEGIN{
+L 09/17/2026 - 05:00:52: "name": "round_stats",
+L 09/17/2026 - 05:00:52: "round_number" : "5",
+L 09/17/2026 - 05:00:52: "score_t" : "4",
+L 09/17/2026 - 05:00:52: "score_ct" : "0",
+L 09/17/2026 - 05:00:52: "map" : "de_shortdust",
+L 09/17/2026 - 05:00:52: "server" : "cupcake",
+L 09/17/2026 - 05:00:52: "fields" : "             accountid,   team,  money,  kills, deaths,assists,    dmg,    hsp,    kdr,    adr,    mvp,     ef,     ud,     3k,     4k,     5k,clutchk, firstk,pistolk,sniperk, blindk,  bombk,firedmg,uniquek,  dinks,chickenk"
+L 09/17/2026 - 05:00:52: "players" : {
+L 09/17/2026 - 05:00:52: "player_0" : "            80924469,      2,   3200,      1,      3,      0, 123.00, 100.00,   0.33,     31,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/17/2026 - 05:00:52: "player_1" : "          1080094440,      3,   4100,      4,      4,      0, 286.00,  50.00,   1.00,     72,      0,      4,      0,      0,      0,      0,      1,      0,      2,      0,      0,0.000000,0.000000,      1,      2,      0"
+L 09/17/2026 - 05:00:52: "player_2" : "           145395478,      3,   4150,      4,      4,      1, 575.00,  50.00,   1.00,    144,      0,      2,      0,      0,      0,      0,      2,      1,      2,      0,      0,0.000000,0.000000,      1,      2,      0"
+L 09/17/2026 - 05:00:52: "player_3" : "          1075176373,      3,   2500,      1,      4,      0, 112.00, 100.00,   0.25,     28,      0,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,0.000000,0.000000,      1,      1,      0"
+L 09/17/2026 - 05:00:52: "player_4" : "           887890842,      2,   4250,      4,      2,      1, 329.00,  75.00,   2.00,     82,      1,      0,      0,      0,      0,      0,      0,      1,      2,      0,      0,0.000000,0.000000,      0,      2,      1"
+L 09/17/2026 - 05:00:52: "player_5" : "           104794797,      2,   2900,      2,      3,      2, 372.00,  50.00,   0.67,     93,      0,      3,      0,      0,      0,      0,      0,      1,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/17/2026 - 05:00:52: "player_6" : "          1085341771,      2,   3550,      5,      1,      1, 537.00,  40.00,   5.00,    134,      2,      0,     61,      0,      0,      0,      1,      0,      3,      1,      0,37.000000,24.000000,      0,      4,      0"
+L 09/17/2026 - 05:00:52: "player_7" : "           335158966,      3,   2700,      1,      4,      2, 252.00, 100.00,   0.25,     63,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      1,      0"
+L 09/17/2026 - 05:00:52: "player_8" : "          1076778384,      2,   8950,      4,      1,      1, 239.00,   0.00,   4.00,     60,      1,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,0.000000,0.000000,      0,      2,      0"
+L 09/17/2026 - 05:00:52: "player_9" : "           156268658,      3,   3400,      0,      0,      0,   0.00,   0.00,   0.00,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,0.000000,0.000000,      0,      0,      0"
+L 09/17/2026 - 05:00:52: }}JSON_END
+L 09/17/2026 - 05:00:52: "BigHero<4><[U:1:887890842]><TERRORIST>" triggered "Got_The_Bomb"
+L 09/17/2026 - 05:00:52: MatchStatus: Team "CT" is unset.
+L 09/17/2026 - 05:00:52: MatchStatus: Team "TERRORIST" is unset.
+L 09/17/2026 - 05:00:52: MatchStatus: Score: 0:4 on map "de_shortdust" RoundsPlayed: 4
+L 09/17/2026 - 05:00:53: "blazingshack<6><[U:1:1085341771]><TERRORIST>" purchased "hegrenade"
+L 09/17/2026 - 05:00:53: "Pheonix<5><[U:1:104794797]><TERRORIST>" purchased "ak47"
+L 09/17/2026 - 05:00:54: "bazooka39<8><[U:1:1076778384]><TERRORIST>" purchased "awp"
+L 09/17/2026 - 05:00:54: "prasaadem<3><[U:1:1075176373]><CT>" purchased "p90"
+L 09/17/2026 - 05:00:54: "Pheonix<5><[U:1:104794797]><TERRORIST>" purchased "flashbang"
+L 09/17/2026 - 05:00:54: rcon from "169.150.232.56:59712": command "status_json"
+L 09/17/2026 - 05:00:54: rcon from "169.150.232.56:59712": command "status"
+L 09/17/2026 - 05:00:54: "pichekistha<0><[U:1:80924469]><TERRORIST>" purchased "galilar"
+L 09/17/2026 - 05:00:54: "blazingshack<6><[U:1:1085341771]><TERRORIST>" purchased "molotov"
+L 09/17/2026 - 05:00:54: "kiiiiiira<7><[U:1:335158966]><CT>" purchased "p90"
+L 09/17/2026 - 05:00:55: "pichekistha<0><[U:1:80924469]><TERRORIST>" purchased "smokegrenade"
+L 09/17/2026 - 05:00:55: "BigHero<4><[U:1:887890842]><TERRORIST>" purchased "deagle"
+L 09/17/2026 - 05:00:55: "kiiiiiira<7><[U:1:335158966]><CT>" purchased "smokegrenade"
+L 09/17/2026 - 05:00:55: "pichekistha<0><[U:1:80924469]><TERRORIST>" purchased "molotov"
+L 09/17/2026 - 05:00:56: "BigHero<4><[U:1:887890842]><TERRORIST>" purchased "flashbang"
+L 09/17/2026 - 05:00:57: World triggered "Round_Start"
+L 09/17/2026 - 05:00:57: "Sheldor<1><[U:1:1080094440]><CT>" purchased "m4a1_silencer"
+L 09/17/2026 - 05:00:58: "Sheldor<1><[U:1:1080094440]><CT>" purchased "deagle"
+L 09/17/2026 - 05:00:58: "Sheldor<1><[U:1:1080094440]><CT>" purchased "flashbang"
+L 09/17/2026 - 05:00:58: "Sheldor<1><[U:1:1080094440]><CT>" purchased "smokegrenade"
+L 09/17/2026 - 05:01:00: "Pheonix<5><[U:1:104794797]><TERRORIST>" sv_throw_flashgrenade -1082.049 1312.853 -116.375 0.000 0.000 0.000 395.720 -660.319 490.413 600.000 -721.000 0.000 43
+L 09/17/2026 - 05:01:01: "Beni Lava<2><[U:1:145395478]><CT>" purchased "hegrenade"
+L 09/17/2026 - 05:01:01: "Beni Lava<2><[U:1:145395478]><CT>" purchased "m4a1_silencer"
+L 09/17/2026 - 05:01:02: "Beni Lava<2><[U:1:145395478]><CT>" purchased "smokegrenade"
+L 09/17/2026 - 05:01:02: "Pheonix<5><[U:1:104794797]><TERRORIST>" threw flashbang [-495 487 251] flashbang entindex 748)
+L 09/17/2026 - 05:01:02: "kiiiiiira<7><[U:1:335158966]><CT>" blinded for 1.63 by "Pheonix<5><[U:1:104794797]><TERRORIST>" from flashbang entindex 748 
+L 09/17/2026 - 05:01:02: "prasaadem<3><[U:1:1075176373]><CT>" blinded for 1.65 by "Pheonix<5><[U:1:104794797]><TERRORIST>" from flashbang entindex 748 
+L 09/17/2026 - 05:01:02: "Beni Lava<2><[U:1:145395478]><CT>" purchased "flashbang"
+L 09/17/2026 - 05:01:03: "mcdreamy111<9><[U:1:156268658]><CT>" purchased "m4a1_silencer"
+L 09/17/2026 - 05:01:03: "kiiiiiira<7><[U:1:335158966]><CT>" sv_throw_smokegrenade 131.509 692.750 62.234 0.000 0.000 0.000 -460.132 863.089 63.746 600.000 -719.000 0.000 45 3
+L 09/17/2026 - 05:01:03: "pichekistha<0><[U:1:80924469]><TERRORIST>" sv_throw_smokegrenade -151.687 1817.972 96.385 0.000 0.000 0.000 422.238 -526.380 16.240 600.000 -583.000 0.000 45 2
+L 09/17/2026 - 05:01:04: "mcdreamy111<9><[U:1:156268658]><CT>" purchased "hegrenade"
+L 09/17/2026 - 05:01:04: rcon from "169.150.232.56:51592": command "status_json"
+L 09/17/2026 - 05:01:04: "kiiiiiira<7><[U:1:335158966]><CT>" threw smokegrenade [-113 1313 34]
+L 09/17/2026 - 05:01:04: rcon from "169.150.232.56:51592": command "status"
+L 09/17/2026 - 05:01:05: "pichekistha<0><[U:1:80924469]><TERRORIST>" threw smokegrenade [272 1290 34]
+L 09/17/2026 - 05:01:07: "blazingshack<6><[U:1:1085341771]><TERRORIST>" sv_throw_hegrenade -1013.507 1441.633 67.793 0.000 0.000 0.000 918.604 -23.813 160.005 600.000 -85.000 0.000 44 3.000
+L 09/17/2026 - 05:01:08: "blazingshack<6><[U:1:1085341771]><TERRORIST>" threw hegrenade [254 1409 46]
+L 09/17/2026 - 05:01:09: "Beni Lava<2><[U:1:145395478]><CT>" [-7 514 8] killed "Pheonix<5><[U:1:104794797]><TERRORIST>" [-1078 808 -188] with "m4a1_silencer" (penetrated)
+L 09/17/2026 - 05:01:09: "pichekistha<0><[U:1:80924469]><TERRORIST>" sv_throw_molotov 7.100 1732.161 100.426 0.000 0.000 0.000 -28.106 -648.055 186.709 600.000 -262.000 0.000 46
+L 09/17/2026 - 05:01:09: Molotov projectile spawned at 7.100066 1732.160889 100.425697, velocity -28.106459 -648.054565 186.709122
+L 09/17/2026 - 05:01:10: "blazingshack<6><[U:1:1085341771]><TERRORIST>" sv_throw_molotov -913.604 1469.470 67.259 0.000 0.000 0.000 931.591 -66.980 137.474 600.000 -651.000 0.000 46
+L 09/17/2026 - 05:01:10: Molotov projectile spawned at -913.603821 1469.470093 67.258636, velocity 931.591003 -66.980469 137.473892
+L 09/17/2026 - 05:01:10: "pichekistha<0><[U:1:80924469]><TERRORIST>" threw molotov [-37 721 2]
+L 09/17/2026 - 05:01:11: "Sheldor<1><[U:1:1080094440]><CT>" sv_throw_flashgrenade 506.191 1236.889 92.453 0.000 0.000 0.000 -716.934 305.235 -149.649 600.000 -663.000 0.000 43
+L 09/17/2026 - 05:01:11: "blazingshack<6><[U:1:1085341771]><TERRORIST>" threw molotov [70 1399 34]
+L 09/17/2026 - 05:01:12: "Sheldor<1><[U:1:1080094440]><CT>" threw flashbang [183 1310 34] flashbang entindex 767)
+L 09/17/2026 - 05:01:12: "pichekistha<0><[U:1:80924469]><TERRORIST>" blinded for 4.45 by "Sheldor<1><[U:1:1080094440]><CT>" from flashbang entindex 767 
+L 09/17/2026 - 05:01:12: "kiiiiiira<7><[U:1:335158966]><CT>" blinded for 0.17 by "Sheldor<1><[U:1:1080094440]><CT>" from flashbang entindex 767 
+L 09/17/2026 - 05:01:12: "prasaadem<3><[U:1:1075176373]><CT>" blinded for 3.66 by "Sheldor<1><[U:1:1080094440]><CT>" from flashbang entindex 767 
+L 09/17/2026 - 05:01:13: "Rat<10><[U:1:892155064]><>" connected, address "50.46.246.32:59864"
+L 09/17/2026 - 05:01:14: rcon from "169.150.232.56:42574": command "status_json"
+L 09/17/2026 - 05:01:14: rcon from "169.150.232.56:42574": command "status"
+L 09/17/2026 - 05:01:14: "Rat<10><[U:1:892155064]><>" STEAM USERID validated
+L 09/17/2026 - 05:01:14: "Rat<10><[U:1:892155064]><>" entered the game
+L 09/17/2026 - 05:01:17: "Beni Lava<2><[U:1:145395478]><CT>" sv_throw_hegrenade 188.202 571.857 65.662 0.000 0.000 0.000 -295.929 602.215 73.406 600.000 254.000 0.000 44 3.000
+L 09/17/2026 - 05:01:19: "Beni Lava<2><[U:1:145395478]><CT>" threw hegrenade [-105 1169 34]
+L 09/17/2026 - 05:01:19: "Rat<10><[U:1:892155064]>" switched from team <Unassigned> to <TERRORIST>
+L 09/17/2026 - 05:01:21: "mcdreamy111<9><[U:1:156268658]><CT>" sv_throw_hegrenade 121.454 698.682 64.834 0.000 0.000 0.000 -304.964 580.214 161.162 600.000 1043.000 0.000 44 3.000
+L 09/17/2026 - 05:01:22: "mcdreamy111<9><[U:1:156268658]><CT>" threw hegrenade [-84 1366 43]
+L 09/17/2026 - 05:01:24: rcon from "169.150.232.56:34602": command "status_json"
+L 09/17/2026 - 05:01:24: rcon from "169.150.232.56:34602": command "status"
+L 09/17/2026 - 05:01:24: "Beni Lava<2><[U:1:145395478]><CT>" [77 598 57] killed "bazooka39<8><[U:1:1076778384]><TERRORIST>" [-1304 888 32] with "m4a1_silencer" (headshot)
+L 09/17/2026 - 05:01:25: "pichekistha<0><[U:1:80924469]><TERRORIST>" [-159 1432 32] killed "kiiiiiira<7><[U:1:335158966]><CT>" [-76 1133 32] with "galilar" (headshot)
+L 09/17/2026 - 05:01:26: "BigHero<4><[U:1:887890842]><TERRORIST>" triggered "Dropped_The_Bomb"
+L 09/17/2026 - 05:01:26: "Beni Lava<2><[U:1:145395478]><CT>" [71 585 57] killed "BigHero<4><[U:1:887890842]><TERRORIST>" [-977 685 -181] with "m4a1_silencer"
+L 09/17/2026 - 05:01:27: "Sheldor<1><[U:1:1080094440]><CT>" [441 1291 32] killed "pichekistha<0><[U:1:80924469]><TERRORIST>" [-137 1424 32] with "m4a1_silencer"
+L 09/17/2026 - 05:01:34: rcon from "169.150.232.56:48140": command "status_json"
+L 09/17/2026 - 05:01:34: rcon from "169.150.232.56:48140": command "status"
+L 09/17/2026 - 05:01:37: "MAXROY<11><[U:1:867967831]><>" connected, address "71.198.205.35:64367"
+L 09/17/2026 - 05:01:38: "MAXROY<11><[U:1:867967831]><>" STEAM USERID validated
+L 09/17/2026 - 05:01:44: rcon from "169.150.232.56:42254": command "status_json"
+L 09/17/2026 - 05:01:44: rcon from "169.150.232.56:42254": command "status"
+L 09/17/2026 - 05:01:46: "blazingshack<6><[U:1:1085341771]><TERRORIST>" [-1081 1362 -192] killed "mcdreamy111<9><[U:1:156268658]><CT>" [-1178 1059 -187] with "awp"
+L 09/17/2026 - 05:01:50: "prasaadem<3><[U:1:1075176373]><CT>" [-1201 1369 0] killed "blazingshack<6><[U:1:1085341771]><TERRORIST>" [-1595 1345 -62] with "p90"
+L 09/17/2026 - 05:01:50: Team "CT" triggered "SFUI_Notice_CTs_Win" (CT "1") (T "4")
+L 09/17/2026 - 05:01:50: Team "CT" scored "1" with "10" players
+L 09/17/2026 - 05:01:50: Team "TERRORIST" scored "4" with "12" players
+L 09/17/2026 - 05:01:50: MatchStatus: Team "CT" is unset.
+L 09/17/2026 - 05:01:50: MatchStatus: Team "TERRORIST" is unset.
+L 09/17/2026 - 05:01:50: MatchStatus: Score: 1:4 on map "de_shortdust" RoundsPlayed: 5
+L 09/17/2026 - 05:01:50: World triggered "Round_End"
+L 09/17/2026 - 05:01:51: "MAXROY<11><[U:1:867967831]><>" connected, address "71.198.205.35:58851"
+L 09/17/2026 - 05:01:52: "MAXROY<11><[U:1:867967831]><>" STEAM USERID validated
+L 09/17/2026 - 05:01:54: rcon from "169.150.232.56:35966": command "status_json"
+L 09/17/2026 - 05:01:54: rcon from "169.150.232.56:35966": command "status"
+L 09/17/2026 - 05:01:55: "pichekistha<0><[U:1:80924469]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/17/2026 - 05:01:55: "pichekistha<0><[U:1:80924469]>" switched from team <TERRORIST> to <Unassigned>
+L 09/17/2026 - 05:01:55: "Sheldor<1><[U:1:1080094440]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/17/2026 - 05:01:55: "Sheldor<1><[U:1:1080094440]>" switched from team <CT> to <Unassigned>
+L 09/17/2026 - 05:01:55: "Sheldor<1><[U:1:1080094440]><Unassigned>" [-255 1426 32] committed suicide with "world"
+L 09/17/2026 - 05:01:55: "Beni Lava<2><[U:1:145395478]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/17/2026 - 05:01:55: "Beni Lava<2><[U:1:145395478]>" switched from team <CT> to <Unassigned>
+L 09/17/2026 - 05:01:55: "Beni Lava<2><[U:1:145395478]><Unassigned>" [87 535 54] committed suicide with "world"
+L 09/17/2026 - 05:01:55: "prasaadem<3><[U:1:1075176373]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/17/2026 - 05:01:55: "prasaadem<3><[U:1:1075176373]>" switched from team <CT> to <Unassigned>
+L 09/17/2026 - 05:01:55: "prasaadem<3><[U:1:1075176373]><Unassigned>" [-1242 1410 0] committed suicide with "world"
+L 09/17/2026 - 05:01:55: "BigHero<4><[U:1:887890842]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/17/2026 - 05:01:55: "BigHero<4><[U:1:887890842]>" switched from team <TERRORIST> to <Unassigned>
+L 09/17/2026 - 05:01:55: "Pheonix<5><[U:1:104794797]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/17/2026 - 05:01:55: "Pheonix<5><[U:1:104794797]>" switched from team <TERRORIST> to <Unassigned>
+L 09/17/2026 - 05:01:55: "blazingshack<6><[U:1:1085341771]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/17/2026 - 05:01:55: "blazingshack<6><[U:1:1085341771]>" switched from team <TERRORIST> to <Unassigned>
+L 09/17/2026 - 05:01:55: "kiiiiiira<7><[U:1:335158966]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/17/2026 - 05:01:55: "kiiiiiira<7><[U:1:335158966]>" switched from team <CT> to <Unassigned>
+L 09/17/2026 - 05:01:55: "bazooka39<8><[U:1:1076778384]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/17/2026 - 05:01:55: "bazooka39<8><[U:1:1076778384]>" switched from team <TERRORIST> to <Unassigned>
+L 09/17/2026 - 05:01:55: "mcdreamy111<9><[U:1:156268658]><CT>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/17/2026 - 05:01:55: "mcdreamy111<9><[U:1:156268658]>" switched from team <CT> to <Unassigned>
+L 09/17/2026 - 05:01:55: "Rat<10><[U:1:892155064]><TERRORIST>" disconnected (reason "NETWORK_DISCONNECT_SHUTDOWN")
+L 09/17/2026 - 05:01:55: "Rat<10><[U:1:892155064]>" switched from team <TERRORIST> to <Unassigned>
+L 09/17/2026 - 05:01:55: Log file closed

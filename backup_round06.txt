@@ -1,0 +1,1214 @@
+"SaveFile"
+{
+	"timestamp"		"2026-10-11 05:35:43"
+	"map"		"de_guard_s2"
+	"round"		"6"
+	"FirstHalfScore"
+	{
+		"team1"		"0"
+		"team2"		"0"
+	}
+	"History"
+	{
+		"NumConsecutiveCTLoses"		"1"
+		"LoserMostRecentTeam"		"CT"
+		"SpawnPointsCfg"		"1132700742"
+	}
+	"RoundResults"
+	{
+		"round1"		"5"
+		"round2"		"5"
+		"round3"		"1"
+		"round4"		"5"
+		"round5"		"1"
+		"round6"		"5"
+		"round7"		"0"
+		"round8"		"0"
+		"round9"		"0"
+		"round10"		"0"
+		"round11"		"0"
+		"round12"		"0"
+		"round13"		"0"
+		"round14"		"0"
+		"round15"		"0"
+		"round16"		"0"
+		"round17"		"0"
+		"round18"		"0"
+		"round19"		"0"
+		"round20"		"0"
+		"round21"		"0"
+		"round22"		"0"
+		"round23"		"0"
+		"round24"		"0"
+		"round25"		"0"
+		"round26"		"0"
+		"round27"		"0"
+		"round28"		"0"
+		"round29"		"0"
+		"round30"		"0"
+	}
+	"PlayersAliveT"
+	{
+		"round1"		"2"
+		"round2"		"4"
+		"round3"		"0"
+		"round4"		"3"
+		"round5"		"0"
+		"round6"		"2"
+		"round7"		"63"
+		"round8"		"63"
+		"round9"		"63"
+		"round10"		"63"
+		"round11"		"63"
+		"round12"		"63"
+		"round13"		"63"
+		"round14"		"63"
+		"round15"		"63"
+		"round16"		"63"
+		"round17"		"63"
+		"round18"		"63"
+		"round19"		"63"
+		"round20"		"63"
+		"round21"		"63"
+		"round22"		"63"
+		"round23"		"63"
+		"round24"		"63"
+		"round25"		"63"
+		"round26"		"63"
+		"round27"		"63"
+		"round28"		"63"
+		"round29"		"63"
+		"round30"		"63"
+	}
+	"PlayersAliveCT"
+	{
+		"round1"		"0"
+		"round2"		"0"
+		"round3"		"1"
+		"round4"		"0"
+		"round5"		"1"
+		"round6"		"0"
+		"round7"		"63"
+		"round8"		"63"
+		"round9"		"63"
+		"round10"		"63"
+		"round11"		"63"
+		"round12"		"63"
+		"round13"		"63"
+		"round14"		"63"
+		"round15"		"63"
+		"round16"		"63"
+		"round17"		"63"
+		"round18"		"63"
+		"round19"		"63"
+		"round20"		"63"
+		"round21"		"63"
+		"round22"		"63"
+		"round23"		"63"
+		"round24"		"63"
+		"round25"		"63"
+		"round26"		"63"
+		"round27"		"63"
+		"round28"		"63"
+		"round29"		"63"
+		"round30"		"63"
+	}
+	"Timeouts"
+	{
+		"team1"		"1"
+		"team2"		"1"
+		"technical"
+		{
+			"team1"		"0"
+			"team2"		"0"
+		}
+	}
+	"PlayersOnTeam1"
+	{
+		"1080094440"
+		{
+			"name"		"Sheldor"
+			"kills"		"3"
+			"assists"		"0"
+			"deaths"		"5"
+			"mvps"		"0"
+			"score"		"8"
+			"cash"		"2600"
+			"roundsWon"		"2"
+			"enemyKs"		"3"
+			"enemyHSs"		"0"
+			"enemy2Ks"		"1"
+			"enemy3Ks"		"0"
+			"enemy4Ks"		"0"
+			"enemy5Ks"		"0"
+			"enemyKAg"		"3"
+			"firstKs"		"0"
+			"clutchKs"		"3"
+			"kills_weapon_pistol"		"0"
+			"kills_weapon_sniper"		"3"
+			"kills_knife"		"0"
+			"kills_taser"		"0"
+			"enemyDamageDealt"		"143"
+			"helmet"		"0"
+			"MatchStats"
+			{
+				"EquipmentValue"
+				{
+					"round1"		"2300"
+					"round2"		"3800"
+					"round3"		"3800"
+					"round4"		"4800"
+					"round5"		"2600"
+					"round6"		"1600"
+				}
+				"MoneySaved"
+				{
+					"round1"		"100"
+					"round2"		"100"
+					"round3"		"100"
+					"round4"		"2150"
+					"round5"		"3350"
+					"round6"		"6050"
+				}
+				"LiveTime"
+				{
+					"round1"		"9"
+					"round2"		"36"
+					"round3"		"98"
+					"round4"		"42"
+					"round5"		"29"
+					"round6"		"75"
+				}
+				"Deaths"
+				{
+					"round1"		"1"
+					"round2"		"1"
+					"round4"		"1"
+					"round5"		"1"
+					"round6"		"1"
+				}
+				"CashEarned"
+				{
+					"round1"		"2500"
+					"round2"		"2500"
+					"round3"		"2950"
+					"round4"		"4550"
+					"round5"		"6050"
+					"round6"		"2600"
+				}
+				"Kills"
+				{
+					"round3"		"1"
+					"round6"		"2"
+				}
+				"Damage"
+				{
+					"round3"		"100"
+					"round6"		"143"
+				}
+				"KillReward"
+				{
+					"round3"		"150"
+					"round6"		"100"
+				}
+				"Totals"
+				{
+					"Kills"		"3"
+					"Damage"		"243"
+					"EquipmentValue"		"18900"
+					"KillReward"		"250"
+					"LiveTime"		"289"
+					"Deaths"		"5"
+					"Assists"		"0"
+					"HeadshotKills"		"0"
+					"Objective"		"0"
+					"CashEarned"		"15250"
+					"UtilityDamage"		"0"
+					"UtilityCount"		"1"
+					"UtilitySuccesses"		"0"
+					"UtilityEnemies"		"0"
+					"FlashCount"		"2"
+					"FlashSuccesses"		"0"
+					"EnemiesFlashed"		"0"
+					"1v1Count"		"1"
+					"1v1Wins"		"1"
+					"1v2Count"		"1"
+					"1v2Wins"		"0"
+					"EntryCount"		"1"
+					"EntryWins"		"0"
+				}
+			}
+			"WeaponPurchases"
+			{
+				"DefIndex_1"		"5"
+				"DefIndex_9"		"1"
+				"DefIndex_31"		"1"
+				"DefIndex_40"		"2"
+				"DefIndex_43"		"3"
+				"DefIndex_44"		"1"
+				"DefIndex_45"		"3"
+			}
+		}
+		"186183274"
+		{
+			"name"		"whitefether"
+			"kills"		"7"
+			"assists"		"0"
+			"deaths"		"5"
+			"mvps"		"1"
+			"score"		"18"
+			"cash"		"5150"
+			"roundsWon"		"2"
+			"enemyKs"		"7"
+			"enemyHSs"		"4"
+			"enemy2Ks"		"1"
+			"enemy3Ks"		"0"
+			"enemy4Ks"		"1"
+			"enemy5Ks"		"0"
+			"enemyKAg"		"7"
+			"firstKs"		"1"
+			"clutchKs"		"5"
+			"kills_weapon_pistol"		"2"
+			"kills_weapon_sniper"		"1"
+			"kills_knife"		"0"
+			"kills_taser"		"1"
+			"enemyDamageDealt"		"83"
+			"helmet"		"0"
+			"MatchStats"
+			{
+				"Kills"
+				{
+					"round1"		"2"
+					"round4"		"1"
+					"round5"		"4"
+				}
+				"Damage"
+				{
+					"round1"		"208"
+					"round4"		"69"
+					"round5"		"276"
+					"round6"		"83"
+				}
+				"EquipmentValue"
+				{
+					"round1"		"2400"
+					"round2"		"4300"
+					"round3"		"3950"
+					"round4"		"3900"
+					"round5"		"4550"
+					"round6"		"6850"
+				}
+				"KillReward"
+				{
+					"round1"		"300"
+					"round4"		"150"
+					"round5"		"500"
+				}
+				"LiveTime"
+				{
+					"round1"		"49"
+					"round2"		"19"
+					"round3"		"29"
+					"round4"		"52"
+					"round5"		"119"
+					"round6"		"10"
+				}
+				"Deaths"
+				{
+					"round1"		"1"
+					"round2"		"1"
+					"round3"		"1"
+					"round4"		"1"
+					"round6"		"1"
+				}
+				"HeadShotKills"
+				{
+					"round1"		"1"
+					"round4"		"1"
+					"round5"		"2"
+				}
+				"CashEarned"
+				{
+					"round1"		"2700"
+					"round2"		"2400"
+					"round3"		"2750"
+					"round4"		"3000"
+					"round5"		"3250"
+					"round6"		"5150"
+				}
+				"UtilityDamage"
+				{
+					"round1"		"8"
+				}
+				"MoneySaved"
+				{
+					"round3"		"50"
+					"round4"		"450"
+					"round5"		"50"
+					"round6"		"2750"
+				}
+				"Totals"
+				{
+					"Kills"		"7"
+					"Damage"		"636"
+					"EquipmentValue"		"25950"
+					"KillReward"		"950"
+					"LiveTime"		"278"
+					"Deaths"		"5"
+					"Assists"		"0"
+					"HeadshotKills"		"4"
+					"Objective"		"0"
+					"CashEarned"		"15950"
+					"UtilityDamage"		"8"
+					"UtilityCount"		"0"
+					"UtilitySuccesses"		"0"
+					"UtilityEnemies"		"0"
+					"FlashCount"		"0"
+					"FlashSuccesses"		"0"
+					"EnemiesFlashed"		"0"
+					"1v1Count"		"0"
+					"1v1Wins"		"0"
+					"1v2Count"		"2"
+					"1v2Wins"		"1"
+					"EntryCount"		"2"
+					"EntryWins"		"1"
+				}
+			}
+			"WeaponPurchases"
+			{
+				"DefIndex_3"		"1"
+				"DefIndex_16"		"1"
+				"DefIndex_19"		"1"
+				"DefIndex_40"		"2"
+				"DefIndex_43"		"2"
+				"DefIndex_44"		"1"
+				"DefIndex_45"		"3"
+				"DefIndex_47"		"1"
+				"DefIndex_48"		"2"
+			}
+		}
+		"80924469"
+		{
+			"name"		"pichekistha"
+			"kills"		"0"
+			"assists"		"2"
+			"deaths"		"6"
+			"mvps"		"0"
+			"score"		"6"
+			"cash"		"2900"
+			"roundsWon"		"2"
+			"enemyKs"		"0"
+			"enemyHSs"		"0"
+			"enemy2Ks"		"0"
+			"enemy3Ks"		"0"
+			"enemy4Ks"		"0"
+			"enemy5Ks"		"0"
+			"enemyKAg"		"0"
+			"firstKs"		"0"
+			"clutchKs"		"0"
+			"kills_weapon_pistol"		"0"
+			"kills_weapon_sniper"		"0"
+			"kills_knife"		"0"
+			"kills_taser"		"0"
+			"enemyDamageDealt"		"0"
+			"helmet"		"0"
+			"MatchStats"
+			{
+				"Damage"
+				{
+					"round1"		"85"
+					"round3"		"45"
+					"round4"		"51"
+					"round5"		"50"
+				}
+				"EquipmentValue"
+				{
+					"round1"		"1900"
+					"round2"		"4500"
+					"round3"		"3550"
+					"round4"		"4500"
+					"round5"		"3550"
+					"round6"		"4500"
+				}
+				"MoneySaved"
+				{
+					"round1"		"500"
+					"round3"		"450"
+					"round4"		"250"
+					"round5"		"700"
+					"round6"		"500"
+				}
+				"LiveTime"
+				{
+					"round1"		"11"
+					"round2"		"10"
+					"round3"		"14"
+					"round4"		"25"
+					"round5"		"16"
+					"round6"		"34"
+				}
+				"Deaths"
+				{
+					"round1"		"1"
+					"round2"		"1"
+					"round3"		"1"
+					"round4"		"1"
+					"round5"		"1"
+					"round6"		"1"
+				}
+				"CashEarned"
+				{
+					"round1"		"2900"
+					"round2"		"2400"
+					"round3"		"3150"
+					"round4"		"2650"
+					"round5"		"3400"
+					"round6"		"2900"
+				}
+				"Assists"
+				{
+					"round3"		"1"
+					"round5"		"1"
+				}
+				"Totals"
+				{
+					"Kills"		"0"
+					"Damage"		"231"
+					"EquipmentValue"		"22500"
+					"KillReward"		"0"
+					"LiveTime"		"110"
+					"Deaths"		"6"
+					"Assists"		"2"
+					"HeadshotKills"		"0"
+					"Objective"		"0"
+					"CashEarned"		"15000"
+					"UtilityDamage"		"0"
+					"UtilityCount"		"0"
+					"UtilitySuccesses"		"0"
+					"UtilityEnemies"		"0"
+					"FlashCount"		"0"
+					"FlashSuccesses"		"0"
+					"EnemiesFlashed"		"0"
+					"1v1Count"		"0"
+					"1v1Wins"		"0"
+					"1v2Count"		"0"
+					"1v2Wins"		"0"
+					"EntryCount"		"2"
+					"EntryWins"		"0"
+				}
+			}
+			"WeaponPurchases"
+			{
+				"DefIndex_3"		"1"
+				"DefIndex_10"		"2"
+				"DefIndex_60"		"3"
+			}
+		}
+		"859176345"
+		{
+			"name"		"ItsThief"
+			"kills"		"3"
+			"assists"		"4"
+			"deaths"		"6"
+			"mvps"		"1"
+			"score"		"15"
+			"cash"		"2550"
+			"roundsWon"		"2"
+			"enemyKs"		"3"
+			"enemyHSs"		"0"
+			"enemy2Ks"		"0"
+			"enemy3Ks"		"1"
+			"enemy4Ks"		"0"
+			"enemy5Ks"		"0"
+			"enemyKAg"		"3"
+			"firstKs"		"0"
+			"clutchKs"		"0"
+			"kills_weapon_pistol"		"0"
+			"kills_weapon_sniper"		"0"
+			"kills_knife"		"0"
+			"kills_taser"		"0"
+			"enemyDamageDealt"		"60"
+			"helmet"		"0"
+			"MatchStats"
+			{
+				"Damage"
+				{
+					"round1"		"32"
+					"round3"		"255"
+					"round4"		"31"
+					"round5"		"74"
+					"round6"		"60"
+				}
+				"EquipmentValue"
+				{
+					"round1"		"1600"
+					"round2"		"4500"
+					"round3"		"4500"
+					"round4"		"4700"
+					"round5"		"3950"
+					"round6"		"4250"
+				}
+				"MoneySaved"
+				{
+					"round1"		"1000"
+					"round2"		"500"
+					"round4"		"50"
+					"round5"		"100"
+					"round6"		"150"
+				}
+				"LiveTime"
+				{
+					"round1"		"24"
+					"round2"		"8"
+					"round3"		"53"
+					"round4"		"58"
+					"round5"		"30"
+					"round6"		"18"
+				}
+				"Deaths"
+				{
+					"round1"		"1"
+					"round2"		"1"
+					"round3"		"1"
+					"round4"		"1"
+					"round5"		"1"
+					"round6"		"1"
+				}
+				"Assists"
+				{
+					"round1"		"1"
+					"round4"		"1"
+					"round5"		"1"
+					"round6"		"1"
+				}
+				"CashEarned"
+				{
+					"round1"		"3400"
+					"round2"		"2900"
+					"round3"		"3150"
+					"round4"		"2450"
+					"round5"		"2800"
+					"round6"		"2550"
+				}
+				"Kills"
+				{
+					"round3"		"3"
+				}
+				"KillReward"
+				{
+					"round3"		"450"
+				}
+				"EnemiesFlashed"
+				{
+					"round4"		"1"
+				}
+				"UtilityDamage"
+				{
+					"round6"		"8"
+				}
+				"Totals"
+				{
+					"Kills"		"3"
+					"Damage"		"452"
+					"EquipmentValue"		"23500"
+					"KillReward"		"450"
+					"LiveTime"		"191"
+					"Deaths"		"6"
+					"Assists"		"4"
+					"HeadshotKills"		"0"
+					"Objective"		"0"
+					"CashEarned"		"18750"
+					"UtilityDamage"		"8"
+					"UtilityCount"		"1"
+					"UtilitySuccesses"		"1"
+					"UtilityEnemies"		"2"
+					"FlashCount"		"1"
+					"FlashSuccesses"		"1"
+					"EnemiesFlashed"		"1"
+					"1v1Count"		"0"
+					"1v1Wins"		"0"
+					"1v2Count"		"0"
+					"1v2Wins"		"0"
+					"EntryCount"		"1"
+					"EntryWins"		"0"
+				}
+			}
+			"WeaponPurchases"
+			{
+				"DefIndex_19"		"2"
+				"DefIndex_43"		"1"
+				"DefIndex_44"		"1"
+				"DefIndex_60"		"3"
+			}
+		}
+	}
+	"PlayersOnTeam2"
+	{
+		"1075176373"
+		{
+			"name"		"prasaadem"
+			"kills"		"6"
+			"assists"		"2"
+			"deaths"		"4"
+			"mvps"		"2"
+			"score"		"23"
+			"cash"		"9250"
+			"roundsWon"		"4"
+			"enemyKs"		"6"
+			"enemyHSs"		"4"
+			"enemy2Ks"		"1"
+			"enemy3Ks"		"1"
+			"enemy4Ks"		"0"
+			"enemy5Ks"		"0"
+			"enemyKAg"		"6"
+			"firstKs"		"1"
+			"clutchKs"		"0"
+			"kills_weapon_pistol"		"1"
+			"kills_weapon_sniper"		"0"
+			"kills_knife"		"0"
+			"kills_taser"		"0"
+			"enemyDamageDealt"		"0"
+			"helmet"		"0"
+			"MatchStats"
+			{
+				"Kills"
+				{
+					"round1"		"1"
+					"round4"		"3"
+					"round5"		"2"
+				}
+				"Damage"
+				{
+					"round1"		"157"
+					"round2"		"97"
+					"round3"		"15"
+					"round4"		"203"
+					"round5"		"200"
+				}
+				"EquipmentValue"
+				{
+					"round1"		"1500"
+					"round2"		"3850"
+					"round3"		"3850"
+					"round4"		"3750"
+					"round5"		"4050"
+					"round6"		"1200"
+				}
+				"MoneySaved"
+				{
+					"round1"		"500"
+					"round2"		"400"
+					"round3"		"3000"
+					"round4"		"2850"
+					"round5"		"6000"
+					"round6"		"8700"
+				}
+				"KillReward"
+				{
+					"round1"		"150"
+					"round4"		"450"
+					"round5"		"300"
+				}
+				"LiveTime"
+				{
+					"round1"		"38"
+					"round2"		"46"
+					"round3"		"19"
+					"round4"		"68"
+					"round5"		"32"
+					"round6"		"67"
+				}
+				"Deaths"
+				{
+					"round1"		"1"
+					"round3"		"1"
+					"round5"		"1"
+					"round6"		"1"
+				}
+				"Assists"
+				{
+					"round1"		"1"
+					"round2"		"1"
+				}
+				"HeadShotKills"
+				{
+					"round1"		"1"
+					"round4"		"1"
+					"round5"		"2"
+				}
+				"CashEarned"
+				{
+					"round1"		"3050"
+					"round2"		"3300"
+					"round3"		"5400"
+					"round4"		"6000"
+					"round5"		"8700"
+					"round6"		"9250"
+				}
+				"UtilityDamage"
+				{
+					"round1"		"34"
+				}
+				"Objective"
+				{
+					"round2"		"1"
+					"round6"		"1"
+				}
+				"EnemiesFlashed"
+				{
+					"round4"		"1"
+				}
+				"Totals"
+				{
+					"Kills"		"6"
+					"Damage"		"672"
+					"EquipmentValue"		"18200"
+					"KillReward"		"900"
+					"LiveTime"		"270"
+					"Deaths"		"4"
+					"Assists"		"2"
+					"HeadshotKills"		"4"
+					"Objective"		"2"
+					"CashEarned"		"16900"
+					"UtilityDamage"		"34"
+					"UtilityCount"		"4"
+					"UtilitySuccesses"		"1"
+					"UtilityEnemies"		"1"
+					"FlashCount"		"1"
+					"FlashSuccesses"		"1"
+					"EnemiesFlashed"		"1"
+					"1v1Count"		"0"
+					"1v1Wins"		"0"
+					"1v2Count"		"0"
+					"1v2Wins"		"0"
+					"EntryCount"		"1"
+					"EntryWins"		"1"
+				}
+			}
+			"WeaponPurchases"
+			{
+				"DefIndex_19"		"3"
+				"DefIndex_30"		"1"
+				"DefIndex_43"		"1"
+				"DefIndex_44"		"3"
+			}
+		}
+		"335158966"
+		{
+			"name"		"kiiiiiira"
+			"kills"		"3"
+			"assists"		"3"
+			"deaths"		"4"
+			"mvps"		"1"
+			"score"		"14"
+			"cash"		"3100"
+			"roundsWon"		"4"
+			"enemyKs"		"3"
+			"enemyHSs"		"0"
+			"enemy2Ks"		"1"
+			"enemy3Ks"		"0"
+			"enemy4Ks"		"0"
+			"enemy5Ks"		"0"
+			"enemyKAg"		"3"
+			"firstKs"		"0"
+			"clutchKs"		"0"
+			"kills_weapon_pistol"		"1"
+			"kills_weapon_sniper"		"0"
+			"kills_knife"		"0"
+			"kills_taser"		"0"
+			"enemyDamageDealt"		"272"
+			"helmet"		"0"
+			"MatchStats"
+			{
+				"Kills"
+				{
+					"round1"		"1"
+					"round6"		"2"
+				}
+				"Damage"
+				{
+					"round1"		"41"
+					"round3"		"1"
+					"round4"		"97"
+					"round6"		"272"
+				}
+				"EquipmentValue"
+				{
+					"round1"		"1700"
+					"round2"		"4700"
+					"round3"		"5200"
+					"round4"		"5200"
+					"round5"		"4100"
+					"round6"		"1200"
+				}
+				"MoneySaved"
+				{
+					"round1"		"300"
+					"round2"		"150"
+					"round3"		"1850"
+					"round4"		"250"
+					"round5"		"50"
+					"round6"		"2450"
+				}
+				"KillReward"
+				{
+					"round1"		"150"
+					"round6"		"300"
+				}
+				"LiveTime"
+				{
+					"round1"		"59"
+					"round2"		"46"
+					"round3"		"47"
+					"round4"		"39"
+					"round5"		"12"
+					"round6"		"61"
+				}
+				"Objective"
+				{
+					"round1"		"1"
+				}
+				"CashEarned"
+				{
+					"round1"		"3350"
+					"round2"		"2850"
+					"round3"		"4250"
+					"round4"		"2950"
+					"round5"		"2450"
+					"round6"		"3100"
+				}
+				"Deaths"
+				{
+					"round3"		"1"
+					"round4"		"1"
+					"round5"		"1"
+					"round6"		"1"
+				}
+				"UtilityDamage"
+				{
+					"round3"		"1"
+					"round4"		"32"
+				}
+				"Assists"
+				{
+					"round4"		"2"
+					"round6"		"1"
+				}
+				"Totals"
+				{
+					"Kills"		"3"
+					"Damage"		"411"
+					"EquipmentValue"		"22100"
+					"KillReward"		"450"
+					"LiveTime"		"264"
+					"Deaths"		"4"
+					"Assists"		"3"
+					"HeadshotKills"		"0"
+					"Objective"		"1"
+					"CashEarned"		"16250"
+					"UtilityDamage"		"33"
+					"UtilityCount"		"1"
+					"UtilitySuccesses"		"1"
+					"UtilityEnemies"		"1"
+					"FlashCount"		"3"
+					"FlashSuccesses"		"0"
+					"EnemiesFlashed"		"0"
+					"1v1Count"		"0"
+					"1v1Wins"		"0"
+					"1v2Count"		"0"
+					"1v2Wins"		"0"
+					"EntryCount"		"1"
+					"EntryWins"		"0"
+				}
+			}
+			"WeaponPurchases"
+			{
+				"DefIndex_7"		"2"
+				"DefIndex_19"		"1"
+				"DefIndex_30"		"1"
+				"DefIndex_39"		"1"
+				"DefIndex_43"		"3"
+				"DefIndex_44"		"2"
+				"DefIndex_45"		"3"
+				"DefIndex_46"		"2"
+			}
+		}
+		"887890842"
+		{
+			"name"		"BigHero"
+			"kills"		"5"
+			"assists"		"2"
+			"deaths"		"3"
+			"mvps"		"0"
+			"score"		"15"
+			"cash"		"10000"
+			"roundsWon"		"4"
+			"enemyKs"		"5"
+			"enemyHSs"		"4"
+			"enemy2Ks"		"2"
+			"enemy3Ks"		"0"
+			"enemy4Ks"		"0"
+			"enemy5Ks"		"0"
+			"enemyKAg"		"5"
+			"firstKs"		"2"
+			"clutchKs"		"0"
+			"kills_weapon_pistol"		"1"
+			"kills_weapon_sniper"		"0"
+			"kills_knife"		"0"
+			"kills_taser"		"0"
+			"enemyDamageDealt"		"0"
+			"helmet"		"1"
+			"armor"		"100"
+			"Items"
+			{
+				"item"		"weapon_knife_t"
+				"item"		"weapon_glock"
+			}
+			"MatchStats"
+			{
+				"Kills"
+				{
+					"round1"		"1"
+					"round2"		"2"
+					"round3"		"2"
+				}
+				"Damage"
+				{
+					"round1"		"135"
+					"round2"		"103"
+					"round3"		"254"
+				}
+				"EquipmentValue"
+				{
+					"round1"		"1700"
+					"round2"		"3900"
+					"round3"		"4200"
+					"round4"		"1200"
+					"round5"		"1200"
+					"round6"		"1200"
+				}
+				"MoneySaved"
+				{
+					"round1"		"300"
+					"round2"		"450"
+					"round3"		"3150"
+					"round4"		"5850"
+					"round5"		"8550"
+					"round6"		"10000"
+				}
+				"KillReward"
+				{
+					"round1"		"150"
+					"round2"		"300"
+					"round3"		"300"
+				}
+				"LiveTime"
+				{
+					"round1"		"46"
+					"round2"		"46"
+					"round3"		"31"
+					"round4"		"68"
+					"round5"		"109"
+				}
+				"Deaths"
+				{
+					"round1"		"1"
+					"round3"		"1"
+					"round5"		"1"
+				}
+				"Assists"
+				{
+					"round1"		"1"
+					"round3"		"1"
+				}
+				"HeadShotKills"
+				{
+					"round1"		"1"
+					"round2"		"1"
+					"round3"		"2"
+				}
+				"CashEarned"
+				{
+					"round1"		"3150"
+					"round2"		"3450"
+					"round3"		"5850"
+					"round4"		"8550"
+					"round5"		"10000"
+					"round6"		"10000"
+				}
+				"Totals"
+				{
+					"Kills"		"5"
+					"Damage"		"492"
+					"EquipmentValue"		"13400"
+					"KillReward"		"750"
+					"LiveTime"		"300"
+					"Deaths"		"3"
+					"Assists"		"2"
+					"HeadshotKills"		"4"
+					"Objective"		"0"
+					"CashEarned"		"16350"
+					"UtilityDamage"		"0"
+					"UtilityCount"		"1"
+					"UtilitySuccesses"		"0"
+					"UtilityEnemies"		"0"
+					"FlashCount"		"0"
+					"FlashSuccesses"		"0"
+					"EnemiesFlashed"		"0"
+					"1v1Count"		"1"
+					"1v1Wins"		"0"
+					"1v2Count"		"0"
+					"1v2Wins"		"0"
+					"EntryCount"		"2"
+					"EntryWins"		"2"
+				}
+			}
+			"WeaponPurchases"
+			{
+				"DefIndex_1"		"1"
+				"DefIndex_7"		"1"
+				"DefIndex_44"		"1"
+			}
+		}
+		"1080906432"
+		{
+			"name"		"Ironman"
+			"kills"		"8"
+			"assists"		"0"
+			"deaths"		"2"
+			"mvps"		"1"
+			"score"		"23"
+			"cash"		"5700"
+			"roundsWon"		"4"
+			"enemyKs"		"8"
+			"enemyHSs"		"3"
+			"enemy2Ks"		"2"
+			"enemy3Ks"		"0"
+			"enemy4Ks"		"0"
+			"enemy5Ks"		"0"
+			"enemyKAg"		"8"
+			"firstKs"		"2"
+			"clutchKs"		"1"
+			"kills_weapon_pistol"		"1"
+			"kills_weapon_sniper"		"7"
+			"kills_knife"		"0"
+			"kills_taser"		"0"
+			"enemyDamageDealt"		"128"
+			"helmet"		"1"
+			"armor"		"97"
+			"Items"
+			{
+				"item"		"weapon_knife_t"
+				"item"		"weapon_glock"
+				"item"		"weapon_awp"
+			}
+			"MatchStats"
+			{
+				"Kills"
+				{
+					"round1"		"1"
+					"round2"		"2"
+					"round3"		"1"
+					"round4"		"1"
+					"round5"		"1"
+					"round6"		"2"
+				}
+				"Damage"
+				{
+					"round1"		"66"
+					"round2"		"200"
+					"round3"		"103"
+					"round4"		"100"
+					"round5"		"100"
+					"round6"		"128"
+				}
+				"EquipmentValue"
+				{
+					"round1"		"1500"
+					"round2"		"3400"
+					"round3"		"3400"
+					"round4"		"5950"
+					"round5"		"5950"
+					"round6"		"5950"
+				}
+				"MoneySaved"
+				{
+					"round1"		"500"
+					"round2"		"1650"
+					"round3"		"4650"
+					"round4"		"2450"
+					"round5"		"5200"
+					"round6"		"2900"
+				}
+				"KillReward"
+				{
+					"round1"		"150"
+					"round2"		"300"
+					"round3"		"150"
+					"round4"		"50"
+					"round5"		"50"
+					"round6"		"100"
+				}
+				"LiveTime"
+				{
+					"round1"		"59"
+					"round2"		"46"
+					"round3"		"88"
+					"round4"		"68"
+					"round5"		"62"
+				}
+				"HeadShotKills"
+				{
+					"round1"		"1"
+					"round2"		"2"
+				}
+				"CashEarned"
+				{
+					"round1"		"3350"
+					"round2"		"4650"
+					"round3"		"7200"
+					"round4"		"5200"
+					"round5"		"7650"
+					"round6"		"5700"
+				}
+				"Deaths"
+				{
+					"round3"		"1"
+					"round5"		"1"
+				}
+				"Totals"
+				{
+					"Kills"		"8"
+					"Damage"		"697"
+					"EquipmentValue"		"26150"
+					"KillReward"		"800"
+					"LiveTime"		"323"
+					"Deaths"		"2"
+					"Assists"		"0"
+					"HeadshotKills"		"3"
+					"Objective"		"0"
+					"CashEarned"		"16400"
+					"UtilityDamage"		"0"
+					"UtilityCount"		"0"
+					"UtilitySuccesses"		"0"
+					"UtilityEnemies"		"0"
+					"FlashCount"		"1"
+					"FlashSuccesses"		"0"
+					"EnemiesFlashed"		"0"
+					"1v1Count"		"1"
+					"1v1Wins"		"0"
+					"1v2Count"		"0"
+					"1v2Wins"		"0"
+					"EntryCount"		"2"
+					"EntryWins"		"2"
+				}
+			}
+			"WeaponPurchases"
+			{
+				"DefIndex_9"		"2"
+				"DefIndex_30"		"1"
+				"DefIndex_40"		"1"
+			}
+		}
+	}
+}
