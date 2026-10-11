@@ -2,7 +2,7 @@
 """Build a self-contained CS2 stats site from DatHost server logs.
 
 Usage:
-    python build_stats.py                      # reads ../logs, writes ./index.html
+    python build_stats.py                      # reads ../logs, writes ../docs/index.html
     python build_stats.py --logs PATH --out FILE --utc-offset -7
 
 Each night is the local date of the match start, minus 6 hours, so a session
@@ -289,7 +289,7 @@ def build_game(m, gid):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--logs', default=os.path.join(HERE, '..', 'logs'))
-    ap.add_argument('--out', default=os.path.join(HERE, 'index.html'))
+    ap.add_argument('--out', default=os.path.join(HERE, '..', 'docs', 'index.html'))
     ap.add_argument('--template', default=os.path.join(HERE, 'template.html'))
     ap.add_argument('--utc-offset', type=float, default=None,
                     help='hours from UTC for local times (default: this computer\'s timezone)')
@@ -323,6 +323,7 @@ def main():
     with open(args.template, encoding='utf-8') as fh:
         html = fh.read()
     html = html.replace('/*__DATA__*/null', payload).replace('__TITLE__', args.title)
+    os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
     with open(args.out, 'w', encoding='utf-8') as fh:
         fh.write(html)
 
