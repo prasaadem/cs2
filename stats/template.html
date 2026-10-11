@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__TITLE__</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oxanium:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f4f3ef;
+  --surface: #fcfcfb;
+  --surface-2: #efeee9;
+  --line: #e2e0d8;
+  --text: #0b0b0b;
+  --text-2: #52514e;
+  --text-3: #7c7a74;
+  --accent: #b87700;
+  --accent-ink: #1a1200;
+  --accent-soft: rgba(237, 161, 0, .14);
+  --ct: #2a78d6;
+  --t: #eb6834;
+  --ct-soft: rgba(42, 120, 214, .12);
+  --t-soft: rgba(235, 104, 52, .12);
+  --bar: #2a78d6;
+  --win: #1d7a3a;
+  --loss: #b3261e;
+  --shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 16px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0f1012;
+    --surface: #17181b;
+    --surface-2: #1f2024;
+    --line: #2a2b30;
+    --text: #f4f4f2;
+    --text-2: #b9b8b0;
+    --text-3: #85847d;
+    --accent: #f0b232;
+    --accent-ink: #1a1200;
+    --accent-soft: rgba(240, 178, 50, .13);
+    --ct: #3987e5;
+    --t: #d95926;
+    --ct-soft: rgba(57, 135, 229, .16);
+    --t-soft: rgba(217, 89, 38, .16);
+    --bar: #3987e5;
+    --win: #4cc274;
+    --loss: #f07167;
+    --shadow: none;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0f1012; --surface: #17181b; --surface-2: #1f2024; --line: #2a2b30;
+  --text: #f4f4f2; --text-2: #b9b8b0; --text-3: #85847d;
+  --accent: #f0b232; --accent-ink: #1a1200; --accent-soft: rgba(240, 178, 50, .13);
+  --ct: #3987e5; --t: #d95926; --ct-soft: rgba(57, 135, 229, .16); --t-soft: rgba(217, 89, 38, .16);
+  --bar: #3987e5; --win: #4cc274; --loss: #f07167; --shadow: none;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 14px/1.5 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+a { color: inherit; text-decoration: none; }
+a:hover { color: var(--accent); }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+
+/* header */
+header { border-bottom: 1px solid var(--line); background: var(--surface); position: sticky; top: 0; z-index: 10; }
+.hbar { display: flex; align-items: center; gap: 24px; height: 60px; }
+.brand { font: 800 20px/1 Oxanium, sans-serif; letter-spacing: .02em; display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+.brand .dot { width: 10px; height: 10px; border-radius: 2px; background: var(--accent); transform: rotate(45deg); }
+nav { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; flex: 1; }
+nav::-webkit-scrollbar { display: none; }
+nav a { padding: 8px 12px; border-radius: 8px; color: var(--text-2); font-weight: 500; white-space: nowrap; }
+nav a.on { color: var(--text); background: var(--surface-2); }
+.hctl { display: flex; align-items: center; gap: 8px; }
+.toggle { display: flex; align-items: center; gap: 8px; color: var(--text-2); font-size: 13px; cursor: pointer; user-select: none; white-space: nowrap; }
+.toggle input { accent-color: var(--accent); width: 16px; height: 16px; margin: 0; }
+.iconbtn { border: 1px solid var(--line); background: transparent; color: var(--text-2); border-radius: 8px; height: 32px; width: 32px; cursor: pointer; font-size: 15px; }
+
+main { padding: 28px 0 64px; }
+h1 { font: 700 30px/1.15 Oxanium, sans-serif; margin: 0; letter-spacing: .01em; }
+h2 { font: 700 18px/1.2 Oxanium, sans-serif; margin: 0 0 12px; letter-spacing: .02em; }
+.sub { color: var(--text-2); margin-top: 6px; }
+.crumb { color: var(--text-3); font-size: 13px; margin-bottom: 8px; }
+.crumb a { color: var(--text-2); }
+.pagehead { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+section { margin-top: 28px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); }
+.pad { padding: 18px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 900px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+/* stat tiles */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; box-shadow: var(--shadow); min-width: 0; }
+.tile .l { color: var(--text-2); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .06em; }
+.tile .v { font: 700 28px/1.1 Oxanium, sans-serif; margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tile .s { color: var(--text-3); font-size: 12px; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tile.hero { background: linear-gradient(135deg, var(--accent-soft), transparent 70%), var(--surface); }
+
+/* tables */
+.tblwrap { overflow-x: auto; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow); }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { padding: 9px 10px; text-align: right; white-space: nowrap; }
+th { color: var(--text-2); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; background: var(--surface-2); position: sticky; top: 0; cursor: pointer; user-select: none; }
+th.nosort { cursor: default; }
+th:hover:not(.nosort) { color: var(--text); }
+th.sorted { color: var(--accent); }
+th.sorted::after { content: " ▾"; }
+th.sorted.asc::after { content: " ▴"; }
+td { border-top: 1px solid var(--line); }
+th.l, td.l { text-align: left; }
+tbody tr { transition: background .1s; }
+tbody tr.link { cursor: pointer; }
+tbody tr:hover { background: var(--surface-2); }
+td.rank { color: var(--text-3); width: 32px; }
+td.pname { font-weight: 600; }
+td.strong { font-weight: 700; }
+.muted { color: var(--text-3); }
+.pos { color: var(--win); }
+.neg { color: var(--loss); }
+tr.top1 td.rank { color: var(--accent); font-weight: 700; }
+.rt { font-weight: 700; }
+.chip { display: inline-block; padding: 1px 7px; border-radius: 999px; font-size: 11px; font-weight: 600; background: var(--surface-2); color: var(--text-2); }
+.chip.W { background: rgba(76, 194, 116, .15); color: var(--win); }
+.chip.L { background: rgba(240, 113, 103, .14); color: var(--loss); }
+.chip.ct { background: var(--ct-soft); color: var(--ct); }
+.chip.t { background: var(--t-soft); color: var(--t); }
+.mvp { color: var(--accent); font-size: 12px; margin-left: 4px; }
+
+/* filters */
+.filters { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+select { font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; }
+.flabel { color: var(--text-2); font-size: 13px; }
+.note { color: var(--text-3); font-size: 12px; margin-top: 8px; }
+
+/* night cards */
+.ncards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.ncard { display: block; padding: 16px; transition: border-color .15s, transform .15s; }
+.ncard:hover { border-color: var(--accent); color: inherit; transform: translateY(-1px); }
+.ncard .d { font: 700 18px/1.2 Oxanium, sans-serif; }
+.ncard .m { color: var(--text-2); font-size: 13px; margin-top: 4px; }
+.ncard .row { display: flex; justify-content: space-between; margin-top: 12px; font-size: 13px; color: var(--text-2); }
+.ncard .row b { color: var(--text); }
+.maps { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px; }
+
+/* records */
+.recs { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.rec { display: block; padding: 14px 16px; }
+.rec:hover { border-color: var(--accent); color: inherit; }
+.rec .l { color: var(--text-2); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; font-weight: 500; }
+.rec .v { font: 700 26px/1.1 Oxanium, sans-serif; margin-top: 6px; }
+.rec .w { font-weight: 600; margin-top: 4px; }
+.rec .s { color: var(--text-3); font-size: 12px; }
+
+/* horizontal bars */
+.hbars { display: grid; gap: 8px; }
+.hb { display: grid; grid-template-columns: 120px 1fr 48px; gap: 10px; align-items: center; font-size: 13px; }
+.hb .n { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text-2); }
+.hb .track { height: 14px; position: relative; }
+.hb .fill { height: 100%; background: var(--bar); border-radius: 0 4px 4px 0; min-width: 2px; }
+.hb .v { text-align: right; font-weight: 600; }
+.hb:hover .fill { filter: brightness(1.15); }
+
+/* charts */
+.chart { width: 100%; height: 220px; display: block; }
+.chart text { fill: var(--text-3); font: 11px Inter, sans-serif; }
+.chart .grid { stroke: var(--line); stroke-width: 1; }
+.chart .ref { stroke: var(--text-3); stroke-dasharray: 3 3; }
+.chart .bar { fill: var(--bar); }
+.chart .hit { fill: transparent; cursor: default; }
+.chart g.b:hover .bar { filter: brightness(1.2); }
+#tip { position: fixed; pointer-events: none; z-index: 50; background: var(--text); color: var(--surface); padding: 6px 9px; border-radius: 8px; font-size: 12px; line-height: 1.4; opacity: 0; transition: opacity .1s; max-width: 240px; }
+#tip b { font-weight: 700; }
+
+/* game page */
+.score { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding: 22px; }
+.side { display: flex; flex-direction: column; gap: 4px; }
+.side.r { align-items: flex-end; text-align: right; }
+.side .tn { font: 700 13px/1 Inter, sans-serif; text-transform: uppercase; letter-spacing: .08em; }
+.side.ct .tn { color: var(--ct); }
+.side.t .tn { color: var(--t); }
+.big { font: 800 56px/1 Oxanium, sans-serif; display: flex; gap: 14px; align-items: center; }
+.big .sep { color: var(--text-3); font-size: 36px; }
+.big .lose { color: var(--text-3); }
+.rhist { display: flex; gap: 3px; flex-wrap: wrap; margin-top: 14px; }
+.rhist span { width: 18px; height: 18px; border-radius: 4px; font-size: 10px; display: grid; place-items: center; color: #fff; font-weight: 700; }
+.rhist .C { background: var(--ct); }
+.rhist .T { background: var(--t); }
+.rhist .D { background: var(--surface-2); color: var(--text-3); }
+.teamhead { display: flex; align-items: center; gap: 10px; margin: 0 0 10px; }
+.teamhead .bar { width: 4px; height: 20px; border-radius: 2px; }
+.legend { display: flex; gap: 14px; color: var(--text-2); font-size: 12px; margin-top: 10px; flex-wrap: wrap; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+
+/* players grid */
+.pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+.pcard { display: block; padding: 14px 16px; }
+.pcard:hover { border-color: var(--accent); color: inherit; }
+.pcard .n { font-weight: 700; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pcard .r { font: 700 26px/1.1 Oxanium, sans-serif; margin-top: 6px; }
+.pcard .s { color: var(--text-3); font-size: 12px; }
+
+footer { color: var(--text-3); font-size: 12px; padding: 24px 0 40px; border-top: 1px solid var(--line); }
+
+@media (max-width: 640px) {
+  .hbar { gap: 12px; height: auto; padding: 10px 0; flex-wrap: wrap; }
+  nav { order: 3; flex-basis: 100%; }
+  .toggle span { display: none; }
+  h1 { font-size: 24px; }
+  .big { font-size: 40px; }
+  .score { grid-template-columns: 1fr; text-align: center; }
+  .side, .side.r { align-items: center; text-align: center; }
+  .hb { grid-template-columns: 90px 1fr 40px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap hbar">
+    <a class="brand" href="#/"><span class="dot"></span><span id="brand"></span></a>
+    <nav id="nav">
+      <a href="#/" data-r="">Overview</a>
+      <a href="#/nights" data-r="nights">Nights</a>
+      <a href="#/games" data-r="games">Games</a>
+      <a href="#/maps" data-r="maps">Maps</a>
+      <a href="#/players" data-r="players">Players</a>
+    </nav>
+    <div class="hctl">
+      <label class="toggle" title="Only count games that reached the final round (excludes aim maps and abandoned games)"><input type="checkbox" id="onlyFin"><span>Completed games only</span></label>
+      <button class="iconbtn" id="theme" title="Toggle light / dark">◐</button>
+    </div>
+  </div>
+</header>
+<main class="wrap" id="app"></main>
+<footer class="wrap" id="foot"></footer>
+<div id="tip"></div>
+<script>
+const DATA = /*__DATA__*/null;
+const ALL = DATA.games;
+const MIN_ROUNDS_SHARE = 0.5; // a player must play half the rounds to be a game's MVP
+
+// ---------- helpers ----------
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const f2 = v => (v == null || !isFinite(v)) ? '–' : v.toFixed(2);
+const f1 = v => (v == null || !isFinite(v)) ? '–' : v.toFixed(1);
+const f0 = v => (v == null || !isFinite(v)) ? '–' : Math.round(v).toString();
+const pct = v => (v == null || !isFinite(v)) ? '–' : Math.round(v * 100) + '%';
+const sgn = v => v > 0 ? `<span class="pos">+${v}</span>` : v < 0 ? `<span class="neg">${v}</span>` : '0';
+const mapName = m => m.replace(/^(de|cs|aim|fy|ar|dz)_/, '').replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+const nightDate = n => new Date(n + 'T12:00:00');
+const nightLabel = (n, long) => nightDate(n).toLocaleDateString('en-US', long ? {weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'} : {weekday: 'short', month: 'short', day: 'numeric'});
+const timeLabel = s => { const [h, m] = s.slice(11).split(':').map(Number); return `${(h % 12) || 12}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`; };
+const pageTitle = t => { document.title = t ? `${t} · ${DATA.title}` : DATA.title; };
+const weaponName = w => ({ak47:'AK-47', m4a1:'M4A4', m4a1_silencer:'M4A1-S', awp:'AWP', ssg08:'SSG 08', deagle:'Desert Eagle', usp_silencer:'USP-S', hkp2000:'P2000', glock:'Glock-18', p250:'P250', fiveseven:'Five-SeveN', tec9:'Tec-9', cz75a:'CZ75', elite:'Dual Berettas', revolver:'R8', galilar:'Galil AR', famas:'FAMAS', sg556:'SG 553', aug:'AUG', p90:'P90', mp9:'MP9', mac10:'MAC-10', mp7:'MP7', mp5sd:'MP5-SD', ump45:'UMP-45', bizon:'PP-Bizon', nova:'Nova', xm1014:'XM1014', mag7:'MAG-7', sawedoff:'Sawed-Off', m249:'M249', negev:'Negev', g3sg1:'G3SG1', scar20:'SCAR-20', hegrenade:'HE Grenade', inferno:'Molotov', taser:'Zeus x27', knife:'Knife', knife_t:'Knife', decoy:'Decoy', flashbang:'Flashbang', smokegrenade:'Smoke'}[w] || w);
+const plink = (id, n) => `<a href="#/player/${id}">${esc(n)}</a>`;
+
+let onlyFin = false;
+try { onlyFin = localStorage.getItem('cs2.onlyFin') === '1'; } catch (e) {}
+const games = () => onlyFin ? ALL.filter(g => g.fin) : ALL;
+
+// game-level derived values
+for (const g of ALL) {
+  const n = g.rounds.length;
+  const elig = g.p.filter(p => p.r >= n * MIN_ROUNDS_SHARE);
+  g.mvp = (elig[0] || g.p[0]).id;
+  g.top = g.p.slice().sort((a, b) => b.k - a.k || b.rt - a.rt)[0];
+}
+
+// latest name per player
+const NAMES = {};
+for (const g of ALL) for (const p of g.p) NAMES[p.id] = p.n;
+
+function rating(k, d, r, k1, k2, k3, k4, k5) {
+  if (!r) return 0;
+  return (k / r / 0.679 + 0.7 * Math.max(r - d, 0) / r / 0.317 + (k1 + 4 * k2 + 9 * k3 + 16 * k4 + 25 * k5) / r / 1.277) / 2.7;
+}
+
+const SUM_KEYS = ['r','k','d','a','fa','hs','tk','ek','ed','k1','k2','k3','k4','k5','awp','knife','wb','ns','smoke','blindk','plant','defuse'];
+function aggregate(gs) {
+  const by = new Map();
+  for (const g of gs) {
+    for (const p of g.p) {
+      let s = by.get(p.id);
+      if (!s) { s = {id: p.id, n: NAMES[p.id], g: 0, w: 0, l: 0, mvp: 0, dmg: 0, dmgR: 0, nights: new Set(), maps: new Set(), wp: {}}; SUM_KEYS.forEach(k => s[k] = 0); by.set(p.id, s); }
+      s.g++; s.nights.add(g.night); s.maps.add(g.map);
+      if (p.res === 'W') s.w++; else if (p.res === 'L') s.l++;
+      if (g.mvp === p.id) s.mvp++;
+      SUM_KEYS.forEach(k => s[k] += p[k] || 0);
+      if (p.dmg != null && p.dmgR) { s.dmg += p.dmg; s.dmgR += p.dmgR; }
+      for (const [w, c] of Object.entries(p.w)) s.wp[w] = (s.wp[w] || 0) + c;
+    }
+  }
+  for (const s of by.values()) derive(s);
+  return [...by.values()];
+}
+function derive(s) {
+  s.kd = s.d ? s.k / s.d : s.k;
+  s.diff = s.k - s.d;
+  s.kpr = s.r ? s.k / s.r : 0;
+  s.adr = s.dmgR ? s.dmg / s.dmgR : null;
+  s.hsp = s.k ? s.hs / s.k : 0;
+  s.rt = rating(s.k, s.d, s.r, s.k1, s.k2, s.k3, s.k4, s.k5);
+  s.wr = (s.w + s.l) ? s.w / (s.w + s.l) : null;
+  s.entry = s.ek - s.ed;
+  s.mk = s.k3 + s.k4 + s.k5;
+  return s;
+}
+// per-game player row with derived values
+function prow(g, p) {
+  const s = Object.assign({}, p, {g: 1, gid: g.id, map: g.map, night: g.night, start: g.start});
+  s.kd = p.d ? p.k / p.d : p.k; s.diff = p.k - p.d; s.kpr = p.r ? p.k / p.r : 0;
+  s.adr = p.dmgR ? p.dmg / p.dmgR : null; s.hsp = p.k ? p.hs / p.k : 0; s.entry = p.ek - p.ed;
+  s.isMvp = g.mvp === p.id;
+  return s;
+}
+
+// ---------- tooltip ----------
+const tip = $('#tip');
+document.addEventListener('mousemove', e => {
+  const t = e.target.closest('[data-tip]');
+  if (!t) { tip.style.opacity = 0; return; }
+  tip.innerHTML = t.getAttribute('data-tip');
+  const w = tip.offsetWidth, h = tip.offsetHeight;
+  let x = e.clientX + 14, y = e.clientY - h - 10;
+  if (x + w > innerWidth - 8) x = e.clientX - w - 14;
+  if (y < 8) y = e.clientY + 16;
+  tip.style.left = x + 'px'; tip.style.top = y + 'px'; tip.style.opacity = 1;
+});
+
+// ---------- sortable table ----------
+// cols: {k, l, v?(row), f?(val,row) -> html, cls, sort?: false, asc?: bool, t?: tooltip}
+function mountTable(el, cols, rows, opt = {}) {
+  let sortKey = opt.sort, asc = !!opt.asc;
+  const val = (c, r) => c.v ? c.v(r) : r[c.k];
+  function render() {
+    const col = cols.find(c => c.k === sortKey);
+    const sorted = col ? rows.slice().sort((a, b) => {
+      let x = val(col, a), y = val(col, b);
+      if (x == null) return 1; if (y == null) return -1;
+      if (typeof x === 'string') return asc ? x.localeCompare(y) : y.localeCompare(x);
+      return asc ? x - y : y - x;
+    }) : rows;
+    const head = (opt.rank ? '<th class="nosort"></th>' : '') + cols.map(c =>
+      `<th class="${c.cls || ''} ${c.sort === false ? 'nosort' : ''} ${c.k === sortKey ? 'sorted' + (asc ? ' asc' : '') : ''}" data-k="${c.k}"${c.t ? ` title="${esc(c.t)}"` : ''}>${c.l}</th>`).join('');
+    const body = sorted.map((r, i) =>
+      `<tr class="${opt.href ? 'link' : ''} ${opt.rank && i === 0 ? 'top1' : ''}"${opt.href ? ` data-href="${opt.href(r)}"` : ''}>` +
+      (opt.rank ? `<td class="rank">${i + 1}</td>` : '') +
+      cols.map(c => { const v = val(c, r); return `<td class="${c.cls || ''}">${c.f ? c.f(v, r) : (v == null ? '–' : esc(v))}</td>`; }).join('') + '</tr>').join('');
+    el.innerHTML = `<div class="tblwrap"><table><thead><tr>${head}</tr></thead><tbody>${body || `<tr><td colspan="${cols.length + 1}" class="l muted">No data</td></tr>`}</tbody></table></div>`;
+    el.querySelectorAll('th[data-k]').forEach(th => th.onclick = () => {
+      const c = cols.find(c => c.k === th.dataset.k);
+      if (!c || c.sort === false) return;
+      if (sortKey === c.k) asc = !asc; else { sortKey = c.k; asc = !!c.asc; }
+      render();
+    });
+    el.querySelectorAll('tr[data-href]').forEach(tr => tr.onclick = e => { if (!e.target.closest('a')) location.hash = tr.dataset.href; });
+  }
+  render();
+}
+
+// standard leaderboard columns
+const C = {
+  player: {k: 'n', l: 'Player', cls: 'l pname', asc: true, f: (v, r) => plink(r.id, v)},
+  g: {k: 'g', l: 'G', t: 'Games played'},
+  wl: {k: 'wr', l: 'W–L', t: 'Wins–losses in completed games (sort by win rate)', f: (v, r) => (r.w + r.l) ? `${r.w}–${r.l}` : '<span class="muted">–</span>'},
+  wr: {k: 'wr', l: 'Win %', f: v => v == null ? '–' : pct(v)},
+  rt: {k: 'rt', l: 'Rating', cls: 'rt', t: 'HLTV 1.0-style rating: kills, survival and multi-kill rounds per round (1.00 = average)', f: f2},
+  k: {k: 'k', l: 'K'}, d: {k: 'd', l: 'D'}, a: {k: 'a', l: 'A'},
+  diff: {k: 'diff', l: '+/−', f: v => sgn(v)},
+  kd: {k: 'kd', l: 'K/D', f: f2},
+  adr: {k: 'adr', l: 'ADR', t: 'Average damage per round (server stats, excludes each game\'s last round)', f: f0},
+  kpr: {k: 'kpr', l: 'KPR', t: 'Kills per round', f: f2},
+  hsp: {k: 'hsp', l: 'HS%', f: pct},
+  entry: {k: 'entry', l: 'Entry', t: 'Opening duels won – lost (first kill of the round)', f: (v, r) => `${r.ek}–${r.ed}`},
+  k3: {k: 'k3', l: '3K'}, k4: {k: 'k4', l: '4K'}, k5: {k: 'k5', l: 'Ace'},
+  mk: {k: 'mk', l: '3K+', t: 'Rounds with 3 or more kills'},
+  awp: {k: 'awp', l: 'AWP', t: 'AWP kills'},
+  mvp: {k: 'mvp', l: 'MVP', t: 'Games where this player had the best rating (min. half the rounds played)'},
+  nights: {k: 'nn', l: 'Nights', v: r => r.nights.size},
+  r: {k: 'r', l: 'Rnds', t: 'Rounds played'},
+};
+const BOARD = [C.player, C.g, C.wl, C.rt, C.k, C.d, C.a, C.diff, C.kd, C.adr, C.kpr, C.hsp, C.entry, C.mk, C.k5, C.awp, C.mvp];
+
+function minGamesFilter(el, rows, def, onChange) {
+  const opts = [1, 2, 3, 5, 10, 20].filter(n => n <= Math.max(...rows.map(r => r.g), 1));
+  el.innerHTML = `<span class="flabel">Min. games</span><select>${opts.map(n => `<option ${n === def ? 'selected' : ''}>${n}</option>`).join('')}</select>`;
+  el.querySelector('select').onchange = e => onChange(+e.target.value);
+}
+function board(el, rows, {minGames = 1, cols = BOARD, sort = 'rt'} = {}) {
+  el.innerHTML = '<div class="filters"></div><div class="t"></div>';
+  const draw = mg => mountTable($('.t', el), cols, rows.filter(r => r.g >= mg), {sort, rank: true});
+  const def = Math.min(minGames, Math.max(...rows.map(r => r.g), 1));
+  minGamesFilter($('.filters', el), rows, def, draw);
+  draw(def);
+}
+
+// ---------- charts ----------
+function barPath(x, y, w, h, r) {
+  r = Math.min(r, w / 2, h);
+  return `M${x},${y + h}V${y + r}Q${x},${y} ${x + r},${y}H${x + w - r}Q${x + w},${y} ${x + w},${y + r}V${y + h}Z`;
+}
+// single-series vertical bar chart; items: {label, value, tip, href?}
+function vbars(items, {height = 220, ref = null, fmt = f0} = {}) {
+  const W = 720, H = height, L = 36, R = 8, T = 12, B = 30;
+  const max = Math.max(...items.map(i => i.value), ref || 0) * 1.1 || 1;
+  const step = niceStep(max / 4);
+  const ticks = []; for (let v = 0; v <= max; v += step) ticks.push(v);
+  const bw = (W - L - R) / items.length, gap = Math.min(bw * 0.3, 14);
+  const y = v => T + (H - T - B) * (1 - v / max);
+  const every = Math.ceil(items.length / 12);
+  let s = `<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="height:${H}px">`;
+  for (const t of ticks) s += `<line class="grid" x1="${L}" x2="${W - R}" y1="${y(t)}" y2="${y(t)}"/><text x="${L - 6}" y="${y(t) + 4}" text-anchor="end">${fmt(t)}</text>`;
+  items.forEach((it, i) => {
+    const x = L + i * bw + gap / 2, w = bw - gap, top = y(Math.max(it.value, 0));
+    const tag = it.href ? 'a' : 'g';
+    s += `<${tag} class="b" ${it.href ? `href="${it.href}"` : ''} data-tip="${esc(it.tip)}"><rect class="hit" x="${L + i * bw}" y="${T}" width="${bw}" height="${H - T - B}"/>`;
+    if (it.value > 0) s += `<path class="bar" d="${barPath(x, top, w, y(0) - top, 4)}"/>`;
+    s += `</${tag}>`;
+    if (i % every === 0) s += `<text x="${x + w / 2}" y="${H - 10}" text-anchor="middle">${esc(it.label)}</text>`;
+  });
+  if (ref != null) s += `<line class="ref" x1="${L}" x2="${W - R}" y1="${y(ref)}" y2="${y(ref)}"/>`;
+  return s + '</svg>';
+}
+function niceStep(x) {
+  const p = Math.pow(10, Math.floor(Math.log10(x || 1))), n = x / p;
+  return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 2.5 ? 2.5 : n <= 5 ? 5 : 10) * p;
+}
+// horizontal bars; items: {label, value, tip, href?}
+function hbars(items, fmt = v => v) {
+  const max = Math.max(...items.map(i => i.value), 1);
+  return `<div class="hbars">${items.map(i => `<${i.href ? `a href="${i.href}"` : 'div'} class="hb" data-tip="${esc(i.tip || '')}"><span class="n">${esc(i.label)}</span><span class="track"><span class="fill" style="display:block;width:${(i.value / max * 100).toFixed(1)}%"></span></span><span class="v">${fmt(i.value)}</span></${i.href ? 'a' : 'div'}>`).join('')}</div>`;
+}
+
+const tile = (l, v, s = '', hero = false) => `<div class="tile ${hero ? 'hero' : ''}"><div class="l">${l}</div><div class="v">${v}</div><div class="s">${s}</div></div>`;
+
+// ---------- shared blocks ----------
+function gamesTable(el, gs, {showNight = true} = {}) {
+  const cols = [
+    ...(showNight ? [{k: 'night', l: 'Night', cls: 'l', f: v => nightLabel(v)}] : []),
+    {k: 'start', l: 'Start', cls: 'l', f: v => timeLabel(v)},
+    {k: 'map', l: 'Map', cls: 'l pname', asc: true, f: v => esc(mapName(v))},
+    {k: 'score', l: 'Score', cls: 'l', v: g => Math.max(g.ct, g.t), sort: false, f: (v, g) => scoreChip(g)},
+    {k: 'nr', l: 'Rnds', v: g => g.rounds.length},
+    {k: 'min', l: 'Mins'},
+    {k: 'np', l: 'Players', v: g => g.p.length},
+    {k: 'mvpn', l: 'MVP', cls: 'l', v: g => NAMES[g.mvp], f: (v, g) => { const p = g.p.find(p => p.id === g.mvp); return `${esc(p.n)} <span class="muted">${f2(p.rt)}</span>`; }},
+    {k: 'topk', l: 'Top fragger', cls: 'l', v: g => g.top.k, f: (v, g) => `${esc(g.top.n)} <span class="muted">${g.top.k} K</span>`},
+  ];
+  mountTable(el, cols, gs, {sort: 'start', href: g => `#/game/${g.id}`});
+}
+function scoreChip(g) {
+  const ct = `<span style="color:var(--ct);font-weight:700">${g.ct}</span>`, t = `<span style="color:var(--t);font-weight:700">${g.t}</span>`;
+  return `${ct} : ${t}${g.fin ? '' : ' <span class="chip">unfinished</span>'}`;
+}
+function recordCards(gs) {
+  const rows = gs.flatMap(g => g.p.map(p => prow(g, p)));
+  const full = rows.filter(r => { const g = ALL[r.gid - 1]; return r.r >= Math.max(8, g.rounds.length * MIN_ROUNDS_SHARE); });
+  const best = (arr, key) => arr.reduce((a, b) => (b[key] ?? -1) > (a?.[key] ?? -1) ? b : a, null);
+  const ctx = r => `${mapName(r.map)} · ${nightLabel(r.night)}`;
+  const recs = [];
+  const add = (l, r, v, extra = '') => r && recs.push(`<a class="card rec" href="#/game/${r.gid}"><div class="l">${l}</div><div class="v">${v}</div><div class="w">${esc(r.n)}</div><div class="s">${extra ? extra + ' · ' : ''}${esc(ctx(r))}</div></a>`);
+  let r;
+  r = best(full, 'k'); add('Most kills in a game', r, r?.k, r && `${r.k}–${r.d}–${r.a}`);
+  r = best(full, 'rt'); add('Best game rating', r, f2(r?.rt), r && `${r.k}–${r.d}, ${r.r} rounds`);
+  r = best(full.filter(x => x.adr != null), 'adr'); add('Highest ADR', r, f0(r?.adr), r && `${r.k} kills`);
+  r = best(full, 'hs'); add('Most headshots', r, r?.hs, r && `of ${r.k} kills`);
+  r = best(full, 'awp'); if (r?.awp) add('Most AWP kills', r, r.awp);
+  r = best(full, 'diff'); add('Biggest +/−', r, r && '+' + r.diff, r && `${r.k}–${r.d}`);
+  const aces = rows.filter(x => x.k5);
+  if (aces.length) { const a = aces[aces.length - 1]; add(`Aces (${aces.reduce((s, x) => s + x.k5, 0)} total)`, a, '★ ' + aces.reduce((s, x) => s + x.k5, 0), 'Latest: ' + esc(a.n)); }
+  r = best(full, 'knife'); if (r?.knife) add('Most knife kills', r, r.knife);
+  return `<div class="recs">${recs.join('')}</div>`;
+}
+function weaponsBlock(wp, n = 10) {
+  const items = Object.entries(wp).sort((a, b) => b[1] - a[1]).slice(0, n);
+  const tot = Object.values(wp).reduce((a, b) => a + b, 0) || 1;
+  return hbars(items.map(([w, c]) => ({label: weaponName(w), value: c, tip: `<b>${esc(weaponName(w))}</b><br>${c} kills · ${pct(c / tot)} of all`})));
+}
+
+// ---------- views ----------
+function viewOverview() {
+  pageTitle('');
+  const gs = games();
+  const rows = aggregate(gs);
+  const nights = [...new Set(gs.map(g => g.night))].sort();
+  const rounds = gs.reduce((s, g) => s + g.rounds.length, 0);
+  const kills = rows.reduce((s, r) => s + r.k, 0), hs = rows.reduce((s, r) => s + r.hs, 0);
+  const elig = rows.filter(r => r.g >= Math.min(10, Math.max(...rows.map(r => r.g))));
+  const king = elig.slice().sort((a, b) => b.rt - a.rt)[0];
+  const wp = {}; rows.forEach(r => Object.entries(r.wp).forEach(([w, c]) => wp[w] = (wp[w] || 0) + c));
+  const mapCount = {}; gs.forEach(g => mapCount[g.map] = (mapCount[g.map] || 0) + 1);
+  const minutes = gs.reduce((s, g) => s + g.min, 0);
+
+  $('#app').innerHTML = `
+    <div class="pagehead"><div><h1>${esc(DATA.title)}</h1>
+      <div class="sub">${nights.length ? `${nightLabel(nights[0], true)} – ${nightLabel(nights[nights.length - 1], true)}` : ''}</div></div></div>
+    <div class="tiles">
+      ${king ? tile('Top rated', `${esc(king.n)}`, `${f2(king.rt)} rating over ${king.g} games`, true) : ''}
+      ${tile('Nights', nights.length, `${Math.round(minutes / 60)} hours of play`)}
+      ${tile('Games', gs.length, `${gs.filter(g => g.fin).length} completed`)}
+      ${tile('Rounds', rounds.toLocaleString())}
+      ${tile('Kills', kills.toLocaleString(), `${pct(hs / kills)} headshots`)}
+      ${tile('Players', rows.length)}
+    </div>
+    <section><h2>Leaderboard</h2><div id="lb"></div>
+      <div class="note">Rating ≈ HLTV 1.0 (1.00 is average). W–L counts completed games only. Click a column to sort, a name for the player's page.</div></section>
+    <section class="grid2">
+      <div class="card pad"><h2>Games per night</h2>${vbars(nights.map(n => { const c = gs.filter(g => g.night === n).length; return {label: nightDate(n).toLocaleDateString('en-US', {month: 'short', day: 'numeric'}), value: c, tip: `<b>${nightLabel(n)}</b><br>${c} games`, href: `#/night/${n}`}; }))}</div>
+      <div class="card pad"><h2>Map pool</h2>${hbars(Object.entries(mapCount).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([m, c]) => ({label: mapName(m), value: c, tip: `<b>${esc(mapName(m))}</b><br>played ${c}×`, href: `#/map/${m}`})))}</div>
+    </section>
+    <section><h2>Records</h2>${recordCards(gs)}</section>
+    <section class="card pad"><h2>Kills by weapon</h2>${weaponsBlock(wp, 12)}</section>`;
+  board($('#lb'), rows, {minGames: 5});
+}
+
+function viewNights() {
+  pageTitle('Nights');
+  const gs = games();
+  const nights = [...new Set(gs.map(g => g.night))].sort().reverse();
+  $('#app').innerHTML = `<div class="pagehead"><div><h1>Nights</h1><div class="sub">${nights.length} sessions</div></div></div>
+    <div class="ncards">${nights.map(n => {
+      const ng = gs.filter(g => g.night === n);
+      const rows = aggregate(ng);
+      const maxg = Math.max(...rows.map(r => r.g));
+      const mvp = rows.filter(r => r.g >= Math.ceil(maxg / 2)).sort((a, b) => b.rt - a.rt)[0];
+      const maps = [...new Set(ng.map(g => g.map))];
+      const first = ng.map(g => g.start).sort()[0], mins = ng.reduce((s, g) => s + g.min, 0);
+      return `<a class="card ncard" href="#/night/${n}"><div class="d">${nightLabel(n)}</div>
+        <div class="m">${ng.length} games · ${rows.length} players · from ${timeLabel(first)} · ${(mins / 60).toFixed(1)} h</div>
+        <div class="row"><span>Night MVP</span><b>${mvp ? esc(mvp.n) + ' · ' + f2(mvp.rt) : '–'}</b></div>
+        <div class="row"><span>Most kills</span><b>${(() => { const t = rows.slice().sort((a, b) => b.k - a.k)[0]; return t ? esc(t.n) + ' · ' + t.k : '–'; })()}</b></div>
+        <div class="maps">${maps.map(m => `<span class="chip">${esc(mapName(m))}</span>`).join('')}</div></a>`;
+    }).join('')}</div>`;
+}
+
+function viewNight(n) {
+  const ng = games().filter(g => g.night === n);
+  pageTitle(nightLabel(n));
+  if (!ng.length) return notFound();
+  const rows = aggregate(ng);
+  const all = [...new Set(games().map(g => g.night))].sort();
+  const i = all.indexOf(n);
+  const kills = rows.reduce((s, r) => s + r.k, 0);
+  const maxg = Math.max(...rows.map(r => r.g));
+  const mvp = rows.filter(r => r.g >= Math.ceil(maxg / 2)).sort((a, b) => b.rt - a.rt)[0];
+  const wp = {}; rows.forEach(r => Object.entries(r.wp).forEach(([w, c]) => wp[w] = (wp[w] || 0) + c));
+  $('#app').innerHTML = `
+    <div class="crumb"><a href="#/nights">Nights</a> / ${esc(nightLabel(n))}</div>
+    <div class="pagehead"><div><h1>${esc(nightLabel(n, true))}</h1><div class="sub">${ng.length} games · ${rows.length} players</div></div>
+      <div class="filters">${i > 0 ? `<a class="chip" href="#/night/${all[i - 1]}">← ${esc(nightLabel(all[i - 1]))}</a>` : ''}${i < all.length - 1 ? `<a class="chip" href="#/night/${all[i + 1]}">${esc(nightLabel(all[i + 1]))} →</a>` : ''}</div></div>
+    <div class="tiles">
+      ${mvp ? tile('Night MVP', esc(mvp.n), `${f2(mvp.rt)} rating · ${mvp.k}–${mvp.d}`, true) : ''}
+      ${tile('Games', ng.length, `${ng.filter(g => g.fin).length} completed`)}
+      ${tile('Rounds', ng.reduce((s, g) => s + g.rounds.length, 0))}
+      ${tile('Kills', kills)}
+      ${tile('Play time', (ng.reduce((s, g) => s + g.min, 0) / 60).toFixed(1) + ' h', `from ${timeLabel(ng[0].start)}`)}
+    </div>
+    <section><h2>Night leaderboard</h2><div id="lb"></div></section>
+    <section><h2>Games</h2><div id="gt"></div></section>
+    <section class="grid2"><div class="card pad"><h2>Records</h2>${recordCards(ng)}</div><div class="card pad"><h2>Kills by weapon</h2>${weaponsBlock(wp)}</div></section>`;
+  board($('#lb'), rows, {minGames: 1});
+  gamesTable($('#gt'), ng, {showNight: false});
+}
+
+function viewGames() {
+  pageTitle('Games');
+  const gs = games();
+  const nights = [...new Set(gs.map(g => g.night))].sort().reverse();
+  const maps = [...new Set(gs.map(g => g.map))].sort();
+  $('#app').innerHTML = `<div class="pagehead"><div><h1>Games</h1><div class="sub">${gs.length} games</div></div></div>
+    <div class="filters"><span class="flabel">Night</span><select id="fn"><option value="">All nights</option>${nights.map(n => `<option value="${n}">${esc(nightLabel(n))}</option>`).join('')}</select>
+    <span class="flabel">Map</span><select id="fm"><option value="">All maps</option>${maps.map(m => `<option value="${m}">${esc(mapName(m))}</option>`).join('')}</select></div>
+    <div id="gt"></div>`;
+  const draw = () => gamesTable($('#gt'), gs.filter(g => (!$('#fn').value || g.night === $('#fn').value) && (!$('#fm').value || g.map === $('#fm').value)));
+  $('#fn').onchange = $('#fm').onchange = draw;
+  draw();
+}
+
+function viewGame(id) {
+  const g = ALL[id - 1];
+  if (!g) return notFound();
+  pageTitle(`${mapName(g.map)} · ${nightLabel(g.night)}`);
+  const ctWin = g.win === 'CT', tWin = g.win === 'T';
+  const rows = g.p.map(p => prow(g, p));
+  const nightGames = ALL.filter(x => x.night === g.night);
+  const idx = nightGames.indexOf(g);
+  const half = 7; // mp_maxrounds 15 → sides swap after round 7
+  $('#app').innerHTML = `
+    <div class="crumb"><a href="#/night/${g.night}">${esc(nightLabel(g.night))}</a> / Game ${idx + 1} of ${nightGames.length}</div>
+    <div class="pagehead"><div><h1>${esc(mapName(g.map))}</h1><div class="sub">${esc(g.map)} · ${esc(nightLabel(g.night, true))} · ${timeLabel(g.start)} · ${g.min} min · ${g.rounds.length} rounds${g.fin ? '' : ' · <span class="chip">unfinished</span>'}</div></div>
+      <div class="filters">${idx > 0 ? `<a class="chip" href="#/game/${nightGames[idx - 1].id}">← ${esc(mapName(nightGames[idx - 1].map))}</a>` : ''}${idx < nightGames.length - 1 ? `<a class="chip" href="#/game/${nightGames[idx + 1].id}">${esc(mapName(nightGames[idx + 1].map))} →</a>` : ''}</div></div>
+    <div class="card score">
+      <div class="side ct"><span class="tn">Counter-Terrorists</span><span class="muted">${ctWin ? 'Winner' : g.fin ? '' : 'Ended on CT'}</span></div>
+      <div><div class="big"><span class="${tWin ? 'lose' : ''}" style="${tWin ? '' : 'color:var(--ct)'}">${g.ct}</span><span class="sep">:</span><span class="${ctWin ? 'lose' : ''}" style="${ctWin ? '' : 'color:var(--t)'}">${g.t}</span></div></div>
+      <div class="side t r"><span class="tn">Terrorists</span><span class="muted">${tWin ? 'Winner' : g.fin ? '' : 'Ended on T'}</span></div>
+    </div>
+    <section class="card pad"><h2>Round history</h2>
+      <div class="rhist">${[...g.rounds].map((r, i) => `<span class="${r === 'C' ? 'C' : r === 'T' ? 'T' : 'D'}" data-tip="Round ${i + 1}: ${r === 'C' ? 'CT win' : r === 'T' ? 'T win' : 'draw'}">${i + 1}</span>`).join('')}</div>
+      <div class="legend"><span><i style="background:var(--ct)"></i>CT round win</span><span><i style="background:var(--t)"></i>T round win</span></div>
+      <div class="note">Teams are listed by the side they finished on; sides swap at half time.</div></section>
+    ${['CT', 'T'].map(side => `<section><div class="teamhead"><span class="bar" style="background:var(--${side.toLowerCase()})"></span><h2 style="margin:0">${side === 'CT' ? 'Counter-Terrorists' : 'Terrorists'}</h2>${g.win === side ? '<span class="chip W">Won</span>' : g.win ? '<span class="chip L">Lost</span>' : ''}</div><div id="t${side}"></div></section>`).join('')}`;
+  const cols = [
+    {k: 'n', l: 'Player', cls: 'l pname', asc: true, f: (v, r) => plink(r.id, v) + (r.isMvp ? '<span class="mvp" title="Game MVP">★ MVP</span>' : '')},
+    C.rt, C.k, C.d, C.a, C.diff, C.kd, C.adr, C.hsp, C.entry,
+    {k: 'k2', l: '2K'}, C.k3, C.k4, C.k5,
+    {k: 'r', l: 'Rnds'},
+    {k: 'tw', l: 'Top weapons', cls: 'l', sort: false, f: (v, r) => Object.entries(r.w).slice(0, 3).map(([w, c]) => `${esc(weaponName(w))} <span class="muted">${c}</span>`).join(', ')},
+  ];
+  for (const side of ['CT', 'T']) mountTable($('#t' + side), cols, rows.filter(r => r.team === side), {sort: 'rt'});
+}
+
+function viewMaps() {
+  pageTitle('Maps');
+  const gs = games();
+  const by = {};
+  for (const g of gs) (by[g.map] = by[g.map] || []).push(g);
+  const rows = Object.entries(by).map(([m, mg]) => {
+    const rs = mg.map(g => g.rounds).join('');
+    const ct = [...rs].filter(c => c === 'C').length, t = [...rs].filter(c => c === 'T').length;
+    const agg = aggregate(mg).filter(r => r.g >= Math.min(2, mg.length));
+    const best = agg.sort((a, b) => b.rt - a.rt)[0];
+    const kills = mg.reduce((s, g) => s + g.p.reduce((a, p) => a + p.k, 0), 0);
+    return {map: m, n: mapName(m), g: mg.length, fin: mg.filter(g => g.fin).length, ctw: (ct + t) ? ct / (ct + t) : null,
+      avgR: rs.length / mg.length, kpg: kills / mg.length, last: mg.map(g => g.night).sort().pop(), best};
+  });
+  $('#app').innerHTML = `<div class="pagehead"><div><h1>Maps</h1><div class="sub">${rows.length} maps played</div></div></div>
+    <div id="mt"></div><div class="note">CT round win % counts every round on the map. Best player needs 2+ games on the map (when available).</div>`;
+  mountTable($('#mt'), [
+    {k: 'n', l: 'Map', cls: 'l pname', asc: true, f: (v, r) => `<a href="#/map/${r.map}">${esc(v)}</a>`},
+    {k: 'g', l: 'Played'}, {k: 'fin', l: 'Completed'},
+    {k: 'ctw', l: 'CT rounds', f: v => v == null ? '–' : `<span style="color:var(--ct)">${pct(v)}</span> / <span style="color:var(--t)">${pct(1 - v)}</span>`},
+    {k: 'avgR', l: 'Avg rounds', f: f1}, {k: 'kpg', l: 'Kills / game', f: f0},
+    {k: 'bestn', l: 'Best player', cls: 'l', v: r => r.best ? r.best.rt : null, f: (v, r) => r.best ? `${esc(r.best.n)} <span class="muted">${f2(r.best.rt)}</span>` : '–'},
+    {k: 'last', l: 'Last played', cls: 'l', f: v => nightLabel(v)},
+  ], rows, {sort: 'g', href: r => `#/map/${r.map}`});
+}
+
+function viewMap(m) {
+  const mg = games().filter(g => g.map === m);
+  pageTitle(mapName(m));
+  if (!mg.length) return notFound();
+  const rows = aggregate(mg);
+  const rs = mg.map(g => g.rounds).join('');
+  const ct = [...rs].filter(c => c === 'C').length, t = [...rs].filter(c => c === 'T').length;
+  const wp = {}; rows.forEach(r => Object.entries(r.wp).forEach(([w, c]) => wp[w] = (wp[w] || 0) + c));
+  $('#app').innerHTML = `
+    <div class="crumb"><a href="#/maps">Maps</a> / ${esc(mapName(m))}</div>
+    <div class="pagehead"><div><h1>${esc(mapName(m))}</h1><div class="sub">${esc(m)}</div></div></div>
+    <div class="tiles">
+      ${tile('Played', mg.length, `${mg.filter(g => g.fin).length} completed`)}
+      ${tile('CT round wins', pct(ct / (ct + t || 1)), `${ct} CT · ${t} T rounds`)}
+      ${tile('Avg rounds', f1(rs.length / mg.length))}
+      ${tile('Players', rows.length)}
+    </div>
+    <section><h2>Leaderboard on ${esc(mapName(m))}</h2><div id="lb"></div></section>
+    <section class="grid2"><div class="card pad"><h2>Records</h2>${recordCards(mg)}</div><div class="card pad"><h2>Kills by weapon</h2>${weaponsBlock(wp)}</div></section>
+    <section><h2>Games</h2><div id="gt"></div></section>`;
+  board($('#lb'), rows, {minGames: mg.length >= 4 ? 2 : 1});
+  gamesTable($('#gt'), mg);
+}
+
+function viewPlayers() {
+  pageTitle('Players');
+  const rows = aggregate(games()).sort((a, b) => b.g - a.g || b.rt - a.rt);
+  $('#app').innerHTML = `<div class="pagehead"><div><h1>Players</h1><div class="sub">${rows.length} players · sorted by games played</div></div></div>
+    <div class="pgrid">${rows.map(r => `<a class="card pcard" href="#/player/${r.id}"><div class="n">${esc(r.n)}</div><div class="r">${f2(r.rt)}</div>
+      <div class="s">rating · ${r.g} games · ${r.nights.size} nights</div><div class="s">K/D ${f2(r.kd)} · ADR ${f0(r.adr)} · HS ${pct(r.hsp)}</div></a>`).join('')}</div>`;
+}
+
+function viewPlayer(id) {
+  const gs = games();
+  const mine = gs.filter(g => g.p.some(p => p.id === id));
+  const name = NAMES[id];
+  pageTitle(name || 'Player');
+  if (!mine.length) return notFound();
+  const me = aggregate(mine).find(r => r.id === id);
+  const prs = mine.map(g => prow(g, g.p.find(p => p.id === id)));
+  const nights = [...new Set(mine.map(g => g.night))].sort();
+  const perNight = nights.map(n => Object.assign(aggregate(mine.filter(g => g.night === n)).find(r => r.id === id), {night: n}));
+  const maps = [...new Set(mine.map(g => g.map))].map(m => Object.assign(aggregate(mine.filter(g => g.map === m)).find(r => r.id === id), {map: m, mn: mapName(m)}));
+  const everyone = aggregate(gs).filter(r => r.g >= 5).sort((a, b) => b.rt - a.rt);
+  const rank = everyone.findIndex(r => r.id === id);
+  $('#app').innerHTML = `
+    <div class="crumb"><a href="#/players">Players</a> / ${esc(name)}</div>
+    <div class="pagehead"><div><h1>${esc(name)}</h1><div class="sub">${me.g} games over ${nights.length} nights${rank >= 0 ? ` · #${rank + 1} of ${everyone.length} by rating (5+ games)` : ''}</div></div></div>
+    <div class="tiles">
+      ${tile('Rating', f2(me.rt), `${me.mvp} game MVPs`, true)}
+      ${tile('Record', me.w + me.l ? `${me.w}–${me.l}` : '–', me.wr == null ? 'no completed games' : pct(me.wr) + ' win rate')}
+      ${tile('Kills – deaths', `${me.k}–${me.d}`, `K/D ${f2(me.kd)} · ${me.a} assists`)}
+      ${tile('ADR', f0(me.adr), `${f2(me.kpr)} kills / round`)}
+      ${tile('Headshots', pct(me.hsp), `${me.hs} HS kills`)}
+      ${tile('Multi-kills', me.mk, `${me.k3} × 3K · ${me.k4} × 4K · ${me.k5} aces`)}
+    </div>
+    <section class="card pad"><h2>Rating by night</h2>${vbars(perNight.map(r => ({label: nightDate(r.night).toLocaleDateString('en-US', {month: 'short', day: 'numeric'}), value: r.rt, tip: `<b>${nightLabel(r.night)}</b><br>Rating ${f2(r.rt)} · ${r.k}–${r.d} · ${r.g} games`, href: `#/night/${r.night}`})), {ref: 1, fmt: v => v.toFixed(1)})}
+      <div class="note">Dashed line = 1.00 (average).</div></section>
+    <section class="grid2">
+      <div><h2>By map</h2><div id="pm"></div></div>
+      <div class="card pad"><h2>Kills by weapon</h2>${weaponsBlock(me.wp)}</div>
+    </section>
+    <section><h2>By night</h2><div id="pn"></div></section>
+    <section><h2>Game log</h2><div id="pg"></div></section>`;
+  mountTable($('#pm'), [
+    {k: 'mn', l: 'Map', cls: 'l pname', asc: true, f: (v, r) => `<a href="#/map/${r.map}">${esc(v)}</a>`},
+    C.g, C.wl, C.rt, C.kd, C.adr, C.hsp,
+  ], maps, {sort: 'g'});
+  mountTable($('#pn'), [
+    {k: 'night', l: 'Night', cls: 'l pname', f: v => `<a href="#/night/${v}">${esc(nightLabel(v))}</a>`},
+    C.g, C.wl, C.rt, C.k, C.d, C.a, C.kd, C.adr, C.hsp, C.mk, C.mvp,
+  ], perNight, {sort: 'night', href: r => `#/night/${r.night}`});
+  mountTable($('#pg'), [
+    {k: 'start', l: 'Date', cls: 'l', f: (v, r) => `${esc(nightLabel(r.night))} <span class="muted">${timeLabel(v)}</span>`},
+    {k: 'map', l: 'Map', cls: 'l pname', f: v => esc(mapName(v))},
+    {k: 'res', l: 'Result', cls: 'l', f: v => v ? `<span class="chip ${v}">${v === 'W' ? 'Win' : 'Loss'}</span>` : '<span class="chip">–</span>'},
+    {k: 'team', l: 'Side', cls: 'l', f: v => `<span class="chip ${v.toLowerCase()}">${v}</span>`},
+    C.rt, C.k, C.d, C.a, C.diff, C.adr, C.hsp,
+    {k: 'isMvp', l: 'MVP', v: r => r.isMvp ? 1 : 0, f: v => v ? '<span class="mvp">★</span>' : ''},
+  ], prs, {sort: 'start', href: r => `#/game/${r.gid}`});
+}
+
+function notFound() {
+  $('#app').innerHTML = `<h1>Not found</h1><p class="sub">Nothing here${onlyFin ? ' with “Completed games only” switched on' : ''}. <a href="#/" style="color:var(--accent)">Back to overview</a></p>`;
+}
+
+// ---------- router ----------
+function route() {
+  const [, view = '', arg] = decodeURIComponent(location.hash.slice(1)).split('/');
+  document.querySelectorAll('#nav a').forEach(a => a.classList.toggle('on',
+    a.dataset.r === view || (a.dataset.r && view === a.dataset.r.replace(/s$/, ''))));
+  ({'': viewOverview, nights: viewNights, night: () => viewNight(arg), games: viewGames, game: () => viewGame(+arg),
+    maps: viewMaps, map: () => viewMap(arg), players: viewPlayers, player: () => viewPlayer(arg)}[view] || notFound)();
+  tip.style.opacity = 0;
+}
+addEventListener('hashchange', () => { route(); scrollTo(0, 0); });
+
+$('#brand').textContent = DATA.title;
+$('#foot').innerHTML = `Built from CS2 server logs · ${ALL.length} games · generated ${esc(DATA.generated)}`;
+$('#onlyFin').checked = onlyFin;
+$('#onlyFin').onchange = e => { onlyFin = e.target.checked; try { localStorage.setItem('cs2.onlyFin', onlyFin ? '1' : '0'); } catch (x) {} route(); };
+$('#theme').onclick = () => {
+  const dark = document.documentElement.dataset.theme ? document.documentElement.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  document.documentElement.dataset.theme = dark ? 'light' : 'dark';
+  try { localStorage.setItem('cs2.theme', document.documentElement.dataset.theme); } catch (x) {}
+};
+try { const t = localStorage.getItem('cs2.theme'); if (t) document.documentElement.dataset.theme = t; } catch (x) {}
+route();
+</script>
+</body>
+</html>
