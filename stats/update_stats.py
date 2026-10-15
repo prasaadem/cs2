@@ -8,6 +8,8 @@ Rules, so history is never lost:
   * a game not in the archive is added as data/games/<id>.json
   * a completed game already in the archive is never changed
   * an unfinished game is replaced only by a version with more rounds
+  * a game is re-parsed by a newer parser version only from logs that are at
+    least as complete (same or more rounds, and finished if it was finished)
   * nothing is ever deleted (games missing from the logs stay as they are)
 """
 import argparse
@@ -43,9 +45,11 @@ def merge(games, data_dir):
             added.append(g)
             continue
         old = load(path)
-        if old.get('fin'):
-            continue
-        if g['fin'] or len(g['rounds']) > len(old.get('rounds', '')):
+        more_rounds = len(g['rounds']) > len(old.get('rounds', ''))
+        # a newer parser may re-parse a game, but only from logs at least as complete
+        upgrade = (g.get('v', 0) > old.get('v', 0) and len(g['rounds']) >= len(old.get('rounds', ''))
+                   and (g['fin'] or not old.get('fin')))
+        if upgrade or (not old.get('fin') and (g['fin'] or more_rounds)):
             save(path, g)
             updated.append(g)
     return added, updated

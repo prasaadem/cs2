@@ -9,7 +9,7 @@ import glob
 import os
 import re
 
-PARSER_VERSION = 1
+PARSER_VERSION = 2  # 2: grenades, flashes, purchases, picked-up kills
 
 # Local time for display / night grouping: US Pacific with US daylight-saving rules.
 STD_OFFSET_HOURS = -8
@@ -46,6 +46,25 @@ MAP = re.compile(r'(?:Loading map|Match_Start" on) "(\w+)"')
 ANY_PLAYER = re.compile(P)
 SWITCH = re.compile(r'"(.+?)<\d+><\[U:1:(\d+)\]>" switched from team <\w+> to <(\w+)>')
 DISCONNECT = re.compile(P + r' disconnected')
+THREW = re.compile(P + r' threw (hegrenade|flashbang|smokegrenade|molotov|decoy)\b')
+PURCHASE = re.compile(P + r' purchased "(\w+)"')
+BLIND = re.compile(P + r' blinded for ([\d.]+) by ' + P + r' from flashbang')
+
+THROW_KEY = {'hegrenade': 'gh', 'flashbang': 'gf', 'smokegrenade': 'gs', 'molotov': 'gm', 'decoy': 'gd'}
+# Weapons everyone spawns with, plus utility: a kill with these says nothing about picking up.
+NOT_PICKUP = {'glock', 'hkp2000', 'usp_silencer', 'taser', 'hegrenade', 'inferno', 'molotov',
+              'incgrenade', 'flashbang', 'smokegrenade', 'decoy', 'world'}
+# CS2 list prices, used to estimate money spent (armor and kits are not logged).
+PRICES = {
+    'ak47': 2700, 'm4a1': 3100, 'm4a1_silencer': 2900, 'awp': 4750, 'aug': 3300, 'sg556': 3000,
+    'famas': 2050, 'galilar': 1800, 'ssg08': 1700, 'g3sg1': 5000, 'scar20': 5000,
+    'deagle': 700, 'tec9': 500, 'fiveseven': 500, 'cz75a': 500, 'p250': 300, 'elite': 300,
+    'revolver': 600, 'glock': 200, 'hkp2000': 200, 'usp_silencer': 200,
+    'p90': 2350, 'mp7': 1500, 'mp5sd': 1500, 'mac10': 1050, 'mp9': 1250, 'ump45': 1200, 'bizon': 1400,
+    'nova': 1050, 'xm1014': 2000, 'mag7': 1300, 'sawedoff': 1100, 'negev': 1700, 'm249': 5200,
+    'hegrenade': 300, 'flashbang': 200, 'smokegrenade': 300, 'molotov': 400, 'incgrenade': 500,
+    'decoy': 50, 'taser': 200,
+}
 JSON_KV = re.compile(r'^"(round_number|score_t|score_ct)" : "(\d+)"')
 JSON_PLAYER = re.compile(r'^"player_\d+" : "(.*)"')
 
@@ -79,6 +98,8 @@ class Match:
         self.stats = collections.defaultdict(collections.Counter)
         self.weapons = collections.defaultdict(collections.Counter)
         self.weapon_hs = collections.defaultdict(collections.Counter)
+        self.bought = collections.defaultdict(collections.Counter)    # purchases per player
+        self.picked = collections.defaultdict(collections.Counter)    # kills with weapons not bought
         self.names = {}
         self.team = {}
         self.json = None            # last round_stats block: (rounds, {id: dmg})
@@ -194,6 +215,8 @@ def parse_group(files):
                         s['zeus'] += 1
                     if w in ('hegrenade', 'inferno'):
                         s['nade'] += 1
+                    if w not in NOT_PICKUP and not is_knife(w) and not cur.bought[aid][w]:
+                        cur.picked[aid][w] += 1
                     if not cur.round_kills[-1]:
                         s['ek'] += 1
                         v['ed'] += 1
@@ -216,6 +239,31 @@ def parse_group(files):
                         cur.see(name, sid, team)
                         cur.stats[sid]['d'] += 1
                         cur.stats[sid]['sui'] += 1
+                    continue
+                th = THREW.search(msg)
+                if th:
+                    cur.see(*th.groups()[:3])
+                    cur.stats[th.group(2)][THROW_KEY[th.group(4)]] += 1
+                    continue
+                pu = PURCHASE.search(msg)
+                if pu:
+                    cur.see(*pu.groups()[:3])
+                    cur.bought[pu.group(2)][pu.group(4)] += 1
+                    continue
+                bl = BLIND.search(msg)
+                if bl:
+                    vn, vid, vt, dur, an, aid, at = bl.groups()
+                    cur.see(vn, vid, vt)
+                    cur.see(an, aid, at)
+                    dur = float(dur)
+                    if vid == aid:
+                        cur.stats[aid]['fself'] += 1
+                    elif vt == at:
+                        cur.stats[aid]['ft'] += 1
+                    else:
+                        cur.stats[aid]['fe'] += 1
+                        cur.stats[aid]['fdur_ms'] += round(dur * 1000)
+                        cur.stats[vid]['fbd'] += 1
                     continue
                 b = BOMB.search(msg)
                 if b:
@@ -262,6 +310,8 @@ def build_game(m):
         winner = 'CT' if ct > t else 'T'
 
     json_rounds, json_dmg = m.json if m.json else (0, {})
+    # Picked-up kills only make sense where people buy (aim/fy maps hand out weapons)
+    economy = sum(sum(c.values()) for c in m.bought.values()) >= nrounds
     players = []
     ids = set(m.stats) | {sid for r in m.present for sid in r}
     for sid in ids:
@@ -295,6 +345,14 @@ def build_game(m):
             'zeus': s['zeus'], 'nade': s['nade'],
             'w': dict(m.weapons[sid].most_common()),
             'wh': dict(m.weapon_hs[sid]),
+            'gh': s['gh'], 'gf': s['gf'], 'gs': s['gs'], 'gm': s['gm'], 'gd': s['gd'],
+            'fe': s['fe'], 'ft': s['ft'], 'fself': s['fself'], 'fbd': s['fbd'],
+            'fdur': round(s['fdur_ms'] / 1000, 1),
+            'buy': sum(m.bought[sid].values()),
+            'spent': sum(PRICES.get(i, 0) * c for i, c in m.bought[sid].items()),
+            'bi': dict(m.bought[sid].most_common()),
+            'pk': sum(m.picked[sid].values()) if economy else None,
+            'pkw': dict(m.picked[sid].most_common()) if economy else {},
         })
     players.sort(key=lambda p: (-p['rt'], -p['k']))
     local = to_local(m.start)
@@ -307,6 +365,7 @@ def build_game(m):
         'start_utc': m.start.strftime('%Y-%m-%dT%H:%M:%SZ'),
         'start': local.strftime('%Y-%m-%dT%H:%M'),
         'min': m.game_over[2] if finished else max(1, round((m.end - m.start).total_seconds() / 60)),
+        'economy': economy,
         'fin': finished, 'ct': ct, 't': t, 'win': winner,
         'rounds': ''.join({'CT': 'C', 'T': 'T', None: '-'}[r] for r in m.rounds),
         'p': players,

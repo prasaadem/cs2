@@ -235,6 +235,7 @@ footer { color: var(--text-3); font-size: 12px; padding: 24px 0 40px; border-top
       <a href="#/maps" data-r="maps">Maps</a>
       <a href="#/players" data-r="players">Players</a>
       <a href="#/weapons" data-r="weapons">Weapons</a>
+      <a href="#/utility" data-r="utility">Utility</a>
       <a href="#/awards" data-r="awards">Awards</a>
     </nav>
     <div class="hctl">
@@ -289,7 +290,7 @@ function rating(k, d, r, k1, k2, k3, k4, k5) {
   return (k / r / 0.679 + 0.7 * Math.max(r - d, 0) / r / 0.317 + (k1 + 4 * k2 + 9 * k3 + 16 * k4 + 25 * k5) / r / 1.277) / 2.7;
 }
 
-const SUM_KEYS = ['r','k','d','a','fa','hs','tk','sui','ek','ed','k1','k2','k3','k4','k5','awp','knife','zeus','nade','wb','ns','smoke','blindk','plant','defuse'];
+const SUM_KEYS = ['r','k','d','a','fa','hs','tk','sui','ek','ed','k1','k2','k3','k4','k5','awp','knife','zeus','nade','wb','ns','smoke','blindk','plant','defuse','gh','gf','gs','gm','gd','fe','ft','fself','fbd','fdur','buy','spent'];
 
 // weapon classes
 const CATS = {
@@ -316,7 +317,7 @@ function aggregate(gs) {
   for (const g of gs) {
     for (const p of g.p) {
       let s = by.get(p.id);
-      if (!s) { s = {id: p.id, n: NAMES[p.id], g: 0, w: 0, l: 0, mvp: 0, dmg: 0, dmgR: 0, nights: new Set(), maps: new Set(), wp: {}, wh: {}}; SUM_KEYS.forEach(k => s[k] = 0); by.set(p.id, s); }
+      if (!s) { s = {id: p.id, n: NAMES[p.id], g: 0, w: 0, l: 0, mvp: 0, dmg: 0, dmgR: 0, nights: new Set(), maps: new Set(), wp: {}, wh: {}, bi: {}, pkw: {}, pk: 0, pkG: 0}; SUM_KEYS.forEach(k => s[k] = 0); by.set(p.id, s); }
       s.g++; s.nights.add(g.night); s.maps.add(g.map);
       if (p.res === 'W') s.w++; else if (p.res === 'L') s.l++;
       if (g.mvp === p.id) s.mvp++;
@@ -324,6 +325,9 @@ function aggregate(gs) {
       if (p.dmg != null && p.dmgR) { s.dmg += p.dmg; s.dmgR += p.dmgR; }
       for (const [w, c] of Object.entries(p.w)) s.wp[w] = (s.wp[w] || 0) + c;
       for (const [w, c] of Object.entries(p.wh || {})) s.wh[w] = (s.wh[w] || 0) + c;
+      for (const [w, c] of Object.entries(p.bi || {})) s.bi[w] = (s.bi[w] || 0) + c;
+      for (const [w, c] of Object.entries(p.pkw || {})) s.pkw[w] = (s.pkw[w] || 0) + c;
+      if (p.pk != null) { s.pk += p.pk; s.pkG++; }
     }
   }
   for (const s of by.values()) derive(s);
@@ -342,6 +346,10 @@ function derive(s) {
   const fav = topWeapons(s.wp, 1)[0];
   s.fav = fav ? fav[0] : null; s.favK = fav ? fav[1] : 0; s.favShare = s.k ? s.favK / s.k : 0;
   s.nw = topWeapons(s.wp, 99).length;
+  s.gt = (s.gh || 0) + (s.gf || 0) + (s.gs || 0) + (s.gm || 0) + (s.gd || 0);
+  s.gpr = s.r ? s.gt / s.r : 0;
+  s.spg = s.g ? (s.spent || 0) / s.g : null;
+  s.spk = s.k ? (s.spent || 0) / s.k : null;
   return s;
 }
 // per-game player row with derived values
@@ -350,6 +358,9 @@ function prow(g, p) {
   s.kd = p.d ? p.k / p.d : p.k; s.diff = p.k - p.d; s.kpr = p.r ? p.k / p.r : 0;
   s.adr = p.dmgR ? p.dmg / p.dmgR : null; s.hsp = p.k ? p.hs / p.k : 0; s.entry = p.ek - p.ed;
   s.isMvp = g.mvp === p.id;
+  s.gt = (p.gh || 0) + (p.gf || 0) + (p.gs || 0) + (p.gm || 0) + (p.gd || 0);
+  s.gpr = p.r ? s.gt / p.r : 0; s.spg = p.spent; s.spk = p.k ? (p.spent || 0) / p.k : null;
+  s.pkG = p.pk == null ? 0 : 1; s.bi = p.bi || {}; s.pkw = p.pkw || {};
   return s;
 }
 
@@ -595,7 +606,7 @@ function viewNight(n) {
       ${tile('Kills', kills)}
       ${tile('Play time', (ng.reduce((s, g) => s + g.min, 0) / 60).toFixed(1) + ' h', `from ${timeLabel(ng[0].start)}`)}
     </div>
-    <section><h2>Night leaderboard</h2><div id="lb"></div></section>
+    <section><h2>Night leaderboard</h2><div id="lb"></div><div class="note"><a href="#/utility/${n}" style="color:var(--accent)">Grenades, flashes, purchases and pickups for this night →</a></div></section>
     <section><h2>Games</h2><div id="gt"></div></section>
     <section class="grid2"><div class="card pad"><h2>Records</h2>${recordCards(ng)}</div><div class="card pad"><h2>Kills by weapon</h2>${weaponsBlock(wp)}</div></section>`;
   board($('#lb'), rows, {minGames: 1});
@@ -647,6 +658,12 @@ function viewGame(id) {
     {k: 'tw', l: 'Top weapons', cls: 'l', sort: false, f: (v, r) => Object.entries(r.w).slice(0, 3).map(([w, c]) => `${esc(weaponName(w))} <span class="muted">${c}</span>`).join(', ')},
   ];
   for (const side of ['CT', 'T']) mountTable($('#t' + side), cols, rows.filter(r => r.team === side), {sort: 'rt'});
+  $('#app').insertAdjacentHTML('beforeend', `<section><h2>Utility &amp; economy</h2><div id="gu"></div>${g.v >= 2 ? '' : '<div class="note">This game was parsed before utility tracking; it fills in after the next daily update.</div>'}</section>`);
+  mountTable($('#gu'), [
+    {k: 'n', l: 'Player', cls: 'l pname', asc: true, f: (v, r) => plink(r.id, v)},
+    {k: 'team', l: 'Side', cls: 'l', f: v => `<span class="chip ${v.toLowerCase()}">${v}</span>`},
+    U.gt, U.gh, U.gf, U.gs, U.gm, U.fe, U.fdur, U.ft, U.fa, U.buy, U.spent, U.biTop, U.pk, U.pkTop,
+  ], rows, {sort: 'gt'});
 }
 
 function viewMaps() {
@@ -730,6 +747,8 @@ function viewPlayer(id) {
       ${tile('ADR', f0(me.adr), `${f2(me.kpr)} kills / round`)}
       ${tile('Headshots', pct(me.hsp), `${me.hs} HS kills`)}
       ${tile('Multi-kills', me.mk, `${me.k3} × 3K · ${me.k4} × 4K · ${me.k5} aces`)}
+      ${tile('Grenades thrown', me.gt, `${me.fe} enemies flashed · ${me.ft} teammates`)}
+      ${tile('Bought', me.buy, `≈ $${Math.round(me.spent).toLocaleString()} spent · ${me.pk} picked-up kills`)}
       ${me.fav ? tile('Favourite weapon', esc(weaponName(me.fav)), `${me.favK} kills · ${pct(me.favShare)} of all`) : ''}
     </div>
     <section class="card pad"><h2>Rating by night</h2>${vbars(perNight.map(r => ({label: nightDate(r.night).toLocaleDateString('en-US', {month: 'short', day: 'numeric'}), value: r.rt, tip: `<b>${nightLabel(r.night)}</b><br>Rating ${f2(r.rt)} · ${r.k}–${r.d} · ${r.g} games`, href: `#/night/${r.night}`})), {ref: 1, fmt: v => v.toFixed(1)})}
@@ -737,6 +756,7 @@ function viewPlayer(id) {
     <section class="grid2">
       <div><h2>By map</h2><div id="pm"></div></div>
       <div class="card pad"><h2>Kills by weapon</h2>${weaponsBlock(me.wp)}
+        <h2 style="margin-top:20px">Most bought</h2>${hbars(topWeapons(me.bi, 8).map(([w, c]) => ({label: weaponName(w), value: c, tip: `<b>${esc(weaponName(w))}</b><br>bought ${c}×`})))}
         <h2 style="margin-top:20px">Weapon classes</h2>${hbars(Object.entries(catShare(me.wp)).sort((a, b) => b[1] - a[1]).map(([c, v]) => ({label: c, value: v, tip: `<b>${c}</b><br>${pct(v)} of kills`})), pct)}</div>
     </section>
     <section><h2>By night</h2><div id="pn"></div></section>
@@ -875,6 +895,13 @@ const AWARDS = [
   {k: 'tk', l: 'Wrong team', d: 'Team kills'},
   {k: 'sui', l: 'Self-destruct', d: 'Suicides (fall damage, own grenades)'},
   {k: 'd', l: 'Cannon fodder', d: 'Deaths'},
+  {k: 'gt', l: 'Grenade spammer', d: 'Grenades thrown'},
+  {k: 'fe', l: 'Flash king', d: 'Enemies blinded'},
+  {k: 'ft', l: 'Team flasher', d: 'Teammates blinded'},
+  {k: 'fself', l: 'Self-flasher', d: 'Times flashed themselves'},
+  {k: 'fbd', l: 'Always blind', d: 'Times blinded by enemies'},
+  {k: 'pk', l: 'Scavenger', d: 'Kills with picked-up weapons'},
+  {k: 'spent', l: 'Big spender', d: 'Estimated $ spent'},
 ];
 function viewAwards() {
   pageTitle('Awards');
@@ -884,16 +911,88 @@ function viewAwards() {
     <div class="recs">${AWARDS.map(a => {
       const s = rows.filter(r => r[a.k] > 0).sort((x, y) => y[a.k] - x[a.k]);
       if (!s.length) return '';
-      return `<a class="card rec" href="#/player/${s[0].id}"><div class="l">${a.l}</div><div class="v">${s[0][a.k]}</div><div class="w">${esc(s[0].n)}</div>
-        <div class="s">${a.d}${s[1] ? ` · 2nd ${esc(s[1].n)} (${s[1][a.k]})` : ''}</div></a>`;
+      const fmt = v => a.k === 'spent' ? '$' + Math.round(v).toLocaleString() : v;
+      return `<a class="card rec" href="#/player/${s[0].id}"><div class="l">${a.l}</div><div class="v">${fmt(s[0][a.k])}</div><div class="w">${esc(s[0].n)}</div>
+        <div class="s">${a.d}${s[1] ? ` · 2nd ${esc(s[1].n)} (${fmt(s[1][a.k])})` : ''}</div></a>`;
     }).join('')}</div>
     <section><h2>Playstyle table</h2><div id="ps"><div class="filters"></div><div class="t"></div></div>
       <div class="note">Totals across all games. Hover a column name for what it counts.</div></section>`;
-  const cols = [C.player, C.g, ...AWARDS.filter(a => !['d', 'a', 'awp', 'k4', 'k5'].includes(a.k))
+  const cols = [C.player, C.g, ...AWARDS.filter(a => !['d', 'a', 'awp', 'k4', 'k5', 'spent', 'gt', 'fe', 'ft', 'fself', 'fbd', 'pk'].includes(a.k))
     .map(a => ({k: a.k, l: a.d.replace(/ \(.*\)/, '').replace(/^Kills /, '').replace(/ kills$/, ''), t: `${a.l}: ${a.d}`, f: v => v ? v : '<span class="muted">0</span>'}))];
   const draw = mg => mountTable($('#ps .t'), cols, rows.filter(r => r.g >= mg), {sort: 'wb', rank: true});
   minGamesFilter($('#ps .filters'), rows, 1, draw);
   draw(1);
+}
+
+// utility, flash and economy columns
+const U = {
+  gt: {k: 'gt', l: 'Nades', t: 'Grenades thrown (all types)'},
+  gh: {k: 'gh', l: 'HE'}, gf: {k: 'gf', l: 'Flash'}, gs: {k: 'gs', l: 'Smoke'},
+  gm: {k: 'gm', l: 'Molly', t: 'Molotovs and incendiaries thrown'}, gd: {k: 'gd', l: 'Decoy'},
+  gpr: {k: 'gpr', l: 'Nades/rnd', t: 'Grenades thrown per round played', f: f2},
+  fe: {k: 'fe', l: 'Enemies flashed', t: 'Enemies blinded by your flashes'},
+  fdur: {k: 'fdur', l: 'Blind time', t: 'Total seconds enemies spent blinded by your flashes', f: v => v ? Math.round(v) + 's' : '0'},
+  ft: {k: 'ft', l: 'Team flashed', t: 'Teammates blinded by your flashes'},
+  fself: {k: 'fself', l: 'Self', t: 'Times you flashed yourself'},
+  fbd: {k: 'fbd', l: 'Got flashed', t: 'Times you were blinded by an enemy flash'},
+  fa: {k: 'fa', l: 'Flash assists'},
+  nade: {k: 'nade', l: 'Nade kills', t: 'HE and molotov kills'},
+  buy: {k: 'buy', l: 'Bought', t: 'Items purchased (weapons and grenades; armor is not logged)'},
+  spent: {k: 'spent', l: 'Spent', t: 'Estimated money spent, at CS2 list prices (armor and kits not included)', f: v => '$' + Math.round(v || 0).toLocaleString()},
+  spg: {k: 'spg', l: '$/game', f: v => v == null ? '–' : '$' + Math.round(v).toLocaleString()},
+  spk: {k: 'spk', l: '$/kill', t: 'Estimated money spent per kill', f: v => v == null ? '–' : '$' + Math.round(v).toLocaleString()},
+  pk: {k: 'pk', l: 'Picked-up kills', t: 'Kills with a weapon the player never bought that game: picked up from the floor or dropped by a teammate. Not counted on maps without buying (aim maps).', f: (v, r) => r.pkG === 0 ? '<span class="muted">–</span>' : v},
+  pkTop: {k: 'pkTop', l: 'Top pickup', cls: 'l', sort: false, f: (v, r) => { const t = topWeapons(r.pkw || {}, 1)[0]; return t ? `${esc(weaponName(t[0]))} <span class="muted">${t[1]}</span>` : '–'; }},
+  biTop: {k: 'biTop', l: 'Most bought', cls: 'l', sort: false, f: (v, r) => { const t = topWeapons(r.bi || {}, 1)[0]; return t ? `${esc(weaponName(t[0]))} <span class="muted">${t[1]}</span>` : '–'; }},
+};
+const UTIL_COLS = [U.gt, U.gh, U.gf, U.gs, U.gm, U.gd, U.gpr, U.fe, U.fdur, U.ft, U.fself, U.fbd, U.fa, U.nade];
+const ECON_COLS = [U.buy, U.spent, U.spg, U.spk, U.biTop, U.pk, U.pkTop];
+
+function viewUtility(night) {
+  const all = games();
+  const nights = [...new Set(all.map(g => g.night))].sort().reverse();
+  const gs = night ? all.filter(g => g.night === night) : all;
+  pageTitle(night ? `Utility · ${nightLabel(night)}` : 'Utility');
+  if (!gs.length) return notFound();
+  const rows = aggregate(gs);
+  const sum = k => rows.reduce((s, r) => s + (r[k] || 0), 0);
+  const top = (k, f = r => true) => rows.filter(r => f(r) && r[k] > 0).sort((a, b) => b[k] - a[k])[0];
+  const thrown = {HE: sum('gh'), Flashbang: sum('gf'), Smoke: sum('gs'), 'Molotov / Incendiary': sum('gm'), Decoy: sum('gd')};
+  const bi = {}, pkw = {};
+  rows.forEach(r => { for (const [w, c] of Object.entries(r.bi)) bi[w] = (bi[w] || 0) + c; for (const [w, c] of Object.entries(r.pkw)) pkw[w] = (pkw[w] || 0) + c; });
+  const old = gs.filter(g => !(g.v >= 2)).length;
+  const t1 = top('gt'), t2 = top('fe'), t3 = top('ft'), t4 = top('spent'), t5 = top('pk'), t6 = top('fbd');
+  const card = (l, r, v, s) => r ? tile(l, esc(r.n), `${v} · ${s}`) : '';
+
+  $('#app').innerHTML = `
+    <div class="pagehead"><div><h1>Utility &amp; economy</h1><div class="sub">${night ? esc(nightLabel(night, true)) : 'All nights'} · ${gs.length} games</div></div>
+      <div class="filters"><span class="flabel">Night</span><select id="un"><option value="">All nights</option>${nights.map(n => `<option value="${n}" ${n === night ? 'selected' : ''}>${esc(nightLabel(n))}</option>`).join('')}</select></div></div>
+    <div class="tiles">
+      ${tile('Grenades thrown', sum('gt').toLocaleString(), `${sum('fe').toLocaleString()} enemies flashed`, true)}
+      ${card('Grenade spammer', t1, t1?.gt + ' thrown', f2(t1?.gpr) + ' per round')}
+      ${card('Flash king', t2, t2?.fe + ' enemies blinded', Math.round(t2?.fdur || 0) + 's total')}
+      ${card('Team flasher', t3, t3?.ft + ' teammates blinded', 'oops')}
+      ${card('Big spender', t4, '$' + Math.round(t4?.spent || 0).toLocaleString(), (t4?.buy || 0) + ' items')}
+      ${card('Scavenger', t5, t5?.pk + ' picked-up kills', t5 ? 'mostly ' + weaponName((topWeapons(t5.pkw, 1)[0] || ['–'])[0]) : '')}
+      ${card('Always blind', t6, t6?.fbd + ' times flashed', 'by enemies')}
+    </div>
+    ${old ? `<div class="note">${old} game${old > 1 ? 's' : ''} parsed before utility tracking show 0 here until the next daily update re-reads their logs.</div>` : ''}
+    <section><h2>Grenades &amp; flashes</h2><div id="ut"><div class="filters"></div><div class="t"></div></div></section>
+    <section><h2>Purchases &amp; pickups</h2><div id="et"><div class="filters"></div><div class="t"></div></div>
+      <div class="note">Spent is estimated from CS2 list prices; armor, kits and dropped-for-teammates buys can't be told apart in the logs. Picked-up kills are kills with a weapon the player never bought that game (spawn pistols excluded, aim maps skipped).</div></section>
+    <section class="grid3">
+      <div class="card pad"><h2>Grenades by type</h2>${hbars(Object.entries(thrown).map(([l, v]) => ({label: l, value: v, tip: `<b>${l}</b><br>${v} thrown`})))}</div>
+      <div class="card pad"><h2>Most bought</h2>${hbars(topWeapons(bi, 12).map(([w, c]) => ({label: weaponName(w), value: c, tip: `<b>${esc(weaponName(w))}</b><br>bought ${c}×`})))}</div>
+      <div class="card pad"><h2>Picked-up kills by weapon</h2>${Object.keys(pkw).length ? hbars(topWeapons(pkw, 12).map(([w, c]) => ({label: weaponName(w), value: c, href: `#/weapon/${w}`, tip: `<b>${esc(weaponName(w))}</b><br>${c} kills with a picked-up one`}))) : '<p class="muted">None yet</p>'}</div>
+    </section>`;
+  $('#un').onchange = e => { location.hash = e.target.value ? `#/utility/${e.target.value}` : '#/utility'; };
+  const def = night ? 1 : Math.min(5, Math.max(...rows.map(r => r.g)));
+  for (const [id, cols, sort] of [['#ut', [C.player, C.g, ...UTIL_COLS], 'gt'], ['#et', [C.player, C.g, C.k, ...ECON_COLS], 'spent']]) {
+    const el = $(id);
+    const draw = mg => mountTable($('.t', el), cols, rows.filter(r => r.g >= mg), {sort, rank: true});
+    minGamesFilter($('.filters', el), rows, def, draw);
+    draw(def);
+  }
 }
 
 function notFound() {
@@ -907,7 +1006,7 @@ function route() {
     a.dataset.r === view || (a.dataset.r && view === a.dataset.r.replace(/s$/, ''))));
   ({'': viewOverview, nights: viewNights, night: () => viewNight(arg), games: viewGames, game: () => viewGame(arg),
     maps: viewMaps, map: () => viewMap(arg), players: viewPlayers, player: () => viewPlayer(arg),
-    weapons: viewWeapons, weapon: () => viewWeapon(arg), awards: viewAwards}[view] || notFound)();
+    weapons: viewWeapons, weapon: () => viewWeapon(arg), awards: viewAwards, utility: () => viewUtility(arg)}[view] || notFound)();
   tip.style.opacity = 0;
 }
 addEventListener('hashchange', () => { route(); scrollTo(0, 0); });
