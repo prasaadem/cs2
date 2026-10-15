@@ -1,0 +1,16 @@
+# Only the stats pipeline is tracked. Raw server files (logs, configs, plugins)
+# contain passwords and player IP addresses and must never be committed.
+/*
+!/.gitignore
+!/.gitattributes
+!/README.md
+!/.github/
+!/stats/
+!/data/
+!/docs/
+!/.claude/
+/.claude/*
+!/.claude/launch.json
+
+__pycache__/
+*.tmp

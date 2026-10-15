@@ -243,12 +243,13 @@ footer { color: var(--text-3); font-size: 12px; padding: 24px 0 40px; border-top
     </div>
   </div>
 </header>
-<main class="wrap" id="app"></main>
+<main class="wrap" id="app"><p class="sub">Loading stats…</p></main>
 <footer class="wrap" id="foot"></footer>
 <div id="tip"></div>
 <script>
-const DATA = /*__DATA__*/null;
+fetch('data/games.json', {cache: 'no-cache'}).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(DATA => {
 const ALL = DATA.games;
+const BYID = Object.fromEntries(ALL.map(g => [g.id, g]));
 const MIN_ROUNDS_SHARE = 0.5; // a player must play half the rounds to be a game's MVP
 
 // ---------- helpers ----------
@@ -493,7 +494,7 @@ function scoreChip(g) {
 }
 function recordCards(gs) {
   const rows = gs.flatMap(g => g.p.map(p => prow(g, p)));
-  const full = rows.filter(r => { const g = ALL[r.gid - 1]; return r.r >= Math.max(8, g.rounds.length * MIN_ROUNDS_SHARE); });
+  const full = rows.filter(r => { const g = BYID[r.gid]; return r.r >= Math.max(8, g.rounds.length * MIN_ROUNDS_SHARE); });
   const best = (arr, key) => arr.reduce((a, b) => (b[key] ?? -1) > (a?.[key] ?? -1) ? b : a, null);
   const ctx = r => `${mapName(r.map)} · ${nightLabel(r.night)}`;
   const recs = [];
@@ -616,7 +617,7 @@ function viewGames() {
 }
 
 function viewGame(id) {
-  const g = ALL[id - 1];
+  const g = BYID[id];
   if (!g) return notFound();
   pageTitle(`${mapName(g.map)} · ${nightLabel(g.night)}`);
   const ctWin = g.win === 'CT', tWin = g.win === 'T';
@@ -904,7 +905,7 @@ function route() {
   const [, view = '', arg] = decodeURIComponent(location.hash.slice(1)).split('/');
   document.querySelectorAll('#nav a').forEach(a => a.classList.toggle('on',
     a.dataset.r === view || (a.dataset.r && view === a.dataset.r.replace(/s$/, ''))));
-  ({'': viewOverview, nights: viewNights, night: () => viewNight(arg), games: viewGames, game: () => viewGame(+arg),
+  ({'': viewOverview, nights: viewNights, night: () => viewNight(arg), games: viewGames, game: () => viewGame(arg),
     maps: viewMaps, map: () => viewMap(arg), players: viewPlayers, player: () => viewPlayer(arg),
     weapons: viewWeapons, weapon: () => viewWeapon(arg), awards: viewAwards}[view] || notFound)();
   tip.style.opacity = 0;
@@ -912,7 +913,7 @@ function route() {
 addEventListener('hashchange', () => { route(); scrollTo(0, 0); });
 
 $('#brand').textContent = DATA.title;
-$('#foot').innerHTML = `Built from CS2 server logs · ${ALL.length} games · generated ${esc(DATA.generated)}`;
+$('#foot').innerHTML = `Built from CS2 server logs · ${ALL.length} games · last game ${esc(DATA.updated ? DATA.updated.slice(0, 10) : '–')}`;
 $('#onlyFin').checked = onlyFin;
 $('#onlyFin').onchange = e => { onlyFin = e.target.checked; try { localStorage.setItem('cs2.onlyFin', onlyFin ? '1' : '0'); } catch (x) {} route(); };
 $('#theme').onclick = () => {
@@ -922,6 +923,9 @@ $('#theme').onclick = () => {
 };
 try { const t = localStorage.getItem('cs2.theme'); if (t) document.documentElement.dataset.theme = t; } catch (x) {}
 route();
+}).catch(e => {
+  document.getElementById('app').innerHTML = `<h1>Could not load stats</h1><p class="sub">data/games.json failed to load (${String(e.message || e).replace(/[<>&]/g, '')}). If you opened this file directly, serve the docs folder over HTTP instead.</p>`;
+});
 </script>
 </body>
 </html>

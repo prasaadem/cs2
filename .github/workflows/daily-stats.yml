@@ -1,0 +1,51 @@
+name: Daily stats
+
+on:
+  schedule:
+    - cron: '0 16 * * *'   # 16:00 UTC = 9 AM PDT / 8 AM PST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-stats
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Download server logs from DatHost
+        env:
+          DATHOST_EMAIL: ${{ secrets.DATHOST_EMAIL }}
+          DATHOST_PASSWORD: ${{ secrets.DATHOST_PASSWORD }}
+          DATHOST_SERVER_ID: ${{ secrets.DATHOST_SERVER_ID }}
+          DATHOST_ACCOUNT_EMAIL: ${{ secrets.DATHOST_ACCOUNT_EMAIL }}
+        run: python stats/fetch_dathost.py --out "$RUNNER_TEMP/logs"
+
+      - name: Merge new games into data/games
+        id: update
+        run: python stats/update_stats.py --logs "$RUNNER_TEMP/logs"
+
+      - name: Build site
+        run: python stats/build_site.py
+
+      - name: Commit and push
+        run: |
+          git add data docs
+          if git diff --cached --quiet; then
+            echo "No new games."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Stats: ${{ steps.update.outputs.summary }}"
+          git push
