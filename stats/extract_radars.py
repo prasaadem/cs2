@@ -113,7 +113,22 @@ def decode_dxt(data, w, h, dxt5):
     return bytes(out)
 
 
-FORMATS = {1: 'DXT1', 2: 'DXT5', 4: 'RGBA8888', 28: 'BGRA8888'}
+FORMATS = {1: 'DXT1', 2: 'DXT5', 4: 'RGBA8888', 20: 'BC7', 28: 'BGRA8888'}
+
+
+def decode_bc7(data, w, h):
+    """BC7 via Pillow (pip install Pillow): wrap the blocks in a DDS (DX10) header."""
+    try:
+        import io
+        from PIL import Image
+    except ImportError:
+        raise ValueError('BC7 radar needs Pillow (pip install Pillow)') from None
+    flags = 0x1 | 0x2 | 0x4 | 0x1000 | 0x80000  # caps, height, width, pixelformat, linearsize
+    pf = struct.pack('<II4s5I', 32, 0x4, b'DX10', 0, 0, 0, 0, 0)
+    header = struct.pack('<7I44x', 124, flags, h, w, len(data), 0, 1) + pf + struct.pack('<5I', 0x1000, 0, 0, 0, 0)
+    dx10 = struct.pack('<5I', 98, 3, 0, 1, 0)  # DXGI_FORMAT_BC7_UNORM, 2D texture
+    img = Image.open(io.BytesIO(b'DDS ' + header + dx10 + data)).convert('RGBA')
+    return img.tobytes()
 
 
 def decode_vtex(b):
@@ -138,12 +153,14 @@ def decode_vtex(b):
                 sizes = struct.unpack('<%dI' % cnt, b[e + 4 + o2:e + 4 + o2 + 4 * cnt])
         if fmt not in FORMATS:
             raise ValueError(f'unsupported texture format {fmt}')
-        full = w * h * 4 if fmt in (4, 28) else ((w + 3) // 4) * ((h + 3) // 4) * (16 if fmt == 2 else 8)
+        full = w * h * 4 if fmt in (4, 28) else ((w + 3) // 4) * ((h + 3) // 4) * (16 if fmt in (2, 20) else 8)
         data = b[fsize:]
         # mips are stored smallest first, so the full-size image is the last chunk
         raw = lz4_block(data[len(data) - sizes[0]:], full) if sizes else data[len(data) - full:]
         if fmt in (1, 2):
             return w, h, decode_dxt(raw, w, h, fmt == 2)
+        if fmt == 20:
+            return w, h, decode_bc7(raw, w, h)
         if fmt == 28:
             px = bytearray(raw)
             px[0::4], px[2::4] = px[2::4], px[0::4]

@@ -33,7 +33,7 @@ def radar_overviews(radar_dir):
             body = fh.read()
         vals = {}
         for key in ('pos_x', 'pos_y', 'scale'):
-            m = re.search(r'"%s"\s+"(-?[\d.]+)"' % key, body)
+            m = re.search(r'"?%s"?\s+"?(-?[\d.]+)"?' % key, body)  # some maps leave out the quotes
             if m:
                 vals[key] = float(m.group(1))
         if len(vals) == 3:

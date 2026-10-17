@@ -1,4 +1,9 @@
 {
+ "aim_ak_bench": {
+  "pos_x": -1152.0,
+  "pos_y": 1152.0,
+  "scale": 2.25
+ },
  "aim_redline": {
   "pos_x": -1198.8,
   "pos_y": 1246.8,
@@ -14,6 +19,11 @@
   "pos_y": 3328.0,
   "scale": 5.22
  },
+ "de_assembly": {
+  "pos_x": 1628.0,
+  "pos_y": 4512.0,
+  "scale": 2.84
+ },
  "de_cache": {
   "pos_x": -2000.0,
   "pos_y": 3250.0,
@@ -23,6 +33,21 @@
   "pos_x": -2476.0,
   "pos_y": 3239.0,
   "scale": 4.4
+ },
+ "de_dust2_n": {
+  "pos_x": -2693.0,
+  "pos_y": 3359.0,
+  "scale": 6.745199
+ },
+ "de_foroglio": {
+  "pos_x": -1600.0,
+  "pos_y": 50.0,
+  "scale": 4.0
+ },
+ "de_guard_s2": {
+  "pos_x": -1788.0,
+  "pos_y": 1659.0,
+  "scale": 8.111328
  },
  "de_inferno": {
   "pos_x": -2087.0,
@@ -44,9 +69,39 @@
   "pos_y": 1781.0,
   "scale": 5.2
  },
+ "de_safehouse": {
+  "pos_x": -240.0,
+  "pos_y": 2650.0,
+  "scale": 4.52
+ },
+ "de_seaside_d_prefab": {
+  "pos_x": -4161.0,
+  "pos_y": 3680.0,
+  "scale": 7.0
+ },
+ "de_shortdust": {
+  "pos_x": -2318.0,
+  "pos_y": 2337.0,
+  "scale": 3.6
+ },
+ "de_thera": {
+  "pos_x": -85.609764,
+  "pos_y": 2261.8025,
+  "scale": 4.846961
+ },
  "de_vertigo": {
   "pos_x": -3168.0,
   "pos_y": 1762.0,
   "scale": 4.0
+ },
+ "fy_pool_day": {
+  "pos_x": -1088.0,
+  "pos_y": 1600.0,
+  "scale": 2.125
+ },
+ "gd_rialto": {
+  "pos_x": -1260.0,
+  "pos_y": 1836.0,
+  "scale": 3.0
  }
 }
