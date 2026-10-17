@@ -198,6 +198,8 @@ select { font: inherit; color: var(--text); background: var(--surface); border: 
 .rhist span { width: 18px; height: 18px; border-radius: 4px; font-size: 10px; display: grid; place-items: center; color: #fff; font-weight: 700; }
 .rhist .C { background: var(--ct); }
 .rhist .T { background: var(--t); }
+.rhist span.rx { box-shadow: inset 0 -3px 0 rgba(255,255,255,.75); }
+.legend i.rxkey { background: var(--surface-2); box-shadow: inset 0 -3px 0 var(--text-2); }
 .rhist .D { background: var(--surface-2); color: var(--text-3); }
 .teamhead { display: flex; align-items: center; gap: 10px; margin: 0 0 10px; }
 .teamhead .bar { width: 4px; height: 20px; border-radius: 2px; }
@@ -263,6 +265,7 @@ footer { color: var(--text-3); font-size: 12px; padding: 24px 0 40px; border-top
       <a href="#/players" data-r="players">Players</a>
       <a href="#/weapons" data-r="weapons">Weapons</a>
       <a href="#/utility" data-r="utility">Utility</a>
+      <a href="#/rounds" data-r="rounds">Rounds</a>
       <a href="#/awards" data-r="awards">Awards</a>
       <div class="navfoot">
         <label class="toggle"><input type="checkbox" id="onlyFin2"><span>Completed games only</span></label>
@@ -336,7 +339,7 @@ function rating(k, d, r, k1, k2, k3, k4, k5) {
   return (k / r / 0.679 + 0.7 * Math.max(r - d, 0) / r / 0.317 + (k1 + 4 * k2 + 9 * k3 + 16 * k4 + 25 * k5) / r / 1.277) / 2.7;
 }
 
-const SUM_KEYS = ['r','k','d','a','fa','hs','tk','sui','ek','ed','k1','k2','k3','k4','k5','awp','knife','zeus','nade','wb','ns','smoke','blindk','plant','defuse','gh','gf','gs','gm','gd','fe','ft','fself','fbd','fdur','buy','spent'];
+const SUM_KEYS = ['r','k','d','a','fa','hs','tk','sui','ek','ed','k1','k2','k3','k4','k5','awp','knife','zeus','nade','wb','ns','smoke','blindk','plant','defuse','gh','gf','gs','gm','gd','fe','ft','fself','fbd','fdur','buy','spent','ck','trade','traded','bspawn','bpick','bdrop','pA','pB'];
 
 // weapon classes
 const CATS = {
@@ -363,7 +366,8 @@ function aggregate(gs) {
   for (const g of gs) {
     for (const p of g.p) {
       let s = by.get(p.id);
-      if (!s) { s = {id: p.id, n: NAMES[p.id], g: 0, w: 0, l: 0, mvp: 0, dmg: 0, dmgR: 0, nights: new Set(), maps: new Set(), wp: {}, wh: {}, bi: {}, pkw: {}, pk: 0, pkG: 0}; SUM_KEYS.forEach(k => s[k] = 0); by.set(p.id, s); }
+      if (!s) { s = {id: p.id, n: NAMES[p.id], g: 0, w: 0, l: 0, mvp: 0, dmg: 0, dmgR: 0, nights: new Set(), maps: new Set(), wp: {}, wh: {}, bi: {}, pkw: {}, pk: 0, pkG: 0,
+        ca: 0, cw: 0, c1a: 0, c1w: 0, c2a: 0, c2w: 0, c3a: 0, c3w: 0, cbest: 0, ctR: 0, ctW: 0, tR: 0, tW: 0, pR: 0, pW: 0}; SUM_KEYS.forEach(k => s[k] = 0); by.set(p.id, s); }
       s.g++; s.nights.add(g.night); s.maps.add(g.map);
       if (p.res === 'W') s.w++; else if (p.res === 'L') s.l++;
       if (g.mvp === p.id) s.mvp++;
@@ -374,10 +378,26 @@ function aggregate(gs) {
       for (const [w, c] of Object.entries(p.bi || {})) s.bi[w] = (s.bi[w] || 0) + c;
       for (const [w, c] of Object.entries(p.pkw || {})) s.pkw[w] = (s.pkw[w] || 0) + c;
       if (p.pk != null) { s.pk += p.pk; s.pkG++; }
+      roundStats(s, g, p);
     }
   }
   for (const s of by.values()) derive(s);
   return [...by.values()];
+}
+// clutches, sides and pistol rounds for one player in one game (adds into s)
+function roundStats(s, g, p) {
+  for (const [vs, w] of p.cl || []) {
+    s.ca++; s.cw += w;
+    const b = vs >= 3 ? 3 : vs; s['c' + b + 'a']++; s['c' + b + 'w'] += w;
+    if (w && vs > s.cbest) s.cbest = vs;
+  }
+  const sd = p.sd || '';
+  for (let i = 0; i < sd.length; i++) {
+    const c = sd[i];
+    if (c === 'C') { s.ctR++; s.ctW += g.rounds[i] === 'C'; }
+    else if (c === 'T') { s.tR++; s.tW += g.rounds[i] === 'T'; }
+  }
+  for (const i of g.pistol || []) if (sd[i] === 'C' || sd[i] === 'T') { s.pR++; s.pW += g.rounds[i] === sd[i]; }
 }
 function derive(s) {
   s.kd = s.d ? s.k / s.d : s.k;
@@ -396,6 +416,12 @@ function derive(s) {
   s.gpr = s.r ? s.gt / s.r : 0;
   s.spg = s.g ? (s.spent || 0) / s.g : null;
   s.spk = s.k ? (s.spent || 0) / s.k : null;
+  s.cwr = s.ca ? s.cw / s.ca : 0;
+  s.tdr = s.d ? (s.traded || 0) / s.d : 0;
+  s.carry = (s.bspawn || 0) + (s.bpick || 0);
+  s.ctwr = s.ctR ? s.ctW / s.ctR : 0; s.twr = s.tR ? s.tW / s.tR : 0;
+  s.rwr = (s.ctR + s.tR) ? (s.ctW + s.tW) / (s.ctR + s.tR) : 0;
+  s.pwr = s.pR ? s.pW / s.pR : 0;
   return s;
 }
 // per-game player row with derived values
@@ -407,6 +433,9 @@ function prow(g, p) {
   s.gt = (p.gh || 0) + (p.gf || 0) + (p.gs || 0) + (p.gm || 0) + (p.gd || 0);
   s.gpr = p.r ? s.gt / p.r : 0; s.spg = p.spent; s.spk = p.k ? (p.spent || 0) / p.k : null;
   s.pkG = p.pk == null ? 0 : 1; s.bi = p.bi || {}; s.pkw = p.pkw || {};
+  Object.assign(s, {ca: 0, cw: 0, c1a: 0, c1w: 0, c2a: 0, c2w: 0, c3a: 0, c3w: 0, cbest: 0, ctR: 0, ctW: 0, tR: 0, tW: 0, pR: 0, pW: 0});
+  roundStats(s, g, p);
+  s.cwr = s.ca ? s.cw / s.ca : 0; s.tdr = p.d ? (p.traded || 0) / p.d : 0; s.carry = (p.bspawn || 0) + (p.bpick || 0);
   return s;
 }
 
@@ -476,14 +505,14 @@ const C = {
   fav: {k: 'favK', l: 'Fav weapon', cls: 'l', t: 'Weapon with the most kills', f: (v, r) => r.fav ? `<a href="#/weapon/${r.fav}">${esc(weaponName(r.fav))}</a> <span class="muted">${pct(r.favShare)}</span>` : '–'},
   r: {k: 'r', l: 'Rnds', t: 'Rounds played'},
 };
-const BOARD = [C.player, C.g, C.wl, C.rt, C.k, C.d, C.a, C.diff, C.kd, C.adr, C.kpr, C.hsp, C.entry, C.mk, C.k5, C.awp, C.mvp, C.fav];
+let BOARD; const boardCols = () => BOARD || (BOARD = [C.player, C.g, C.wl, C.rt, C.k, C.d, C.a, C.diff, C.kd, C.adr, C.kpr, C.hsp, C.entry, C.mk, C.k5, R.clutch, R.trade, C.awp, C.mvp, C.fav]);
 
 function minGamesFilter(el, rows, def, onChange) {
   const opts = [1, 2, 3, 5, 10, 20].filter(n => n <= Math.max(...rows.map(r => r.g), 1));
   el.innerHTML = `<span class="flabel">Min. games</span><select>${opts.map(n => `<option ${n === def ? 'selected' : ''}>${n}</option>`).join('')}</select>`;
   el.querySelector('select').onchange = e => onChange(+e.target.value);
 }
-function board(el, rows, {minGames = 1, cols = BOARD, sort = 'rt'} = {}) {
+function board(el, rows, {minGames = 1, cols = boardCols(), sort = 'rt'} = {}) {
   el.innerHTML = '<div class="filters"></div><div class="t"></div>';
   const draw = mg => mountTable($('.t', el), cols, rows.filter(r => r.g >= mg), {sort, rank: true});
   const def = Math.min(minGames, Math.max(...rows.map(r => r.g), 1));
@@ -652,7 +681,7 @@ function viewNight(n) {
       ${tile('Kills', kills)}
       ${tile('Play time', (ng.reduce((s, g) => s + g.min, 0) / 60).toFixed(1) + ' h', `from ${timeLabel(ng[0].start)}`)}
     </div>
-    <section><h2>Night leaderboard</h2><div id="lb"></div><div class="note"><a href="#/utility/${n}" style="color:var(--accent)">Grenades, flashes, purchases and pickups for this night →</a></div></section>
+    <section><h2>Night leaderboard</h2><div id="lb"></div><div class="note"><a href="#/utility/${n}" style="color:var(--accent)">Grenades, flashes, purchases and pickups for this night →</a> · <a href="#/rounds/${n}" style="color:var(--accent)">Clutches, trades and bomb →</a></div></section>
     <section><h2>Games</h2><div id="gt"></div></section>
     <section class="grid2"><div class="card pad"><h2>Records</h2>${recordCards(ng)}</div><div class="card pad"><h2>Kills by weapon</h2>${weaponsBlock(wp)}</div></section>`;
   board($('#lb'), rows, {minGames: 1});
@@ -692,8 +721,8 @@ function viewGame(id) {
       <div class="side t r"><span class="tn">Terrorists</span><span class="muted">${tWin ? 'Winner' : g.fin ? '' : 'Ended on T'}</span></div>
     </div>
     <section class="card pad"><h2>Round history</h2>
-      <div class="rhist">${[...g.rounds].map((r, i) => `<span class="${r === 'C' ? 'C' : r === 'T' ? 'T' : 'D'}" data-tip="Round ${i + 1}: ${r === 'C' ? 'CT win' : r === 'T' ? 'T win' : 'draw'}">${i + 1}</span>`).join('')}</div>
-      <div class="legend"><span><i style="background:var(--ct)"></i>CT round win</span><span><i style="background:var(--t)"></i>T round win</span></div>
+      <div class="rhist">${[...g.rounds].map((r, i) => `<span class="${r === 'C' ? 'C' : r === 'T' ? 'T' : 'D'}${(g.rr || '')[i] && 'bdt'.includes(g.rr[i]) ? ' rx' : ''}" data-tip="Round ${i + 1}: ${r === 'C' ? 'CT win' : r === 'T' ? 'T win' : 'draw'}${g.rr ? ' · ' + REASON[g.rr[i]] : ''}${g.rp && 'AB'.includes(g.rp[i]) ? ' · planted ' + g.rp[i] : ''}${(g.pistol || []).includes(i) ? ' · pistol round' : ''}">${i + 1}</span>`).join('')}</div>
+      <div class="legend"><span><i style="background:var(--ct)"></i>CT round win</span><span><i style="background:var(--t)"></i>T round win</span><span><i class="rxkey"></i>ended by the bomb or the clock (hover for details)</span></div>
       <div class="note">Teams are listed by the side they finished on; sides swap at half time.</div></section>
     ${['CT', 'T'].map(side => `<section><div class="teamhead"><span class="bar" style="background:var(--${side.toLowerCase()})"></span><h2 style="margin:0">${side === 'CT' ? 'Counter-Terrorists' : 'Terrorists'}</h2>${g.win === side ? '<span class="chip W">Won</span>' : g.win ? '<span class="chip L">Lost</span>' : ''}</div><div id="t${side}"></div></section>`).join('')}`;
   const cols = [
@@ -704,6 +733,12 @@ function viewGame(id) {
     {k: 'tw', l: 'Top weapons', cls: 'l', sort: false, f: (v, r) => Object.entries(r.w).slice(0, 3).map(([w, c]) => `${esc(weaponName(w))} <span class="muted">${c}</span>`).join(', ')},
   ];
   for (const side of ['CT', 'T']) mountTable($('#t' + side), cols, rows.filter(r => r.team === side), {sort: 'rt'});
+  $('#app').insertAdjacentHTML('beforeend', `<section><h2>Clutches, trades &amp; bomb</h2><div id="gr"></div></section>`);
+  mountTable($('#gr'), [
+    {k: 'n', l: 'Player', cls: 'l pname', asc: true, f: (v, r) => plink(r.id, v)},
+    {k: 'team', l: 'Side', cls: 'l', f: v => `<span class="chip ${v.toLowerCase()}">${v}</span>`},
+    R.clutch, R.best, R.ck, R.trade, {k: 'traded', l: 'Traded deaths'}, C.entry, R.carry, R.bdrop, R.pA, R.pB, R.defuse,
+  ], rows, {sort: 'cw'});
   $('#app').insertAdjacentHTML('beforeend', `<section><h2>Utility &amp; economy</h2><div id="gu"></div>${g.v >= 2 ? '' : '<div class="note">This game was parsed before utility tracking; it fills in after the next daily update.</div>'}</section>`);
   mountTable($('#gu'), [
     {k: 'n', l: 'Player', cls: 'l pname', asc: true, f: (v, r) => plink(r.id, v)},
@@ -756,6 +791,7 @@ function viewMap(m) {
       ${tile('Players', rows.length)}
     </div>
     <section><h2>Leaderboard on ${esc(mapName(m))}</h2><div id="lb"></div></section>
+    <section class="grid2">${roundBlock(mg, 'How rounds ended')}<div></div></section>
     <section class="grid2"><div class="card pad"><h2>Records</h2>${recordCards(mg)}</div><div class="card pad"><h2>Kills by weapon</h2>${weaponsBlock(wp)}</div></section>
     <section><h2>Games</h2><div id="gt"></div></section>`;
   board($('#lb'), rows, {minGames: mg.length >= 4 ? 2 : 1});
@@ -793,6 +829,8 @@ function viewPlayer(id) {
       ${tile('ADR', f0(me.adr), `${f2(me.kpr)} kills / round`)}
       ${tile('Headshots', pct(me.hsp), `${me.hs} HS kills`)}
       ${tile('Multi-kills', me.mk, `${me.k3} × 3K · ${me.k4} × 4K · ${me.k5} aces`)}
+      ${tile('Clutches', me.ca ? `${me.cw}/${me.ca}` : '–', me.cbest ? `best: 1v${me.cbest} · ${me.ck} clutch kills` : 'none won yet')}
+      ${tile('Trades', me.trade, `${pct(me.tdr)} of deaths traded · round win ${pct(me.rwr)}`)}
       ${tile('Grenades thrown', me.gt, `${me.fe} enemies flashed · ${me.ft} teammates`)}
       ${tile('Bought', me.buy, `≈ $${Math.round(me.spent).toLocaleString()} spent · ${me.pk} picked-up kills`)}
       ${me.fav ? tile('Favourite weapon', esc(weaponName(me.fav)), `${me.favK} kills · ${pct(me.favShare)} of all`) : ''}
@@ -948,6 +986,10 @@ const AWARDS = [
   {k: 'fbd', l: 'Always blind', d: 'Times blinded by enemies'},
   {k: 'pk', l: 'Scavenger', d: 'Kills with picked-up weapons'},
   {k: 'spent', l: 'Big spender', d: 'Estimated $ spent'},
+  {k: 'cw', l: 'Clutch king', d: 'Clutches won'},
+  {k: 'trade', l: 'Trader', d: 'Trade kills'},
+  {k: 'carry', l: 'Bomb mule', d: 'Times carrying the bomb'},
+  {k: 'bdrop', l: 'Butterfingers', d: 'Bomb drops (including on death)'},
 ];
 function viewAwards() {
   pageTitle('Awards');
@@ -963,7 +1005,7 @@ function viewAwards() {
     }).join('')}</div>
     <section><h2>Playstyle table</h2><div id="ps"><div class="filters"></div><div class="t"></div></div>
       <div class="note">Totals across all games. Hover a column name for what it counts.</div></section>`;
-  const cols = [C.player, C.g, ...AWARDS.filter(a => !['d', 'a', 'awp', 'k4', 'k5', 'spent', 'gt', 'fe', 'ft', 'fself', 'fbd', 'pk'].includes(a.k))
+  const cols = [C.player, C.g, ...AWARDS.filter(a => !['d', 'a', 'awp', 'k4', 'k5', 'spent', 'gt', 'fe', 'ft', 'fself', 'fbd', 'pk', 'cw', 'trade', 'carry', 'bdrop'].includes(a.k))
     .map(a => ({k: a.k, l: a.d.replace(/ \(.*\)/, '').replace(/^Kills /, '').replace(/ kills$/, ''), t: `${a.l}: ${a.d}`, f: v => v ? v : '<span class="muted">0</span>'}))];
   const draw = mg => mountTable($('#ps .t'), cols, rows.filter(r => r.g >= mg), {sort: 'wb', rank: true});
   minGamesFilter($('#ps .filters'), rows, 1, draw);
@@ -1041,6 +1083,87 @@ function viewUtility(night) {
   }
 }
 
+const REASON = {e: 'elimination', b: 'bomb exploded', d: 'bomb defused', t: 'time ran out', '-': 'draw'};
+const R = {
+  clutch: {k: 'cw', l: 'Clutches', t: 'Clutches won / attempted (last alive on your side vs 1+ enemies)', f: (v, r) => r.ca ? `${r.cw}/${r.ca}` : '<span class="muted">–</span>'},
+  cwr: {k: 'cwr', l: 'Clutch %', f: (v, r) => r.ca ? pct(v) : '–'},
+  c1: {k: 'c1w', l: '1v1', f: (v, r) => r.c1a ? `${r.c1w}/${r.c1a}` : '<span class="muted">–</span>'},
+  c2: {k: 'c2w', l: '1v2', f: (v, r) => r.c2a ? `${r.c2w}/${r.c2a}` : '<span class="muted">–</span>'},
+  c3: {k: 'c3w', l: '1v3+', f: (v, r) => r.c3a ? `${r.c3w}/${r.c3a}` : '<span class="muted">–</span>'},
+  best: {k: 'cbest', l: 'Best', t: 'Biggest clutch won', f: v => v ? `1v${v}` : '<span class="muted">–</span>'},
+  ck: {k: 'ck', l: 'Clutch kills', t: 'Kills made while clutching'},
+  trade: {k: 'trade', l: 'Trades', t: 'Kills on an enemy within 5s of them killing your teammate'},
+  traded: {k: 'tdr', l: 'Deaths traded', t: 'Share of your deaths a teammate avenged within 5s', f: (v, r) => r.d ? pct(v) : '–'},
+  carry: {k: 'carry', l: 'Bomb carried', t: 'Times holding the bomb (spawned with it or picked it up)'},
+  bpick: {k: 'bpick', l: 'Picked up', t: 'Picked up a dropped bomb'},
+  bdrop: {k: 'bdrop', l: 'Dropped', t: 'Dropped the bomb (including on death)'},
+  pA: {k: 'pA', l: 'Plants A'}, pB: {k: 'pB', l: 'Plants B'}, defuse: {k: 'defuse', l: 'Defuses'},
+  ctw: {k: 'ctwr', l: 'CT win %', f: (v, r) => r.ctR ? `${pct(v)} <span class="muted">${r.ctR}</span>` : '–'},
+  tw: {k: 'twr', l: 'T win %', f: (v, r) => r.tR ? `${pct(v)} <span class="muted">${r.tR}</span>` : '–'},
+  pw: {k: 'pwr', l: 'Pistol rounds', t: 'Pistol rounds won / played', f: (v, r) => r.pR ? `${r.pW}/${r.pR}` : '–'},
+  rw: {k: 'rwr', l: 'Round win %', t: 'Share of rounds played that your side won', f: (v, r) => (r.ctR + r.tR) ? pct(v) : '–'},
+};
+
+function roundBlock(gs, title) {
+  const cnt = {};
+  let A = 0, B = 0, aW = 0, bW = 0;
+  for (const g of gs) {
+    [...(g.rr || '')].forEach(c => cnt[c] = (cnt[c] || 0) + 1);
+    [...(g.rp || '')].forEach((s, i) => {
+      if (s === 'A' || s === 'B') { const tWin = g.rounds[i] === 'T'; if (s === 'A') { A++; aW += tWin; } else { B++; bW += tWin; } }
+    });
+  }
+  const tot = Object.values(cnt).reduce((a, b) => a + b, 0) || 1;
+  return `<div class="card pad"><h2>${title}</h2>${hbars(['e', 'b', 'd', 't'].filter(k => cnt[k]).map(k => ({label: REASON[k][0].toUpperCase() + REASON[k].slice(1), value: cnt[k], tip: `<b>${REASON[k]}</b><br>${cnt[k]} rounds · ${pct(cnt[k] / tot)}`})))}
+    ${A + B ? `<h2 style="margin-top:20px">Bomb sites</h2>${hbars([{label: `A (T won ${pct(aW / (A || 1))})`, value: A, tip: `<b>Site A</b><br>${A} plants · T won ${aW} of them`}, {label: `B (T won ${pct(bW / (B || 1))})`, value: B, tip: `<b>Site B</b><br>${B} plants · T won ${bW} of them`}])}` : ''}</div>`;
+}
+
+function viewRounds(night) {
+  const all = games();
+  const nights = [...new Set(all.map(g => g.night))].sort().reverse();
+  const gs = night ? all.filter(g => g.night === night) : all;
+  pageTitle(night ? `Rounds · ${nightLabel(night)}` : 'Rounds');
+  if (!gs.length) return notFound();
+  const rows = aggregate(gs);
+  const top = (k, f = () => true) => rows.filter(r => f(r) && r[k] > 0).sort((a, b) => b[k] - a[k] || b.cwr - a.cwr)[0];
+  const big = gs.flatMap(g => g.p.flatMap(p => (p.cl || []).filter(c => c[1]).map(c => ({vs: c[0], p, g})))).sort((a, b) => b.vs - a.vs)[0];
+  const t1 = top('cw'), t2 = top('trade'), t3 = top('carry'), t4 = top('bdrop'), t5 = top('pwr', r => r.pR >= 3);
+  const old = gs.filter(g => !(g.v >= 3)).length;
+  $('#app').innerHTML = `
+    <div class="pagehead"><div><h1>Rounds</h1><div class="sub">${night ? esc(nightLabel(night, true)) : 'All nights'} · ${gs.reduce((s, g) => s + g.rounds.length, 0).toLocaleString()} rounds in ${gs.length} games</div></div>
+      <div class="filters"><span class="flabel">Night</span><select id="rn"><option value="">All nights</option>${nights.map(n => `<option value="${n}" ${n === night ? 'selected' : ''}>${esc(nightLabel(n))}</option>`).join('')}</select></div></div>
+    <div class="tiles">
+      ${t1 ? tile('Clutch king', esc(t1.n), `${t1.cw} clutches won of ${t1.ca}`, true) : ''}
+      ${big ? `<a href="#/game/${big.g.id}" style="display:contents">${tile('Biggest clutch', '1v' + big.vs, `${esc(big.p.n)} · ${esc(mapName(big.g.map))}, ${esc(nightLabel(big.g.night))}`)}</a>` : ''}
+      ${t2 ? tile('Trade master', esc(t2.n), `${t2.trade} trade kills`) : ''}
+      ${t3 ? tile('Bomb mule', esc(t3.n), `carried the bomb ${t3.carry}×`) : ''}
+      ${t4 ? tile('Butterfingers', esc(t4.n), `dropped the bomb ${t4.bdrop}×`) : ''}
+      ${t5 ? tile('Pistol ace', esc(t5.n), `won ${t5.pW} of ${t5.pR} pistol rounds`) : ''}
+    </div>
+    ${old ? `<div class="note">${old} game${old > 1 ? 's' : ''} parsed before round tracking show nothing here until the next daily update re-reads their logs.</div>` : ''}
+    <section><h2>Clutches</h2><div id="tc"><div class="filters"></div><div class="t"></div></div></section>
+    <section><h2>Trades, sides &amp; pistol rounds</h2><div id="tt"><div class="filters"></div><div class="t"></div></div>
+      <div class="note">Your server doesn't swap sides at half time, so most players spend a whole game on one side; pistol rounds are each game's first round.</div></section>
+    <section><h2>Bomb</h2><div id="tb"><div class="filters"></div><div class="t"></div></div></section>
+    <section class="grid2">${roundBlock(gs, 'How rounds ended')}
+      <div class="card pad"><h2>Clutch success by situation</h2>${(() => {
+        const s = {}; gs.forEach(g => g.p.forEach(p => (p.cl || []).forEach(([vs, w]) => { const k = Math.min(vs, 5); s[k] = s[k] || [0, 0]; s[k][0] += w; s[k][1]++; })));
+        return Object.keys(s).length ? hbars(Object.entries(s).map(([k, [w, a]]) => ({label: `1v${k}${k == 5 ? '+' : ''} (${w}/${a})`, value: w / a, tip: `<b>1v${k}${k == 5 ? '+' : ''}</b><br>won ${w} of ${a}`})), pct) : '<p class="muted">No clutches yet</p>';
+      })()}</div></section>`;
+  $('#rn').onchange = e => { location.hash = e.target.value ? `#/rounds/${e.target.value}` : '#/rounds'; };
+  const def = night ? 1 : Math.min(5, Math.max(...rows.map(r => r.g)));
+  for (const [id, cols, sort] of [
+    ['#tc', [C.player, C.g, R.clutch, R.cwr, R.c1, R.c2, R.c3, R.best, R.ck], 'cw'],
+    ['#tt', [C.player, C.g, R.trade, R.traded, C.entry, R.rw, R.ctw, R.tw, R.pw], 'trade'],
+    ['#tb', [C.player, C.g, R.carry, R.bpick, R.bdrop, R.pA, R.pB, R.defuse], 'carry'],
+  ]) {
+    const el = $(id);
+    const draw = mg => mountTable($('.t', el), cols, rows.filter(r => r.g >= mg), {sort, rank: true});
+    minGamesFilter($('.filters', el), rows, def, draw);
+    draw(def);
+  }
+}
+
 function notFound() {
   $('#app').innerHTML = `<h1>Not found</h1><p class="sub">Nothing here${onlyFin ? ' with “Completed games only” switched on' : ''}. <a href="#/" style="color:var(--accent)">Back to overview</a></p>`;
 }
@@ -1052,7 +1175,7 @@ function route() {
     a.dataset.r === view || (a.dataset.r && view === a.dataset.r.replace(/s$/, ''))));
   ({'': viewOverview, nights: viewNights, night: () => viewNight(arg), games: viewGames, game: () => viewGame(arg),
     maps: viewMaps, map: () => viewMap(arg), players: viewPlayers, player: () => viewPlayer(arg),
-    weapons: viewWeapons, weapon: () => viewWeapon(arg), awards: viewAwards, utility: () => viewUtility(arg)}[view] || notFound)();
+    weapons: viewWeapons, weapon: () => viewWeapon(arg), awards: viewAwards, utility: () => viewUtility(arg), rounds: () => viewRounds(arg)}[view] || notFound)();
   tip.style.opacity = 0;
 }
 addEventListener('hashchange', () => { route(); scrollTo(0, 0); });

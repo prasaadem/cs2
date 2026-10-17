@@ -10,6 +10,7 @@
   {
    "a": 2,
    "awp": 0,
+   "bdrop": 2,
    "bi": {
     "ak47": 7,
     "deagle": 2,
@@ -19,7 +20,16 @@
     "smokegrenade": 8
    },
    "blindk": 0,
+   "bpick": 1,
+   "bspawn": 2,
    "buy": 36,
+   "ck": 3,
+   "cl": [
+    [
+     3,
+     1
+    ]
+   ],
    "d": 8,
    "defuse": 0,
    "dmg": 1856.0,
@@ -49,17 +59,22 @@
    "n": "MAXROY",
    "nade": 0,
    "ns": 0,
+   "pA": 0,
+   "pB": 1,
    "pk": 0,
    "pkw": {},
    "plant": 1,
    "r": 13,
    "res": "W",
    "rt": 3.022,
+   "sd": "TTTTTTTTTTTTT",
    "smoke": 1,
    "spent": 29200,
    "sui": 0,
    "team": "T",
    "tk": 0,
+   "trade": 4,
+   "traded": 2,
    "w": {
     "ak47": 21,
     "glock": 1
@@ -73,6 +88,7 @@
   {
    "a": 1,
    "awp": 1,
+   "bdrop": 1,
    "bi": {
     "ak47": 2,
     "awp": 3,
@@ -85,7 +101,16 @@
     "tec9": 1
    },
    "blindk": 0,
+   "bpick": 1,
+   "bspawn": 3,
    "buy": 35,
+   "ck": 2,
+   "cl": [
+    [
+     2,
+     1
+    ]
+   ],
    "d": 8,
    "defuse": 0,
    "dmg": 978.0,
@@ -115,6 +140,8 @@
    "n": "Sheldor",
    "nade": 0,
    "ns": 0,
+   "pA": 2,
+   "pB": 0,
    "pk": 4,
    "pkw": {
     "p90": 2,
@@ -124,11 +151,14 @@
    "r": 13,
    "res": "W",
    "rt": 1.579,
+   "sd": "TTTTTTTTTTTTT",
    "smoke": 0,
    "spent": 34550,
    "sui": 0,
    "team": "T",
    "tk": 0,
+   "trade": 2,
+   "traded": 4,
    "w": {
     "ak47": 1,
     "awp": 1,
@@ -146,13 +176,23 @@
   {
    "a": 6,
    "awp": 2,
+   "bdrop": 3,
    "bi": {
     "flashbang": 4,
     "p90": 5,
     "sg556": 5
    },
    "blindk": 0,
+   "bpick": 4,
+   "bspawn": 2,
    "buy": 14,
+   "ck": 1,
+   "cl": [
+    [
+     3,
+     0
+    ]
+   ],
    "d": 10,
    "defuse": 0,
    "dmg": 1426.0,
@@ -182,6 +222,8 @@
    "n": "prasaadem",
    "nade": 0,
    "ns": 0,
+   "pA": 2,
+   "pB": 1,
    "pk": 2,
    "pkw": {
     "awp": 2
@@ -190,11 +232,14 @@
    "r": 13,
    "res": "W",
    "rt": 1.49,
+   "sd": "TTTTTTTTTTTTT",
    "smoke": 0,
    "spent": 27550,
    "sui": 0,
    "team": "T",
    "tk": 0,
+   "trade": 4,
+   "traded": 3,
    "w": {
     "awp": 2,
     "p90": 6,
@@ -209,77 +254,8 @@
   },
   {
    "a": 1,
-   "awp": 4,
-   "bi": {
-    "awp": 3,
-    "deagle": 1,
-    "hegrenade": 5,
-    "m4a1_silencer": 3,
-    "p90": 1,
-    "smokegrenade": 1,
-    "ssg08": 1
-   },
-   "blindk": 0,
-   "buy": 15,
-   "d": 10,
-   "defuse": 0,
-   "dmg": 771.0,
-   "dmgR": 12,
-   "ed": 1,
-   "ek": 1,
-   "fa": 0,
-   "fbd": 0,
-   "fdur": 0.0,
-   "fe": 0,
-   "fself": 0,
-   "ft": 0,
-   "gd": 0,
-   "gf": 0,
-   "gh": 0,
-   "gm": 0,
-   "gs": 0,
-   "hs": 1,
-   "id": "156268658",
-   "k": 12,
-   "k1": 7,
-   "k2": 1,
-   "k3": 1,
-   "k4": 0,
-   "k5": 0,
-   "knife": 0,
-   "n": "mcdreamy111",
-   "nade": 0,
-   "ns": 0,
-   "pk": 1,
-   "pkw": {
-    "ak47": 1
-   },
-   "plant": 0,
-   "r": 13,
-   "res": "L",
-   "rt": 1.138,
-   "smoke": 1,
-   "spent": 29500,
-   "sui": 0,
-   "team": "CT",
-   "tk": 0,
-   "w": {
-    "ak47": 1,
-    "awp": 4,
-    "deagle": 3,
-    "m4a1_silencer": 2,
-    "p90": 1,
-    "ssg08": 1
-   },
-   "wb": 1,
-   "wh": {
-    "m4a1_silencer": 1
-   },
-   "zeus": 0
-  },
-  {
-   "a": 1,
    "awp": 2,
+   "bdrop": 0,
    "bi": {
     "awp": 1,
     "fiveseven": 2,
@@ -290,7 +266,16 @@
     "smokegrenade": 4
    },
    "blindk": 0,
+   "bpick": 0,
+   "bspawn": 0,
    "buy": 30,
+   "ck": 0,
+   "cl": [
+    [
+     4,
+     0
+    ]
+   ],
    "d": 10,
    "defuse": 0,
    "dmg": 1289.0,
@@ -320,17 +305,22 @@
    "n": "kiiiiiira",
    "nade": 0,
    "ns": 0,
+   "pA": 0,
+   "pB": 0,
    "pk": 0,
    "pkw": {},
    "plant": 0,
    "r": 13,
    "res": "L",
    "rt": 1.138,
+   "sd": "CCCCCCCCCCCCC",
    "smoke": 0,
    "spent": 31350,
    "sui": 0,
    "team": "CT",
    "tk": 0,
+   "trade": 1,
+   "traded": 1,
    "w": {
     "awp": 2,
     "p90": 10
@@ -342,8 +332,89 @@
    "zeus": 0
   },
   {
+   "a": 1,
+   "awp": 4,
+   "bdrop": 0,
+   "bi": {
+    "awp": 3,
+    "deagle": 1,
+    "hegrenade": 5,
+    "m4a1_silencer": 3,
+    "p90": 1,
+    "smokegrenade": 1,
+    "ssg08": 1
+   },
+   "blindk": 0,
+   "bpick": 0,
+   "bspawn": 0,
+   "buy": 15,
+   "ck": 0,
+   "cl": [],
+   "d": 10,
+   "defuse": 0,
+   "dmg": 771.0,
+   "dmgR": 12,
+   "ed": 1,
+   "ek": 1,
+   "fa": 0,
+   "fbd": 0,
+   "fdur": 0.0,
+   "fe": 0,
+   "fself": 0,
+   "ft": 0,
+   "gd": 0,
+   "gf": 0,
+   "gh": 0,
+   "gm": 0,
+   "gs": 0,
+   "hs": 1,
+   "id": "156268658",
+   "k": 12,
+   "k1": 7,
+   "k2": 1,
+   "k3": 1,
+   "k4": 0,
+   "k5": 0,
+   "knife": 0,
+   "n": "mcdreamy111",
+   "nade": 0,
+   "ns": 0,
+   "pA": 0,
+   "pB": 0,
+   "pk": 1,
+   "pkw": {
+    "ak47": 1
+   },
+   "plant": 0,
+   "r": 13,
+   "res": "L",
+   "rt": 1.138,
+   "sd": "CCCCCCCCCCCCC",
+   "smoke": 1,
+   "spent": 29500,
+   "sui": 0,
+   "team": "CT",
+   "tk": 0,
+   "trade": 0,
+   "traded": 1,
+   "w": {
+    "ak47": 1,
+    "awp": 4,
+    "deagle": 3,
+    "m4a1_silencer": 2,
+    "p90": 1,
+    "ssg08": 1
+   },
+   "wb": 1,
+   "wh": {
+    "m4a1_silencer": 1
+   },
+   "zeus": 0
+  },
+  {
    "a": 2,
    "awp": 3,
+   "bdrop": 0,
    "bi": {
     "aug": 5,
     "awp": 1,
@@ -351,7 +422,20 @@
     "p90": 2
    },
    "blindk": 0,
+   "bpick": 0,
+   "bspawn": 0,
    "buy": 9,
+   "ck": 1,
+   "cl": [
+    [
+     1,
+     0
+    ],
+    [
+     3,
+     0
+    ]
+   ],
    "d": 8,
    "defuse": 0,
    "dmg": 717.0,
@@ -381,6 +465,8 @@
    "n": "Rat",
    "nade": 0,
    "ns": 0,
+   "pA": 0,
+   "pB": 0,
    "pk": 2,
    "pkw": {
     "ak47": 2
@@ -389,11 +475,14 @@
    "r": 13,
    "res": "L",
    "rt": 1.136,
+   "sd": "CCCCCCCCCCCCC",
    "smoke": 2,
    "spent": 26250,
    "sui": 0,
    "team": "CT",
    "tk": 0,
+   "trade": 2,
+   "traded": 0,
    "w": {
     "ak47": 2,
     "aug": 3,
@@ -411,6 +500,7 @@
   {
    "a": 7,
    "awp": 0,
+   "bdrop": 2,
    "bi": {
     "ak47": 3,
     "g3sg1": 1,
@@ -420,7 +510,11 @@
     "tec9": 1
    },
    "blindk": 0,
+   "bpick": 0,
+   "bspawn": 3,
    "buy": 27,
+   "ck": 0,
+   "cl": [],
    "d": 10,
    "defuse": 0,
    "dmg": 1127.0,
@@ -450,6 +544,8 @@
    "n": "pichekistha",
    "nade": 0,
    "ns": 0,
+   "pA": 0,
+   "pB": 1,
    "pk": 2,
    "pkw": {
     "m4a1_silencer": 2
@@ -458,11 +554,14 @@
    "r": 13,
    "res": "W",
    "rt": 0.985,
+   "sd": "TTTTTTTTTTTTT",
    "smoke": 0,
    "spent": 30200,
    "sui": 0,
    "team": "T",
    "tk": 0,
+   "trade": 3,
+   "traded": 5,
    "w": {
     "ak47": 1,
     "galilar": 7,
@@ -481,6 +580,7 @@
   {
    "a": 3,
    "awp": 0,
+   "bdrop": 0,
    "bi": {
     "awp": 1,
     "fiveseven": 1,
@@ -492,7 +592,11 @@
     "p90": 2
    },
    "blindk": 0,
+   "bpick": 0,
+   "bspawn": 0,
    "buy": 37,
+   "ck": 0,
+   "cl": [],
    "d": 10,
    "defuse": 0,
    "dmg": 734.0,
@@ -522,17 +626,22 @@
    "n": "Fraggy",
    "nade": 0,
    "ns": 0,
+   "pA": 0,
+   "pB": 0,
    "pk": 0,
    "pkw": {},
    "plant": 0,
    "r": 13,
    "res": "L",
    "rt": 0.946,
+   "sd": "CCCCCCCCCCCCC",
    "smoke": 0,
    "spent": 31950,
    "sui": 0,
    "team": "CT",
    "tk": 0,
+   "trade": 2,
+   "traded": 0,
    "w": {
     "fiveseven": 1,
     "m4a1_silencer": 1,
@@ -550,6 +659,7 @@
   {
    "a": 5,
    "awp": 3,
+   "bdrop": 3,
    "bi": {
     "ak47": 7,
     "flashbang": 8,
@@ -559,7 +669,20 @@
     "tec9": 1
    },
    "blindk": 0,
+   "bpick": 2,
+   "bspawn": 2,
    "buy": 35,
+   "ck": 1,
+   "cl": [
+    [
+     2,
+     0
+    ],
+    [
+     6,
+     0
+    ]
+   ],
    "d": 9,
    "defuse": 0,
    "dmg": 970.0,
@@ -589,6 +712,8 @@
    "n": "Beni Lava",
    "nade": 0,
    "ns": 0,
+   "pA": 1,
+   "pB": 0,
    "pk": 3,
    "pkw": {
     "awp": 3
@@ -597,11 +722,14 @@
    "r": 13,
    "res": "W",
    "rt": 0.919,
+   "sd": "TTTTTTTTTTTTT",
    "smoke": 0,
    "spent": 28200,
    "sui": 0,
    "team": "T",
    "tk": 0,
+   "trade": 3,
+   "traded": 2,
    "w": {
     "ak47": 4,
     "awp": 3,
@@ -618,6 +746,7 @@
   {
    "a": 6,
    "awp": 2,
+   "bdrop": 0,
    "bi": {
     "awp": 2,
     "deagle": 1,
@@ -626,7 +755,16 @@
     "xm1014": 8
    },
    "blindk": 0,
+   "bpick": 0,
+   "bspawn": 0,
    "buy": 26,
+   "ck": 1,
+   "cl": [
+    [
+     6,
+     0
+    ]
+   ],
    "d": 11,
    "defuse": 0,
    "dmg": 757.0,
@@ -656,17 +794,22 @@
    "n": "Ironman",
    "nade": 0,
    "ns": 0,
+   "pA": 0,
+   "pB": 0,
    "pk": 0,
    "pkw": {},
    "plant": 0,
    "r": 13,
    "res": "L",
    "rt": 0.71,
+   "sd": "CCCCCCCCCCCCC",
    "smoke": 0,
    "spent": 32900,
    "sui": 0,
    "team": "CT",
    "tk": 0,
+   "trade": 1,
+   "traded": 1,
    "w": {
     "awp": 2,
     "xm1014": 5
@@ -680,13 +823,31 @@
   {
    "a": 3,
    "awp": 4,
+   "bdrop": 0,
    "bi": {
     "awp": 5,
     "deagle": 6,
     "flashbang": 3
    },
    "blindk": 0,
+   "bpick": 0,
+   "bspawn": 0,
    "buy": 14,
+   "ck": 1,
+   "cl": [
+    [
+     4,
+     0
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     1,
+     0
+    ]
+   ],
    "d": 11,
    "defuse": 0,
    "dmg": 696.0,
@@ -716,17 +877,22 @@
    "n": "BigHero",
    "nade": 0,
    "ns": 0,
+   "pA": 0,
+   "pB": 0,
    "pk": 0,
    "pkw": {},
    "plant": 0,
    "r": 13,
    "res": "L",
    "rt": 0.492,
+   "sd": "CCCCCCCCCCCCC",
    "smoke": 0,
    "spent": 28550,
    "sui": 0,
    "team": "CT",
    "tk": 0,
+   "trade": 0,
+   "traded": 3,
    "w": {
     "awp": 4,
     "deagle": 1
@@ -740,6 +906,7 @@
   {
    "a": 4,
    "awp": 0,
+   "bdrop": 2,
    "bi": {
     "ak47": 9,
     "deagle": 1,
@@ -751,7 +918,24 @@
     "ssg08": 1
    },
    "blindk": 0,
+   "bpick": 0,
+   "bspawn": 2,
    "buy": 30,
+   "ck": 0,
+   "cl": [
+    [
+     5,
+     1
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     6,
+     0
+    ]
+   ],
    "d": 13,
    "defuse": 0,
    "dmg": 777.0,
@@ -781,17 +965,22 @@
    "n": "KaiZen",
    "nade": 0,
    "ns": 1,
+   "pA": 0,
+   "pB": 0,
    "pk": 0,
    "pkw": {},
    "plant": 0,
    "r": 13,
    "res": "W",
    "rt": 0.366,
+   "sd": "TTTTTTTTTTTTT",
    "smoke": 0,
    "spent": 32750,
    "sui": 0,
    "team": "T",
    "tk": 0,
+   "trade": 2,
+   "traded": 2,
    "w": {
     "ak47": 3,
     "mp7": 1,
@@ -806,6 +995,7 @@
   {
    "a": 6,
    "awp": 0,
+   "bdrop": 0,
    "bi": {
     "fiveseven": 1,
     "flashbang": 5,
@@ -818,7 +1008,11 @@
     "xm1014": 1
    },
    "blindk": 0,
+   "bpick": 0,
+   "bspawn": 0,
    "buy": 28,
+   "ck": 0,
+   "cl": [],
    "d": 12,
    "defuse": 0,
    "dmg": 862.0,
@@ -848,17 +1042,22 @@
    "n": "blazingshack",
    "nade": 0,
    "ns": 0,
+   "pA": 0,
+   "pB": 0,
    "pk": 0,
    "pkw": {},
    "plant": 0,
    "r": 13,
    "res": "L",
    "rt": 0.256,
+   "sd": "CCCCCCCCCCCCC",
    "smoke": 0,
    "spent": 32450,
    "sui": 0,
    "team": "CT",
    "tk": 0,
+   "trade": 0,
+   "traded": 0,
    "w": {
     "m4a1_silencer": 1,
     "p90": 2
@@ -870,10 +1069,15 @@
    "zeus": 0
   }
  ],
+ "pistol": [
+  0
+ ],
  "rounds": "TTTCCCTTCTTCT",
+ "rp": "-ABA--A--BA-B",
+ "rr": "eeedeeeeeeeee",
  "start": "2026-09-16T23:49",
  "start_utc": "2026-09-17T06:49:08Z",
  "t": 8,
- "v": 2,
+ "v": 3,
  "win": "T"
 }

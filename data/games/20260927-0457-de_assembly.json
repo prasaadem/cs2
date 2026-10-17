@@ -10,6 +10,7 @@
   {
    "a": 3,
    "awp": 2,
+   "bdrop": 2,
    "bi": {
     "ak47": 2,
     "awp": 1,
@@ -21,7 +22,28 @@
     "taser": 3
    },
    "blindk": 0,
+   "bpick": 0,
+   "bspawn": 4,
    "buy": 32,
+   "ck": 4,
+   "cl": [
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
    "d": 3,
    "defuse": 0,
    "dmg": 656.0,
@@ -51,6 +73,8 @@
    "n": "Sheldor",
    "nade": 0,
    "ns": 0,
+   "pA": 1,
+   "pB": 0,
    "pk": 2,
    "pkw": {
     "m4a1_silencer": 2
@@ -59,11 +83,14 @@
    "r": 10,
    "res": "W",
    "rt": 1.357,
+   "sd": "TTTTTTTTTT",
    "smoke": 0,
    "spent": 20650,
    "sui": 0,
    "team": "T",
    "tk": 0,
+   "trade": 4,
+   "traded": 0,
    "w": {
     "ak47": 3,
     "awp": 2,
@@ -80,6 +107,7 @@
   {
    "a": 0,
    "awp": 0,
+   "bdrop": 0,
    "bi": {
     "famas": 1,
     "fiveseven": 1,
@@ -90,7 +118,16 @@
     "smokegrenade": 4
    },
    "blindk": 0,
+   "bpick": 0,
+   "bspawn": 2,
    "buy": 20,
+   "ck": 2,
+   "cl": [
+    [
+     2,
+     1
+    ]
+   ],
    "d": 5,
    "defuse": 0,
    "dmg": 770.0,
@@ -120,17 +157,22 @@
    "n": "pichekistha",
    "nade": 0,
    "ns": 0,
+   "pA": 2,
+   "pB": 0,
    "pk": 0,
    "pkw": {},
    "plant": 2,
    "r": 10,
    "res": "W",
    "rt": 1.335,
+   "sd": "CCCCTTTTTT",
    "smoke": 0,
    "spent": 17350,
    "sui": 0,
    "team": "T",
    "tk": 0,
+   "trade": 0,
+   "traded": 0,
    "w": {
     "famas": 1,
     "fiveseven": 2,
@@ -149,6 +191,7 @@
   {
    "a": 2,
    "awp": 0,
+   "bdrop": 0,
    "bi": {
     "awp": 1,
     "flashbang": 2,
@@ -159,7 +202,24 @@
     "xm1014": 6
    },
    "blindk": 0,
+   "bpick": 0,
+   "bspawn": 0,
    "buy": 24,
+   "ck": 4,
+   "cl": [
+    [
+     2,
+     0
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     2,
+     0
+    ]
+   ],
    "d": 8,
    "defuse": 0,
    "dmg": 773.0,
@@ -189,6 +249,8 @@
    "n": "blazingshack",
    "nade": 0,
    "ns": 0,
+   "pA": 0,
+   "pB": 0,
    "pk": 1,
    "pkw": {
     "ak47": 1
@@ -197,11 +259,14 @@
    "r": 10,
    "res": "L",
    "rt": 0.806,
+   "sd": "CCCCCCCCCC",
    "smoke": 0,
    "spent": 24900,
    "sui": 0,
    "team": "CT",
    "tk": 0,
+   "trade": 0,
+   "traded": 0,
    "w": {
     "ak47": 1,
     "usp_silencer": 1,
@@ -218,6 +283,7 @@
   {
    "a": 2,
    "awp": 0,
+   "bdrop": 1,
    "bi": {
     "deagle": 1,
     "flashbang": 4,
@@ -228,7 +294,32 @@
     "smokegrenade": 1
    },
    "blindk": 0,
+   "bpick": 0,
+   "bspawn": 1,
    "buy": 31,
+   "ck": 3,
+   "cl": [
+    [
+     3,
+     0
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     0
+    ]
+   ],
    "d": 9,
    "defuse": 0,
    "dmg": 866.0,
@@ -258,17 +349,22 @@
    "n": "Fraggy",
    "nade": 0,
    "ns": 0,
+   "pA": 0,
+   "pB": 0,
    "pk": 0,
    "pkw": {},
    "plant": 0,
    "r": 10,
    "res": "L",
    "rt": 0.783,
+   "sd": "TTTTCCCCCC",
    "smoke": 0,
    "spent": 16800,
    "sui": 0,
    "team": "CT",
    "tk": 0,
+   "trade": 0,
+   "traded": 2,
    "w": {
     "nova": 7
    },
@@ -281,6 +377,7 @@
   {
    "a": 4,
    "awp": 0,
+   "bdrop": 4,
    "bi": {
     "ak47": 4,
     "galilar": 1,
@@ -290,7 +387,20 @@
     "tec9": 1
    },
    "blindk": 0,
+   "bpick": 1,
+   "bspawn": 3,
    "buy": 15,
+   "ck": 0,
+   "cl": [
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     0
+    ]
+   ],
    "d": 8,
    "defuse": 0,
    "dmg": 404.0,
@@ -320,17 +430,22 @@
    "n": "mcdreamy111",
    "nade": 0,
    "ns": 0,
+   "pA": 0,
+   "pB": 0,
    "pk": 0,
    "pkw": {},
    "plant": 0,
    "r": 10,
    "res": "W",
    "rt": 0.331,
+   "sd": "TTTTTTTTTT",
    "smoke": 0,
    "spent": 21500,
    "sui": 0,
    "team": "T",
    "tk": 0,
+   "trade": 0,
+   "traded": 2,
    "w": {
     "ssg08": 2
    },
@@ -341,10 +456,15 @@
    "zeus": 0
   }
  ],
+ "pistol": [
+  0
+ ],
  "rounds": "CTTTTCTTTT",
+ "rp": "----A-----",
+ "rr": "eeeeeeeeee",
  "start": "2026-09-26T21:57",
  "start_utc": "2026-09-27T04:57:19Z",
  "t": 8,
- "v": 2,
+ "v": 3,
  "win": "T"
 }

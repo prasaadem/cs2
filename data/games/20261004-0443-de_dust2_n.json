@@ -10,13 +10,27 @@
   {
    "a": 1,
    "awp": 0,
+   "bdrop": 0,
    "bi": {
     "fiveseven": 1,
     "m4a1_silencer": 1,
     "ump45": 1
    },
    "blindk": 0,
+   "bpick": 0,
+   "bspawn": 0,
    "buy": 3,
+   "ck": 4,
+   "cl": [
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ]
+   ],
    "d": 2,
    "defuse": 0,
    "dmg": 487.0,
@@ -46,17 +60,22 @@
    "n": "pichekistha",
    "nade": 0,
    "ns": 0,
+   "pA": 0,
+   "pB": 0,
    "pk": 0,
    "pkw": {},
    "plant": 0,
    "r": 4,
    "res": null,
    "rt": 1.743,
+   "sd": "CCCC",
    "smoke": 0,
    "spent": 4600,
    "sui": 0,
    "team": "CT",
    "tk": 0,
+   "trade": 0,
+   "traded": 0,
    "w": {
     "fiveseven": 2,
     "m4a1_silencer": 3
@@ -70,6 +89,7 @@
   {
    "a": 1,
    "awp": 0,
+   "bdrop": 0,
    "bi": {
     "deagle": 1,
     "flashbang": 1,
@@ -77,7 +97,11 @@
     "p90": 2
    },
    "blindk": 0,
+   "bpick": 0,
+   "bspawn": 0,
    "buy": 6,
+   "ck": 0,
+   "cl": [],
    "d": 2,
    "defuse": 0,
    "dmg": 134.0,
@@ -107,17 +131,22 @@
    "n": "prasaadem",
    "nade": 0,
    "ns": 0,
+   "pA": 0,
+   "pB": 0,
    "pk": 0,
    "pkw": {},
    "plant": 0,
    "r": 4,
    "res": null,
    "rt": 1.389,
+   "sd": "CCCC",
    "smoke": 0,
    "spent": 6600,
    "sui": 0,
    "team": "CT",
    "tk": 0,
+   "trade": 0,
+   "traded": 0,
    "w": {
     "p90": 4
    },
@@ -130,6 +159,7 @@
   {
    "a": 2,
    "awp": 0,
+   "bdrop": 1,
    "bi": {
     "ak47": 2,
     "flashbang": 4,
@@ -138,7 +168,20 @@
     "tec9": 2
    },
    "blindk": 0,
+   "bpick": 1,
+   "bspawn": 1,
    "buy": 15,
+   "ck": 0,
+   "cl": [
+    [
+     1,
+     0
+    ],
+    [
+     2,
+     0
+    ]
+   ],
    "d": 4,
    "defuse": 0,
    "dmg": 497.0,
@@ -168,17 +211,22 @@
    "n": "Beni Lava",
    "nade": 0,
    "ns": 0,
+   "pA": 0,
+   "pB": 1,
    "pk": 0,
    "pkw": {},
    "plant": 1,
    "r": 4,
    "res": null,
    "rt": 1.189,
+   "sd": "TTTT",
    "smoke": 0,
    "spent": 9300,
    "sui": 0,
    "team": "T",
    "tk": 0,
+   "trade": 2,
+   "traded": 0,
    "w": {
     "ak47": 2,
     "tec9": 3
@@ -192,6 +240,7 @@
   {
    "a": 2,
    "awp": 0,
+   "bdrop": 0,
    "bi": {
     "fiveseven": 1,
     "hegrenade": 1,
@@ -201,7 +250,11 @@
     "xm1014": 1
    },
    "blindk": 0,
+   "bpick": 0,
+   "bspawn": 0,
    "buy": 6,
+   "ck": 0,
+   "cl": [],
    "d": 3,
    "defuse": 0,
    "dmg": 179.0,
@@ -231,6 +284,8 @@
    "n": "Pheonix",
    "nade": 0,
    "ns": 0,
+   "pA": 0,
+   "pB": 0,
    "pk": 2,
    "pkw": {
     "ak47": 2
@@ -239,11 +294,14 @@
    "r": 4,
    "res": null,
    "rt": 0.622,
+   "sd": "CCCC",
    "smoke": 1,
    "spent": 6500,
    "sui": 0,
    "team": "CT",
    "tk": 0,
+   "trade": 0,
+   "traded": 0,
    "w": {
     "ak47": 2
    },
@@ -256,6 +314,7 @@
   {
    "a": 1,
    "awp": 0,
+   "bdrop": 1,
    "bi": {
     "ak47": 1,
     "flashbang": 1,
@@ -264,7 +323,11 @@
     "ssg08": 1
    },
    "blindk": 0,
+   "bpick": 0,
+   "bspawn": 2,
    "buy": 5,
+   "ck": 0,
+   "cl": [],
    "d": 3,
    "defuse": 0,
    "dmg": 64.0,
@@ -294,6 +357,8 @@
    "n": "whitefe@ther",
    "nade": 0,
    "ns": 0,
+   "pA": 1,
+   "pB": 0,
    "pk": 1,
    "pkw": {
     "deagle": 1
@@ -302,11 +367,14 @@
    "r": 4,
    "res": null,
    "rt": 0.413,
+   "sd": "TTTT",
    "smoke": 0,
    "spent": 5200,
    "sui": 0,
    "team": "T",
    "tk": 0,
+   "trade": 0,
+   "traded": 2,
    "w": {
     "deagle": 1
    },
@@ -319,6 +387,7 @@
   {
    "a": 0,
    "awp": 0,
+   "bdrop": 2,
    "bi": {
     "ak47": 1,
     "deagle": 3,
@@ -328,7 +397,20 @@
     "ssg08": 1
    },
    "blindk": 0,
+   "bpick": 0,
+   "bspawn": 2,
    "buy": 14,
+   "ck": 0,
+   "cl": [
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     0
+    ]
+   ],
    "d": 4,
    "defuse": 0,
    "dmg": 80.0,
@@ -358,17 +440,22 @@
    "n": "Sheldor",
    "nade": 0,
    "ns": 0,
+   "pA": 0,
+   "pB": 0,
    "pk": 0,
    "pkw": {},
    "plant": 0,
    "r": 4,
    "res": null,
    "rt": 0.209,
+   "sd": "TTTT",
    "smoke": 0,
    "spent": 8800,
    "sui": 0,
    "team": "T",
    "tk": 0,
+   "trade": 0,
+   "traded": 0,
    "w": {
     "deagle": 1
    },
@@ -379,10 +466,15 @@
    "zeus": 0
   }
  ],
+ "pistol": [
+  0
+ ],
  "rounds": "TCCC",
+ "rp": "-B--",
+ "rr": "edee",
  "start": "2026-10-03T21:43",
  "start_utc": "2026-10-04T04:43:56Z",
  "t": 1,
- "v": 2,
+ "v": 3,
  "win": null
 }

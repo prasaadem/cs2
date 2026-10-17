@@ -9,7 +9,7 @@ import glob
 import os
 import re
 
-PARSER_VERSION = 2  # 2: grenades, flashes, purchases, picked-up kills
+PARSER_VERSION = 3  # 2: grenades, flashes, purchases, picked-up kills; 3: clutches, trades, bomb, round ends, sides
 
 # Local time for display / night grouping: US Pacific with US daylight-saving rules.
 STD_OFFSET_HOURS = -8
@@ -38,7 +38,12 @@ KILL = re.compile(P + r' \[[^\]]*\] killed ' + P + r' \[[^\]]*\] with "(\w+)"(.*
 ASSIST = re.compile(P + r' assisted killing ' + P)
 FLASH_ASSIST = re.compile(P + r' flash-assisted killing ' + P)
 SUICIDE = re.compile(P + r' \[[^\]]*\] committed suicide with "(\w+)"')
-BOMB = re.compile(P + r' triggered "(Planted_The_Bomb|Defused_The_Bomb)"')
+BOMB = re.compile(P + r' triggered "(Planted_The_Bomb|Defused_The_Bomb)"(?: at bombsite (\w))?')
+BOMB_CARRY = re.compile(P + r' triggered "(Got_The_Bomb|Dropped_The_Bomb)"')
+ROUND_START = 'World triggered "Round_Start"'
+# how a round ended, from the SFUI notice: e=elimination, b=bomb exploded, d=defused, t=time ran out
+END_REASON = {'CTs_Win': 'e', 'Terrorists_Win': 'e', 'Target_Bombed': 'b', 'Bomb_Defused': 'd', 'Target_Saved': 't'}
+TRADE_SECONDS = 5
 NOTICE = re.compile(r'Team "(CT|TERRORIST)" triggered "SFUI_Notice_(\w+)" \(CT "(\d+)"\) \(T "(\d+)"\)')
 DRAW = re.compile(r'World triggered "SFUI_Notice_Round_Draw"')
 GAME_OVER = re.compile(r'Game Over: \w+\s+(\S+) score (\d+):(\d+) after (\d+) min')
@@ -104,6 +109,29 @@ class Match:
         self.team = {}
         self.json = None            # last round_stats block: (rounds, {id: dmg})
         self.game_over = None
+        self.reasons = []           # per round: END_REASON code
+        self.plants = []            # per round: bombsite planted ('A'/'B') or '-'
+        self.sides = []             # per round: {player: 'C'/'T'}
+        self.clutches = collections.defaultdict(list)   # player -> [[vs, won], ...]
+        self.alive = {}             # player -> 'CT'/'T' while the round is live
+        self.clutch = {}            # side -> (player, enemies alive when the clutch began)
+        self.recent = []            # this round's kills: [time, killer, killer side, victim]
+        self.bomb_dropped = False
+        self.plant = '-'
+
+    def start_round(self):
+        self.alive = {sid: self.team[sid] for sid in self.roster if sid in self.team}
+        self.clutch, self.recent, self.bomb_dropped, self.plant = {}, [], False, '-'
+
+    def died(self, sid):
+        """Remove a player from the living; start a clutch when one player is left on a side."""
+        if self.alive.pop(sid, None) is None:
+            return
+        for side in ('CT', 'T'):
+            left = [p for p, s in self.alive.items() if s == side]
+            enemies = sum(1 for s in self.alive.values() if s != side)
+            if len(left) == 1 and enemies and side not in self.clutch:
+                self.clutch[side] = (left[0], enemies)
 
     def see(self, name, sid, team):
         self.names[sid] = name
@@ -112,11 +140,17 @@ class Match:
             self.present[-1].add(sid)
             self.roster[sid] = name
 
-    def end_round(self, winner):
+    def end_round(self, winner, reason='e'):
         # everyone on a team at round end played it, even with no kill/death/buy
         for sid, name in self.roster.items():
             self.present[-1].add(sid)
             self.names.setdefault(sid, name)
+        for side, (sid, vs) in self.clutch.items():
+            self.clutches[sid].append([vs, 1 if side == winner else 0])
+        self.sides.append({sid: self.team[sid][0] for sid in self.present[-1] if sid in self.team})
+        self.reasons.append(reason)
+        self.plants.append(self.plant)
+        self.alive, self.clutch, self.bomb_dropped = {}, {}, False
         self.rounds.append(winner)
         self.round_kills.append([])
         self.present.append(set())
@@ -179,10 +213,15 @@ def parse_group(files):
                 dc = DISCONNECT.search(msg)
                 if dc:
                     roster.pop(dc.group(2), None)
+                    if cur is not None and cur.game_over is None:
+                        cur.died(dc.group(2))
                     continue
                 if cur is None or cur.game_over is not None:
                     continue
                 cur.end = t
+                if ROUND_START in msg:
+                    cur.start_round()
+                    continue
 
                 k = KILL.search(msg)
                 if k:
@@ -191,9 +230,23 @@ def parse_group(files):
                     cur.see(vn, vid, vt)
                     s, v = cur.stats[aid], cur.stats[vid]
                     v['d'] += 1
+                    cur.died(vid)
                     if at == vt:
                         s['tk'] += 1
                         continue
+                    side = 'CT' if at == 'CT' else 'T'
+                    clutcher = cur.clutch.get(side)
+                    if clutcher and clutcher[0] == aid:
+                        s['ck'] += 1
+                    # trade: killing the enemy who just killed a teammate
+                    for ev in cur.recent:
+                        if ev[1] == vid and ev[2] != side and (t - ev[0]).total_seconds() <= TRADE_SECONDS \
+                                and cur.team.get(ev[3]) == side:
+                            s['trade'] += 1
+                            cur.stats[ev[3]]['traded'] += 1
+                            ev[1] = None  # each death is traded once
+                            break
+                    cur.recent.append([t, aid, side, vid])
                     s['k'] += 1
                     cur.weapons[aid][w] += 1
                     if 'headshot' in rest:
@@ -239,6 +292,7 @@ def parse_group(files):
                         cur.see(name, sid, team)
                         cur.stats[sid]['d'] += 1
                         cur.stats[sid]['sui'] += 1
+                        cur.died(sid)
                     continue
                 th = THREW.search(msg)
                 if th:
@@ -268,14 +322,29 @@ def parse_group(files):
                 b = BOMB.search(msg)
                 if b:
                     cur.see(*b.groups()[:3])
-                    cur.stats[b.group(2)]['plant' if b.group(4).startswith('Planted') else 'defuse'] += 1
+                    if b.group(4).startswith('Planted'):
+                        cur.stats[b.group(2)]['plant'] += 1
+                        cur.plant = b.group(5) or '?'
+                        if b.group(5) in ('A', 'B'):
+                            cur.stats[b.group(2)]['p' + b.group(5)] += 1
+                    else:
+                        cur.stats[b.group(2)]['defuse'] += 1
+                    continue
+                bc = BOMB_CARRY.search(msg)
+                if bc:
+                    cur.see(*bc.groups()[:3])
+                    if bc.group(4) == 'Dropped_The_Bomb':
+                        cur.stats[bc.group(2)]['bdrop'] += 1
+                        cur.bomb_dropped = True
+                    else:
+                        cur.stats[bc.group(2)]['bpick' if cur.bomb_dropped else 'bspawn'] += 1
                     continue
                 n = NOTICE.search(msg)
                 if n:
-                    cur.end_round('CT' if n.group(1) == 'CT' else 'T')
+                    cur.end_round('CT' if n.group(1) == 'CT' else 'T', END_REASON.get(n.group(2), 'e'))
                     continue
                 if DRAW.search(msg):
-                    cur.end_round(None)
+                    cur.end_round(None, '-')
                     continue
                 g = GAME_OVER.search(msg)
                 if g:
@@ -286,6 +355,16 @@ def parse_group(files):
     if cur is not None and (cur.game_over is not None or cur.rounds):
         matches.append(cur)
     return matches
+
+
+def pistol_rounds(m):
+    """Round 1, plus each round where most players switched sides (half time)."""
+    out = [0] if m.rounds else []
+    for i in range(1, len(m.sides)):
+        both = [p for p in m.sides[i] if p in m.sides[i - 1]]
+        if both and sum(m.sides[i][p] != m.sides[i - 1][p] for p in both) * 2 > len(both):
+            out.append(i)
+    return out
 
 
 def rating(k, d, rounds, mk):
@@ -352,6 +431,10 @@ def build_game(m):
             'spent': sum(PRICES.get(i, 0) * c for i, c in m.bought[sid].items()),
             'bi': dict(m.bought[sid].most_common()),
             'pk': sum(m.picked[sid].values()) if economy else None,
+            'cl': m.clutches.get(sid, []), 'ck': s['ck'],
+            'trade': s['trade'], 'traded': s['traded'],
+            'bspawn': s['bspawn'], 'bpick': s['bpick'], 'bdrop': s['bdrop'], 'pA': s['pA'], 'pB': s['pB'],
+            'sd': ''.join(m.sides[i].get(sid, '.') for i in range(nrounds)),
             'pkw': dict(m.picked[sid].most_common()) if economy else {},
         })
     players.sort(key=lambda p: (-p['rt'], -p['k']))
@@ -368,6 +451,9 @@ def build_game(m):
         'economy': economy,
         'fin': finished, 'ct': ct, 't': t, 'win': winner,
         'rounds': ''.join({'CT': 'C', 'T': 'T', None: '-'}[r] for r in m.rounds),
+        'rr': ''.join(m.reasons),
+        'rp': ''.join(m.plants),
+        'pistol': pistol_rounds(m),
         'p': players,
     }
 

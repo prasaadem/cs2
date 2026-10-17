@@ -10,6 +10,7 @@
   {
    "a": 0,
    "awp": 0,
+   "bdrop": 0,
    "bi": {
     "flashbang": 3,
     "hegrenade": 3,
@@ -17,7 +18,11 @@
     "smokegrenade": 2
    },
    "blindk": 0,
+   "bpick": 0,
+   "bspawn": 0,
    "buy": 10,
+   "ck": 0,
+   "cl": [],
    "d": 1,
    "defuse": 0,
    "dmg": 378.0,
@@ -47,17 +52,22 @@
    "n": "pichekistha",
    "nade": 0,
    "ns": 0,
+   "pA": 0,
+   "pB": 0,
    "pk": 0,
    "pkw": {},
    "plant": 0,
    "r": 5,
    "res": null,
    "rt": 1.156,
+   "sd": "CCCCC",
    "smoke": 0,
    "spent": 7900,
    "sui": 0,
    "team": "CT",
    "tk": 0,
+   "trade": 0,
+   "traded": 0,
    "w": {
     "m4a1_silencer": 2,
     "usp_silencer": 1
@@ -72,6 +82,7 @@
   {
    "a": 0,
    "awp": 0,
+   "bdrop": 3,
    "bi": {
     "deagle": 4,
     "flashbang": 5,
@@ -82,7 +93,11 @@
     "xm1014": 1
    },
    "blindk": 0,
+   "bpick": 0,
+   "bspawn": 5,
    "buy": 23,
+   "ck": 0,
+   "cl": [],
    "d": 3,
    "defuse": 0,
    "dmg": 142.0,
@@ -112,17 +127,22 @@
    "n": "Sheldor",
    "nade": 0,
    "ns": 0,
+   "pA": 2,
+   "pB": 0,
    "pk": 0,
    "pkw": {},
    "plant": 2,
    "r": 5,
    "res": null,
    "rt": 0.494,
+   "sd": "TTTTT",
    "smoke": 0,
    "spent": 10800,
    "sui": 0,
    "team": "T",
    "tk": 0,
+   "trade": 0,
+   "traded": 0,
    "w": {
     "deagle": 1
    },
@@ -133,10 +153,15 @@
    "zeus": 0
   }
  ],
+ "pistol": [
+  0
+ ],
  "rounds": "CTCCC",
+ "rp": "AA---",
+ "rr": "deeet",
  "start": "2026-09-30T20:56",
  "start_utc": "2026-10-01T03:56:52Z",
  "t": 1,
- "v": 2,
+ "v": 3,
  "win": null
 }
