@@ -1251,7 +1251,7 @@ function viewRounds(night) {
 // ---------- heatmaps (positions are loaded lazily, only on this page) ----------
 let POS = null, posLoading = null;
 const loadPositions = () => POS ? Promise.resolve(POS) : (posLoading = posLoading || fetch('data/positions.json', {cache: 'no-cache'}).then(r => r.json()).then(d => (POS = d)));
-const HM = {mode: 'kills', view: 'heat', nade: '', side: '', player: '', night: '', lines: false};
+const HM = {mode: 'kills', view: 'dots', nade: '', side: '', player: '', night: '', lines: false};
 const NADE_NAME = {s: 'Smoke', m: 'Molotov / Incendiary', h: 'HE grenade', f: 'Flashbang', d: 'Decoy'};
 const UNIT_M = 0.0254; // one Hammer unit is an inch
 let hmRedraw = null;
@@ -1285,7 +1285,7 @@ function viewHeatmap(map, gid) {
       <div class="filters"><span class="flabel">Map</span><select id="hmap">${maps.map(m => opt(m, `${mapName(m)} (${byMap[m].length})`, map)).join('')}</select></div></div>
     <div class="filters hmf">
       <div class="seg" id="hmode">${[['kills', 'Kills'], ['deaths', 'Deaths'], ['nades', 'Grenades']].map(([v, l]) => `<button data-v="${v}" class="${HM.mode === v ? 'on' : ''}">${l}</button>`).join('')}</div>
-      <div class="seg" id="hview">${[['heat', 'Heat'], ['dots', 'Dots']].map(([v, l]) => `<button data-v="${v}" class="${HM.view === v ? 'on' : ''}">${l}</button>`).join('')}</div>
+      <div class="seg" id="hview">${[['dots', 'Dots'], ['heat', 'Heat']].map(([v, l]) => `<button data-v="${v}" class="${HM.view === v ? 'on' : ''}">${l}</button>`).join('')}</div>
       <select id="hnade" ${HM.mode === 'nades' ? '' : 'hidden'}>${opt('', 'All grenades', HM.nade)}${Object.entries(NADE_NAME).map(([k, v]) => opt(k, v, HM.nade)).join('')}</select>
       <select id="hside">${opt('', 'Both sides', HM.side)}${opt('C', 'CT', HM.side)}${opt('T', 'T', HM.side)}</select>
       <select id="hplayer"><option value="">All players</option></select>
