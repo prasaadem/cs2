@@ -8,6 +8,10 @@ Credentials come from environment variables (GitHub Actions secrets):
     DATHOST_EMAIL, DATHOST_PASSWORD   DatHost login (HTTP basic auth)
     DATHOST_SERVER_ID                 id from the control panel URL
     DATHOST_ACCOUNT_EMAIL             optional: act on an account this login was invited to
+For local runs they can also come from a .env file in the repo root (never committed).
+
+With --demos DIR it also downloads GOTV demos (.dem in the server's root folder)
+that aren't in DIR yet; --list prints the server's root folder listing and exits.
 
 Steps: ask DatHost to sync the server's files to its cache, wait, then download
 the logs directory (DatHost returns a directory as a zip) and extract the .log files.
@@ -27,6 +31,19 @@ import zipfile
 API = os.environ.get('DATHOST_API', 'https://dathost.com/api/0.1')
 
 
+def load_dotenv():
+    """Fill missing environment variables from <repo>/.env (KEY=value lines)."""
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '.env')
+    if not os.path.exists(path):
+        return
+    with open(path, encoding='utf-8') as fh:
+        for line in fh:
+            line = line.strip()
+            if line and not line.startswith('#') and '=' in line:
+                k, v = line.split('=', 1)
+                os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+
+
 def env(name, required=True):
     v = os.environ.get(name, '').strip()
     if required and not v:
@@ -34,7 +51,7 @@ def env(name, required=True):
     return v
 
 
-def request(method, path, retries=3, timeout=300):
+def request(method, path, retries=3, timeout=300):  # noqa: C901
     auth = base64.b64encode(f'{env("DATHOST_EMAIL")}:{env("DATHOST_PASSWORD")}'.encode()).decode()
     headers = {'Authorization': 'Basic ' + auth, 'User-Agent': 'cs2-stats'}
     account = env('DATHOST_ACCOUNT_EMAIL', required=False)
@@ -74,6 +91,36 @@ def extract_logs(blob, out):
     return n
 
 
+def list_root(server):
+    """Files in the server's root folder (shape of the response isn't documented)."""
+    raw = json.loads(request('GET', f'/game-servers/{server}/files?max_depth=1'))
+    items = raw if isinstance(raw, list) else raw.get('files', [])
+    out = []
+    for it in items:
+        if isinstance(it, str):
+            out.append((it, None))
+        else:
+            out.append((it.get('path') or it.get('name') or '', it.get('size')))
+    return out
+
+
+def fetch_demos(server, folder):
+    os.makedirs(folder, exist_ok=True)
+    have = set(os.listdir(folder))
+    demos = [(p, size) for p, size in list_root(server) if p.lower().endswith('.dem')]
+    print(f'{len(demos)} demos on the server, {len([d for d in demos if os.path.basename(d[0]) not in have])} new')
+    for p, size in demos:
+        name = os.path.basename(p)
+        if name in have:
+            continue
+        print(f'  downloading {name}' + (f' ({int(size) / 1e6:.0f} MB)' if size else ''))
+        data = request('GET', f'/game-servers/{server}/files/' + urllib.parse.quote(p.lstrip('/')), timeout=900)
+        tmp = os.path.join(folder, name + '.part')
+        with open(tmp, 'wb') as fh:
+            fh.write(data)
+        os.replace(tmp, os.path.join(folder, name))
+
+
 def list_log_paths(server):
     """Fallback: list logs/ and return file paths. The response shape isn't documented,
     so accept a list of strings or of objects with a path/name field."""
@@ -89,11 +136,18 @@ def list_log_paths(server):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('--out', required=True, help='folder to write the .log files into')
+    ap.add_argument('--out', help='folder to write the .log files into')
+    ap.add_argument('--demos', help='also download new GOTV demos into this folder')
+    ap.add_argument('--list', action='store_true', help="print the server's root folder listing and exit")
     ap.add_argument('--wait', type=int, default=60, help='seconds to wait after sync-files (default 60)')
     args = ap.parse_args()
+    load_dotenv()
     server = urllib.parse.quote(env('DATHOST_SERVER_ID'), safe='')
-    os.makedirs(args.out, exist_ok=True)
+    if args.list:
+        print(json.dumps(json.loads(request('GET', f'/game-servers/{server}/files?max_depth=1')), indent=1)[:4000])
+        return
+    if not args.out and not args.demos:
+        sys.exit('error: give --out and/or --demos')
 
     print('syncing server files to the DatHost cache')
     try:
@@ -103,6 +157,11 @@ def main():
         # a stopped server was already synced when it shut down, so carry on
         print(f'  warning: {e}; using the cached files')
 
+    if args.demos:
+        fetch_demos(server, args.demos)
+    if not args.out:
+        return
+    os.makedirs(args.out, exist_ok=True)
     print('downloading logs/')
     try:
         blob = request('GET', f'/game-servers/{server}/files/logs')
