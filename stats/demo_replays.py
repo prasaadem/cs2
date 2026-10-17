@@ -19,6 +19,8 @@ Replay format (positions are Hammer units, times are seconds from match start):
   grenades            [type s/m/h/f/d, thrower id, thrown, landed, effect ends, path] where path is
                       x,y pairs every 1/16 s from the throw to the landing (delta-encoded)
   shots               [time, player index] for every bullet fired
+  hits                [time, attacker index, victim index, damage, hit group, weapon] (player_hurt)
+  players[i].w / .h   weapon held / health, run-length: [[sample, value], ...] (weapon = index into wn)
 """
 import argparse
 import datetime as dt
@@ -144,7 +146,8 @@ def convert(path, games):
                  for e in events(p, 'weapon_fire') if not str(e.get('weapon', '')).endswith(NOT_GUNS)]
     # a match begins at the server's restart/new-match events; otherwise the whole demo is one match
     starts = sorted({int(e['tick']) for n in ('begin_new_match', 'round_announce_match_start') for e in events(p, n)})
-    ticks = p.parse_ticks(['X', 'Y', 'yaw', 'is_alive', 'team_num'])
+    ticks = p.parse_ticks(['X', 'Y', 'yaw', 'is_alive', 'team_num', 'active_weapon_name', 'health'])
+    hurts = events(p, 'player_hurt')
     if not len(ticks):
         return []
     first, last = int(ticks['tick'].min()), int(ticks['tick'].max())
@@ -160,16 +163,32 @@ def convert(path, games):
             continue
         sec = lambda tk: round((tk - a) / TICKRATE, 1)  # noqa: E731
         players = []
+        wnames = []
+
+        def rle(values):
+            out, prev = [], object()
+            for i, v in enumerate(values):
+                if v != prev:
+                    out.append([i, v])
+                    prev = v
+            return out
         for sid, rows in seg.groupby('steamid'):
             if not sid or str(sid) == '0':
                 continue  # GOTV itself
             idx = ((rows['tick'] - a) // SAMPLE_TICKS).astype(int).tolist()
             xs, ys, as_, ss = [0] * n, [0] * n, [0] * n, ['.'] * n
+            ws, hs = [None] * n, [None] * n
             lx = ly = 0
-            for i, x, y, yaw, alive, team in zip(idx, rows['X'], rows['Y'], rows['yaw'], rows['is_alive'], rows['team_num']):
+            for i, x, y, yaw, alive, team, wpn, hp in zip(idx, rows['X'], rows['Y'], rows['yaw'], rows['is_alive'],
+                                                          rows['team_num'], rows['active_weapon_name'], rows['health']):
                 side = SIDE.get(int(num(team, 0)))
                 if not side:
                     continue  # spectator / unassigned
+                if isinstance(wpn, str) and wpn:
+                    if wpn not in wnames:
+                        wnames.append(wpn)
+                    ws[i] = wnames.index(wpn)
+                hs[i] = int(num(hp, 0)) if bool(alive) else 0
                 lx, ly = int(round(num(x, lx))), int(round(num(y, ly)))
                 xs[i], ys[i] = lx, ly
                 as_[i] = int(round((num(yaw, 0) % 360) / 4)) % 90
@@ -183,7 +202,13 @@ def convert(path, games):
             # steamid64 -> account id, the id the stats use
             sid64 = int(sid)
             pid = str(sid64 - 76561197960265728) if sid64 > 76561197960265728 else str(sid64)
-            players.append({'id': pid, 'n': str(rows['name'].iloc[-1]), 'x': delta(xs), 'y': delta(ys), 'a': as_, 's': ''.join(ss)})
+            for i in range(1, n):  # hold the last weapon / health through short gaps
+                if ws[i] is None:
+                    ws[i] = ws[i - 1]
+                if hs[i] is None:
+                    hs[i] = hs[i - 1]
+            players.append({'id': pid, 'n': str(rows['name'].iloc[-1]), 'x': delta(xs), 'y': delta(ys), 'a': as_,
+                            's': ''.join(ss), 'w': rle(ws), 'h': rle(hs)})
         if not players:
             continue
         rounds = []
@@ -216,13 +241,22 @@ def convert(path, games):
                           [v for pair in zip(delta(flat[0::2]), delta(flat[1::2])) for v in pair]])
         pidx = {pl['id']: i for i, pl in enumerate(players)}
         shots = [[sec(tk), pidx[acct(sid)]] for tk, sid in shots_all if a <= tk < b and acct(sid) in pidx]
+        hits = []
+        for e in hurts:
+            tk = int(e['tick'])
+            att, vic = acct(str(e.get('attacker_steamid') or '')), acct(str(e.get('user_steamid') or ''))
+            if not a <= tk < b or vic not in pidx:
+                continue
+            hits.append([sec(tk), pidx.get(att), pidx[vic], int(num(e.get('dmg_health'), 0)),
+                         str(e.get('hitgroup') or ''), str(e.get('weapon') or '')])
         start = t0 + dt.timedelta(seconds=a / TICKRATE)
         game = min((g for g in games if g[1] == mp and abs((g[2] - start).total_seconds()) <= MATCH_WINDOW),
                    key=lambda g: abs((g[2] - start).total_seconds()), default=None)
         rid = game[0] if game else start.strftime('%Y%m%d-%H%M') + '-' + mp
         out.append({'id': rid, 'game': game[0] if game else None, 'map': mp,
                     'start_utc': start.strftime('%Y-%m-%dT%H:%M:%SZ'), 'hz': TICKRATE / SAMPLE_TICKS, 'n': n,
-                    'players': players, 'rounds': rounds, 'kills': kills, 'grenades': nades, 'shots': shots})
+                    'players': players, 'rounds': rounds, 'kills': kills, 'grenades': nades, 'shots': shots,
+                    'hits': hits, 'wn': wnames})
     return out
 
 

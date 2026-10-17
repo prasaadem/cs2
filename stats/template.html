@@ -1663,8 +1663,15 @@ function playReplay(rp, radar) {
     const x = new Float64Array(rp.n), y = new Float64Array(rp.n);
     let ax = 0, ay = 0;
     for (let k = 0; k < rp.n; k++) { ax += p.x[k] || 0; ay += p.y[k] || 0; x[k] = ax; y[k] = ay; }
-    return {id: p.id, n: p.n, x, y, a: p.a, s: p.s, i};
+    const unrle = (r, fill) => { const out = new Array(rp.n).fill(fill); (r || []).forEach(([k, v], j) => { const end = j + 1 < r.length ? r[j + 1][0] : rp.n; for (let q = k; q < end; q++) out[q] = v; }); return out; };
+    return {id: p.id, n: p.n, x, y, a: p.a, s: p.s, i, w: unrle(p.w, null), h: unrle(p.h, 100)};
   });
+  const WN = rp.wn || [];
+  const wpnAt = (p, t) => { const k = Math.max(0, Math.min(rp.n - 1, Math.round(t * rp.hz))); const w = p.w[k]; return w == null ? '' : weaponName(String(WN[w] || '').replace(/^weapon_/, '')); };
+  const hpAt = (p, t) => p.h[Math.max(0, Math.min(rp.n - 1, Math.floor(t * rp.hz)))];
+  // pair each shot with the hit it caused (same shooter, hit within 0.15s); unpaired shots are misses
+  const HITS = rp.hits || [];
+  const shotHit = (rp.shots || []).map(([ts, i]) => HITS.find(h => h[1] === i && h[2] !== i && h[0] >= ts - 0.02 && h[0] - ts <= 0.15) || null);
   const dur = (rp.n - 1) / rp.hz;
   const when = utcLocal(rp.start_utc);
   // grenades: [type, thrower, thrown, landed, effect ends, delta-encoded x,y path at 16/s]
@@ -1677,7 +1684,7 @@ function playReplay(rp, radar) {
   for (const [t0, kind, x, y, d] of rp.nades || []) G.push({kind, by: null, t0, t1: t0, t2: t0 + d, pts: [[x, y]]});
   const NADE_COL = {s: '#b9b9b9', m: '#f07a2e', mx: '#f07a2e', h: '#e5484d', f: '#ffffff', d: '#c9b37a'};
   const ease = u => 1 - Math.pow(1 - Math.min(1, Math.max(0, u)), 3);
-  const st = {t: rp.rounds.length ? rp.rounds[0][1] : 0, playing: false, speed: 1, focus: new Set(), trails: true, names: true};
+  const st = {t: rp.rounds.length ? rp.rounds[0][1] : 0, playing: false, speed: 1, focus: new Set(), trails: true, names: true, cones: true};
 
   $('#app').innerHTML = `
     <div class="crumb"><a href="#/replays">Replays</a> / ${esc(mapName(rp.map))}</div>
@@ -1695,7 +1702,8 @@ function playReplay(rp, radar) {
       </div>
       <div class="rprow rprounds" id="rprounds"></div>
       <div class="rprow"><label class="toggle"><input type="checkbox" id="rptrail" checked><span>Trails</span></label>
-        <label class="toggle"><input type="checkbox" id="rpnames" checked><span>Names</span></label>
+        <label class="toggle"><input type="checkbox" id="rpnames" checked><span>Names &amp; weapons</span></label>
+        <label class="toggle"><input type="checkbox" id="rpcones" checked><span>View cones</span></label>
         <span class="legend" style="margin:0"><span><i style="background:var(--ct)"></i>CT</span><span><i style="background:var(--t)"></i>T</span><span><i style="background:#b9b9b9"></i>smoke</span><span><i style="background:#f07a2e"></i>fire</span><span><i style="background:#e5484d"></i>HE</span><span><i style="background:#fff;box-shadow:inset 0 0 0 1px var(--line)"></i>flash</span><span><i style="background:#ffe27a"></i>shots</span></span></div>
     </div>
       </div>
@@ -1723,6 +1731,7 @@ function playReplay(rp, radar) {
   $('#rpspeed').onchange = e => { st.speed = +e.target.value; };
   $('#rptrail').onchange = e => { st.trails = e.target.checked; draw(); };
   $('#rpnames').onchange = e => { st.names = e.target.checked; draw(); };
+  $('#rpcones').onchange = e => { st.cones = e.target.checked; draw(); };
   const onKey = e => {
     if (!document.body.contains(canvas)) { removeEventListener('keydown', onKey); return; }
     if (e.target.closest('input, select, textarea')) return;
@@ -1804,17 +1813,38 @@ function playReplay(rp, radar) {
         continue;
       }
       const r = foc ? 8 : 6, ang = -s.a * Math.PI / 180; // game yaw is counter-clockwise from east; screen y points down
+      if (st.cones) {
+        // what they're looking at: a 90-degree cone that fades with distance
+        const R = Math.max(34, 650 * scale) * (foc ? 1.4 : 1);
+        const gr = c.createRadialGradient(px, py, r, px, py, R);
+        gr.addColorStop(0, s.side === 'C' ? 'rgba(57,135,229,' + (foc ? 0.42 : 0.26) + ')' : 'rgba(217,89,38,' + (foc ? 0.42 : 0.26) + ')');
+        gr.addColorStop(1, 'rgba(0,0,0,0)');
+        c.beginPath(); c.moveTo(px, py); c.arc(px, py, R, ang - Math.PI / 4, ang + Math.PI / 4); c.closePath();
+        c.fillStyle = gr; c.fill();
+      }
       c.beginPath(); c.moveTo(px + Math.cos(ang) * (r + 7), py + Math.sin(ang) * (r + 7));
       c.lineTo(px + Math.cos(ang + 0.5) * r, py + Math.sin(ang + 0.5) * r); c.lineTo(px + Math.cos(ang - 0.5) * r, py + Math.sin(ang - 0.5) * r);
       c.closePath(); c.fillStyle = color; c.fill();
       c.beginPath(); c.arc(px, py, r, 0, 7); c.fillStyle = color; c.fill();
       c.lineWidth = foc ? 2.5 : 1.5; c.strokeStyle = foc ? '#fff' : col('--surface'); c.stroke();
+      const life = hpAt(p, t);
+      if (life != null && life < 100) {
+        const bw = 18, bx = px - bw / 2, by = py + r + 4;
+        c.fillStyle = 'rgba(0,0,0,.6)'; c.fillRect(bx - 1, by - 1, bw + 2, 5);
+        c.fillStyle = life > 50 ? '#4cc274' : life > 20 ? '#f0b232' : '#ff4d4f'; c.fillRect(bx, by, bw * Math.max(0, life) / 100, 3);
+      }
       if (st.names || foc) {
         c.font = `${foc ? 600 : 500} 11px Inter, sans-serif`; c.textAlign = 'center';
         c.lineWidth = 3; c.strokeStyle = 'rgba(0,0,0,.7)'; c.strokeText(p.n, px, py - r - 6);
         c.fillStyle = '#fff'; c.fillText(p.n, px, py - r - 6);
+        const wl = wpnAt(p, t);
+        if (wl) {
+          const wy = py + r + (life != null && life < 100 ? 18 : 13);
+          c.font = '500 10px Inter, sans-serif'; c.strokeText(wl, px, wy); c.fillStyle = '#d6d6d0'; c.fillText(wl, px, wy);
+        }
       }
     }
+    drawHits(c, t);
     drawDeaths(c, t, col);
     // HUD, controls, side panel
     const ri = rp.rounds.findIndex(r => t >= r[0] && t <= r[2] + 4);
@@ -1830,7 +1860,8 @@ function playReplay(rp, radar) {
       const i = +b.dataset.i, s = hp[i];
       b.classList.toggle('on', st.focus.has(i)); b.classList.toggle('dead', !s || !s.alive);
       b.querySelector('.dot').style.background = s ? col(s.side === 'C' ? '--ct' : '--t') : 'var(--line)';
-      b.querySelector('.hp').textContent = !s ? 'away' : s.alive ? '' : 'dead';
+      const hpv = s && s.alive ? hpAt(P[i], t) : null;
+      b.querySelector('.hp').textContent = !s ? 'away' : !s.alive ? 'dead' : [wpnAt(P[i], t), hpv != null ? hpv + ' hp' : ''].filter(Boolean).join(' · ');
     });
     const name = id => (P.find(p => p.id === id) || {}).n || '?';
     const feed = rp.kills.filter(k => k[0] <= t && k[0] > t - 12).slice(-6).reverse();
@@ -1898,18 +1929,46 @@ function playReplay(rp, radar) {
     }
   }
   function drawShots(c, t) {
-    // a short tracer from the shooter in the direction they face, ~0.12s per shot
-    for (const [ts, i] of rp.shots || []) {
+    (rp.shots || []).forEach(([ts, i], k) => {
       const age = t - ts;
-      if (age < 0 || age > 0.12) continue;
+      if (age < 0 || age > 0.15) return;
       const pl = P[i], s = pl && at(pl, ts);
-      if (!s || !s.alive) continue;
-      const [px, py] = tf(s.x, s.y), ang = -s.a * Math.PI / 180, L = Math.max(30, 900 * scale);
-      c.save(); c.globalAlpha = 1 - age / 0.12;
-      const gr = c.createLinearGradient(px, py, px + Math.cos(ang) * L, py + Math.sin(ang) * L);
-      gr.addColorStop(0, 'rgba(255,225,120,.95)'); gr.addColorStop(1, 'rgba(255,225,120,0)');
-      c.strokeStyle = gr; c.lineWidth = 1.5; c.beginPath(); c.moveTo(px + Math.cos(ang) * 9, py + Math.sin(ang) * 9);
-      c.lineTo(px + Math.cos(ang) * L, py + Math.sin(ang) * L); c.stroke(); c.restore();
+      if (!s || !s.alive) return;
+      const [px, py] = tf(s.x, s.y), ang = -s.a * Math.PI / 180;
+      // muzzle flash
+      if (age < 0.05) { c.beginPath(); c.arc(px + Math.cos(ang) * 10, py + Math.sin(ang) * 10, 3, 0, 7); c.fillStyle = 'rgba(255,240,170,.95)'; c.fill(); }
+      const hit = shotHit[k];
+      let ex, ey;
+      if (hit) {
+        const v = at(P[hit[2]], hit[0] - 0.01);
+        if (v) [ex, ey] = tf(v.x, v.y);
+      }
+      const L = Math.max(30, 900 * scale);
+      if (ex === undefined) { ex = px + Math.cos(ang) * L; ey = py + Math.sin(ang) * L; }
+      c.save(); c.globalAlpha = 1 - age / 0.15;
+      const gr = c.createLinearGradient(px, py, ex, ey);
+      gr.addColorStop(0, 'rgba(255,225,120,.95)'); gr.addColorStop(1, hit ? 'rgba(255,90,80,.9)' : 'rgba(255,225,120,0)');
+      c.strokeStyle = gr; c.lineWidth = hit ? 2 : 1.5; c.beginPath(); c.moveTo(px + Math.cos(ang) * 9, py + Math.sin(ang) * 9);
+      c.lineTo(ex, ey); c.stroke(); c.restore();
+    });
+  }
+  function drawHits(c, t) {
+    // spark + floating damage number on whoever got hurt
+    for (const [th, ai, vi, dmg, grp, wpn] of HITS) {
+      const age = t - th;
+      if (age < 0 || age > 1 || !dmg) continue;
+      const v = P[vi] && at(P[vi], th - 0.01);
+      if (!v) continue;
+      const [vx, vy] = tf(v.x, v.y), head = /head/i.test(grp), self = ai == null || ai === vi;
+      if (age < 0.18) {
+        c.save(); c.globalAlpha = 1 - age / 0.18; c.strokeStyle = head ? '#ffd166' : '#ff5a50'; c.lineWidth = 2;
+        for (let q = 0; q < 6; q++) { const aa = q * Math.PI / 3 + th; c.beginPath(); c.moveTo(vx + Math.cos(aa) * 5, vy + Math.sin(aa) * 5); c.lineTo(vx + Math.cos(aa) * (9 + 10 * age / 0.18), vy + Math.sin(aa) * (9 + 10 * age / 0.18)); c.stroke(); }
+        c.restore();
+      }
+      c.save(); c.globalAlpha = Math.min(1, (1 - age) / 0.4); c.font = '700 12px Oxanium, sans-serif'; c.textAlign = 'left';
+      const lx = vx + 10, ly = vy - 6 - age * 18, txt = '-' + dmg + (head ? ' HS' : '');
+      c.lineWidth = 3; c.strokeStyle = 'rgba(0,0,0,.8)'; c.strokeText(txt, lx, ly);
+      c.fillStyle = head ? '#ffd166' : self ? '#f0a35e' : '#ff6b62'; c.fillText(txt, lx, ly); c.restore();
     }
   }
   function drawDeaths(c, t, col) {
