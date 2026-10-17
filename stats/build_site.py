@@ -16,8 +16,29 @@ import datetime as dt
 import glob
 import json
 import os
+import re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+
+
+def radar_overviews(radar_dir):
+    """Read the game's overview files (docs/radar/<map>.txt) for maps that also have
+    docs/radar/<map>.png, giving the numbers that place world positions on the image."""
+    out = {}
+    for txt in glob.glob(os.path.join(radar_dir, '*.txt')):
+        name = os.path.splitext(os.path.basename(txt))[0]
+        if not os.path.exists(os.path.join(radar_dir, name + '.png')):
+            continue
+        with open(txt, encoding='utf-8', errors='replace') as fh:
+            body = fh.read()
+        vals = {}
+        for key in ('pos_x', 'pos_y', 'scale'):
+            m = re.search(r'"%s"\s+"(-?[\d.]+)"' % key, body)
+            if m:
+                vals[key] = float(m.group(1))
+        if len(vals) == 3:
+            out[name] = vals
+    return out
 
 
 def main():
@@ -56,13 +77,20 @@ def main():
     with open(out, 'w', encoding='utf-8') as fh:
         json.dump(payload, fh, ensure_ascii=False, separators=(',', ':'))
 
+    radar_dir = os.path.join(args.docs, 'radar')
+    radar = radar_overviews(radar_dir) if os.path.isdir(radar_dir) else {}
+    if os.path.isdir(radar_dir):
+        with open(os.path.join(radar_dir, 'overviews.json'), 'w', encoding='utf-8') as fh:
+            json.dump(radar, fh, indent=1, sort_keys=True)
+
     with open(args.template, encoding='utf-8') as fh:
         html = fh.read().replace('__TITLE__', args.title)
     with open(os.path.join(args.docs, 'index.html'), 'w', encoding='utf-8') as fh:
         fh.write(html)
 
     nights = {g['night'] for g in games}
-    print(f'site: {len(games)} games over {len(nights)} nights -> {os.path.abspath(args.docs)}')
+    print(f'site: {len(games)} games over {len(nights)} nights, radar images for {len(radar)} maps'
+          f' -> {os.path.abspath(args.docs)}')
 
 
 if __name__ == '__main__':

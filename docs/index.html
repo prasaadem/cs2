@@ -1255,6 +1255,16 @@ const HM = {mode: 'kills', view: 'heat', nade: '', side: '', player: '', night: 
 const NADE_NAME = {s: 'Smoke', m: 'Molotov / Incendiary', h: 'HE grenade', f: 'Flashbang', d: 'Decoy'};
 const UNIT_M = 0.0254; // one Hammer unit is an inch
 let hmRedraw = null;
+// optional radar images: docs/radar/<map>.png + overviews.json (built from the game's overview files)
+const RADAR = {meta: null, img: {}};
+const loadRadar = () => RADAR.meta ? Promise.resolve(RADAR.meta)
+  : fetch('radar/overviews.json', {cache: 'no-cache'}).then(r => r.ok ? r.json() : {}).catch(() => ({})).then(m => (RADAR.meta = m));
+const radarImg = map => new Promise(res => {
+  if (RADAR.img[map] !== undefined) return res(RADAR.img[map]);
+  const im = new Image();
+  im.onload = () => res(RADAR.img[map] = im); im.onerror = () => res(RADAR.img[map] = null);
+  im.src = `radar/${map}.png`;
+});
 addEventListener('resize', () => { if (hmRedraw && document.getElementById('hm')) hmRedraw(); });
 
 function viewHeatmap(map, gid) {
@@ -1285,7 +1295,7 @@ function viewHeatmap(map, gid) {
     </div>
     <div class="hmwrap"><div class="card hmcard"><canvas id="hm"></canvas><div class="hmmsg" id="hmmsg">Loading positions…</div></div>
       <div class="card pad hmside" id="hmstats"></div></div>
-    <div class="note">Faint grey dots are every kill, death and grenade ever recorded on this map, which traces its layout. Positions come from the server log at the moment of each kill and where each grenade landed; full movement needs GOTV demos.</div>`;
+    <div class="note" id="hmnote">Faint grey dots are every kill, death and grenade ever recorded on this map, which traces its layout. Positions come from the server log at the moment of each kill and where each grenade landed; full movement needs GOTV demos.</div>`;
 
   const sel = id => $('#' + id);
   sel('hmap').onchange = e => { location.hash = `#/heatmap/${e.target.value}`; };
@@ -1306,10 +1316,11 @@ function viewHeatmap(map, gid) {
     };
   }
 
-  let pts = [], bounds = null, base = [], tf = null;
+  let pts = [], bounds = null, base = [], tf = null, radar = null;
   const canvas = sel('hm');
 
-  loadPositions().then(() => {
+  Promise.all([loadPositions(), loadRadar()]).then(async ([, meta]) => {
+    if (meta[map]) { const img = await radarImg(map); if (img) radar = Object.assign({img}, meta[map]); }
     if (!document.body.contains(canvas)) return;
     // every point ever recorded on the map: fixed bounds + faint layout
     for (const g of byMap[map]) {
@@ -1325,6 +1336,7 @@ function viewHeatmap(map, gid) {
     for (const g of byMap[map]) g.p.forEach(p => names[p.id] = NAMES[p.id]);
     sel('hplayer').innerHTML = '<option value="">All players</option>' + Object.entries(names).sort((a, b) => a[1].localeCompare(b[1])).map(([id, n]) => opt(id, n, HM.player)).join('');
     sel('hmmsg').textContent = '';
+    if (radar) sel('hmnote').textContent = 'Positions come from the server log at the moment of each kill and where each grenade landed; full movement needs GOTV demos.';
     draw();
   });
   hmRedraw = draw;
@@ -1359,19 +1371,32 @@ function viewHeatmap(map, gid) {
     const css = getComputedStyle(document.documentElement);
     const col = v => css.getPropertyValue(v).trim();
     const W = canvas.parentElement.clientWidth;
-    const rx = bounds.x1 - bounds.x0 || 1, ry = bounds.y1 - bounds.y0 || 1;
-    const pad = 16, H = Math.min(Math.round((W - 2 * pad) * ry / rx) + 2 * pad, Math.round(innerHeight * 0.78));
-    const sc = Math.min((W - 2 * pad) / rx, (H - 2 * pad) / ry);
-    const ox = (W - rx * sc) / 2, oy = (H - ry * sc) / 2;
-    tf = (x, y) => [ox + (x - bounds.x0) * sc, oy + (bounds.y1 - y) * sc]; // game y points up
+    let H, imgBox = null;
+    if (radar) {
+      // the radar image is square; world -> image pixel is (x - pos_x) / scale, (pos_y - y) / scale
+      const S = Math.min(W, Math.round(innerHeight * 0.85)), k = S / radar.img.naturalWidth, ox = (W - S) / 2;
+      H = S; imgBox = [ox, 0, S, S];
+      tf = (x, y) => [ox + (x - radar.pos_x) / radar.scale * k, (radar.pos_y - y) / radar.scale * k];
+    } else {
+      const rx = bounds.x1 - bounds.x0 || 1, ry = bounds.y1 - bounds.y0 || 1;
+      const pad = 16;
+      H = Math.min(Math.round((W - 2 * pad) * ry / rx) + 2 * pad, Math.round(innerHeight * 0.78));
+      const sc = Math.min((W - 2 * pad) / rx, (H - 2 * pad) / ry);
+      const ox = (W - rx * sc) / 2, oy = (H - ry * sc) / 2;
+      tf = (x, y) => [ox + (x - bounds.x0) * sc, oy + (bounds.y1 - y) * sc]; // game y points up
+    }
     const dpr = devicePixelRatio || 1;
     canvas.width = W * dpr; canvas.height = H * dpr; canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
     const c = canvas.getContext('2d');
     c.setTransform(dpr, 0, 0, dpr, 0, 0);
     c.clearRect(0, 0, W, H);
-    c.fillStyle = col('--text-3'); c.globalAlpha = 0.22;
-    for (const [x, y] of base) { const [px, py] = tf(x, y); c.fillRect(px - 0.75, py - 0.75, 1.5, 1.5); }
-    c.globalAlpha = 1;
+    if (imgBox) {
+      c.globalAlpha = HM.view === 'heat' ? 0.55 : 0.75; c.drawImage(radar.img, ...imgBox); c.globalAlpha = 1;
+    } else {
+      c.fillStyle = col('--text-3'); c.globalAlpha = 0.22;
+      for (const [x, y] of base) { const [px, py] = tf(x, y); c.fillRect(px - 0.75, py - 0.75, 1.5, 1.5); }
+      c.globalAlpha = 1;
+    }
 
     pts = selected();
     for (const p of pts) [p.px, p.py] = tf(p.x, p.y);
