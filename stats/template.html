@@ -292,6 +292,7 @@ select { font: inherit; color: var(--text); background: var(--surface); border: 
 .rpbar input { width: 100%; accent-color: var(--accent); margin: 0; }
 .rpmarks { position: absolute; left: 0; right: 0; bottom: 0; height: 8px; pointer-events: none; }
 .rpmarks span { position: absolute; bottom: 0; width: 2px; height: 8px; background: var(--text-3); }
+.rpmarks b { position: absolute; bottom: -1px; width: 8px; height: 8px; margin-left: -4px; background: var(--accent); clip-path: polygon(0 0, 50% 50%, 0 100%, 50% 100%, 100% 50%, 50% 0); }
 .rpmarks i { position: absolute; bottom: 0; width: 2px; height: 4px; background: var(--loss); opacity: .7; }
 .rprounds { gap: 6px; }
 .rprb { cursor: pointer; border: 1px solid transparent; font: inherit; font-size: 12px; min-width: 30px; }
@@ -1706,7 +1707,7 @@ function playReplay(rp, radar) {
   $('#app').innerHTML = `
     <div class="crumb"><a href="#/replays">TV</a> / ${esc(mapName(rp.map))}</div>
     <div class="pagehead"><div><h1>${esc(mapName(rp.map))}</h1>
-      <div class="sub">${esc(when.toLocaleDateString('en-US', {weekday: 'long', month: 'long', day: 'numeric'}))} · ${esc(when.toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'}))} · ${fmtClock(dur)} · ${P.length} players${rp.game ? ` · <a href="#/game/${rp.game}" style="color:var(--accent)">game stats →</a>` : ''}</div></div></div>
+      <div class="sub">${esc(when.toLocaleDateString('en-US', {weekday: 'long', month: 'long', day: 'numeric'}))} · ${esc(when.toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'}))} · ${fmtClock(dur)}${(rp.cuts || []).length ? ` <span class="muted" title="Stretches where nobody moved are cut out">(${fmtClock((rp.cuts || []).reduce((s, c) => s + c[1], 0))} idle cut)</span>` : ''} · ${P.length} players${rp.game ? ` · <a href="#/game/${rp.game}" style="color:var(--accent)">game stats →</a>` : ''}</div></div></div>
     <div class="rpwrap">
       <div class="rpmain">
       <div class="card rpstage"><canvas id="rpc"></canvas><div class="rphud" id="rphud"></div></div>
@@ -1734,7 +1735,8 @@ function playReplay(rp, radar) {
   const canvas = $('#rpc'), seek = $('#rpseek');
   // round markers + buttons
   $('#rpmarks').innerHTML = rp.rounds.map((r, i) => `<span style="left:${(r[1] / dur * 100).toFixed(2)}%" title="Round ${i + 1}"></span>`).join('')
-    + rp.kills.map(k => `<i style="left:${(k[0] / dur * 100).toFixed(2)}%"></i>`).join('');
+    + rp.kills.map(k => `<i style="left:${(k[0] / dur * 100).toFixed(2)}%"></i>`).join('')
+    + (rp.cuts || []).map(([tc, gone]) => `<b style="left:${(tc / dur * 100).toFixed(2)}%" title="Skipped ${fmtClock(gone)} with nobody moving"></b>`).join('');
   $('#rprounds').innerHTML = rp.rounds.length
     ? rp.rounds.map((r, i) => `<button class="chip rprb ${r[3] === 'C' ? 'ct' : r[3] === 'T' ? 't' : ''}" data-t="${r[1]}" title="Round ${i + 1}${r[3] !== '-' ? (r[3] === 'C' ? ' · CT won' : ' · T won') : ''}">${i + 1}</button>`).join('')
     : '<span class="muted">No completed rounds in this recording.</span>';

@@ -23,6 +23,7 @@ Replay format (positions are Hammer units, times are seconds from match start):
   bomb                [time, event, player index, x, y, has kit] events: pick drop bp (begin plant)
                       ap (abort plant) plant bd (begin defuse) ad (abort defuse) defuse boom
   blind               [time, victim index, attacker index, seconds] (flashed players)
+  cuts                [time, seconds removed] where idle stretches (nobody moving) were cut out
   players[i].w / .h   weapon held / health, run-length: [[sample, value], ...] (weapon = index into wn)
 """
 import argparse
@@ -38,6 +39,10 @@ TICKRATE = 64
 SAMPLE_TICKS = 32          # two samples a second; the viewer interpolates between them
 MATCH_WINDOW = 6 * 60      # a demo match and a logged game start within 6 minutes = same game
 MIN_SECONDS = 30           # shorter fragments (restarts, map changes) aren't worth a replay
+IDLE_SECONDS = 8           # nobody moving for longer than this gets cut out of the replay...
+KEEP_MARGIN = 2            # ...keeping this much on each side so the cut isn't abrupt
+MOVE_UNITS = 4             # smaller position changes count as standing still
+MIN_ACTIVE_SECONDS = 10    # after trimming, shorter replays are dropped
 SIDE = {2: 'T', 3: 'C'}
 
 
@@ -233,6 +238,65 @@ def resolve_players(p, shots, hurts, deaths, grenades):
     return fixed_shots, hurts, deaths
 
 
+def trim_idle(rep):
+    """Cut stretches where nothing happens (no player moving, shooting, throwing or dying)
+    for longer than IDLE_SECONDS, keeping KEEP_MARGIN on each side; shift every event time."""
+    hz, n = rep['hz'], rep['n']
+    active = [False] * n
+    for pl in rep['players']:
+        xs, ys, _, ss, _, _ = pl['_raw']
+        for k in range(1, n):
+            if ss[k] in 'CT' and abs(xs[k] - xs[k - 1]) + abs(ys[k] - ys[k - 1]) > MOVE_UNITS:
+                active[k] = active[k - 1] = True
+
+    def mark(t0, t1=None):
+        for k in range(max(0, int(t0 * hz)), min(n - 1, int((t0 if t1 is None else t1) * hz)) + 1):
+            active[k] = True
+    for e in rep['kills'] + rep['shots'] + rep['hits'] + rep['bomb'] + rep['blind']:
+        mark(e[0])
+    for g in rep['grenades']:
+        mark(g[2], g[3])  # in flight
+
+    lim, margin = int(IDLE_SECONDS * hz), int(KEEP_MARGIN * hz)
+    cuts, k = [], 0
+    while k < n:
+        if active[k]:
+            k += 1
+            continue
+        j = k
+        while j < n and not active[j]:
+            j += 1
+        if j - k > lim:
+            a = k if k == 0 else k + margin          # idle at the very start: keep only the lead-in
+            b = j if j == n else j - margin          # idle at the very end: drop it all
+            if b - a > 0:
+                cuts.append((a, b))
+        k = j
+    if not cuts:
+        rep['cuts'] = []
+        return
+    keep = [k for k in range(n) if not any(a <= k < b for a, b in cuts)]
+    if len(keep) < 2:
+        rep['cuts'] = []
+        return
+
+    def remap(t):
+        if t is None:
+            return t
+        removed = sum(max(0.0, min(t, b / hz) - a / hz) for a, b in cuts)
+        return round(t - removed, 2)
+    for r in rep['rounds']:
+        r[0], r[1], r[2] = remap(r[0]), remap(r[1]), remap(r[2])
+    for e in rep['kills'] + rep['shots'] + rep['hits'] + rep['bomb'] + rep['blind']:
+        e[0] = remap(e[0])
+    for g in rep['grenades']:
+        g[2], g[3], g[4] = remap(g[2]), remap(g[3]), remap(g[4])
+    for pl in rep['players']:
+        pl['_raw'] = tuple([v[k] for k in keep] for v in pl['_raw'])
+    rep['cuts'] = [[remap(a / hz), round((b - a) / hz, 1)] for a, b in cuts]
+    rep['n'] = len(keep)
+
+
 def load_games(data_dir):
     games = []
     for f in glob.glob(os.path.join(data_dir, '*.json')):
@@ -333,8 +397,7 @@ def convert(path, games):
                     ws[i] = ws[i - 1]
                 if hs[i] is None:
                     hs[i] = hs[i - 1]
-            players.append({'id': pid, 'n': str(rows['name'].iloc[-1]), 'x': delta(xs), 'y': delta(ys), 'a': as_,
-                            's': ''.join(ss), 'w': rle(ws), 'h': rle(hs)})
+            players.append({'id': pid, 'n': str(rows['name'].iloc[-1]), '_raw': (xs, ys, as_, ss, ws, hs)})
         if not players:
             continue
         rounds = []
@@ -421,10 +484,17 @@ def convert(path, games):
         game = min((g for g in games if g[1] == mp and abs((g[2] - start).total_seconds()) <= MATCH_WINDOW),
                    key=lambda g: abs((g[2] - start).total_seconds()), default=None)
         rid = game[0] if game else start.strftime('%Y%m%d-%H%M') + '-' + mp
-        out.append({'id': rid, 'game': game[0] if game else None, 'map': mp,
-                    'start_utc': start.strftime('%Y-%m-%dT%H:%M:%SZ'), 'hz': TICKRATE / SAMPLE_TICKS, 'n': n,
-                    'players': players, 'rounds': rounds, 'kills': kills, 'grenades': nades, 'shots': shots,
-                    'hits': hits, 'wn': wnames, 'bomb': bomb, 'blind': blind})
+        replay = {'id': rid, 'game': game[0] if game else None, 'map': mp,
+                  'start_utc': start.strftime('%Y-%m-%dT%H:%M:%SZ'), 'hz': TICKRATE / SAMPLE_TICKS, 'n': n,
+                  'players': players, 'rounds': rounds, 'kills': kills, 'grenades': nades, 'shots': shots,
+                  'hits': hits, 'wn': wnames, 'bomb': bomb, 'blind': blind}
+        trim_idle(replay)
+        if replay['n'] / replay['hz'] < MIN_ACTIVE_SECONDS:
+            continue  # almost nothing happened
+        for pl in players:  # encode the (trimmed) tracks
+            xs, ys, as_, ss, ws, hs = pl.pop('_raw')
+            pl.update({'x': delta(xs), 'y': delta(ys), 'a': as_, 's': ''.join(ss), 'w': rle(ws), 'h': rle(hs)})
+        out.append(replay)
     return out
 
 
@@ -468,6 +538,7 @@ def main():
                 json.dump(r, fh, ensure_ascii=False, separators=(',', ':'))
             by_id[r['id']] = {'id': r['id'], 'game': r['game'], 'map': r['map'], 'start_utc': r['start_utc'],
                               'dur': round(r['n'] / r['hz']), 'rounds': len(r['rounds']),
+                              'trimmed': round(sum(c[1] for c in r.get('cuts', []))),
                               'players': [pl['n'] for pl in r['players']]}
             print(f'  + {r["id"]}: {len(r["players"])} players, {len(r["rounds"])} rounds, {r["n"] / r["hz"] / 60:.1f} min'
                   + (' (matched to stats)' if r['game'] else ''))

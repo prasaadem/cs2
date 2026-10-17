@@ -5,8 +5,9 @@
    "game": null,
    "map": "de_dust2",
    "start_utc": "2026-10-17T03:52:04Z",
-   "dur": 36,
+   "dur": 22,
    "rounds": 1,
+   "trimmed": 13,
    "players": [
     "prasaadem"
    ]
@@ -16,19 +17,9 @@
    "game": null,
    "map": "de_dust2",
    "start_utc": "2026-10-17T03:54:17Z",
-   "dur": 516,
+   "dur": 39,
    "rounds": 1,
-   "players": [
-    "prasaadem"
-   ]
-  },
-  {
-   "id": "20261017-0409-de_dust2",
-   "game": null,
-   "map": "de_dust2",
-   "start_utc": "2026-10-17T04:09:18Z",
-   "dur": 36,
-   "rounds": 1,
+   "trimmed": 477,
    "players": [
     "prasaadem"
    ]
@@ -38,8 +29,9 @@
    "game": null,
    "map": "de_shortdust",
    "start_utc": "2026-10-17T04:10:05Z",
-   "dur": 34,
+   "dur": 14,
    "rounds": 1,
+   "trimmed": 20,
    "players": [
     "prasaadem"
    ]
@@ -51,6 +43,7 @@
    "start_utc": "2026-10-17T04:20:40Z",
    "dur": 46,
    "rounds": 1,
+   "trimmed": 0,
    "players": [
     "prasaadem"
    ]
@@ -71,9 +64,7 @@
   },
   "auto-20261017-0409-de_dust2-cupcake.dem": {
    "size": 503621,
-   "ids": [
-    "20261017-0409-de_dust2"
-   ]
+   "ids": []
   },
   "auto-20261017-0410-de_shortdust-cupcake.dem": {
    "size": 637348,
