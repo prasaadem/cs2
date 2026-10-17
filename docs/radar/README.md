@@ -7,7 +7,11 @@ For each map, put two files from the game in this folder:
 
 Then run `python stats/build_site.py`. It writes `overviews.json`, and the heatmap draws the map underneath the data. Maps without these files keep the traced layout.
 
-## Where to get them (from your own CS2 install)
+## Automatic: `python stats/extract_radars.py`
+
+If CS2 is installed on this computer, this script finds every played map's radar and overview in your install (official maps and workshop maps) and writes them here. It never modifies the game files. Run `build_site.py` afterwards.
+
+## Manually (from your own CS2 install)
 
 Open `game/csgo/pak01_dir.vpk` in [Source 2 Viewer](https://valveresourceformat.github.io/), then:
 
