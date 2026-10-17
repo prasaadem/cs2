@@ -9,7 +9,7 @@ import glob
 import os
 import re
 
-PARSER_VERSION = 3  # 2: grenades, flashes, purchases, picked-up kills; 3: clutches, trades, bomb, round ends, sides
+PARSER_VERSION = 4  # 2: grenades/flashes/purchases; 3: clutches/trades/bomb/round ends; 4: economy, round-stat extras
 
 # Local time for display / night grouping: US Pacific with US daylight-saving rules.
 STD_OFFSET_HOURS = -8
@@ -72,6 +72,10 @@ PRICES = {
 }
 JSON_KV = re.compile(r'^"(round_number|score_t|score_ct)" : "(\d+)"')
 JSON_PLAYER = re.compile(r'^"player_\d+" : "(.*)"')
+JSON_FIELDS = re.compile(r'^"fields" : "(.*)"')
+DEFAULT_FIELDS = ('accountid,team,money,kills,deaths,assists,dmg,hsp,kdr,adr,mvp,ef,ud,3k,4k,5k,clutchk,'
+                  'firstk,pistolk,sniperk,blindk,bombk,firedmg,uniquek,dinks,chickenk').split(',')
+OTHER_KILL = re.compile(P + r' \[[^\]]*\] killed other "(\w+)<')
 
 KNIVES = ('knife', 'bayonet')
 
@@ -118,6 +122,8 @@ class Match:
         self.recent = []            # this round's kills: [time, killer, killer side, victim]
         self.bomb_dropped = False
         self.plant = '-'
+        self.money = {}             # round index -> {player: money at round start}
+        self.spend = collections.defaultdict(collections.Counter)  # round index -> {player: $ spent}
 
     def start_round(self):
         self.alive = {sid: self.team[sid] for sid in self.roster if sid in self.team}
@@ -161,6 +167,7 @@ def parse_group(files):
     cur = None
     mp = None
     json_buf = None
+    last_json = None
     roster = {}
     for f in files:
         with open(f, encoding='utf-8', errors='replace') as fh:
@@ -174,20 +181,29 @@ def parse_group(files):
 
                 # round_stats JSON blocks span several lines
                 if 'JSON_BEGIN' in msg:
-                    json_buf = {'players': {}}
+                    json_buf = {'players': {}, 'fields': DEFAULT_FIELDS}
                     continue
                 if json_buf is not None:
                     kv = JSON_KV.match(msg)
                     if kv:
                         json_buf[kv.group(1)] = int(kv.group(2))
+                    fm = JSON_FIELDS.match(msg)
+                    if fm:
+                        json_buf['fields'] = [c.strip() for c in fm.group(1).split(',')]
                     pm = JSON_PLAYER.match(msg)
                     if pm:
                         cols = [c.strip() for c in pm.group(1).split(',')]
-                        json_buf['players'][cols[0]] = float(cols[6])
+                        json_buf['players'][cols[0]] = dict(zip(json_buf['fields'], cols))
                     if 'JSON_END' in msg:
+                        last_json = json_buf
                         if cur is not None and cur.game_over is None:
                             r = json_buf.get('score_t', 0) + json_buf.get('score_ct', 0)
                             cur.json = (r, json_buf['players'])
+                            # the block is printed as a round begins: money is what each player starts it with
+                            idx = json_buf.get('round_number', 0) - 1
+                            if idx == len(cur.rounds):
+                                cur.money[idx] = {sid: int(float(row.get('money', 0)))
+                                                  for sid, row in json_buf['players'].items()}
                         json_buf = None
                     continue
 
@@ -200,6 +216,9 @@ def parse_group(files):
                     if cur is not None and cur.game_over is not None:
                         matches.append(cur)
                     cur = Match(mp, t, roster)
+                    # round 1's block is printed just before Match_Start
+                    if last_json and last_json.get('round_number') == 1:
+                        cur.money[0] = {sid: int(float(row.get('money', 0))) for sid, row in last_json['players'].items()}
                     continue
                 sw = SWITCH.search(msg)
                 if sw:
@@ -223,6 +242,14 @@ def parse_group(files):
                     cur.start_round()
                     continue
 
+                ok = OTHER_KILL.search(msg)
+                if ok:
+                    cur.see(*ok.groups()[:3])
+                    if ok.group(4) == 'chicken':
+                        cur.stats[ok.group(2)]['chick'] += 1
+                    elif ok.group(4).startswith('func_breakable'):
+                        cur.stats[ok.group(2)]['brk'] += 1
+                    continue
                 k = KILL.search(msg)
                 if k:
                     an, aid, at, vn, vid, vt, w, rest = k.groups()
@@ -303,6 +330,7 @@ def parse_group(files):
                 if pu:
                     cur.see(*pu.groups()[:3])
                     cur.bought[pu.group(2)][pu.group(4)] += 1
+                    cur.spend[len(cur.rounds)][pu.group(2)] += PRICES.get(pu.group(4), 0)
                     continue
                 bl = BLIND.search(msg)
                 if bl:
@@ -407,7 +435,15 @@ def build_game(m):
             if n:
                 mk[min(n, 5)] += 1
         dmg_rounds = sum(1 for i in range(min(json_rounds, nrounds)) if sid in m.present[i])
-        dmg = json_dmg.get(sid)
+        row = json_dmg.get(sid)
+        dmg = float(row['dmg']) if row and row.get('dmg') else None
+        extra = {}
+        if row:
+            for key, field in (('ud', 'ud'), ('fdmg', 'firedmg'), ('dinks', 'dinks'), ('uniq', 'uniquek')):
+                try:
+                    extra[key] = int(float(row[field]))
+                except (KeyError, ValueError):
+                    pass
         team = m.team[sid]
         players.append({
             'id': sid, 'n': m.names[sid], 'team': team,
@@ -435,6 +471,10 @@ def build_game(m):
             'trade': s['trade'], 'traded': s['traded'],
             'bspawn': s['bspawn'], 'bpick': s['bpick'], 'bdrop': s['bdrop'], 'pA': s['pA'], 'pB': s['pB'],
             'sd': ''.join(m.sides[i].get(sid, '.') for i in range(nrounds)),
+            'chick': s['chick'], 'brk': s['brk'],
+            'mo': [m.money.get(i, {}).get(sid) for i in range(nrounds)],
+            'spr': [m.spend[i][sid] for i in range(nrounds)],
+            **extra,
             'pkw': dict(m.picked[sid].most_common()) if economy else {},
         })
     players.sort(key=lambda p: (-p['rt'], -p['k']))

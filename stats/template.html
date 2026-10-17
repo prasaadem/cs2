@@ -339,7 +339,9 @@ function rating(k, d, r, k1, k2, k3, k4, k5) {
   return (k / r / 0.679 + 0.7 * Math.max(r - d, 0) / r / 0.317 + (k1 + 4 * k2 + 9 * k3 + 16 * k4 + 25 * k5) / r / 1.277) / 2.7;
 }
 
-const SUM_KEYS = ['r','k','d','a','fa','hs','tk','sui','ek','ed','k1','k2','k3','k4','k5','awp','knife','zeus','nade','wb','ns','smoke','blindk','plant','defuse','gh','gf','gs','gm','gd','fe','ft','fself','fbd','fdur','buy','spent','ck','trade','traded','bspawn','bpick','bdrop','pA','pB'];
+const SUM_KEYS = ['r','k','d','a','fa','hs','tk','sui','ek','ed','k1','k2','k3','k4','k5','awp','knife','zeus','nade','wb','ns','smoke','blindk','plant','defuse','gh','gf','gs','gm','gd','fe','ft','fself','fbd','fdur','buy','spent','ck','trade','traded','bspawn','bpick','bdrop','pA','pB','chick','brk','ud','fdmg','dinks','uniq'];
+// $ spent in a round: eco < 1000 <= force < 3500 <= full; under 1000 while holding 4000+ = kept weapons / saved
+const ECO_MAX = 1000, FULL_MIN = 3500, SAVE_MONEY = 4000;
 
 // weapon classes
 const CATS = {
@@ -367,7 +369,8 @@ function aggregate(gs) {
     for (const p of g.p) {
       let s = by.get(p.id);
       if (!s) { s = {id: p.id, n: NAMES[p.id], g: 0, w: 0, l: 0, mvp: 0, dmg: 0, dmgR: 0, nights: new Set(), maps: new Set(), wp: {}, wh: {}, bi: {}, pkw: {}, pk: 0, pkG: 0,
-        ca: 0, cw: 0, c1a: 0, c1w: 0, c2a: 0, c2w: 0, c3a: 0, c3w: 0, cbest: 0, ctR: 0, ctW: 0, tR: 0, tW: 0, pR: 0, pW: 0}; SUM_KEYS.forEach(k => s[k] = 0); by.set(p.id, s); }
+        ca: 0, cw: 0, c1a: 0, c1w: 0, c2a: 0, c2w: 0, c3a: 0, c3w: 0, cbest: 0, ctR: 0, ctW: 0, tR: 0, tW: 0, pR: 0, pW: 0,
+        ecoR: 0, ecoW: 0, forceR: 0, forceW: 0, fullR: 0, fullW: 0, saveR: 0, saveW: 0, saves: 0, moneySum: 0, moneyN: 0}; SUM_KEYS.forEach(k => s[k] = 0); by.set(p.id, s); }
       s.g++; s.nights.add(g.night); s.maps.add(g.map);
       if (p.res === 'W') s.w++; else if (p.res === 'L') s.l++;
       if (g.mvp === p.id) s.mvp++;
@@ -398,6 +401,26 @@ function roundStats(s, g, p) {
     else if (c === 'T') { s.tR++; s.tW += g.rounds[i] === 'T'; }
   }
   for (const i of g.pistol || []) if (sd[i] === 'C' || sd[i] === 'T') { s.pR++; s.pW += g.rounds[i] === sd[i]; }
+  // economy: buy type per round played (pistol rounds excluded) and its win rate
+  if (p.spr) for (let i = 0; i < sd.length; i++) {
+    if (sd[i] !== 'C' && sd[i] !== 'T') continue;
+    const m = p.mo ? p.mo[i] : null;
+    if (m != null) { s.moneySum += m; s.moneyN++; }
+    if ((g.pistol || []).includes(i)) continue;
+    const sp = p.spr[i] || 0, won = g.rounds[i] === sd[i] ? 1 : 0;
+    // low spend with money in the bank = kept last round's weapons or saved, not an eco
+    const t = sp < ECO_MAX ? (m != null && m >= SAVE_MONEY ? 'save' : 'eco') : sp < FULL_MIN ? 'force' : 'full';
+    s[t + 'R']++; s[t + 'W'] += won;
+    if (t === 'save') s.saves++;
+  }
+}
+function econDerive(s) {
+  s.avgMoney = s.moneyN ? s.moneySum / s.moneyN : null;
+  s.spr = s.r ? (s.spent || 0) / s.r : null;
+  for (const t of ['eco', 'force', 'full', 'save']) s[t + 'Wr'] = s[t + 'R'] ? s[t + 'W'] / s[t + 'R'] : null;
+  let sn = 0, pi = 0;
+  for (const [w, c] of Object.entries(s.wp || s.w || {})) { const k = weaponCat(w); if (k === 'Sniper') sn += c; else if (k === 'Pistol') pi += c; }
+  s.snk = sn; s.pik = pi;
 }
 function derive(s) {
   s.kd = s.d ? s.k / s.d : s.k;
@@ -422,6 +445,7 @@ function derive(s) {
   s.ctwr = s.ctR ? s.ctW / s.ctR : 0; s.twr = s.tR ? s.tW / s.tR : 0;
   s.rwr = (s.ctR + s.tR) ? (s.ctW + s.tW) / (s.ctR + s.tR) : 0;
   s.pwr = s.pR ? s.pW / s.pR : 0;
+  econDerive(s);
   return s;
 }
 // per-game player row with derived values
@@ -436,6 +460,8 @@ function prow(g, p) {
   Object.assign(s, {ca: 0, cw: 0, c1a: 0, c1w: 0, c2a: 0, c2w: 0, c3a: 0, c3w: 0, cbest: 0, ctR: 0, ctW: 0, tR: 0, tW: 0, pR: 0, pW: 0});
   roundStats(s, g, p);
   s.cwr = s.ca ? s.cw / s.ca : 0; s.tdr = p.d ? (p.traded || 0) / p.d : 0; s.carry = (p.bspawn || 0) + (p.bpick || 0);
+  Object.assign(s, {ecoR: 0, ecoW: 0, forceR: 0, forceW: 0, fullR: 0, fullW: 0, saveR: 0, saveW: 0, saves: 0, moneySum: 0, moneyN: 0});
+  const keepSpr = s.spr; roundStats(s, g, p); s.wp = p.w; econDerive(s); s.sprList = keepSpr;
   return s;
 }
 
@@ -739,6 +765,22 @@ function viewGame(id) {
     {k: 'team', l: 'Side', cls: 'l', f: v => `<span class="chip ${v.toLowerCase()}">${v}</span>`},
     R.clutch, R.best, R.ck, R.trade, {k: 'traded', l: 'Traded deaths'}, C.entry, R.carry, R.bdrop, R.pA, R.pB, R.defuse,
   ], rows, {sort: 'cw'});
+  if (g.p.some(p => p.spr)) {
+    const sides = ['C', 'T'].map(sd => {
+      const cells = [...g.rounds].map((w, i) => {
+        const ps = g.p.filter(p => (p.sd || '')[i] === sd);
+        if (!ps.length) return '<td class="muted">–</td>';
+        const spend = ps.reduce((a, p) => a + ((p.spr || [])[i] || 0), 0) / ps.length;
+        const money = ps.filter(p => (p.mo || [])[i] != null);
+        const mAvg = money.length ? money.reduce((a, p) => a + p.mo[i], 0) / money.length : null;
+        const type = (g.pistol || []).includes(i) ? 'pistol' : spend < ECO_MAX ? 'eco' : spend < FULL_MIN ? 'force' : 'full';
+        return `<td class="${w === sd ? 'strong' : 'muted'}" data-tip="Round ${i + 1} · ${sd === 'C' ? 'CT' : 'T'} ${w === sd ? 'won' : 'lost'}<br>${type} · avg spend $${Math.round(spend).toLocaleString()}${mAvg != null ? `<br>avg money $${Math.round(mAvg).toLocaleString()}` : ''}">${type === 'pistol' ? 'P' : '$' + (spend / 1000).toFixed(1) + 'k'}</td>`;
+      }).join('');
+      return `<tr><td class="l"><span class="chip ${sd === 'C' ? 'ct' : 't'}">${sd === 'C' ? 'CT' : 'T'}</span></td>${cells}</tr>`;
+    }).join('');
+    $('#app').insertAdjacentHTML('beforeend', `<section><h2>Economy by round</h2><div class="tblwrap"><table><thead><tr><th class="l nosort">Avg spend</th>${[...g.rounds].map((_, i) => `<th class="nosort">${i + 1}</th>`).join('')}</tr></thead><tbody>${sides}</tbody></table></div>
+      <div class="note">Average $ spent per player on each side; bold = that side won the round. P = pistol round. Hover for buy type and average money.</div></section>`);
+  }
   $('#app').insertAdjacentHTML('beforeend', `<section><h2>Utility &amp; economy</h2><div id="gu"></div>${g.v >= 2 ? '' : '<div class="note">This game was parsed before utility tracking; it fills in after the next daily update.</div>'}</section>`);
   mountTable($('#gu'), [
     {k: 'n', l: 'Player', cls: 'l pname', asc: true, f: (v, r) => plink(r.id, v)},
@@ -831,6 +873,7 @@ function viewPlayer(id) {
       ${tile('Multi-kills', me.mk, `${me.k3} × 3K · ${me.k4} × 4K · ${me.k5} aces`)}
       ${tile('Clutches', me.ca ? `${me.cw}/${me.ca}` : '–', me.cbest ? `best: 1v${me.cbest} · ${me.ck} clutch kills` : 'none won yet')}
       ${tile('Trades', me.trade, `${pct(me.tdr)} of deaths traded · round win ${pct(me.rwr)}`)}
+      ${tile('Economy', me.avgMoney == null ? '–' : '$' + Math.round(me.avgMoney).toLocaleString(), `avg money · full buys won ${me.fullR ? pct(me.fullWr) : '–'} · ${me.saves} saves`)}
       ${tile('Grenades thrown', me.gt, `${me.fe} enemies flashed · ${me.ft} teammates`)}
       ${tile('Bought', me.buy, `≈ $${Math.round(me.spent).toLocaleString()} spent · ${me.pk} picked-up kills`)}
       ${me.fav ? tile('Favourite weapon', esc(weaponName(me.fav)), `${me.favK} kills · ${pct(me.favShare)} of all`) : ''}
@@ -990,6 +1033,14 @@ const AWARDS = [
   {k: 'trade', l: 'Trader', d: 'Trade kills'},
   {k: 'carry', l: 'Bomb mule', d: 'Times carrying the bomb'},
   {k: 'bdrop', l: 'Butterfingers', d: 'Bomb drops (including on death)'},
+  {k: 'chick', l: 'Chicken hunter', d: 'Chickens killed'},
+  {k: 'brk', l: 'Vandal', d: 'Windows, vents and other breakables destroyed'},
+  {k: 'dinks', l: 'Dink collector', d: 'Headshots that didn\'t kill (server stats)'},
+  {k: 'snk', l: 'Sniper', d: 'Sniper rifle kills'},
+  {k: 'pik', l: 'Pistolero', d: 'Pistol kills'},
+  {k: 'ecoW', l: 'Eco warrior', d: 'Eco rounds won'},
+  {k: 'saves', l: 'Hoarder', d: 'Rounds with $4,000+ where they spent under $1,000'},
+  {k: 'ud', l: 'Utility damage', d: 'HE + molotov damage (server stats)'},
 ];
 function viewAwards() {
   pageTitle('Awards');
@@ -1005,7 +1056,7 @@ function viewAwards() {
     }).join('')}</div>
     <section><h2>Playstyle table</h2><div id="ps"><div class="filters"></div><div class="t"></div></div>
       <div class="note">Totals across all games. Hover a column name for what it counts.</div></section>`;
-  const cols = [C.player, C.g, ...AWARDS.filter(a => !['d', 'a', 'awp', 'k4', 'k5', 'spent', 'gt', 'fe', 'ft', 'fself', 'fbd', 'pk', 'cw', 'trade', 'carry', 'bdrop'].includes(a.k))
+  const cols = [C.player, C.g, ...AWARDS.filter(a => !['d', 'a', 'awp', 'k4', 'k5', 'spent', 'gt', 'fe', 'ft', 'fself', 'fbd', 'pk', 'cw', 'trade', 'carry', 'bdrop', 'snk', 'pik', 'ecoW', 'saves', 'ud'].includes(a.k))
     .map(a => ({k: a.k, l: a.d.replace(/ \(.*\)/, '').replace(/^Kills /, '').replace(/ kills$/, ''), t: `${a.l}: ${a.d}`, f: v => v ? v : '<span class="muted">0</span>'}))];
   const draw = mg => mountTable($('#ps .t'), cols, rows.filter(r => r.g >= mg), {sort: 'wb', rank: true});
   minGamesFilter($('#ps .filters'), rows, 1, draw);
@@ -1033,8 +1084,17 @@ const U = {
   pkTop: {k: 'pkTop', l: 'Top pickup', cls: 'l', sort: false, f: (v, r) => { const t = topWeapons(r.pkw || {}, 1)[0]; return t ? `${esc(weaponName(t[0]))} <span class="muted">${t[1]}</span>` : '–'; }},
   biTop: {k: 'biTop', l: 'Most bought', cls: 'l', sort: false, f: (v, r) => { const t = topWeapons(r.bi || {}, 1)[0]; return t ? `${esc(weaponName(t[0]))} <span class="muted">${t[1]}</span>` : '–'; }},
 };
-const UTIL_COLS = [U.gt, U.gh, U.gf, U.gs, U.gm, U.gd, U.gpr, U.fe, U.fdur, U.ft, U.fself, U.fbd, U.fa, U.nade];
-const ECON_COLS = [U.buy, U.spent, U.spg, U.spk, U.biTop, U.pk, U.pkTop];
+const buyCol = (t, l) => ({k: t + 'Wr', l, t: `${l} rounds won / played (pistol rounds excluded)`, f: (v, r) => r[t + 'R'] ? `${r[t + 'W']}/${r[t + 'R']} <span class="muted">${pct(v)}</span>` : '<span class="muted">–</span>'});
+Object.assign(U, {
+  ud: {k: 'ud', l: 'Util dmg', t: 'Damage dealt with HE grenades and molotovs (server stats, excludes each game\'s last round)'},
+  fdmg: {k: 'fdmg', l: 'Fire dmg', t: 'Damage dealt with molotovs/incendiaries (server stats)'},
+  avgMoney: {k: 'avgMoney', l: 'Avg money', t: 'Average money at the start of a round', f: v => v == null ? '–' : '$' + Math.round(v).toLocaleString()},
+  sprr: {k: 'spr', l: 'Spend/rnd', t: 'Estimated $ spent per round played', f: v => v == null ? '–' : '$' + Math.round(v).toLocaleString()},
+  eco: buyCol('eco', 'Eco'), force: buyCol('force', 'Force'), full: buyCol('full', 'Full buy'),
+  saves: buyCol('save', 'Kept/saved'),
+});
+const UTIL_COLS = [U.gt, U.gh, U.gf, U.gs, U.gm, U.gd, U.gpr, U.fe, U.fdur, U.ft, U.fself, U.fbd, U.fa, U.nade, U.ud, U.fdmg];
+const ECON_COLS = [U.avgMoney, U.sprr, U.eco, U.force, U.full, U.saves, U.spent, U.spk, U.biTop, U.pk, U.pkTop];
 
 function viewUtility(night) {
   const all = games();
@@ -1066,8 +1126,8 @@ function viewUtility(night) {
     </div>
     ${old ? `<div class="note">${old} game${old > 1 ? 's' : ''} parsed before utility tracking show 0 here until the next daily update re-reads their logs.</div>` : ''}
     <section><h2>Grenades &amp; flashes</h2><div id="ut"><div class="filters"></div><div class="t"></div></div></section>
-    <section><h2>Purchases &amp; pickups</h2><div id="et"><div class="filters"></div><div class="t"></div></div>
-      <div class="note">Spent is estimated from CS2 list prices; armor, kits and dropped-for-teammates buys can't be told apart in the logs. Picked-up kills are kills with a weapon the player never bought that game (spawn pistols excluded, aim maps skipped).</div></section>
+    <section><h2>Economy, purchases &amp; pickups</h2><div id="et"><div class="filters"></div><div class="t"></div></div>
+      <div class="note">Buy types use what a player spent in the round: eco under $1,000 with less than $4,000 in the bank, kept/saved under $1,000 with $4,000+ (usually kept last round's weapons), force $1,000–3,499, full buy $3,500+ (armor isn't logged, so real spend is a bit higher). Spent is estimated from CS2 list prices; armor, kits and dropped-for-teammates buys can't be told apart in the logs. Picked-up kills are kills with a weapon the player never bought that game (spawn pistols excluded, aim maps skipped).</div></section>
     <section class="grid3">
       <div class="card pad"><h2>Grenades by type</h2>${hbars(Object.entries(thrown).map(([l, v]) => ({label: l, value: v, tip: `<b>${l}</b><br>${v} thrown`})))}</div>
       <div class="card pad"><h2>Most bought</h2>${hbars(topWeapons(bi, 12).map(([w, c]) => ({label: weaponName(w), value: c, tip: `<b>${esc(weaponName(w))}</b><br>bought ${c}×`})))}</div>
