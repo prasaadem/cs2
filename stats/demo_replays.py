@@ -16,7 +16,9 @@ Replay format (positions are Hammer units, times are seconds from match start):
   players[i].s        one char per sample: C/T alive, c/t dead, . not on the server
   rounds              [start, freeze end, end, winner C/T/-, reason]
   kills               [time, killer id, victim id, weapon, headshot, kx, ky, vx, vy]
-  nades               [time, s=smoke / m=molotov, x, y, duration]
+  grenades            [type s/m/h/f/d, thrower id, thrown, landed, effect ends, path] where path is
+                      x,y pairs every 1/16 s from the throw to the landing (delta-encoded)
+  shots               [time, player index] for every bullet fired
 """
 import argparse
 import datetime as dt
@@ -69,6 +71,55 @@ def delta(vals):
     return out
 
 
+NOT_GUNS = ('knife', 'grenade', 'flashbang', 'molotov', 'decoy', 'incgrenade', 'c4', 'taser', 'bayonet')
+PROJECTILE = {'CSmokeGrenadeProjectile': 's', 'CMolotovProjectile': 'm', 'CHEGrenadeProjectile': 'h',
+              'CFlashbangProjectile': 'f', 'CDecoyProjectile': 'd'}
+FLIGHT_TICKS = 4           # grenade paths are sampled 16 times a second
+EFFECT_SECONDS = {'s': 20, 'm': 7, 'h': 0.5, 'f': 0.4, 'd': 15}  # fallback when the demo has no end event
+
+
+def grenade_flights(p):
+    """Each thrown grenade: (type, thrower steamid64, thrown tick, landed tick, effect-end tick, [(x, y), ...])."""
+    try:
+        g = p.parse_grenades()
+    except Exception:  # noqa: BLE001
+        return []
+    if not len(g):
+        return []
+    g = g[g['grenade_type'].isin(PROJECTILE)].dropna(subset=['x', 'y'])
+    smoke_pop = {int(e['entityid']): int(e['tick']) for e in events(p, 'smokegrenade_detonate')}
+    smoke_end = {int(e['entityid']): int(e['tick']) for e in events(p, 'smokegrenade_expired')}
+    fire_start = [(int(e['tick']), int(e['entityid'])) for e in events(p, 'inferno_startburn')]
+    fire_end = {int(e['entityid']): int(e['tick']) for e in events(p, 'inferno_expire')}
+    out = []
+    for (gtype, eid), rows in g.groupby(['grenade_type', 'grenade_entity_id']):
+        kind, eid = PROJECTILE[gtype], int(eid)
+        rows = rows.sort_values('tick')
+        t_throw = int(rows['tick'].iloc[0])
+        if kind == 's' and eid in smoke_pop:
+            t_land = smoke_pop[eid]                     # the projectile lingers in the smoke afterwards
+        else:
+            t_land = int(rows['tick'].iloc[-1])         # molotov / HE / flash projectiles end where they go off
+        fl = rows[rows['tick'] <= t_land]
+        fl = fl[((fl['tick'] - t_throw) % FLIGHT_TICKS == 0) | (fl['tick'] == fl['tick'].max())]
+        path = [(int(round(x)), int(round(y))) for x, y in zip(fl['x'], fl['y'])]
+        if not path:
+            continue
+        if kind == 's':
+            t_end = smoke_end.get(eid)
+        elif kind == 'm':
+            fire = next((fe for ft, fe in fire_start if 0 <= ft - t_land <= 8), None)
+            t_end = fire_end.get(fire) if fire is not None else None
+            if fire is None:
+                kind = 'mx'  # landed somewhere it couldn't burn (e.g. extinguished in smoke)
+        else:
+            t_end = None
+        if t_end is None:
+            t_end = t_land + int(EFFECT_SECONDS.get(kind, 0.3) * TICKRATE)
+        out.append((kind, str(rows['steamid'].iloc[0]), t_throw, t_land, t_end, path))
+    return out
+
+
 def load_games(data_dir):
     games = []
     for f in glob.glob(os.path.join(data_dir, '*.json')):
@@ -88,8 +139,9 @@ def convert(path, games):
     freeze = sorted(int(e['tick']) for e in events(p, 'round_freeze_end'))
     rends = sorted(events(p, 'round_end'), key=lambda e: e['tick'])
     deaths = events(p, 'player_death', player=['X', 'Y'])
-    smokes = events(p, 'smokegrenade_detonate')
-    mollies = events(p, 'inferno_startburn')
+    grenades = grenade_flights(p)
+    shots_all = [(int(e['tick']), str(e.get('user_steamid') or ''))
+                 for e in events(p, 'weapon_fire') if not str(e.get('weapon', '')).endswith(NOT_GUNS)]
     # a match begins at the server's restart/new-match events; otherwise the whole demo is one match
     starts = sorted({int(e['tick']) for n in ('begin_new_match', 'round_announce_match_start') for e in events(p, n)})
     ticks = p.parse_ticks(['X', 'Y', 'yaw', 'is_alive', 'team_num'])
@@ -154,15 +206,23 @@ def convert(path, games):
                           1 if e.get('headshot') else 0,
                           int(num(e.get('attacker_X'), num(e.get('user_X')))), int(num(e.get('attacker_Y'), num(e.get('user_Y')))),
                           int(num(e.get('user_X'))), int(num(e.get('user_Y')))])
-        nades = [[sec(int(e['tick'])), kind, int(num(e.get('x'), 0)), int(num(e.get('y'), 0)), dur]
-                 for evs, kind, dur in ((smokes, 's', 18), (mollies, 'm', 7)) for e in evs if a <= int(e['tick']) < b]
+        acct = lambda sid: str(int(sid) - 76561197960265728) if sid and sid.isdigit() and int(sid) > 76561197960265728 else None  # noqa: E731
+        nades = []
+        for kind, sid, t_throw, t_land, t_end, path in grenades:
+            if not a <= t_throw < b:
+                continue
+            flat = [c for xy in path for c in xy]
+            nades.append([kind, acct(sid), sec(t_throw), sec(t_land), sec(t_end),
+                          [v for pair in zip(delta(flat[0::2]), delta(flat[1::2])) for v in pair]])
+        pidx = {pl['id']: i for i, pl in enumerate(players)}
+        shots = [[sec(tk), pidx[acct(sid)]] for tk, sid in shots_all if a <= tk < b and acct(sid) in pidx]
         start = t0 + dt.timedelta(seconds=a / TICKRATE)
         game = min((g for g in games if g[1] == mp and abs((g[2] - start).total_seconds()) <= MATCH_WINDOW),
                    key=lambda g: abs((g[2] - start).total_seconds()), default=None)
         rid = game[0] if game else start.strftime('%Y%m%d-%H%M') + '-' + mp
         out.append({'id': rid, 'game': game[0] if game else None, 'map': mp,
                     'start_utc': start.strftime('%Y-%m-%dT%H:%M:%SZ'), 'hz': TICKRATE / SAMPLE_TICKS, 'n': n,
-                    'players': players, 'rounds': rounds, 'kills': kills, 'nades': nades})
+                    'players': players, 'rounds': rounds, 'kills': kills, 'grenades': nades, 'shots': shots})
     return out
 
 

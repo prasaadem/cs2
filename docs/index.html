@@ -1667,6 +1667,16 @@ function playReplay(rp, radar) {
   });
   const dur = (rp.n - 1) / rp.hz;
   const when = utcLocal(rp.start_utc);
+  // grenades: [type, thrower, thrown, landed, effect ends, delta-encoded x,y path at 16/s]
+  const G = (rp.grenades || []).map(([kind, by, t0, t1, t2, d]) => {
+    const pts = []; let x = 0, y = 0;
+    for (let i = 0; i + 1 < d.length; i += 2) { x += d[i]; y += d[i + 1]; pts.push([x, y]); }
+    return {kind, by, t0, t1, t2, pts};
+  }).filter(g => g.pts.length);
+  // older replays only stored where smokes and fires were
+  for (const [t0, kind, x, y, d] of rp.nades || []) G.push({kind, by: null, t0, t1: t0, t2: t0 + d, pts: [[x, y]]});
+  const NADE_COL = {s: '#b9b9b9', m: '#f07a2e', mx: '#f07a2e', h: '#e5484d', f: '#ffffff', d: '#c9b37a'};
+  const ease = u => 1 - Math.pow(1 - Math.min(1, Math.max(0, u)), 3);
   const st = {t: rp.rounds.length ? rp.rounds[0][1] : 0, playing: false, speed: 1, focus: new Set(), trails: true, names: true};
 
   $('#app').innerHTML = `
@@ -1686,7 +1696,7 @@ function playReplay(rp, radar) {
       <div class="rprow rprounds" id="rprounds"></div>
       <div class="rprow"><label class="toggle"><input type="checkbox" id="rptrail" checked><span>Trails</span></label>
         <label class="toggle"><input type="checkbox" id="rpnames" checked><span>Names</span></label>
-        <span class="legend" style="margin:0"><span><i style="background:var(--ct)"></i>CT</span><span><i style="background:var(--t)"></i>T</span><span><i style="background:#9a9a9a"></i>smoke</span><span><i style="background:#e8743b"></i>fire</span></span></div>
+        <span class="legend" style="margin:0"><span><i style="background:var(--ct)"></i>CT</span><span><i style="background:var(--t)"></i>T</span><span><i style="background:#b9b9b9"></i>smoke</span><span><i style="background:#f07a2e"></i>fire</span><span><i style="background:#e5484d"></i>HE</span><span><i style="background:#fff;box-shadow:inset 0 0 0 1px var(--line)"></i>flash</span><span><i style="background:#ffe27a"></i>shots</span></span></div>
     </div>
       </div>
       <div class="rpside">
@@ -1762,13 +1772,7 @@ function playReplay(rp, radar) {
     c.clearRect(0, 0, W, H);
     if (radar) { c.globalAlpha = 0.85; c.drawImage(radar.img, (W - H) / 2, 0, H, H); c.globalAlpha = 1; }
     const t = st.t;
-    // smokes and fires active now
-    for (const [t0, kind, x, y, d] of rp.nades) {
-      if (t < t0 || t > t0 + d) continue;
-      const [px, py] = tf(x, y), r = Math.max(6, (kind === 's' ? 144 : 120) * scale);
-      c.beginPath(); c.arc(px, py, r, 0, 7);
-      c.fillStyle = kind === 's' ? 'rgba(170,170,170,.55)' : 'rgba(232,116,59,.45)'; c.fill();
-    }
+    drawGrenades(c, t);
     // trails
     if (st.trails) {
       for (const p of P) {
@@ -1786,14 +1790,7 @@ function playReplay(rp, radar) {
         c.strokeStyle = col(p.s[k1] && p.s[k1].toUpperCase() === 'C' ? '--ct' : '--t'); c.globalAlpha = st.focus.size ? 0.9 : 0.35; c.lineWidth = st.focus.size ? 2.5 : 1.5; c.stroke(); c.globalAlpha = 1;
       }
     }
-    // recent kills: a fading line from killer to victim
-    for (const k of rp.kills) {
-      const age = t - k[0];
-      if (age < 0 || age > 2.5) continue;
-      const [kx, ky] = tf(k[5], k[6]), [vx, vy] = tf(k[7], k[8]);
-      c.globalAlpha = 1 - age / 2.5; c.strokeStyle = '#fff'; c.lineWidth = 1.5; c.setLineDash([4, 3]);
-      c.beginPath(); c.moveTo(kx, ky); c.lineTo(vx, vy); c.stroke(); c.setLineDash([]); c.globalAlpha = 1;
-    }
+    drawShots(c, t);
     // players
     const hp = {};
     for (const p of P) {
@@ -1818,6 +1815,7 @@ function playReplay(rp, radar) {
         c.fillStyle = '#fff'; c.fillText(p.n, px, py - r - 6);
       }
     }
+    drawDeaths(c, t, col);
     // HUD, controls, side panel
     const ri = rp.rounds.findIndex(r => t >= r[0] && t <= r[2] + 4);
     const done = rp.rounds.filter(r => r[2] <= t);
@@ -1837,6 +1835,113 @@ function playReplay(rp, radar) {
     const name = id => (P.find(p => p.id === id) || {}).n || '?';
     const feed = rp.kills.filter(k => k[0] <= t && k[0] > t - 12).slice(-6).reverse();
     $('#rpfeed').innerHTML = feed.length ? feed.map(k => `<div><b>${esc(k[1] ? name(k[1]) : 'world')}</b> <span class="muted">${esc(weaponName(k[3]))}${k[4] ? ' · HS' : ''}</span> <b>${esc(name(k[2]))}</b></div>`).join('') : '<span class="muted">No recent kills</span>';
+  }
+
+  function pathAt(pts, u) {
+    // u in [0, 1] along the flight; pts are 1/16 s apart
+    const f = u * (pts.length - 1), i = Math.floor(f), j = Math.min(pts.length - 1, i + 1), w = f - i;
+    return [pts[i][0] + (pts[j][0] - pts[i][0]) * w, pts[i][1] + (pts[j][1] - pts[i][1]) * w, f];
+  }
+  function drawGrenades(c, t) {
+    for (const g of G) {
+      if (t < g.t0 || t > g.t2 + 1.5) continue;
+      const col = NADE_COL[g.kind] || '#ddd';
+      const flying = t < g.t1 && g.pts.length > 1;
+      const u = g.t1 > g.t0 ? Math.min(1, (t - g.t0) / (g.t1 - g.t0)) : 1;
+      // trail: dotted arc behind the grenade, fading out after it lands
+      const trailA = flying ? 0.85 : Math.max(0, 1 - (t - g.t1) / 1.2) * 0.6;
+      if (trailA > 0 && g.pts.length > 1) {
+        const [hx, hy, f] = pathAt(g.pts, u);
+        c.save(); c.globalAlpha = trailA; c.strokeStyle = col; c.lineWidth = 1.5; c.setLineDash([2, 4]);
+        c.beginPath();
+        for (let i = 0; i <= Math.floor(f); i++) { const [px, py] = tf(g.pts[i][0], g.pts[i][1]); if (i) c.lineTo(px, py); else c.moveTo(px, py); }
+        const [qx, qy] = tf(hx, hy); c.lineTo(qx, qy); c.stroke(); c.restore();
+      }
+      if (flying) {
+        const [hx, hy] = pathAt(g.pts, u), [px, py] = tf(hx, hy);
+        c.beginPath(); c.arc(px, py, 3.5, 0, 7); c.fillStyle = col; c.fill();
+        c.lineWidth = 1; c.strokeStyle = 'rgba(0,0,0,.6)'; c.stroke();
+        continue;
+      }
+      if (t > g.t2) continue;
+      const [lx, ly] = g.pts[g.pts.length - 1], [px, py] = tf(lx, ly), age = t - g.t1, left = g.t2 - t;
+      if (g.kind === 's') {
+        // smoke blooms over ~1s, holds, thins out over its last 2s
+        const R = Math.max(8, 144 * scale) * (0.35 + 0.65 * ease(age / 1.1)), a = 0.62 * Math.min(1, left / 2);
+        const gr = c.createRadialGradient(px, py, R * 0.2, px, py, R);
+        gr.addColorStop(0, 'rgba(205,205,205,' + a + ')'); gr.addColorStop(0.75, 'rgba(170,170,170,' + (a * 0.85) + ')'); gr.addColorStop(1, 'rgba(160,160,160,0)');
+        c.fillStyle = gr; c.beginPath(); c.arc(px, py, R, 0, 7); c.fill();
+      } else if (g.kind === 'm') {
+        // fire spreads over ~0.6s and flickers
+        const R = Math.max(7, 120 * scale) * ease(age / 0.6), a = Math.min(1, left / 1);
+        for (let k = 0; k < 7; k++) {
+          const ang = k * 0.9 + t * 2.3, rr = Math.max(1, R * (0.45 + 0.25 * Math.sin(t * 9 + k * 1.7)));
+          const fx = px + Math.cos(ang) * R * 0.45, fy = py + Math.sin(ang) * R * 0.45;
+          const gr = c.createRadialGradient(fx, fy, 0, fx, fy, rr);
+          gr.addColorStop(0, 'rgba(255,190,80,' + (0.55 * a) + ')'); gr.addColorStop(1, 'rgba(232,90,30,0)');
+          c.fillStyle = gr; c.beginPath(); c.arc(fx, fy, rr, 0, 7); c.fill();
+        }
+      } else if (g.kind === 'h' || g.kind === 'f') {
+        // HE: red-orange shockwave; flash: white pop
+        const life = g.kind === 'h' ? 0.6 : 0.45, v = age / life;
+        if (v > 1) continue;
+        const R = Math.max(10, (g.kind === 'h' ? 350 : 250) * scale) * ease(v);
+        c.save(); c.globalAlpha = 1 - v;
+        c.fillStyle = g.kind === 'h' ? 'rgba(255,120,60,.35)' : 'rgba(255,255,255,.55)';
+        c.beginPath(); c.arc(px, py, R, 0, 7); c.fill();
+        c.lineWidth = 2; c.strokeStyle = g.kind === 'h' ? '#ff6b3d' : '#fff'; c.stroke(); c.restore();
+      } else if (g.kind === 'd') {
+        c.save(); c.globalAlpha = 0.5 + 0.5 * Math.sin(t * 8); c.fillStyle = col; c.beginPath(); c.arc(px, py, 3, 0, 7); c.fill(); c.restore();
+      } else if (g.kind === 'mx') {
+        c.save(); c.globalAlpha = Math.max(0, 1 - age / 0.6); c.fillStyle = col; c.beginPath(); c.arc(px, py, 6, 0, 7); c.fill(); c.restore();
+      }
+    }
+  }
+  function drawShots(c, t) {
+    // a short tracer from the shooter in the direction they face, ~0.12s per shot
+    for (const [ts, i] of rp.shots || []) {
+      const age = t - ts;
+      if (age < 0 || age > 0.12) continue;
+      const pl = P[i], s = pl && at(pl, ts);
+      if (!s || !s.alive) continue;
+      const [px, py] = tf(s.x, s.y), ang = -s.a * Math.PI / 180, L = Math.max(30, 900 * scale);
+      c.save(); c.globalAlpha = 1 - age / 0.12;
+      const gr = c.createLinearGradient(px, py, px + Math.cos(ang) * L, py + Math.sin(ang) * L);
+      gr.addColorStop(0, 'rgba(255,225,120,.95)'); gr.addColorStop(1, 'rgba(255,225,120,0)');
+      c.strokeStyle = gr; c.lineWidth = 1.5; c.beginPath(); c.moveTo(px + Math.cos(ang) * 9, py + Math.sin(ang) * 9);
+      c.lineTo(px + Math.cos(ang) * L, py + Math.sin(ang) * L); c.stroke(); c.restore();
+    }
+  }
+  function drawDeaths(c, t, col) {
+    const name = id => (P.find(p => p.id === id) || {}).n || '';
+    for (const k of rp.kills) {
+      const age = t - k[0];
+      if (age < 0 || age > 1.6) continue;
+      const [kx, ky] = tf(k[5], k[6]), [vx, vy] = tf(k[7], k[8]);
+      const victim = P.find(p => p.id === k[2]), vs = victim && at(victim, k[0] - 0.01);
+      // killer tracer flash
+      if (age < 0.5 && k[1] && k[1] !== k[2]) {
+        c.save(); c.globalAlpha = 1 - age / 0.5; c.strokeStyle = '#ffe27a'; c.lineWidth = 2;
+        c.beginPath(); c.moveTo(kx, ky); c.lineTo(vx, vy); c.stroke(); c.restore();
+      }
+      // victim: marker collapses while a red ring bursts outward
+      if (age < 0.35) {
+        const v = age / 0.35;
+        c.beginPath(); c.arc(vx, vy, 7 * (1 - v) + 1, 0, 7);
+        c.fillStyle = col(vs && vs.side === 'C' ? '--ct' : '--t'); c.fill();
+      }
+      if (age < 0.7) {
+        const v = age / 0.7;
+        c.save(); c.globalAlpha = 1 - v; c.strokeStyle = '#ff4d4f'; c.lineWidth = 3 * (1 - v) + 1;
+        c.beginPath(); c.arc(vx, vy, 6 + 22 * ease(v), 0, 7); c.stroke(); c.restore();
+      }
+      // floating label: killer, weapon (+ HS), rising and fading
+      const label = (k[1] && k[1] !== k[2] ? name(k[1]) + ' · ' : '') + weaponName(k[3]) + (k[4] ? ' · HS' : '');
+      c.save(); c.globalAlpha = Math.min(1, (1.6 - age) / 0.6); c.font = '600 11px Inter, sans-serif'; c.textAlign = 'center';
+      const ly = vy - 14 - age * 14;
+      c.lineWidth = 3; c.strokeStyle = 'rgba(0,0,0,.75)'; c.strokeText(label, vx, ly);
+      c.fillStyle = k[4] ? '#ffd166' : '#fff'; c.fillText(label, vx, ly); c.restore();
+    }
   }
 
   let last = performance.now();
