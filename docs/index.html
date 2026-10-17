@@ -237,6 +237,19 @@ select { font: inherit; color: var(--text); background: var(--surface); border: 
   body.menu-open { overflow: hidden; }
 }
 @media (prefers-reduced-motion: reduce) { nav, #scrim { transition: none !important; } }
+/* heatmap */
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.seg button { font: inherit; font-size: 13px; color: var(--text-2); background: var(--surface); border: 0; padding: 6px 12px; cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button.on { background: var(--surface-2); color: var(--text); font-weight: 600; }
+.hmwrap { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 16px; align-items: start; }
+.hmcard { position: relative; padding: 8px; overflow: hidden; }
+.hmcard canvas { display: block; }
+.hmmsg { position: absolute; inset: 0; display: grid; place-items: center; color: var(--text-3); pointer-events: none; }
+.hmmsg:empty { display: none; }
+.hmbig { font: 700 32px/1.1 Oxanium, sans-serif; }
+.hmside .s { font-size: 13px; line-height: 1.5; }
+@media (max-width: 900px) { .hmwrap { grid-template-columns: 1fr; } }
 footer { color: var(--text-3); font-size: 12px; padding: 24px 0 40px; border-top: 1px solid var(--line); }
 
 @media (max-width: 640px) {
@@ -266,6 +279,7 @@ footer { color: var(--text-3); font-size: 12px; padding: 24px 0 40px; border-top
       <a href="#/weapons" data-r="weapons">Weapons</a>
       <a href="#/utility" data-r="utility">Utility</a>
       <a href="#/rounds" data-r="rounds">Rounds</a>
+      <a href="#/heatmap" data-r="heatmap">Heatmaps</a>
       <a href="#/awards" data-r="awards">Awards</a>
       <div class="navfoot">
         <label class="toggle"><input type="checkbox" id="onlyFin2"><span>Completed games only</span></label>
@@ -339,7 +353,7 @@ function rating(k, d, r, k1, k2, k3, k4, k5) {
   return (k / r / 0.679 + 0.7 * Math.max(r - d, 0) / r / 0.317 + (k1 + 4 * k2 + 9 * k3 + 16 * k4 + 25 * k5) / r / 1.277) / 2.7;
 }
 
-const SUM_KEYS = ['r','k','d','a','fa','hs','tk','sui','ek','ed','k1','k2','k3','k4','k5','awp','knife','zeus','nade','wb','ns','smoke','blindk','plant','defuse','gh','gf','gs','gm','gd','fe','ft','fself','fbd','fdur','buy','spent','ck','trade','traded','bspawn','bpick','bdrop','pA','pB','chick','brk','ud','fdmg','dinks','uniq'];
+const SUM_KEYS = ['r','k','d','a','fa','hs','tk','sui','ek','ed','k1','k2','k3','k4','k5','awp','knife','zeus','nade','wb','ns','smoke','blindk','plant','defuse','gh','gf','gs','gm','gd','fe','ft','fself','fbd','fdur','buy','spent','ck','trade','traded','bspawn','bpick','bdrop','pA','pB','chick','brk','ud','fdmg','dinks','uniq','kdist','kdn'];
 // $ spent in a round: eco < 1000 <= force < 3500 <= full; under 1000 while holding 4000+ = kept weapons / saved
 const ECO_MAX = 1000, FULL_MIN = 3500, SAVE_MONEY = 4000;
 
@@ -421,6 +435,7 @@ function econDerive(s) {
   let sn = 0, pi = 0;
   for (const [w, c] of Object.entries(s.wp || s.w || {})) { const k = weaponCat(w); if (k === 'Sniper') sn += c; else if (k === 'Pistol') pi += c; }
   s.snk = sn; s.pik = pi;
+  s.kdm = s.kdn ? s.kdist / s.kdn * 0.0254 : null;
 }
 function derive(s) {
   s.kd = s.d ? s.k / s.d : s.k;
@@ -749,7 +764,7 @@ function viewGame(id) {
     <section class="card pad"><h2>Round history</h2>
       <div class="rhist">${[...g.rounds].map((r, i) => `<span class="${r === 'C' ? 'C' : r === 'T' ? 'T' : 'D'}${(g.rr || '')[i] && 'bdt'.includes(g.rr[i]) ? ' rx' : ''}" data-tip="Round ${i + 1}: ${r === 'C' ? 'CT win' : r === 'T' ? 'T win' : 'draw'}${g.rr ? ' · ' + REASON[g.rr[i]] : ''}${g.rp && 'AB'.includes(g.rp[i]) ? ' · planted ' + g.rp[i] : ''}${(g.pistol || []).includes(i) ? ' · pistol round' : ''}">${i + 1}</span>`).join('')}</div>
       <div class="legend"><span><i style="background:var(--ct)"></i>CT round win</span><span><i style="background:var(--t)"></i>T round win</span><span><i class="rxkey"></i>ended by the bomb or the clock (hover for details)</span></div>
-      <div class="note">Teams are listed by the side they finished on; sides swap at half time.</div></section>
+      <div class="note">Teams are listed by the side they finished on.${g.v >= 5 ? ` <a href="#/heatmap/${g.map}/${g.id}" style="color:var(--accent)">See this game's kills on the heatmap →</a>` : ''}</div></section>
     ${['CT', 'T'].map(side => `<section><div class="teamhead"><span class="bar" style="background:var(--${side.toLowerCase()})"></span><h2 style="margin:0">${side === 'CT' ? 'Counter-Terrorists' : 'Terrorists'}</h2>${g.win === side ? '<span class="chip W">Won</span>' : g.win ? '<span class="chip L">Lost</span>' : ''}</div><div id="t${side}"></div></section>`).join('')}`;
   const cols = [
     {k: 'n', l: 'Player', cls: 'l pname', asc: true, f: (v, r) => plink(r.id, v) + (r.isMvp ? '<span class="mvp" title="Game MVP">★ MVP</span>' : '')},
@@ -834,6 +849,7 @@ function viewMap(m) {
     </div>
     <section><h2>Leaderboard on ${esc(mapName(m))}</h2><div id="lb"></div></section>
     <section class="grid2">${roundBlock(mg, 'How rounds ended')}<div></div></section>
+    <div class="note"><a href="#/heatmap/${m}" style="color:var(--accent)">Kill, death and grenade heatmaps for ${esc(mapName(m))} →</a></div>
     <section class="grid2"><div class="card pad"><h2>Records</h2>${recordCards(mg)}</div><div class="card pad"><h2>Kills by weapon</h2>${weaponsBlock(wp)}</div></section>
     <section><h2>Games</h2><div id="gt"></div></section>`;
   board($('#lb'), rows, {minGames: mg.length >= 4 ? 2 : 1});
@@ -873,6 +889,7 @@ function viewPlayer(id) {
       ${tile('Multi-kills', me.mk, `${me.k3} × 3K · ${me.k4} × 4K · ${me.k5} aces`)}
       ${tile('Clutches', me.ca ? `${me.cw}/${me.ca}` : '–', me.cbest ? `best: 1v${me.cbest} · ${me.ck} clutch kills` : 'none won yet')}
       ${tile('Trades', me.trade, `${pct(me.tdr)} of deaths traded · round win ${pct(me.rwr)}`)}
+      ${me.kdm != null ? tile('Kill distance', f1(me.kdm) + ' m', 'average distance to the enemy') : ''}
       ${tile('Economy', me.avgMoney == null ? '–' : '$' + Math.round(me.avgMoney).toLocaleString(), `avg money · full buys won ${me.fullR ? pct(me.fullWr) : '–'} · ${me.saves} saves`)}
       ${tile('Grenades thrown', me.gt, `${me.fe} enemies flashed · ${me.ft} teammates`)}
       ${tile('Bought', me.buy, `≈ $${Math.round(me.spent).toLocaleString()} spent · ${me.pk} picked-up kills`)}
@@ -955,6 +972,7 @@ function viewWeapons() {
     {k: 'w3', l: '3rd', cls: 'l', sort: false, f: (v, r) => wcell(r, 2)},
     share('Rifle'), share('Sniper'), share('SMG'), share('Pistol'), share('Heavy'),
     {k: 'nw', l: 'Weapons', t: 'Different weapons with at least one kill'},
+    {k: 'kdm', l: 'Kill dist', t: 'Average distance to the enemy on a kill', f: v => v == null ? '–' : f1(v) + ' m'},
   ];
   const draw = mg => mountTable($('#pw .t'), cols, rows.filter(r => r.g >= mg), {sort: 'k', rank: true});
   const def = Math.min(5, maxG);
@@ -1224,18 +1242,248 @@ function viewRounds(night) {
   }
 }
 
+// ---------- heatmaps (positions are loaded lazily, only on this page) ----------
+let POS = null, posLoading = null;
+const loadPositions = () => POS ? Promise.resolve(POS) : (posLoading = posLoading || fetch('data/positions.json', {cache: 'no-cache'}).then(r => r.json()).then(d => (POS = d)));
+const HM = {mode: 'kills', view: 'heat', nade: '', side: '', player: '', night: '', lines: false};
+const NADE_NAME = {s: 'Smoke', m: 'Molotov / Incendiary', h: 'HE grenade', f: 'Flashbang', d: 'Decoy'};
+const UNIT_M = 0.0254; // one Hammer unit is an inch
+let hmRedraw = null;
+addEventListener('resize', () => { if (hmRedraw && document.getElementById('hm')) hmRedraw(); });
+
+function viewHeatmap(map, gid) {
+  const gs = games().filter(g => g.v >= 5);
+  const byMap = {};
+  gs.forEach(g => (byMap[g.map] = byMap[g.map] || []).push(g));
+  const maps = Object.keys(byMap).sort((a, b) => byMap[b].length - byMap[a].length);
+  if (!maps.length) { $('#app').innerHTML = '<h1>Heatmaps</h1><p class="sub">No games with position data yet.</p>'; return; }
+  if (!map || !byMap[map]) { location.replace(`#/heatmap/${maps[0]}`); return; }
+  pageTitle(`Heatmap · ${mapName(map)}`);
+  const mg = byMap[map];
+  const nights = [...new Set(mg.map(g => g.night))].sort().reverse();
+  const game = gid && mg.find(g => g.id === gid);
+  const opt = (v, l, cur) => `<option value="${esc(v)}" ${v === cur ? 'selected' : ''}>${esc(l)}</option>`;
+
+  $('#app').innerHTML = `
+    <div class="pagehead"><div><h1>Heatmaps</h1><div class="sub">Where players get kills, die and land grenades</div></div>
+      <div class="filters"><span class="flabel">Map</span><select id="hmap">${maps.map(m => opt(m, `${mapName(m)} (${byMap[m].length})`, map)).join('')}</select></div></div>
+    <div class="filters hmf">
+      <div class="seg" id="hmode">${[['kills', 'Kills'], ['deaths', 'Deaths'], ['nades', 'Grenades']].map(([v, l]) => `<button data-v="${v}" class="${HM.mode === v ? 'on' : ''}">${l}</button>`).join('')}</div>
+      <div class="seg" id="hview">${[['heat', 'Heat'], ['dots', 'Dots']].map(([v, l]) => `<button data-v="${v}" class="${HM.view === v ? 'on' : ''}">${l}</button>`).join('')}</div>
+      <select id="hnade" ${HM.mode === 'nades' ? '' : 'hidden'}>${opt('', 'All grenades', HM.nade)}${Object.entries(NADE_NAME).map(([k, v]) => opt(k, v, HM.nade)).join('')}</select>
+      <select id="hside">${opt('', 'Both sides', HM.side)}${opt('C', 'CT', HM.side)}${opt('T', 'T', HM.side)}</select>
+      <select id="hplayer"><option value="">All players</option></select>
+      <select id="hnight">${opt('', 'All nights', game ? '' : HM.night)}${nights.map(n => opt(n, nightLabel(n), game ? '' : HM.night)).join('')}</select>
+      <select id="hgame">${opt('', 'All games', game ? game.id : '')}${mg.slice().reverse().map(g => opt(g.id, `${nightLabel(g.night)} ${timeLabel(g.start)} · ${g.ct}:${g.t}`, game ? game.id : '')).join('')}</select>
+      <label class="toggle" id="hlinesw" ${HM.mode === 'kills' && HM.view === 'dots' ? '' : 'hidden'}><input type="checkbox" id="hlines" ${HM.lines ? 'checked' : ''}><span>Killer → victim lines</span></label>
+    </div>
+    <div class="hmwrap"><div class="card hmcard"><canvas id="hm"></canvas><div class="hmmsg" id="hmmsg">Loading positions…</div></div>
+      <div class="card pad hmside" id="hmstats"></div></div>
+    <div class="note">Faint grey dots are every kill, death and grenade ever recorded on this map, which traces its layout. Positions come from the server log at the moment of each kill and where each grenade landed; full movement needs GOTV demos.</div>`;
+
+  const sel = id => $('#' + id);
+  sel('hmap').onchange = e => { location.hash = `#/heatmap/${e.target.value}`; };
+  sel('hgame').onchange = e => { location.hash = e.target.value ? `#/heatmap/${map}/${e.target.value}` : `#/heatmap/${map}`; };
+  sel('hnight').onchange = e => { HM.night = e.target.value; if (game) location.hash = `#/heatmap/${map}`; else draw(); };
+  sel('hside').onchange = e => { HM.side = e.target.value; draw(); };
+  sel('hnade').onchange = e => { HM.nade = e.target.value; draw(); };
+  sel('hplayer').onchange = e => { HM.player = e.target.value; draw(); };
+  sel('hlines').onchange = e => { HM.lines = e.target.checked; draw(); };
+  for (const [id, key] of [['hmode', 'mode'], ['hview', 'view']]) {
+    sel(id).onclick = e => {
+      const b = e.target.closest('button'); if (!b) return;
+      HM[key] = b.dataset.v;
+      sel(id).querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
+      sel('hnade').hidden = HM.mode !== 'nades';
+      sel('hlinesw').hidden = !(HM.mode === 'kills' && HM.view === 'dots');
+      draw();
+    };
+  }
+
+  let pts = [], bounds = null, base = [], tf = null;
+  const canvas = sel('hm');
+
+  loadPositions().then(() => {
+    if (!document.body.contains(canvas)) return;
+    // every point ever recorded on the map: fixed bounds + faint layout
+    for (const g of byMap[map]) {
+      const [kp, np] = POS[g.id] || [[], []];
+      for (const k of kp) { base.push([k[5], k[6]], [k[8], k[9]]); }
+      for (const n of np) base.push([n[5], n[6]]);
+    }
+    if (!base.length) { sel('hmmsg').textContent = 'No positions recorded on this map yet.'; return; }
+    const xs = base.map(p => p[0]), ys = base.map(p => p[1]);
+    bounds = {x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys)};
+    // players who appear on this map
+    const names = {};
+    for (const g of byMap[map]) g.p.forEach(p => names[p.id] = NAMES[p.id]);
+    sel('hplayer').innerHTML = '<option value="">All players</option>' + Object.entries(names).sort((a, b) => a[1].localeCompare(b[1])).map(([id, n]) => opt(id, n, HM.player)).join('');
+    sel('hmmsg').textContent = '';
+    draw();
+  });
+  hmRedraw = draw;
+
+  function selected() {
+    const out = [];
+    const list = game ? [game] : byMap[map].filter(g => !HM.night || g.night === HM.night);
+    for (const g of list) {
+      const [kp, np] = POS[g.id] || [[], []];
+      if (HM.mode === 'nades') {
+        for (const n of np) {
+          if (HM.nade && n[4] !== HM.nade) continue;
+          if (HM.side && n[3] !== HM.side) continue;
+          if (HM.player && n[2] !== HM.player) continue;
+          out.push({x: n[5], y: n[6], side: n[3], g, n});
+        }
+      } else {
+        for (const k of kp) {
+          const kills = HM.mode === 'kills';
+          const side = kills ? k[4] : (k[4] === 'C' ? 'T' : 'C');
+          if (HM.side && side !== HM.side) continue;
+          if (HM.player && (kills ? k[2] : k[3]) !== HM.player) continue;
+          out.push({x: kills ? k[5] : k[8], y: kills ? k[6] : k[9], side, g, k});
+        }
+      }
+    }
+    return out;
+  }
+
+  function draw() {
+    if (!bounds || !document.body.contains(canvas)) return;
+    const css = getComputedStyle(document.documentElement);
+    const col = v => css.getPropertyValue(v).trim();
+    const W = canvas.parentElement.clientWidth;
+    const rx = bounds.x1 - bounds.x0 || 1, ry = bounds.y1 - bounds.y0 || 1;
+    const pad = 16, H = Math.min(Math.round((W - 2 * pad) * ry / rx) + 2 * pad, Math.round(innerHeight * 0.78));
+    const sc = Math.min((W - 2 * pad) / rx, (H - 2 * pad) / ry);
+    const ox = (W - rx * sc) / 2, oy = (H - ry * sc) / 2;
+    tf = (x, y) => [ox + (x - bounds.x0) * sc, oy + (bounds.y1 - y) * sc]; // game y points up
+    const dpr = devicePixelRatio || 1;
+    canvas.width = W * dpr; canvas.height = H * dpr; canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    const c = canvas.getContext('2d');
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    c.clearRect(0, 0, W, H);
+    c.fillStyle = col('--text-3'); c.globalAlpha = 0.22;
+    for (const [x, y] of base) { const [px, py] = tf(x, y); c.fillRect(px - 0.75, py - 0.75, 1.5, 1.5); }
+    c.globalAlpha = 1;
+
+    pts = selected();
+    for (const p of pts) [p.px, p.py] = tf(p.x, p.y);
+    if (HM.view === 'heat') heat(c, W, H, dpr, col('--accent'));
+    else {
+      if (HM.lines && HM.mode === 'kills') {
+        c.lineWidth = 1; c.globalAlpha = 0.35;
+        for (const p of pts) { const [vx, vy] = tf(p.k[8], p.k[9]); c.strokeStyle = col(p.side === 'C' ? '--ct' : '--t'); c.beginPath(); c.moveTo(p.px, p.py); c.lineTo(vx, vy); c.stroke(); }
+        c.globalAlpha = 1;
+      }
+      for (const p of pts) {
+        c.beginPath(); c.arc(p.px, p.py, 4, 0, 7);
+        c.fillStyle = col(p.side === 'C' ? '--ct' : p.side === 'T' ? '--t' : '--text-2'); c.fill();
+        c.lineWidth = 1.5; c.strokeStyle = col('--surface'); c.stroke();
+      }
+    }
+    stats();
+  }
+
+  // density: count events per grid cell, blur, scale to the busy end, tint with one hue (faint -> bright)
+  function heat(c, W, H, dpr, hue) {
+    const cell = 3, gw = Math.ceil(W / cell), gh = Math.ceil(H / cell);
+    let grid = new Float32Array(gw * gh);
+    for (const p of pts) {
+      const gx = Math.floor(p.px / cell), gy = Math.floor(p.py / cell);
+      if (gx >= 0 && gy >= 0 && gx < gw && gy < gh) grid[gy * gw + gx]++;
+    }
+    const rad = Math.max(2, Math.round(Math.min(W, H) / 70 / cell));
+    for (let pass = 0; pass < 3; pass++) grid = boxBlur(grid, gw, gh, rad);
+    const nz = [];
+    for (const v of grid) if (v > 1e-4) nz.push(v);
+    if (!nz.length) return;
+    nz.sort((x, y) => x - y);
+    const top = nz[Math.floor(nz.length * 0.985)] || nz[nz.length - 1];
+    const [hr, hg, hb] = hexRgb(hue);
+    const img = new ImageData(gw, gh), d = img.data;
+    for (let i = 0; i < grid.length; i++) {
+      const t = Math.min(1, grid[i] / top);
+      if (t < 0.03) continue;
+      const e = Math.sqrt(t);
+      d[i * 4] = hr + (255 - hr) * e * 0.6; d[i * 4 + 1] = hg + (255 - hg) * e * 0.6; d[i * 4 + 2] = hb + (255 - hb) * e * 0.45;
+      d[i * 4 + 3] = Math.round(255 * (0.12 + 0.88 * e));
+    }
+    const off = document.createElement('canvas'); off.width = gw; off.height = gh;
+    off.getContext('2d').putImageData(img, 0, 0);
+    c.imageSmoothingEnabled = true; c.drawImage(off, 0, 0, gw * cell, gh * cell);
+  }
+  function boxBlur(src, w, h, r) {
+    const tmp = new Float32Array(src.length), out = new Float32Array(src.length), n = 2 * r + 1;
+    for (let y = 0; y < h; y++) {
+      let acc = 0; const row = y * w;
+      for (let x = -r; x <= r; x++) acc += src[row + Math.min(w - 1, Math.max(0, x))];
+      for (let x = 0; x < w; x++) {
+        tmp[row + x] = acc / n;
+        acc += src[row + Math.min(w - 1, x + r + 1)] - src[row + Math.max(0, x - r)];
+      }
+    }
+    for (let x = 0; x < w; x++) {
+      let acc = 0;
+      for (let y = -r; y <= r; y++) acc += tmp[Math.min(h - 1, Math.max(0, y)) * w + x];
+      for (let y = 0; y < h; y++) {
+        out[y * w + x] = acc / n;
+        acc += tmp[Math.min(h - 1, y + r + 1) * w + x] - tmp[Math.max(0, y - r) * w + x];
+      }
+    }
+    return out;
+  }
+
+  function stats() {
+    const n = pts.length;
+    let html = `<h2>${HM.mode === 'kills' ? 'Kills' : HM.mode === 'deaths' ? 'Deaths' : 'Grenades'}</h2><div class="hmbig">${n.toLocaleString()}</div>`;
+    if (HM.mode !== 'nades' && n) {
+      const dist = pts.map(p => Math.hypot(p.k[5] - p.k[8], p.k[6] - p.k[9], p.k[7] - p.k[10]) * UNIT_M);
+      const far = pts[dist.indexOf(Math.max(...dist))];
+      const w = {}; pts.forEach(p => w[p.k[11]] = (w[p.k[11]] || 0) + 1);
+      const hs = pts.filter(p => p.k[12]).length;
+      html += `<div class="s muted">avg distance ${f1(dist.reduce((a, b) => a + b, 0) / n)} m · ${pct(hs / n)} headshots</div>
+        <h2 style="margin-top:18px">Longest</h2><div class="s"><b>${esc(NAMES[far.k[2]] || '?')}</b> → ${esc(NAMES[far.k[3]] || '?')}<br>${f1(Math.max(...dist))} m with ${esc(weaponName(far.k[11]))}<br><a href="#/game/${far.g.id}" style="color:var(--accent)">${esc(nightLabel(far.g.night))}, round ${far.k[0] + 1}</a></div>
+        <h2 style="margin-top:18px">Weapons</h2>${hbars(topWeapons(w, 6).map(([k, v]) => ({label: weaponName(k), value: v, tip: `<b>${esc(weaponName(k))}</b><br>${v}`})))}`;
+    } else if (n) {
+      const t = {}; pts.forEach(p => t[p.n[4]] = (t[p.n[4]] || 0) + 1);
+      html += `<h2 style="margin-top:18px">By type</h2>${hbars(Object.entries(t).sort((a, b) => b[1] - a[1]).map(([k, v]) => ({label: NADE_NAME[k], value: v, tip: `<b>${NADE_NAME[k]}</b><br>${v}`})))}`;
+    }
+    if (HM.view === 'dots') html += `<div class="legend" style="margin-top:16px"><span><i style="background:var(--ct)"></i>CT</span><span><i style="background:var(--t)"></i>T</span></div><div class="note">Hover a dot for details.</div>`;
+    else html += `<div class="note" style="margin-top:16px">Brighter = more events.</div>`;
+    $('#hmstats').innerHTML = html;
+  }
+
+  canvas.onmousemove = e => {
+    if (HM.view !== 'dots' || !pts.length) { canvas.removeAttribute('data-tip'); return; }
+    const r = canvas.getBoundingClientRect(), mx = e.clientX - r.left, my = e.clientY - r.top;
+    let best = null, bd = 81;
+    for (const p of pts) { const d = (p.px - mx) ** 2 + (p.py - my) ** 2; if (d < bd) { bd = d; best = p; } }
+    if (!best) { canvas.removeAttribute('data-tip'); return; }
+    const g = best.g, when = `${esc(mapName(g.map))} · ${esc(nightLabel(g.night))} · round ${(best.k || best.n)[0] + 1}`;
+    canvas.setAttribute('data-tip', best.k
+      ? `<b>${esc(NAMES[best.k[2]] || '?')}</b> killed <b>${esc(NAMES[best.k[3]] || '?')}</b><br>${esc(weaponName(best.k[11]))}${best.k[12] ? ' · headshot' : ''} · ${f1(Math.hypot(best.k[5] - best.k[8], best.k[6] - best.k[9], best.k[7] - best.k[10]) * UNIT_M)} m<br>${when}`
+      : `<b>${esc(NAMES[best.n[2]] || '?')}</b> · ${NADE_NAME[best.n[4]]}<br>${when}`);
+  };
+}
+function hexRgb(h) {
+  h = h.replace('#', '');
+  if (h.length === 3) h = h.split('').map(c => c + c).join('');
+  return [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16));
+}
+
 function notFound() {
   $('#app').innerHTML = `<h1>Not found</h1><p class="sub">Nothing here${onlyFin ? ' with “Completed games only” switched on' : ''}. <a href="#/" style="color:var(--accent)">Back to overview</a></p>`;
 }
 
 // ---------- router ----------
 function route() {
-  const [, view = '', arg] = decodeURIComponent(location.hash.slice(1)).split('/');
+  const [, view = '', arg, arg2] = decodeURIComponent(location.hash.slice(1)).split('/');
   document.querySelectorAll('#nav a').forEach(a => a.classList.toggle('on',
     a.dataset.r === view || (a.dataset.r && view === a.dataset.r.replace(/s$/, ''))));
   ({'': viewOverview, nights: viewNights, night: () => viewNight(arg), games: viewGames, game: () => viewGame(arg),
     maps: viewMaps, map: () => viewMap(arg), players: viewPlayers, player: () => viewPlayer(arg),
-    weapons: viewWeapons, weapon: () => viewWeapon(arg), awards: viewAwards, utility: () => viewUtility(arg), rounds: () => viewRounds(arg)}[view] || notFound)();
+    weapons: viewWeapons, weapon: () => viewWeapon(arg), awards: viewAwards, utility: () => viewUtility(arg), rounds: () => viewRounds(arg), heatmap: () => viewHeatmap(arg, arg2)}[view] || notFound)();
   tip.style.opacity = 0;
 }
 addEventListener('hashchange', () => { route(); scrollTo(0, 0); });

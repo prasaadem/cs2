@@ -9,7 +9,7 @@ import glob
 import os
 import re
 
-PARSER_VERSION = 4  # 2: grenades/flashes/purchases; 3: clutches/trades/bomb/round ends; 4: economy, round-stat extras
+PARSER_VERSION = 5  # 2: grenades/flashes/purchases; 3: clutches/trades/bomb/round ends; 4: economy; 5: positions
 
 # Local time for display / night grouping: US Pacific with US daylight-saving rules.
 STD_OFFSET_HOURS = -8
@@ -51,6 +51,8 @@ MAP = re.compile(r'(?:Loading map|Match_Start" on) "(\w+)"')
 ANY_PLAYER = re.compile(P)
 SWITCH = re.compile(r'"(.+?)<\d+><\[U:1:(\d+)\]>" switched from team <\w+> to <(\w+)>')
 DISCONNECT = re.compile(P + r' disconnected')
+COORDS = re.compile(r'\[(-?[\d.]+) (-?[\d.]+) (-?[\d.]+)\]')
+NADE_CODE = {'hegrenade': 'h', 'flashbang': 'f', 'smokegrenade': 's', 'molotov': 'm', 'decoy': 'd'}
 THREW = re.compile(P + r' threw (hegrenade|flashbang|smokegrenade|molotov|decoy)\b')
 PURCHASE = re.compile(P + r' purchased "(\w+)"')
 BLIND = re.compile(P + r' blinded for ([\d.]+) by ' + P + r' from flashbang')
@@ -123,6 +125,8 @@ class Match:
         self.bomb_dropped = False
         self.plant = '-'
         self.money = {}             # round index -> {player: money at round start}
+        self.kill_pos = []          # [round, sec, killer, victim, killer side, ax, ay, az, vx, vy, vz, weapon, hs]
+        self.nade_pos = []          # [round, sec, player, side, type, x, y, z] (where it landed)
         self.spend = collections.defaultdict(collections.Counter)  # round index -> {player: $ spent}
 
     def start_round(self):
@@ -274,6 +278,14 @@ def parse_group(files):
                             ev[1] = None  # each death is traded once
                             break
                     cur.recent.append([t, aid, side, vid])
+                    xyz = COORDS.findall(msg)
+                    if len(xyz) >= 2:
+                        (ax, ay, az), (vx, vy, vz) = xyz[0], xyz[1]
+                        a3, v3 = [round(float(c)) for c in (ax, ay, az)], [round(float(c)) for c in (vx, vy, vz)]
+                        cur.kill_pos.append([len(cur.rounds), round((t - cur.start).total_seconds()), aid, vid, side[0],
+                                             *a3, *v3, w, 1 if 'headshot' in rest else 0])
+                        s['kdist'] += round(sum((a - b) ** 2 for a, b in zip(a3, v3)) ** 0.5)
+                        s['kdn'] += 1
                     s['k'] += 1
                     cur.weapons[aid][w] += 1
                     if 'headshot' in rest:
@@ -325,6 +337,11 @@ def parse_group(files):
                 if th:
                     cur.see(*th.groups()[:3])
                     cur.stats[th.group(2)][THROW_KEY[th.group(4)]] += 1
+                    xyz = COORDS.findall(msg)
+                    if xyz:
+                        cur.nade_pos.append([len(cur.rounds), round((t - cur.start).total_seconds()), th.group(2),
+                                             (cur.team.get(th.group(2)) or '?')[0], NADE_CODE[th.group(4)],
+                                             *[round(float(c)) for c in xyz[-1]]])
                     continue
                 pu = PURCHASE.search(msg)
                 if pu:
@@ -472,6 +489,7 @@ def build_game(m):
             'bspawn': s['bspawn'], 'bpick': s['bpick'], 'bdrop': s['bdrop'], 'pA': s['pA'], 'pB': s['pB'],
             'sd': ''.join(m.sides[i].get(sid, '.') for i in range(nrounds)),
             'chick': s['chick'], 'brk': s['brk'],
+            'kdist': s['kdist'], 'kdn': s['kdn'],
             'mo': [m.money.get(i, {}).get(sid) for i in range(nrounds)],
             'spr': [m.spend[i][sid] for i in range(nrounds)],
             **extra,
@@ -494,6 +512,8 @@ def build_game(m):
         'rr': ''.join(m.reasons),
         'rp': ''.join(m.plants),
         'pistol': pistol_rounds(m),
+        'kp': m.kill_pos,
+        'np': m.nade_pos,
         'p': players,
     }
 

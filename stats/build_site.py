@@ -7,8 +7,9 @@ Usage:
 Pass --mark-synced after a successful DatHost download to record the sync time;
 without it the previous sync time is kept.
 
-Writes docs/data/games.json (all games in one file, oldest first) and
-docs/index.html (the page, which loads that JSON).
+Writes docs/data/games.json (all games in one file, oldest first),
+docs/data/positions.json (kill and grenade positions, loaded only by the
+heatmap page) and docs/index.html (the page, which loads that JSON).
 """
 import argparse
 import datetime as dt
@@ -44,6 +45,13 @@ def main():
             synced = json.load(fh).get('synced')
 
     os.makedirs(os.path.join(args.docs, 'data'), exist_ok=True)
+    positions = {}
+    for g in games:
+        kp, np_ = g.pop('kp', None), g.pop('np', None)
+        if kp is not None or np_ is not None:
+            positions[g['id']] = [kp or [], np_ or []]
+    with open(os.path.join(args.docs, 'data', 'positions.json'), 'w', encoding='utf-8') as fh:
+        json.dump(positions, fh, separators=(',', ':'))
     payload = {'title': args.title, 'updated': updated, 'synced': synced, 'games': games}
     with open(out, 'w', encoding='utf-8') as fh:
         json.dump(payload, fh, ensure_ascii=False, separators=(',', ':'))
