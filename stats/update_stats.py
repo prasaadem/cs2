@@ -60,6 +60,7 @@ def main():
     ap.add_argument('--logs', required=True, help='folder containing the server .log files')
     ap.add_argument('--data', default=os.path.join(HERE, '..', 'data', 'games'))
     ap.add_argument('--min-rounds', type=int, default=3, help='skip matches with fewer rounds (default 3)')
+    ap.add_argument('--changes', help='write the ids of added/updated games to this JSON file')
     args = ap.parse_args()
 
     games = logparse.parse_logs(args.logs, args.min_rounds)
@@ -70,6 +71,10 @@ def main():
         print(f'  + {g["id"]}  {g["ct"]}:{g["t"]}{"" if g["fin"] else " (unfinished)"}')
     for g in updated:
         print(f'  ~ {g["id"]}  {g["ct"]}:{g["t"]}{"" if g["fin"] else " (unfinished)"}')
+
+    if args.changes:
+        with open(args.changes, 'w', encoding='utf-8') as fh:
+            json.dump({'added': [g['id'] for g in added], 'updated': [g['id'] for g in updated]}, fh)
 
     # one-line summary for the commit message
     nights = sorted({g['night'] for g in added + updated})

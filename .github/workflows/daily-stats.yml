@@ -16,6 +16,8 @@ jobs:
   update:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
     steps:
       - uses: actions/checkout@v4
 
@@ -33,7 +35,7 @@ jobs:
 
       - name: Merge new games into data/games
         id: update
-        run: python stats/update_stats.py --logs "$RUNNER_TEMP/logs"
+        run: python stats/update_stats.py --logs "$RUNNER_TEMP/logs" --changes "$RUNNER_TEMP/changes.json"
 
       - name: Build site
         run: python stats/build_site.py --mark-synced
@@ -50,3 +52,8 @@ jobs:
             git commit -m "Sync: no new games"
           fi
           git push
+
+      # only when the sync brought new data, the push succeeded and a webhook is configured
+      - name: Post to Discord
+        if: steps.update.outputs.changed == 'true' && env.DISCORD_WEBHOOK_URL != ''
+        run: python stats/notify_discord.py --changes "$RUNNER_TEMP/changes.json" --wait-for-site

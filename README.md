@@ -9,7 +9,8 @@ Every day at 9 AM Pacific a GitHub Action ([daily-stats.yml](.github/workflows/d
 1. Downloads the server's `logs/` folder from the DatHost API (`stats/fetch_dathost.py`).
 2. Parses the logs and merges any new games into `data/games/` (`stats/update_stats.py`).
 3. Rebuilds the site in `docs/` (`stats/build_site.py`).
-4. Commits and pushes if anything changed.
+4. Commits and pushes, recording the sync time shown on the page.
+5. If there were new games, posts a summary to Discord (`stats/notify_discord.py`).
 
 GitHub Pages serves `docs/`.
 
@@ -30,6 +31,7 @@ Raw logs are never committed, because they contain passwords and player IP addre
   - `DATHOST_EMAIL` and `DATHOST_PASSWORD`: a DatHost login. Ideally use a separate login invited to the server's account.
   - `DATHOST_SERVER_ID`: the ID from the control panel URL, `dathost.net/control-panel/game-servers/<id>`.
   - `DATHOST_ACCOUNT_EMAIL` (optional): the account owner's email, if the login above was invited to that account.
+  - `DISCORD_WEBHOOK_URL` (optional): a channel webhook (Edit Channel → Integrations → Webhooks). When a sync brings new games, the job posts a summary for each night after the site has updated. Nothing is posted on days without new data.
 - **Pages:** Settings → Pages → Deploy from branch `main`, folder `/docs`.
 - **Manual run:** Actions → Daily stats → Run workflow.
 
