@@ -80,6 +80,8 @@ nav { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; flex: 1;
 nav::-webkit-scrollbar { display: none; }
 nav a { padding: 8px 12px; border-radius: 8px; color: var(--text-2); font-weight: 500; white-space: nowrap; }
 nav a.on { color: var(--text); background: var(--surface-2); }
+.ni { display: block; width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+nav a.on .ni { color: var(--accent); }
 .hctl { display: flex; align-items: center; gap: 8px; }
 .toggle { display: flex; align-items: center; gap: 8px; color: var(--text-2); font-size: 13px; cursor: pointer; user-select: none; white-space: nowrap; }
 .toggle input { accent-color: var(--accent); width: 16px; height: 16px; margin: 0; }
@@ -228,7 +230,8 @@ select { font: inherit; color: var(--text); background: var(--surface); border: 
     transform: translateX(-100%); visibility: hidden; transition: transform .22s ease, visibility 0s linear .22s;
   }
   body.menu-open nav { transform: none; visibility: visible; transition: transform .22s ease; }
-  nav a { padding: 11px 14px; font-size: 15px; }
+  nav a { padding: 11px 14px; font-size: 15px; display: flex; align-items: center; gap: 12px; }
+  .ni { display: block; }
   .navhead { display: flex; align-items: center; justify-content: space-between; padding: 2px 4px 14px 6px; margin-bottom: 8px; border-bottom: 1px solid var(--line); }
   .navfoot { display: flex; flex-direction: column; gap: 10px; margin-top: auto; padding: 16px 6px 0; border-top: 1px solid var(--line); }
   .navfoot .toggle span { display: inline; }
@@ -237,6 +240,20 @@ select { font: inherit; color: var(--text); background: var(--surface); border: 
   body.menu-open { overflow: hidden; }
 }
 @media (prefers-reduced-motion: reduce) { nav, #scrim { transition: none !important; } }
+/* wide screens: the menu is a permanent left sidebar */
+@media (min-width: 1001px) {
+  body { padding-left: 220px; }
+  nav {
+    position: fixed; top: 0; left: 0; bottom: 0; z-index: 20; width: 220px; flex: none;
+    flex-direction: column; gap: 2px; padding: 16px 12px; overflow-y: auto;
+    background: var(--surface); border-right: 1px solid var(--line);
+  }
+  nav a { display: flex; align-items: center; gap: 12px; padding: 9px 12px; }
+  .navhead { display: flex; align-items: center; padding: 4px 6px 18px; margin-bottom: 8px; border-bottom: 1px solid var(--line); }
+  #menuclose { display: none; }
+  .hbar > .brand { display: none; }
+  .hbar { justify-content: flex-end; }
+}
 /* heatmap */
 .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
 .seg button { font: inherit; font-size: 13px; color: var(--text-2); background: var(--surface); border: 0; padding: 6px 12px; cursor: pointer; }
@@ -301,18 +318,18 @@ footer { color: var(--text-3); font-size: 12px; padding: 24px 0 40px; border-top
     <div id="scrim"></div>
     <nav id="nav" aria-label="Main">
       <div class="navhead"><span class="brand"><span class="dot"></span><span class="brandtxt"></span></span><button class="iconbtn" id="menuclose" aria-label="Close menu">✕</button></div>
-      <a href="#/" data-r="">Overview</a>
-      <a href="#/nights" data-r="nights">Nights</a>
-      <a href="#/games" data-r="games">Games</a>
-      <a href="#/maps" data-r="maps">Maps</a>
-      <a href="#/players" data-r="players">Players</a>
-      <a href="#/weapons" data-r="weapons">Weapons</a>
-      <a href="#/utility" data-r="utility">Utility</a>
-      <a href="#/rounds" data-r="rounds">Rounds</a>
-      <a href="#/heatmap" data-r="heatmap">Heatmaps</a>
-      <a href="#/replays" data-r="replays">Replays</a>
-      <a href="#/attendance" data-r="attendance">Attendance</a>
-      <a href="#/awards" data-r="awards">Awards</a>
+      <a href="#/" data-r=""><svg class="ni" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></svg><span>Overview</span></a>
+      <a href="#/nights" data-r="nights"><svg class="ni" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg><span>Nights</span></a>
+      <a href="#/games" data-r="games"><svg class="ni" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h12M9 12h12M9 18h12"/><circle cx="4.5" cy="6" r="1.2"/><circle cx="4.5" cy="12" r="1.2"/><circle cx="4.5" cy="18" r="1.2"/></svg><span>Games</span></a>
+      <a href="#/maps" data-r="maps"><svg class="ni" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg><span>Maps</span></a>
+      <a href="#/players" data-r="players"><svg class="ni" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M17.5 14.2A6.5 6.5 0 0 1 21.5 20"/></svg><span>Players</span></a>
+      <a href="#/weapons" data-r="weapons"><svg class="ni" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="1.5"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg><span>Weapons</span></a>
+      <a href="#/utility" data-r="utility"><svg class="ni" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="14.5" r="6.5"/><path d="M11 8V5.5h4.5"/><path d="M15.5 5.5 18.5 3"/><path d="M8.5 13.5h5"/></svg><span>Utility</span></a>
+      <a href="#/rounds" data-r="rounds"><svg class="ni" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5v4l2.8 1.8M9.5 2.5h5M19 6l1.5-1.5"/></svg><span>Rounds</span></a>
+      <a href="#/heatmap" data-r="heatmap"><svg class="ni" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22c3.9 0 7-2.9 7-6.8 0-3.8-2.6-5.9-3.9-9.7-1.7 1.6-2.8 3.4-2.9 5.6-.9-.9-1.6-2.1-1.8-3.6C7.3 9.2 5 12 5 15.2 5 19.1 8.1 22 12 22z"/></svg><span>Heatmaps</span></a>
+      <a href="#/replays" data-r="replays"><svg class="ni" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="m8 3 4 4 4-4"/><path d="m10.5 11 4 2.5-4 2.5z"/></svg><span>TV</span></a>
+      <a href="#/attendance" data-r="attendance"><svg class="ni" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m9 15.5 2 2 4-4"/></svg><span>Attendance</span></a>
+      <a href="#/awards" data-r="awards"><svg class="ni" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4h8v5a4 4 0 0 1-8 0V4z"/><path d="M8 6H5.5A2.5 2.5 0 0 0 8 10.5M16 6h2.5A2.5 2.5 0 0 1 16 10.5"/><path d="M12 13v4M8.5 21h7M10 17h4v4h-4z"/></svg><span>Awards</span></a>
       <div class="navfoot">
         <label class="toggle"><input type="checkbox" id="onlyFin2"><span>Completed games only</span></label>
         <span class="synced" id="synced2"></span>
@@ -810,7 +827,7 @@ function viewGame(id) {
   loadReplayIndex().then(list => {
     const r = list.find(x => x.game === g.id);
     const head = document.querySelector('.pagehead > div');
-    if (r && head && location.hash === `#/game/${g.id}`) head.insertAdjacentHTML('beforeend', `<div class="sub"><a href="#/replay/${r.id}" style="color:var(--accent)">▶ Watch the replay</a></div>`);
+    if (r && head && location.hash === `#/game/${g.id}`) head.insertAdjacentHTML('beforeend', `<div class="sub"><a href="#/replay/${r.id}" style="color:var(--accent)">▶ Watch on TV</a></div>`);
   });
   $('#app').insertAdjacentHTML('beforeend', `<section><h2>Clutches, trades &amp; bomb</h2><div id="gr"></div></section>`);
   mountTable($('#gr'), [
@@ -1624,13 +1641,13 @@ const fmtClock = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padSta
 const utcLocal = iso => new Date(iso);
 
 function viewReplays() {
-  pageTitle('Replays');
-  $('#app').innerHTML = '<div class="pagehead"><div><h1>Replays</h1><div class="sub">Loading…</div></div></div><div id="rt"></div>';
+  pageTitle('TV');
+  $('#app').innerHTML = '<div class="pagehead"><div><h1>TV</h1><div class="sub">Loading…</div></div></div><div id="rt"></div>';
   loadReplayIndex().then(list => {
     if (!document.getElementById('rt')) return;
     $('.sub').textContent = list.length ? `${list.length} recorded matches · watch every player move, round by round` : 'No recordings yet';
     if (!list.length) {
-      $('#rt').innerHTML = '<p class="sub">Replays appear here once the server records GOTV demos (tv_autorecord) and the daily update converts them.</p>';
+      $('#rt').innerHTML = '<p class="sub">Matches appear here once the server records GOTV demos (tv_autorecord) and the daily update converts them.</p>';
       return;
     }
     mountTable($('#rt'), [
@@ -1645,14 +1662,14 @@ function viewReplays() {
 }
 
 function viewReplay(id) {
-  pageTitle('Replay');
+  pageTitle('TV');
   $('#app').innerHTML = '<p class="sub">Loading replay…</p>';
   Promise.all([fetch(`data/replays/${id}.json`, {cache: 'no-cache'}).then(r => r.ok ? r.json() : null).catch(() => null), loadRadar()]).then(async ([rp, meta]) => {
     if (!rp) return notFound();
     let radar = null;
     if (meta[rp.map]) { const img = await radarImg(rp.map); if (img) radar = Object.assign({img}, meta[rp.map]); }
     if (!location.hash.startsWith(`#/replay/${id}`)) return;
-    pageTitle(`Replay · ${mapName(rp.map)}`);
+    pageTitle(`TV · ${mapName(rp.map)}`);
     playReplay(rp, radar);
   });
 }
@@ -1687,7 +1704,7 @@ function playReplay(rp, radar) {
   const st = {t: rp.rounds.length ? rp.rounds[0][1] : 0, playing: false, speed: 1, focus: new Set(), trails: true, names: true, cones: true};
 
   $('#app').innerHTML = `
-    <div class="crumb"><a href="#/replays">Replays</a> / ${esc(mapName(rp.map))}</div>
+    <div class="crumb"><a href="#/replays">TV</a> / ${esc(mapName(rp.map))}</div>
     <div class="pagehead"><div><h1>${esc(mapName(rp.map))}</h1>
       <div class="sub">${esc(when.toLocaleDateString('en-US', {weekday: 'long', month: 'long', day: 'numeric'}))} · ${esc(when.toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'}))} · ${fmtClock(dur)} · ${P.length} players${rp.game ? ` · <a href="#/game/${rp.game}" style="color:var(--accent)">game stats →</a>` : ''}</div></div></div>
     <div class="rpwrap">

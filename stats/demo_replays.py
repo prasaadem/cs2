@@ -93,6 +93,9 @@ def grenade_flights(p):
         return []
     g = g[g['grenade_type'].isin(PROJECTILE)].dropna(subset=['x', 'y'])
     smoke_pop = {int(e['entityid']): int(e['tick']) for e in events(p, 'smokegrenade_detonate')}
+    # HE / flash / decoy projectiles linger in the demo after going off, so use their own detonation event
+    detonate = {int(e['entityid']): int(e['tick'])
+                for name in ('hegrenade_detonate', 'flashbang_detonate', 'decoy_started') for e in events(p, name)}
     smoke_end = {int(e['entityid']): int(e['tick']) for e in events(p, 'smokegrenade_expired')}
     fire_start = [(int(e['tick']), int(e['entityid'])) for e in events(p, 'inferno_startburn')]
     fire_end = {int(e['entityid']): int(e['tick']) for e in events(p, 'inferno_expire')}
@@ -103,8 +106,10 @@ def grenade_flights(p):
         t_throw = int(rows['tick'].iloc[0])
         if kind == 's' and eid in smoke_pop:
             t_land = smoke_pop[eid]                     # the projectile lingers in the smoke afterwards
+        elif eid in detonate:
+            t_land = detonate[eid]
         else:
-            t_land = int(rows['tick'].iloc[-1])         # molotov / HE / flash projectiles end where they go off
+            t_land = int(rows['tick'].iloc[-1])         # molotovs end where they burst
         fl = rows[rows['tick'] <= t_land]
         fl = fl[((fl['tick'] - t_throw) % FLIGHT_TICKS == 0) | (fl['tick'] == fl['tick'].max())]
         path = [(int(round(x)), int(round(y))) for x, y in zip(fl['x'], fl['y'])]
