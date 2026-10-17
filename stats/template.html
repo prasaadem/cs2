@@ -83,6 +83,8 @@ nav a.on { color: var(--text); background: var(--surface-2); }
 .hctl { display: flex; align-items: center; gap: 8px; }
 .toggle { display: flex; align-items: center; gap: 8px; color: var(--text-2); font-size: 13px; cursor: pointer; user-select: none; white-space: nowrap; }
 .toggle input { accent-color: var(--accent); width: 16px; height: 16px; margin: 0; }
+.synced { color: var(--text-3); font-size: 12px; white-space: nowrap; }
+.synced.stale { color: var(--accent); }
 .iconbtn { border: 1px solid var(--line); background: transparent; color: var(--text-2); border-radius: 8px; height: 32px; width: 32px; cursor: pointer; font-size: 15px; }
 
 main { padding: 28px 0 64px; }
@@ -210,12 +212,34 @@ select { font: inherit; color: var(--text); background: var(--surface); border: 
 .pcard .r { font: 700 26px/1.1 Oxanium, sans-serif; margin-top: 6px; }
 .pcard .s { color: var(--text-3); font-size: 12px; }
 
+/* sidebar menu (small screens) */
+.menubtn, .navhead, .navfoot, #scrim { display: none; }
+@media (max-width: 1000px) {
+  .hbar { gap: 12px; height: 56px; }
+  .menubtn { display: grid; place-items: center; font-size: 18px; flex: none; }
+  .hctl { margin-left: auto; }
+  .hctl .toggle { display: none; }
+  nav {
+    position: fixed; top: 0; left: 0; bottom: 0; z-index: 40; width: min(280px, 82vw);
+    flex-direction: column; gap: 2px; padding: 14px 12px 18px; overflow-y: auto;
+    background: var(--surface); border-right: 1px solid var(--line); box-shadow: 0 0 40px rgba(0,0,0,.25);
+    transform: translateX(-100%); visibility: hidden; transition: transform .22s ease, visibility 0s linear .22s;
+  }
+  body.menu-open nav { transform: none; visibility: visible; transition: transform .22s ease; }
+  nav a { padding: 11px 14px; font-size: 15px; }
+  .navhead { display: flex; align-items: center; justify-content: space-between; padding: 2px 4px 14px 6px; margin-bottom: 8px; border-bottom: 1px solid var(--line); }
+  .navfoot { display: flex; flex-direction: column; gap: 10px; margin-top: auto; padding: 16px 6px 0; border-top: 1px solid var(--line); }
+  .navfoot .toggle span { display: inline; }
+  #scrim { display: block; position: fixed; inset: 0; z-index: 30; background: rgba(0,0,0,.45); opacity: 0; pointer-events: none; transition: opacity .2s; }
+  body.menu-open #scrim { opacity: 1; pointer-events: auto; }
+  body.menu-open { overflow: hidden; }
+}
+@media (prefers-reduced-motion: reduce) { nav, #scrim { transition: none !important; } }
 footer { color: var(--text-3); font-size: 12px; padding: 24px 0 40px; border-top: 1px solid var(--line); }
 
 @media (max-width: 640px) {
-  .hbar { gap: 12px; height: auto; padding: 10px 0; flex-wrap: wrap; }
-  nav { order: 3; flex-basis: 100%; }
-  .toggle span { display: none; }
+  .synced { font-size: 11px; }
+  .brand { font-size: 18px; }
   h1 { font-size: 24px; }
   .big { font-size: 40px; }
   .score { grid-template-columns: 1fr; text-align: center; }
@@ -227,8 +251,11 @@ footer { color: var(--text-3); font-size: 12px; padding: 24px 0 40px; border-top
 <body>
 <header>
   <div class="wrap hbar">
-    <a class="brand" href="#/"><span class="dot"></span><span id="brand"></span></a>
-    <nav id="nav">
+    <button class="iconbtn menubtn" id="menubtn" aria-label="Open menu" aria-expanded="false" aria-controls="nav">☰</button>
+    <a class="brand" href="#/"><span class="dot"></span><span class="brandtxt"></span></a>
+    <div id="scrim"></div>
+    <nav id="nav" aria-label="Main">
+      <div class="navhead"><span class="brand"><span class="dot"></span><span class="brandtxt"></span></span><button class="iconbtn" id="menuclose" aria-label="Close menu">✕</button></div>
       <a href="#/" data-r="">Overview</a>
       <a href="#/nights" data-r="nights">Nights</a>
       <a href="#/games" data-r="games">Games</a>
@@ -237,8 +264,13 @@ footer { color: var(--text-3); font-size: 12px; padding: 24px 0 40px; border-top
       <a href="#/weapons" data-r="weapons">Weapons</a>
       <a href="#/utility" data-r="utility">Utility</a>
       <a href="#/awards" data-r="awards">Awards</a>
+      <div class="navfoot">
+        <label class="toggle"><input type="checkbox" id="onlyFin2"><span>Completed games only</span></label>
+        <span class="synced" id="synced2"></span>
+      </div>
     </nav>
     <div class="hctl">
+      <span class="synced" id="synced"></span>
       <label class="toggle" title="Only count games that reached the final round (excludes aim maps and abandoned games)"><input type="checkbox" id="onlyFin"><span>Completed games only</span></label>
       <button class="iconbtn" id="theme" title="Toggle light / dark">◐</button>
     </div>
@@ -248,6 +280,20 @@ footer { color: var(--text-3); font-size: 12px; padding: 24px 0 40px; border-top
 <footer class="wrap" id="foot"></footer>
 <div id="tip"></div>
 <script>
+(() => {
+  const btn = document.getElementById('menubtn');
+  const open = on => {
+    document.body.classList.toggle('menu-open', on);
+    btn.setAttribute('aria-expanded', on);
+    if (on) (document.querySelector('#nav a.on') || document.querySelector('#nav a')).focus();
+  };
+  btn.onclick = () => open(true);
+  document.getElementById('menuclose').onclick = () => { open(false); btn.focus(); };
+  document.getElementById('scrim').onclick = () => open(false);
+  document.querySelectorAll('#nav a').forEach(a => a.addEventListener('click', () => open(false)));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && document.body.classList.contains('menu-open')) { open(false); btn.focus(); } });
+  matchMedia('(min-width: 1001px)').addEventListener('change', e => { if (e.matches) open(false); });
+})();
 fetch('data/games.json', {cache: 'no-cache'}).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(DATA => {
 const ALL = DATA.games;
 const BYID = Object.fromEntries(ALL.map(g => [g.id, g]));
@@ -1011,10 +1057,24 @@ function route() {
 }
 addEventListener('hashchange', () => { route(); scrollTo(0, 0); });
 
-$('#brand').textContent = DATA.title;
-$('#foot').innerHTML = `Built from CS2 server logs · ${ALL.length} games · last game ${esc(DATA.updated ? DATA.updated.slice(0, 10) : '–')}`;
-$('#onlyFin').checked = onlyFin;
-$('#onlyFin').onchange = e => { onlyFin = e.target.checked; try { localStorage.setItem('cs2.onlyFin', onlyFin ? '1' : '0'); } catch (x) {} route(); };
+document.querySelectorAll('.brandtxt').forEach(e => e.textContent = DATA.title);
+const fmtWhen = d => d.toLocaleString('en-US', {weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short'});
+const ago = d => { const m = Math.max(0, Math.round((Date.now() - d) / 60000)); return m < 60 ? `${m}m ago` : m < 48 * 60 ? `${Math.round(m / 60)}h ago` : `${Math.round(m / 1440)}d ago`; };
+const synced = DATA.synced ? new Date(DATA.synced) : null;
+const syncEl = $('#synced');
+if (synced) {
+  syncEl.textContent = 'Synced ' + ago(synced);
+  syncEl.title = 'Last sync with the server: ' + fmtWhen(synced);
+  if (Date.now() - synced > 36 * 3600e3) { syncEl.classList.add('stale'); syncEl.textContent = '⚠ ' + syncEl.textContent; syncEl.title += ' (the daily update may be failing)'; }
+} else syncEl.textContent = 'Not synced yet';
+const sync2 = $('#synced2');
+sync2.textContent = syncEl.textContent; sync2.title = syncEl.title; sync2.className = syncEl.className;
+$('#foot').innerHTML = `Built from CS2 server logs · ${ALL.length} games · last synced ${synced ? esc(fmtWhen(synced)) : '–'} · last game ${esc(DATA.updated ? fmtWhen(new Date(DATA.updated)) : '–')}`;
+const finBoxes = [$('#onlyFin'), $('#onlyFin2')];
+finBoxes.forEach(c => {
+  c.checked = onlyFin;
+  c.onchange = e => { onlyFin = e.target.checked; finBoxes.forEach(x => x.checked = onlyFin); try { localStorage.setItem('cs2.onlyFin', onlyFin ? '1' : '0'); } catch (x) {} route(); };
+});
 $('#theme').onclick = () => {
   const dark = document.documentElement.dataset.theme ? document.documentElement.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
   document.documentElement.dataset.theme = dark ? 'light' : 'dark';
