@@ -16,7 +16,40 @@
    "game": null,
    "map": "de_dust2",
    "start_utc": "2026-10-17T03:54:17Z",
-   "dur": 458,
+   "dur": 516,
+   "rounds": 1,
+   "players": [
+    "prasaadem"
+   ]
+  },
+  {
+   "id": "20261017-0409-de_dust2",
+   "game": null,
+   "map": "de_dust2",
+   "start_utc": "2026-10-17T04:09:18Z",
+   "dur": 36,
+   "rounds": 1,
+   "players": [
+    "prasaadem"
+   ]
+  },
+  {
+   "id": "20261017-0410-de_shortdust",
+   "game": null,
+   "map": "de_shortdust",
+   "start_utc": "2026-10-17T04:10:05Z",
+   "dur": 34,
+   "rounds": 1,
+   "players": [
+    "prasaadem"
+   ]
+  },
+  {
+   "id": "20261017-0420-de_dust2",
+   "game": null,
+   "map": "de_dust2",
+   "start_utc": "2026-10-17T04:20:40Z",
+   "dur": 46,
    "rounds": 1,
    "players": [
     "prasaadem"
@@ -31,9 +64,27 @@
    ]
   },
   "auto-20261017-0354-de_dust2-cupcake.dem": {
-   "size": 2875392,
+   "size": 3171658,
    "ids": [
     "20261017-0354-de_dust2"
+   ]
+  },
+  "auto-20261017-0409-de_dust2-cupcake.dem": {
+   "size": 503621,
+   "ids": [
+    "20261017-0409-de_dust2"
+   ]
+  },
+  "auto-20261017-0410-de_shortdust-cupcake.dem": {
+   "size": 637348,
+   "ids": [
+    "20261017-0410-de_shortdust"
+   ]
+  },
+  "auto-20261017-0419-de_dust2-cupcake.dem": {
+   "size": 1938746,
+   "ids": [
+    "20261017-0420-de_dust2"
    ]
   }
  }

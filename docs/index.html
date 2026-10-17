@@ -1704,7 +1704,7 @@ function playReplay(rp, radar) {
       <div class="rprow"><label class="toggle"><input type="checkbox" id="rptrail" checked><span>Trails</span></label>
         <label class="toggle"><input type="checkbox" id="rpnames" checked><span>Names &amp; weapons</span></label>
         <label class="toggle"><input type="checkbox" id="rpcones" checked><span>View cones</span></label>
-        <span class="legend" style="margin:0"><span><i style="background:var(--ct)"></i>CT</span><span><i style="background:var(--t)"></i>T</span><span><i style="background:#b9b9b9"></i>smoke</span><span><i style="background:#f07a2e"></i>fire</span><span><i style="background:#e5484d"></i>HE</span><span><i style="background:#fff;box-shadow:inset 0 0 0 1px var(--line)"></i>flash</span><span><i style="background:#ffe27a"></i>shots</span></span></div>
+        <span class="legend" style="margin:0"><span><i style="background:var(--ct)"></i>CT</span><span><i style="background:var(--t)"></i>T</span><span><i style="background:#b9b9b9"></i>smoke</span><span><i style="background:#f07a2e"></i>fire</span><span><i style="background:#e5484d"></i>HE</span><span><i style="background:#fff;box-shadow:inset 0 0 0 1px var(--line)"></i>flash</span><span><i style="background:#ffe27a"></i>shots</span><span><i style="background:#e5484d"></i>bomb</span></span></div>
     </div>
       </div>
       <div class="rpside">
@@ -1801,12 +1801,13 @@ function playReplay(rp, radar) {
     }
     drawShots(c, t);
     // players
-    const hp = {};
+    const hp = {}, pos = {};
     for (const p of P) {
       const s = at(p, t);
       hp[p.i] = s;
       if (!s) continue;
       const [px, py] = tf(s.x, s.y), color = col(s.side === 'C' ? '--ct' : '--t'), foc = st.focus.has(p.i);
+      pos[p.i] = {xy: [px, py], alive: s.alive};
       if (!s.alive) {
         c.strokeStyle = color; c.globalAlpha = 0.7; c.lineWidth = 2;
         c.beginPath(); c.moveTo(px - 4, py - 4); c.lineTo(px + 4, py + 4); c.moveTo(px + 4, py - 4); c.lineTo(px - 4, py + 4); c.stroke(); c.globalAlpha = 1;
@@ -1844,6 +1845,8 @@ function playReplay(rp, radar) {
         }
       }
     }
+    drawBlind(c, t, pos);
+    const bs = drawBomb(c, t, pos);
     drawHits(c, t);
     drawDeaths(c, t, col);
     // HUD, controls, side panel
@@ -1861,7 +1864,8 @@ function playReplay(rp, radar) {
       b.classList.toggle('on', st.focus.has(i)); b.classList.toggle('dead', !s || !s.alive);
       b.querySelector('.dot').style.background = s ? col(s.side === 'C' ? '--ct' : '--t') : 'var(--line)';
       const hpv = s && s.alive ? hpAt(P[i], t) : null;
-      b.querySelector('.hp').textContent = !s ? 'away' : !s.alive ? 'dead' : [wpnAt(P[i], t), hpv != null ? hpv + ' hp' : ''].filter(Boolean).join(' · ');
+      b.querySelector('.hp').textContent = !s ? 'away' : !s.alive ? 'dead'
+        : [bs.carrier === i ? 'C4' : '', wpnAt(P[i], t), hpv != null ? hpv + ' hp' : ''].filter(Boolean).join(' · ');
     });
     const name = id => (P.find(p => p.id === id) || {}).n || '?';
     const feed = rp.kills.filter(k => k[0] <= t && k[0] > t - 12).slice(-6).reverse();
@@ -2000,6 +2004,86 @@ function playReplay(rp, radar) {
       const ly = vy - 14 - age * 14;
       c.lineWidth = 3; c.strokeStyle = 'rgba(0,0,0,.75)'; c.strokeText(label, vx, ly);
       c.fillStyle = k[4] ? '#ffd166' : '#fff'; c.fillText(label, vx, ly); c.restore();
+    }
+  }
+
+  // ---- bomb: carrier, dropped, planting, planted countdown, defusing, explosion ----
+  const BOMB = rp.bomb || [];
+  const C4_SECONDS = 40, PLANT_SECONDS = 3.2;
+  function bombState(t) {
+    const st = {carrier: null, dropped: null, planting: null, planted: null, defusing: null, boom: null};
+    for (const [te, code, pi, x, y, kit] of BOMB) {
+      if (te > t) break;
+      if (code === 'pick') { st.carrier = pi; st.dropped = null; st.planted = null; st.boom = null; st.defusing = null; }
+      else if (code === 'drop') { st.carrier = null; if (x != null) st.dropped = [x, y]; }
+      else if (code === 'bp') st.planting = {pi, t0: te, x, y};
+      else if (code === 'ap') st.planting = null;
+      else if (code === 'plant') { st.planting = null; st.carrier = null; st.dropped = null; st.planted = {t0: te, x, y}; }
+      else if (code === 'bd') st.defusing = {pi, t0: te, kit};
+      else if (code === 'ad') st.defusing = null;
+      else if (code === 'defuse') { st.planted = null; st.defusing = null; }
+      else if (code === 'boom') { st.boom = {t0: te, x: x != null ? x : st.planted && st.planted.x, y: y != null ? y : st.planted && st.planted.y}; st.planted = null; }
+    }
+    // a planted bomb never outlives its round
+    const r = rp.rounds.find(r => st.planted && st.planted.t0 >= r[0] && st.planted.t0 <= r[2]);
+    if (st.planted && r && t > r[2] + 4) st.planted = null;
+    return st;
+  }
+  function bombIcon(c, x, y, blink) {
+    c.save();
+    c.fillStyle = blink ? '#ff3b30' : '#e5484d'; c.strokeStyle = 'rgba(0,0,0,.7)'; c.lineWidth = 1.5;
+    c.beginPath(); c.roundRect ? c.roundRect(x - 6, y - 4, 12, 8, 2) : c.rect(x - 6, y - 4, 12, 8); c.fill(); c.stroke();
+    c.fillStyle = '#fff'; c.font = '700 6px Inter, sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText('C4', x, y + 0.5);
+    c.restore();
+  }
+  function ring(c, x, y, r, u, color) {
+    c.save(); c.lineWidth = 3; c.strokeStyle = 'rgba(0,0,0,.5)'; c.beginPath(); c.arc(x, y, r, 0, 7); c.stroke();
+    c.strokeStyle = color; c.beginPath(); c.arc(x, y, r, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * Math.min(1, u)); c.stroke(); c.restore();
+  }
+  function drawBomb(c, t, pos) {
+    const b = bombState(t);
+    if (b.dropped) { const [px, py] = tf(b.dropped[0], b.dropped[1]); bombIcon(c, px, py, false); }
+    // before the recording's first pickup, whoever has the C4 in hand is the carrier
+    if (b.carrier == null && !b.dropped && !b.planted && !BOMB.some(e => e[0] <= t && e[1] === 'pick')) {
+      const holder = P.find(p => pos[p.i] && pos[p.i].alive && /^C4/i.test(wpnAt(p, t)));
+      if (holder) b.carrier = holder.i;
+    }
+    if (b.carrier != null && pos[b.carrier] && pos[b.carrier].alive) { const [px, py] = pos[b.carrier].xy; bombIcon(c, px + 11, py + 9, false); }
+    if (b.planting && pos[b.planting.pi]) {
+      const [px, py] = pos[b.planting.pi].xy;
+      ring(c, px, py, 13, (t - b.planting.t0) / PLANT_SECONDS, '#ff6b62');
+    }
+    if (b.planted && b.planted.x != null) {
+      const [px, py] = tf(b.planted.x, b.planted.y), left = Math.max(0, C4_SECONDS - (t - b.planted.t0));
+      const blink = Math.floor((t - b.planted.t0) * (left < 10 ? 4 : 1.5)) % 2 === 0;
+      if (blink) { c.save(); c.globalAlpha = 0.35; c.fillStyle = '#ff3b30'; c.beginPath(); c.arc(px, py, 14, 0, 7); c.fill(); c.restore(); }
+      bombIcon(c, px, py, blink);
+      c.save(); c.font = '700 12px Oxanium, sans-serif'; c.textAlign = 'center'; c.lineWidth = 3; c.strokeStyle = 'rgba(0,0,0,.8)';
+      const label = Math.ceil(left) + 's'; c.strokeText(label, px, py - 12); c.fillStyle = left < 10 ? '#ff6b62' : '#fff'; c.fillText(label, px, py - 12); c.restore();
+      if (b.defusing && pos[b.defusing.pi]) {
+        const [dx, dy] = pos[b.defusing.pi].xy;
+        ring(c, dx, dy, 13, (t - b.defusing.t0) / (b.defusing.kit ? 5 : 10), '#3987e5');
+      }
+    }
+    if (b.boom && b.boom.x != null) {
+      const age = t - b.boom.t0;
+      if (age < 1.6) {
+        const [px, py] = tf(b.boom.x, b.boom.y), R = Math.max(30, 1750 * scale) * ease(age / 1.2);
+        const gr = c.createRadialGradient(px, py, 0, px, py, R);
+        gr.addColorStop(0, `rgba(255,236,170,${0.9 * (1 - age / 1.6)})`); gr.addColorStop(0.5, `rgba(255,120,40,${0.6 * (1 - age / 1.6)})`); gr.addColorStop(1, 'rgba(255,60,20,0)');
+        c.fillStyle = gr; c.beginPath(); c.arc(px, py, R, 0, 7); c.fill();
+      }
+    }
+    return b;
+  }
+  // flashed players get a white glow that fades with the blind
+  function drawBlind(c, t, pos) {
+    for (const [tb, vi, ai, d] of rp.blind || []) {
+      if (t < tb || t > tb + d || !pos[vi] || !pos[vi].alive) continue;
+      const [px, py] = pos[vi].xy, u = 1 - (t - tb) / d;
+      const gr = c.createRadialGradient(px, py, 3, px, py, 22);
+      gr.addColorStop(0, `rgba(255,255,255,${0.9 * u})`); gr.addColorStop(1, 'rgba(255,255,255,0)');
+      c.fillStyle = gr; c.beginPath(); c.arc(px, py, 22, 0, 7); c.fill();
     }
   }
 

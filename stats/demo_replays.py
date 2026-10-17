@@ -20,6 +20,9 @@ Replay format (positions are Hammer units, times are seconds from match start):
                       x,y pairs every 1/16 s from the throw to the landing (delta-encoded)
   shots               [time, player index] for every bullet fired
   hits                [time, attacker index, victim index, damage, hit group, weapon] (player_hurt)
+  bomb                [time, event, player index, x, y, has kit] events: pick drop bp (begin plant)
+                      ap (abort plant) plant bd (begin defuse) ad (abort defuse) defuse boom
+  blind               [time, victim index, attacker index, seconds] (flashed players)
   players[i].w / .h   weapon held / health, run-length: [[sample, value], ...] (weapon = index into wn)
 """
 import argparse
@@ -122,6 +125,109 @@ def grenade_flights(p):
     return out
 
 
+CELL = 'CCSPlayerPawn.CBodyComponentBaseAnimGraph.m_cell'
+VEC = 'CCSPlayerPawn.CBodyComponentBaseAnimGraph.m_vec'
+
+
+def fill_positions(ticks):
+    """Rebuild X/Y where the parser left them out. A position is a 512-unit cell plus an
+    offset inside it; a cell that never changes is never sent, and its default (32) is
+    the map origin, so then the coordinate is just the offset."""
+    for axis in ('X', 'Y'):
+        cell, vec = CELL + axis, VEC + axis
+        if vec not in ticks.columns:
+            continue
+        if axis not in ticks.columns:
+            ticks[axis] = float('nan')
+        c = ticks[cell] if cell in ticks.columns else None
+        if c is not None:
+            c = c.groupby(ticks['steamid']).transform(lambda v: v.ffill().bfill())
+            c = c.fillna(32)
+        else:
+            c = 32
+        rebuilt = c * 512 - 16384 + ticks[vec]
+        ticks[axis] = ticks[axis].fillna(rebuilt)
+    return ticks
+
+
+BOMB_EVENTS = {'bomb_pickup': 'pick', 'bomb_dropped': 'drop', 'bomb_beginplant': 'bp', 'bomb_abortplant': 'ap',
+               'bomb_planted': 'plant', 'bomb_begindefuse': 'bd', 'bomb_abortdefuse': 'ad',
+               'bomb_defused': 'defuse', 'bomb_exploded': 'boom'}
+
+
+def _missing(v):
+    return v is None or (isinstance(v, float) and math.isnan(v)) or str(v) in ('', 'nan', 'None')
+
+
+def resolve_players(p, shots, hurts, deaths, grenades):
+    """Fill in who fired / got hurt / died when the demo couldn't name the player.
+
+    That happens for anyone already connected when the recording started (auto-record
+    begins at a map change and misses their join). Their own state is still recorded,
+    so: the shooter is whoever's ammo dropped on that tick, a hurt player is whoever's
+    health dropped, a dead player is whoever stopped being alive; the attacker is whoever
+    fired just before (or threw the grenade), the killer is whoever hurt them last.
+    """
+    need = [t for t, sid, name in shots if _missing(sid) and _missing(name)]
+    need += [int(e['tick']) for e in hurts + deaths if _missing(e.get('user_steamid')) and _missing(e.get('user_name'))]
+    if not need:
+        return shots, hurts, deaths
+    ticks = sorted({x for t in need for x in (t - 2, t + 1)})
+    st = p.parse_ticks(['active_weapon_ammo', 'health', 'is_alive'], ticks=ticks)
+    snap = {}
+    for row in st.to_dict('records'):
+        snap.setdefault(int(row['tick']), {})[str(int(row['steamid']))] = row
+
+    def changed(t, field, test):
+        before, after = snap.get(t - 2, {}), snap.get(t + 1, {})
+        out = []
+        for sid, r0 in before.items():
+            r1 = after.get(sid)
+            if r1 is not None and not _missing(r0.get(field)) and not _missing(r1.get(field)) and test(r0[field], r1[field]):
+                out.append((sid, r0.get('name')))
+        return out
+
+    fixed_shots = []
+    for t, sid, name in shots:
+        if _missing(sid) and _missing(name):
+            c = changed(t, 'active_weapon_ammo', lambda a, b: b < a)
+            if c:
+                sid, name = c[0]
+        fixed_shots.append((t, sid, name))
+    known = sorted((t, sid, name) for t, sid, name in fixed_shots if not _missing(sid))
+    throws = {k: (sid, t_land) for k, sid, _, t_land, _, _ in [(g[0], g[1], g[2], g[3], g[4], g[5]) for g in grenades]}
+
+    for e in hurts:
+        t = int(e['tick'])
+        if _missing(e.get('user_steamid')) and _missing(e.get('user_name')):
+            c = changed(t, 'health', lambda a, b: b < a)
+            if c:
+                e['user_steamid'], e['user_name'] = c[0]
+        if _missing(e.get('attacker_steamid')) and _missing(e.get('attacker_name')):
+            w = str(e.get('weapon') or '')
+            if w in ('inferno', 'molotov', 'incgrenade', 'hegrenade'):
+                kind = 'h' if w == 'hegrenade' else 'm'
+                cands = [g for g in grenades if g[0] == kind and g[3] <= t]
+                if cands:
+                    e['attacker_steamid'] = max(cands, key=lambda g: g[3])[1]
+            elif w and w != 'world':
+                prev = [k for k in known if t - 20 <= k[0] <= t and k[1] != e.get('user_steamid')]
+                if prev:
+                    e['attacker_steamid'], e['attacker_name'] = prev[-1][1], prev[-1][2]
+    for e in deaths:
+        t = int(e['tick'])
+        if _missing(e.get('user_steamid')) and _missing(e.get('user_name')):
+            c = changed(t, 'is_alive', lambda a, b: bool(a) and not bool(b))
+            if c:
+                e['user_steamid'], e['user_name'] = c[0]
+        if _missing(e.get('attacker_steamid')) and _missing(e.get('attacker_name')):
+            last = [h for h in hurts if int(h['tick']) <= t and h.get('user_steamid') == e.get('user_steamid')
+                    and not _missing(h.get('attacker_steamid'))]
+            if last:
+                e['attacker_steamid'] = last[-1]['attacker_steamid']
+    return fixed_shots, hurts, deaths
+
+
 def load_games(data_dir):
     games = []
     for f in glob.glob(os.path.join(data_dir, '*.json')):
@@ -142,12 +248,24 @@ def convert(path, games):
     rends = sorted(events(p, 'round_end'), key=lambda e: e['tick'])
     deaths = events(p, 'player_death', player=['X', 'Y'])
     grenades = grenade_flights(p)
-    shots_all = [(int(e['tick']), str(e.get('user_steamid') or ''))
+    # some demos leave the shooter's steamid empty; the name is still there
+    shots_all = [(int(e['tick']), e.get('user_steamid'), e.get('user_name'))
                  for e in events(p, 'weapon_fire') if not str(e.get('weapon', '')).endswith(NOT_GUNS)]
     # a match begins at the server's restart/new-match events; otherwise the whole demo is one match
     starts = sorted({int(e['tick']) for n in ('begin_new_match', 'round_announce_match_start') for e in events(p, n)})
-    ticks = p.parse_ticks(['X', 'Y', 'yaw', 'is_alive', 'team_num', 'active_weapon_name', 'health'])
+    ticks = p.parse_ticks(['X', 'Y', 'yaw', 'is_alive', 'team_num', 'active_weapon_name', 'health',
+                           CELL + 'X', CELL + 'Y', VEC + 'X', VEC + 'Y'])
+    if len(ticks):
+        ticks = fill_positions(ticks)
+        for col in ('yaw', 'is_alive', 'team_num', 'active_weapon_name', 'health'):
+            if col not in ticks.columns:  # a field that never changed in this demo comes back missing
+                ticks[col] = None
+        if 'X' not in ticks.columns or 'Y' not in ticks.columns:
+            return []
     hurts = events(p, 'player_hurt')
+    bomb_ev = sorted(((code, e) for name, code in BOMB_EVENTS.items() for e in events(p, name)), key=lambda x: int(x[1]['tick']))
+    blinds = events(p, 'player_blind')
+    shots_all, hurts, deaths = resolve_players(p, shots_all, hurts, deaths, grenades)
     if not len(ticks):
         return []
     first, last = int(ticks['tick'].min()), int(ticks['tick'].max())
@@ -164,6 +282,7 @@ def convert(path, games):
         sec = lambda tk: round((tk - a) / TICKRATE, 1)  # noqa: E731
         players = []
         wnames = []
+        track = {}  # player id -> (xs, ys) absolute positions, for kills without coordinates
 
         def rle(values):
             out, prev = [], object()
@@ -188,7 +307,8 @@ def convert(path, games):
                     if wpn not in wnames:
                         wnames.append(wpn)
                     ws[i] = wnames.index(wpn)
-                hs[i] = int(num(hp, 0)) if bool(alive) else 0
+                h = num(hp)
+                hs[i] = (int(h) if h is not None else None) if bool(alive) else 0  # unknown health stays None
                 lx, ly = int(round(num(x, lx))), int(round(num(y, ly)))
                 xs[i], ys[i] = lx, ly
                 as_[i] = int(round((num(yaw, 0) % 360) / 4)) % 90
@@ -202,6 +322,7 @@ def convert(path, games):
             # steamid64 -> account id, the id the stats use
             sid64 = int(sid)
             pid = str(sid64 - 76561197960265728) if sid64 > 76561197960265728 else str(sid64)
+            track[pid] = (xs, ys)
             for i in range(1, n):  # hold the last weapon / health through short gaps
                 if ws[i] is None:
                     ws[i] = ws[i - 1]
@@ -221,17 +342,38 @@ def convert(path, games):
             w = num(e.get('winner'))
             rounds.append([sec(st), sec(fz), sec(tk), {2: 'T', 3: 'C'}.get(int(w), '-') if w is not None else '-',
                            str(e.get('reason') or '')])
+        by_name = {pl['n']: pl['id'] for pl in players}
+
+        def who(sid, name=None):
+            """Account id for an event's player: by name (unique within a match), else by steamid64.
+            The id is parsed from text, since 17-digit ids don't survive a trip through floats."""
+            if isinstance(name, str) and name in by_name:
+                return by_name[name]
+            txt = str(sid).split('.')[0] if sid is not None else ''
+            if txt.isdigit() and int(txt) > 76561197960265728:
+                return str(int(txt) - 76561197960265728)
+            return None
+
+        def where(pid, tk, ex, ey):
+            if num(ex) is not None and num(ey) is not None:
+                return int(num(ex)), int(num(ey))
+            if pid in track:
+                k = max(0, min(n - 1, (tk - a) // SAMPLE_TICKS))
+                return track[pid][0][k], track[pid][1][k]
+            return None
+        acct = who
+
         kills = []
         for e in deaths:
             tk = int(e['tick'])
-            if not a <= tk < b or num(e.get('user_X')) is None:
+            if not a <= tk < b:
                 continue
-            acc = lambda k: str(int(e[k]) - 76561197960265728) if num(e.get(k)) and int(e[k]) > 76561197960265728 else None  # noqa: E731
-            kills.append([sec(tk), acc('attacker_steamid'), acc('user_steamid'), str(e.get('weapon') or ''),
-                          1 if e.get('headshot') else 0,
-                          int(num(e.get('attacker_X'), num(e.get('user_X')))), int(num(e.get('attacker_Y'), num(e.get('user_Y')))),
-                          int(num(e.get('user_X'))), int(num(e.get('user_Y')))])
-        acct = lambda sid: str(int(sid) - 76561197960265728) if sid and sid.isdigit() and int(sid) > 76561197960265728 else None  # noqa: E731
+            killer, victim = who(e.get('attacker_steamid'), e.get('attacker_name')), who(e.get('user_steamid'), e.get('user_name'))
+            vpos = where(victim, tk, e.get('user_X'), e.get('user_Y'))
+            if victim is None or vpos is None:
+                continue
+            kpos = where(killer, tk, e.get('attacker_X'), e.get('attacker_Y')) or vpos
+            kills.append([sec(tk), killer, victim, str(e.get('weapon') or ''), 1 if e.get('headshot') else 0, *kpos, *vpos])
         nades = []
         for kind, sid, t_throw, t_land, t_end, path in grenades:
             if not a <= t_throw < b:
@@ -240,15 +382,36 @@ def convert(path, games):
             nades.append([kind, acct(sid), sec(t_throw), sec(t_land), sec(t_end),
                           [v for pair in zip(delta(flat[0::2]), delta(flat[1::2])) for v in pair]])
         pidx = {pl['id']: i for i, pl in enumerate(players)}
-        shots = [[sec(tk), pidx[acct(sid)]] for tk, sid in shots_all if a <= tk < b and acct(sid) in pidx]
+        shots = [[sec(tk), pidx[who(sid, name)]] for tk, sid, name in shots_all if a <= tk < b and who(sid, name) in pidx]
         hits = []
         for e in hurts:
             tk = int(e['tick'])
-            att, vic = acct(str(e.get('attacker_steamid') or '')), acct(str(e.get('user_steamid') or ''))
+            att, vic = who(e.get('attacker_steamid'), e.get('attacker_name')), who(e.get('user_steamid'), e.get('user_name'))
             if not a <= tk < b or vic not in pidx:
                 continue
             hits.append([sec(tk), pidx.get(att), pidx[vic], int(num(e.get('dmg_health'), 0)),
                          str(e.get('hitgroup') or ''), str(e.get('weapon') or '')])
+        bomb = []
+        last_plant = None
+        for code, e in bomb_ev:
+            tk = int(e['tick'])
+            if not a <= tk < b:
+                continue
+            pid = who(e.get('user_steamid'), e.get('user_name'))
+            pos = where(pid, tk, None, None) if pid else None
+            if code == 'plant':
+                last_plant = pos
+            if code == 'boom' and pos is None:
+                pos = last_plant  # the explosion has no player; it happens where the bomb was planted
+            bomb.append([sec(tk), code, pidx.get(pid), *(pos or (None, None)), 1 if e.get('haskit') else 0])
+        blind = []
+        for e in blinds:
+            tk = int(e['tick'])
+            vic = who(e.get('user_steamid'), e.get('user_name'))
+            if not a <= tk < b or vic not in pidx:
+                continue
+            blind.append([sec(tk), pidx[vic], pidx.get(who(e.get('attacker_steamid'), e.get('attacker_name'))),
+                          round(num(e.get('blind_duration'), 0), 1)])
         start = t0 + dt.timedelta(seconds=a / TICKRATE)
         game = min((g for g in games if g[1] == mp and abs((g[2] - start).total_seconds()) <= MATCH_WINDOW),
                    key=lambda g: abs((g[2] - start).total_seconds()), default=None)
@@ -256,7 +419,7 @@ def convert(path, games):
         out.append({'id': rid, 'game': game[0] if game else None, 'map': mp,
                     'start_utc': start.strftime('%Y-%m-%dT%H:%M:%SZ'), 'hz': TICKRATE / SAMPLE_TICKS, 'n': n,
                     'players': players, 'rounds': rounds, 'kills': kills, 'grenades': nades, 'shots': shots,
-                    'hits': hits, 'wn': wnames})
+                    'hits': hits, 'wn': wnames, 'bomb': bomb, 'blind': blind})
     return out
 
 
