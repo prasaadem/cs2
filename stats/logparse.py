@@ -9,7 +9,7 @@ import glob
 import os
 import re
 
-PARSER_VERSION = 5  # 2: grenades/flashes/purchases; 3: clutches/trades/bomb/round ends; 4: economy; 5: positions
+PARSER_VERSION = 6  # 2: grenades/flashes/purchases; 3: clutches/trades/bomb/round ends; 4: economy; 5: positions; 6: chat, quits
 
 # Local time for display / night grouping: US Pacific with US daylight-saving rules.
 STD_OFFSET_HOURS = -8
@@ -50,7 +50,9 @@ GAME_OVER = re.compile(r'Game Over: \w+\s+(\S+) score (\d+):(\d+) after (\d+) mi
 MAP = re.compile(r'(?:Loading map|Match_Start" on) "(\w+)"')
 ANY_PLAYER = re.compile(P)
 SWITCH = re.compile(r'"(.+?)<\d+><\[U:1:(\d+)\]>" switched from team <\w+> to <(\w+)>')
-DISCONNECT = re.compile(P + r' disconnected')
+DISCONNECT = re.compile(P + r' disconnected(?: \(reason "(\w+)"\))?')
+SAY = re.compile(P + r' say(_team)? "')
+QUIT_REASONS = ('NETWORK_DISCONNECT_DISCONNECT_BY_USER', 'NETWORK_DISCONNECT_EXITING')
 COORDS = re.compile(r'\[(-?[\d.]+) (-?[\d.]+) (-?[\d.]+)\]')
 NADE_CODE = {'hegrenade': 'h', 'flashbang': 'f', 'smokegrenade': 's', 'molotov': 'm', 'decoy': 'd'}
 THREW = re.compile(P + r' threw (hegrenade|flashbang|smokegrenade|molotov|decoy)\b')
@@ -238,6 +240,11 @@ def parse_group(files):
                     roster.pop(dc.group(2), None)
                     if cur is not None and cur.game_over is None:
                         cur.died(dc.group(2))
+                        # leaving a game in progress (not the server shutting down at a map change)
+                        if cur.rounds and dc.group(4) in QUIT_REASONS:
+                            cur.stats[dc.group(2)]['quit'] += 1
+                        elif cur.rounds and dc.group(4) == 'NETWORK_DISCONNECT_TIMEDOUT':
+                            cur.stats[dc.group(2)]['tmo'] += 1
                     continue
                 if cur is None or cur.game_over is not None:
                     continue
@@ -246,6 +253,10 @@ def parse_group(files):
                     cur.start_round()
                     continue
 
+                sy = SAY.search(msg)
+                if sy:
+                    cur.stats[sy.group(2)]['tchat' if sy.group(4) else 'chat'] += 1
+                    continue
                 ok = OTHER_KILL.search(msg)
                 if ok:
                     cur.see(*ok.groups()[:3])
@@ -490,6 +501,7 @@ def build_game(m):
             'sd': ''.join(m.sides[i].get(sid, '.') for i in range(nrounds)),
             'chick': s['chick'], 'brk': s['brk'],
             'kdist': s['kdist'], 'kdn': s['kdn'],
+            'chat': s['chat'], 'tchat': s['tchat'], 'quit': s['quit'], 'tmo': s['tmo'],
             'mo': [m.money.get(i, {}).get(sid) for i in range(nrounds)],
             'spr': [m.spend[i][sid] for i in range(nrounds)],
             **extra,

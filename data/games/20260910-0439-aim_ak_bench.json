@@ -560,6 +560,7 @@
    "brk": 0,
    "bspawn": 0,
    "buy": 0,
+   "chat": 0,
    "chick": 0,
    "ck": 2,
    "cl": [
@@ -640,6 +641,7 @@
    "pk": null,
    "pkw": {},
    "plant": 0,
+   "quit": 0,
    "r": 5,
    "res": null,
    "rt": 1.439,
@@ -677,8 +679,10 @@
     0
    ],
    "sui": 0,
+   "tchat": 0,
    "team": "T",
    "tk": 0,
+   "tmo": 0,
    "trade": 0,
    "traded": 0,
    "ud": 0,
@@ -702,6 +706,7 @@
    "brk": 0,
    "bspawn": 0,
    "buy": 0,
+   "chat": 0,
    "chick": 0,
    "ck": 9,
    "cl": [
@@ -794,6 +799,7 @@
    "pk": null,
    "pkw": {},
    "plant": 0,
+   "quit": 0,
    "r": 28,
    "res": null,
    "rt": 1.079,
@@ -831,8 +837,10 @@
     0
    ],
    "sui": 0,
+   "tchat": 0,
    "team": "T",
    "tk": 0,
+   "tmo": 0,
    "trade": 0,
    "traded": 0,
    "ud": 0,
@@ -858,6 +866,7 @@
    "brk": 0,
    "bspawn": 0,
    "buy": 0,
+   "chat": 0,
    "chick": 0,
    "ck": 1,
    "cl": [
@@ -942,6 +951,7 @@
    "pk": null,
    "pkw": {},
    "plant": 0,
+   "quit": 1,
    "r": 23,
    "res": null,
    "rt": 0.79,
@@ -979,8 +989,10 @@
     0
    ],
    "sui": 0,
+   "tchat": 0,
    "team": "CT",
    "tk": 0,
+   "tmo": 0,
    "trade": 1,
    "traded": 1,
    "ud": 0,
@@ -1006,6 +1018,7 @@
    "brk": 0,
    "bspawn": 0,
    "buy": 0,
+   "chat": 0,
    "chick": 0,
    "ck": 2,
    "cl": [
@@ -1102,6 +1115,7 @@
    "pk": null,
    "pkw": {},
    "plant": 0,
+   "quit": 0,
    "r": 22,
    "res": null,
    "rt": 0.561,
@@ -1139,8 +1153,10 @@
     0
    ],
    "sui": 0,
+   "tchat": 0,
    "team": "CT",
    "tk": 0,
+   "tmo": 0,
    "trade": 1,
    "traded": 1,
    "ud": 0,
@@ -1166,6 +1182,6 @@
  "start": "2026-09-09T21:39",
  "start_utc": "2026-09-10T04:39:39Z",
  "t": 15,
- "v": 5,
+ "v": 6,
  "win": null
 }

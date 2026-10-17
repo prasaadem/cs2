@@ -280,6 +280,7 @@ footer { color: var(--text-3); font-size: 12px; padding: 24px 0 40px; border-top
       <a href="#/utility" data-r="utility">Utility</a>
       <a href="#/rounds" data-r="rounds">Rounds</a>
       <a href="#/heatmap" data-r="heatmap">Heatmaps</a>
+      <a href="#/attendance" data-r="attendance">Attendance</a>
       <a href="#/awards" data-r="awards">Awards</a>
       <div class="navfoot">
         <label class="toggle"><input type="checkbox" id="onlyFin2"><span>Completed games only</span></label>
@@ -353,7 +354,7 @@ function rating(k, d, r, k1, k2, k3, k4, k5) {
   return (k / r / 0.679 + 0.7 * Math.max(r - d, 0) / r / 0.317 + (k1 + 4 * k2 + 9 * k3 + 16 * k4 + 25 * k5) / r / 1.277) / 2.7;
 }
 
-const SUM_KEYS = ['r','k','d','a','fa','hs','tk','sui','ek','ed','k1','k2','k3','k4','k5','awp','knife','zeus','nade','wb','ns','smoke','blindk','plant','defuse','gh','gf','gs','gm','gd','fe','ft','fself','fbd','fdur','buy','spent','ck','trade','traded','bspawn','bpick','bdrop','pA','pB','chick','brk','ud','fdmg','dinks','uniq','kdist','kdn'];
+const SUM_KEYS = ['r','k','d','a','fa','hs','tk','sui','ek','ed','k1','k2','k3','k4','k5','awp','knife','zeus','nade','wb','ns','smoke','blindk','plant','defuse','gh','gf','gs','gm','gd','fe','ft','fself','fbd','fdur','buy','spent','ck','trade','traded','bspawn','bpick','bdrop','pA','pB','chick','brk','ud','fdmg','dinks','uniq','kdist','kdn','chat','tchat','quit','tmo'];
 // $ spent in a round: eco < 1000 <= force < 3500 <= full; under 1000 while holding 4000+ = kept weapons / saved
 const ECO_MAX = 1000, FULL_MIN = 3500, SAVE_MONEY = 4000;
 
@@ -436,6 +437,7 @@ function econDerive(s) {
   for (const [w, c] of Object.entries(s.wp || s.w || {})) { const k = weaponCat(w); if (k === 'Sniper') sn += c; else if (k === 'Pistol') pi += c; }
   s.snk = sn; s.pik = pi;
   s.kdm = s.kdn ? s.kdist / s.kdn * 0.0254 : null;
+  s.msgs = (s.chat || 0) + (s.tchat || 0);
 }
 function derive(s) {
   s.kd = s.d ? s.k / s.d : s.k;
@@ -722,7 +724,7 @@ function viewNight(n) {
       ${tile('Kills', kills)}
       ${tile('Play time', (ng.reduce((s, g) => s + g.min, 0) / 60).toFixed(1) + ' h', `from ${timeLabel(ng[0].start)}`)}
     </div>
-    <section><h2>Night leaderboard</h2><div id="lb"></div><div class="note"><a href="#/utility/${n}" style="color:var(--accent)">Grenades, flashes, purchases and pickups for this night →</a> · <a href="#/rounds/${n}" style="color:var(--accent)">Clutches, trades and bomb →</a></div></section>
+    <section><h2>Night leaderboard</h2><div id="lb"></div><div class="note"><a href="#/utility/${n}" style="color:var(--accent)">Grenades, flashes, purchases and pickups for this night →</a> · <a href="#/rounds/${n}" style="color:var(--accent)">Clutches, trades and bomb →</a> · <a href="#/attendance/${n}" style="color:var(--accent)">Who played when →</a></div></section>
     <section><h2>Games</h2><div id="gt"></div></section>
     <section class="grid2"><div class="card pad"><h2>Records</h2>${recordCards(ng)}</div><div class="card pad"><h2>Kills by weapon</h2>${weaponsBlock(wp)}</div></section>`;
   board($('#lb'), rows, {minGames: 1});
@@ -889,6 +891,7 @@ function viewPlayer(id) {
       ${tile('Multi-kills', me.mk, `${me.k3} × 3K · ${me.k4} × 4K · ${me.k5} aces`)}
       ${tile('Clutches', me.ca ? `${me.cw}/${me.ca}` : '–', me.cbest ? `best: 1v${me.cbest} · ${me.ck} clutch kills` : 'none won yet')}
       ${tile('Trades', me.trade, `${pct(me.tdr)} of deaths traded · round win ${pct(me.rwr)}`)}
+      ${(() => { const a = attendance(gs).rows.find(r => r.id === id); const N = new Set(gs.map(g => g.night)).size; return a ? tile('Attendance', `${a.nn}/${N} nights`, `${f1(a.hours)} h played · usually from ${clock(18 * 60 + a.join)}`) : ''; })()}
       ${me.kdm != null ? tile('Kill distance', f1(me.kdm) + ' m', 'average distance to the enemy') : ''}
       ${tile('Economy', me.avgMoney == null ? '–' : '$' + Math.round(me.avgMoney).toLocaleString(), `avg money · full buys won ${me.fullR ? pct(me.fullWr) : '–'} · ${me.saves} saves`)}
       ${tile('Grenades thrown', me.gt, `${me.fe} enemies flashed · ${me.ft} teammates`)}
@@ -1059,6 +1062,9 @@ const AWARDS = [
   {k: 'ecoW', l: 'Eco warrior', d: 'Eco rounds won'},
   {k: 'saves', l: 'Hoarder', d: 'Rounds with $4,000+ where they spent under $1,000'},
   {k: 'ud', l: 'Utility damage', d: 'HE + molotov damage (server stats)'},
+  {k: 'msgs', l: 'Chatterbox', d: 'Chat messages'},
+  {k: 'quit', l: 'Rage quitter', d: 'Games left mid-way'},
+  {k: 'tmo', l: 'Bad connection', d: 'Timed out mid-game'},
 ];
 function viewAwards() {
   pageTitle('Awards');
@@ -1074,7 +1080,7 @@ function viewAwards() {
     }).join('')}</div>
     <section><h2>Playstyle table</h2><div id="ps"><div class="filters"></div><div class="t"></div></div>
       <div class="note">Totals across all games. Hover a column name for what it counts.</div></section>`;
-  const cols = [C.player, C.g, ...AWARDS.filter(a => !['d', 'a', 'awp', 'k4', 'k5', 'spent', 'gt', 'fe', 'ft', 'fself', 'fbd', 'pk', 'cw', 'trade', 'carry', 'bdrop', 'snk', 'pik', 'ecoW', 'saves', 'ud'].includes(a.k))
+  const cols = [C.player, C.g, ...AWARDS.filter(a => !['d', 'a', 'awp', 'k4', 'k5', 'spent', 'gt', 'fe', 'ft', 'fself', 'fbd', 'pk', 'cw', 'trade', 'carry', 'bdrop', 'snk', 'pik', 'ecoW', 'saves', 'ud', 'msgs', 'quit', 'tmo'].includes(a.k))
     .map(a => ({k: a.k, l: a.d.replace(/ \(.*\)/, '').replace(/^Kills /, '').replace(/ kills$/, ''), t: `${a.l}: ${a.d}`, f: v => v ? v : '<span class="muted">0</span>'}))];
   const draw = mg => mountTable($('#ps .t'), cols, rows.filter(r => r.g >= mg), {sort: 'wb', rank: true});
   minGamesFilter($('#ps .filters'), rows, 1, draw);
@@ -1472,6 +1478,82 @@ function hexRgb(h) {
   return [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16));
 }
 
+// ---------- attendance & chat ----------
+const clock = mins => { const h = Math.floor(mins / 60) % 24, m = Math.round(mins % 60); return `${(h % 12) || 12}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`; };
+// minutes past 6 PM on the night's date, so a session past midnight keeps counting up
+const nightMins = (g, start) => { const d = new Date(start); const base = new Date(g.night + 'T18:00:00'); return (d - base) / 60000; };
+function attendance(gs) {
+  const nights = [...new Set(gs.map(g => g.night))].sort();
+  const by = {};
+  for (const g of gs) {
+    const n = g.rounds.length || 1;
+    for (const p of g.p) {
+      const a = by[p.id] = by[p.id] || {id: p.id, n: NAMES[p.id], g: 0, mins: 0, nights: {}, quit: 0, tmo: 0, chat: 0, tchat: 0};
+      a.g++; a.mins += g.min * Math.min(1, p.r / n);
+      a.quit += p.quit || 0; a.tmo += p.tmo || 0; a.chat += p.chat || 0; a.tchat += p.tchat || 0;
+      const s0 = nightMins(g, g.start), s1 = s0 + g.min;
+      const nt = a.nights[g.night] = a.nights[g.night] || {first: s0, last: s1, g: 0, mins: 0};
+      nt.first = Math.min(nt.first, s0); nt.last = Math.max(nt.last, s1); nt.g++; nt.mins += g.min * Math.min(1, p.r / n);
+    }
+  }
+  for (const a of Object.values(by)) {
+    const ns = Object.keys(a.nights).sort();
+    a.nn = ns.length; a.att = a.nn / nights.length; a.hours = a.mins / 60;
+    a.join = ns.reduce((s, n) => s + a.nights[n].first, 0) / a.nn;
+    a.msgs = a.chat + a.tchat; a.mpg = a.g ? a.msgs / a.g : 0;
+    let best = 0, run = 0;
+    for (const n of nights) { run = a.nights[n] ? run + 1 : 0; best = Math.max(best, run); }
+    a.streak = best; a.cur = run;
+  }
+  return {nights, rows: Object.values(by)};
+}
+
+function viewAttendance(night) {
+  const all = games();
+  const allNights = [...new Set(all.map(g => g.night))].sort().reverse();
+  const gs = night ? all.filter(g => g.night === night) : all;
+  pageTitle(night ? `Attendance · ${nightLabel(night)}` : 'Attendance');
+  if (!gs.length) return notFound();
+  const {nights, rows} = attendance(gs);
+  const tot = attendance(all);
+  const top = (k, f = () => true) => rows.filter(r => f(r) && r[k] > 0).sort((a, b) => b[k] - a[k])[0];
+  const early = rows.filter(r => r.nn >= Math.min(3, nights.length)).sort((a, b) => a.join - b.join)[0];
+  const t1 = top('hours'), t2 = top('nn'), t3 = top('msgs'), t4 = top('quit'), t5 = top('streak');
+  const old = gs.filter(g => !(g.v >= 6)).length;
+  $('#app').innerHTML = `
+    <div class="pagehead"><div><h1>Attendance &amp; chat</h1><div class="sub">${night ? esc(nightLabel(night, true)) : `${nights.length} nights`} · ${rows.length} players</div></div>
+      <div class="filters"><span class="flabel">Night</span><select id="an"><option value="">All nights</option>${allNights.map(n => `<option value="${n}" ${n === night ? 'selected' : ''}>${esc(nightLabel(n))}</option>`).join('')}</select></div></div>
+    <div class="tiles">
+      ${t1 ? tile('Most time played', esc(t1.n), `${f1(t1.hours)} hours`, true) : ''}
+      ${!night && t2 ? tile('Regular', esc(t2.n), `${t2.nn} of ${nights.length} nights`) : ''}
+      ${!night && t5 ? tile('Longest streak', esc(t5.n), `${t5.streak} nights in a row`) : ''}
+      ${early ? tile(night ? 'First in' : 'Early bird', esc(early.n), `${night ? 'from' : 'usually from'} ${clock(18 * 60 + early.join)}`) : ''}
+      ${t3 ? tile('Chatterbox', esc(t3.n), `${t3.msgs} messages`) : ''}
+      ${t4 ? tile('Rage quitter', esc(t4.n), `left ${t4.quit} game${t4.quit > 1 ? 's' : ''} mid-way`) : ''}
+    </div>
+    ${old ? `<div class="note">${old} game${old > 1 ? 's' : ''} parsed before chat/quit tracking show 0 for those until the next daily update.</div>` : ''}
+    <section><h2>${night ? 'Who played' : 'Attendance'}</h2><div id="at"></div>
+      <div class="note">Time played counts each game's length × the share of its rounds a player was in. ${night ? '' : 'Join time is the average start of each player’s first game of the night.'} Quits are leaving a game in progress (not map changes); timeouts are connection drops.</div></section>
+    ${night ? '' : `<section class="card pad"><h2>Players per night</h2>${vbars(tot.nights.map(n => { const c = tot.rows.filter(r => r.nights[n]).length; return {label: nightDate(n).toLocaleDateString('en-US', {month: 'short', day: 'numeric'}), value: c, tip: `<b>${nightLabel(n)}</b><br>${c} players`, href: `#/attendance/${n}`}; }))}</section>`}`;
+  $('#an').onchange = e => { location.hash = e.target.value ? `#/attendance/${e.target.value}` : '#/attendance'; };
+  const msgs = {k: 'msgs', l: 'Chat', t: 'Chat messages (all chat / team chat)', f: (v, r) => `${v} <span class="muted">${r.chat}/${r.tchat}</span>`};
+  const cols = night ? [
+    {k: 'n', l: 'Player', cls: 'l pname', asc: true, f: (v, r) => plink(r.id, v)},
+    {k: 'join', l: 'First game', asc: true, f: (v, r) => clock(18 * 60 + r.nights[night].first)},
+    {k: 'last', l: 'Last game ended', v: r => r.nights[night].last, f: v => clock(18 * 60 + v)},
+    {k: 'g', l: 'Games'}, {k: 'hours', l: 'Played', f: v => `${Math.round(v * 60)} min`},
+    {k: 'quit', l: 'Quits'}, {k: 'tmo', l: 'Timeouts'}, msgs,
+  ] : [
+    {k: 'n', l: 'Player', cls: 'l pname', asc: true, f: (v, r) => plink(r.id, v)},
+    {k: 'nn', l: 'Nights', f: (v, r) => `${v} <span class="muted">${pct(r.att)}</span>`},
+    {k: 'g', l: 'Games'}, {k: 'hours', l: 'Hours', f: f1},
+    {k: 'join', l: 'Usual join', asc: true, f: v => clock(18 * 60 + v)},
+    {k: 'streak', l: 'Best streak', t: 'Most nights in a row attended'}, {k: 'cur', l: 'Current streak'},
+    {k: 'quit', l: 'Quits'}, {k: 'tmo', l: 'Timeouts'}, msgs, {k: 'mpg', l: 'Chat/game', f: f1},
+  ];
+  mountTable($('#at'), cols, rows, {sort: night ? 'join' : 'nn', asc: !!night, rank: true});
+}
+
 function notFound() {
   $('#app').innerHTML = `<h1>Not found</h1><p class="sub">Nothing here${onlyFin ? ' with “Completed games only” switched on' : ''}. <a href="#/" style="color:var(--accent)">Back to overview</a></p>`;
 }
@@ -1483,7 +1565,7 @@ function route() {
     a.dataset.r === view || (a.dataset.r && view === a.dataset.r.replace(/s$/, ''))));
   ({'': viewOverview, nights: viewNights, night: () => viewNight(arg), games: viewGames, game: () => viewGame(arg),
     maps: viewMaps, map: () => viewMap(arg), players: viewPlayers, player: () => viewPlayer(arg),
-    weapons: viewWeapons, weapon: () => viewWeapon(arg), awards: viewAwards, utility: () => viewUtility(arg), rounds: () => viewRounds(arg), heatmap: () => viewHeatmap(arg, arg2)}[view] || notFound)();
+    weapons: viewWeapons, weapon: () => viewWeapon(arg), awards: viewAwards, utility: () => viewUtility(arg), rounds: () => viewRounds(arg), heatmap: () => viewHeatmap(arg, arg2), attendance: () => viewAttendance(arg)}[view] || notFound)();
   tip.style.opacity = 0;
 }
 addEventListener('hashchange', () => { route(); scrollTo(0, 0); });
