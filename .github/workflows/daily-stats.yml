@@ -25,17 +25,24 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Install demo parser
+        run: pip install demoparser2
+
       - name: Download server logs from DatHost
         env:
           DATHOST_EMAIL: ${{ secrets.DATHOST_EMAIL }}
           DATHOST_PASSWORD: ${{ secrets.DATHOST_PASSWORD }}
           DATHOST_SERVER_ID: ${{ secrets.DATHOST_SERVER_ID }}
           DATHOST_ACCOUNT_EMAIL: ${{ secrets.DATHOST_ACCOUNT_EMAIL }}
-        run: python stats/fetch_dathost.py --out "$RUNNER_TEMP/logs"
+        run: python stats/fetch_dathost.py --out "$RUNNER_TEMP/logs" --demos "$RUNNER_TEMP/demos" --known docs/data/replays/index.json
 
       - name: Merge new games into data/games
         id: update
         run: python stats/update_stats.py --logs "$RUNNER_TEMP/logs" --changes "$RUNNER_TEMP/changes.json"
+
+      # GOTV demos -> replay files (only new or grown demos were downloaded)
+      - name: Convert demos to replays
+        run: python stats/demo_replays.py --demos "$RUNNER_TEMP/demos"
 
       - name: Build site
         run: python stats/build_site.py --mark-synced

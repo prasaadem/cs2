@@ -1,0 +1,40 @@
+{
+ "replays": [
+  {
+   "id": "20261017-0352-de_dust2",
+   "game": null,
+   "map": "de_dust2",
+   "start_utc": "2026-10-17T03:52:04Z",
+   "dur": 36,
+   "rounds": 1,
+   "players": [
+    "prasaadem"
+   ]
+  },
+  {
+   "id": "20261017-0354-de_dust2",
+   "game": null,
+   "map": "de_dust2",
+   "start_utc": "2026-10-17T03:54:17Z",
+   "dur": 458,
+   "rounds": 1,
+   "players": [
+    "prasaadem"
+   ]
+  }
+ ],
+ "demos": {
+  "auto-20261017-0345-de_dust2-cupcake.dem": {
+   "size": 3307926,
+   "ids": [
+    "20261017-0352-de_dust2"
+   ]
+  },
+  "auto-20261017-0354-de_dust2-cupcake.dem": {
+   "size": 2875392,
+   "ids": [
+    "20261017-0354-de_dust2"
+   ]
+  }
+ }
+}

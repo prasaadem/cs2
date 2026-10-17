@@ -6,11 +6,12 @@ Stats site for our CS2 server, built from the DatHost server logs.
 
 Every day at 9 AM Pacific a GitHub Action ([daily-stats.yml](.github/workflows/daily-stats.yml)) does the following:
 
-1. Downloads the server's `logs/` folder from the DatHost API (`stats/fetch_dathost.py`).
+1. Downloads the server's `logs/` folder and any new GOTV demos from the DatHost API (`stats/fetch_dathost.py`).
 2. Parses the logs and merges any new games into `data/games/` (`stats/update_stats.py`).
-3. Rebuilds the site in `docs/` (`stats/build_site.py`).
-4. Commits and pushes, recording the sync time shown on the page.
-5. If there were new games, posts a summary to Discord (`stats/notify_discord.py`).
+3. Converts new demos into replay files in `docs/data/replays/` (`stats/demo_replays.py`, needs `pip install demoparser2`). These are kept forever, like the stats.
+4. Rebuilds the site in `docs/` (`stats/build_site.py`).
+5. Commits and pushes, recording the sync time shown on the page.
+6. If there were new games, posts a summary to Discord (`stats/notify_discord.py`).
 
 GitHub Pages serves `docs/`.
 
@@ -35,7 +36,22 @@ Raw logs are never committed, because they contain passwords and player IP addre
 - **Pages:** Settings → Pages → Deploy from branch `main`, folder `/docs`.
 - **Manual run:** Actions → Daily stats → Run workflow.
 
+## Replays (GOTV demos)
+
+The server records every map with `tv_autorecord 1` (in `cfg/server.cfg`); DatHost keeps the demos in `replays/` for 14 days. Each match becomes `docs/data/replays/<game id>.json`: every player's position and facing twice a second, plus rounds, kills, smokes and fires. The Replays page plays them back on the map radar. Raw demos are never committed.
+
+## Map radars
+
+`python stats/extract_radars.py` copies radar images and overview files for every played map from a local CS2 install into `docs/radar/` (see `docs/radar/README.md`).
+
 ## Running locally
+
+Put `DATHOST_EMAIL`, `DATHOST_PASSWORD` and `DATHOST_SERVER_ID` (and `DATHOST_ACCOUNT_EMAIL` if needed) in a `.env` file in the repo root. It is never committed.
+
+```bash
+python stats/fetch_dathost.py --out ../logs --demos ../demos   # download logs and demos
+python stats/demo_replays.py --demos ../demos                    # demos -> replays
+```
 
 ```bash
 python stats/update_stats.py --logs path/to/logs   # add games from a folder of .log files

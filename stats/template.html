@@ -250,6 +250,36 @@ select { font: inherit; color: var(--text); background: var(--surface); border: 
 .hmbig { font: 700 32px/1.1 Oxanium, sans-serif; }
 .hmside .s { font-size: 13px; line-height: 1.5; }
 @media (max-width: 900px) { .hmwrap { grid-template-columns: 1fr; } }
+/* replay viewer */
+.rpwrap { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 16px; align-items: start; }
+.rpstage { position: relative; padding: 8px; overflow: hidden; background: #111214; }
+.rpstage canvas { display: block; }
+.rphud { position: absolute; left: 16px; top: 14px; background: rgba(0,0,0,.6); color: #fff; padding: 6px 10px; border-radius: 8px; font-size: 13px; display: flex; gap: 12px; align-items: center; }
+.rpscore { font: 700 15px Oxanium, sans-serif; }
+.rpside { display: grid; gap: 16px; }
+.rpplayers { display: grid; gap: 4px; }
+.rpp { display: flex; align-items: center; gap: 8px; width: 100%; font: inherit; font-size: 13px; color: var(--text); background: transparent; border: 1px solid transparent; border-radius: 8px; padding: 5px 8px; cursor: pointer; text-align: left; }
+.rpp:hover { background: var(--surface-2); }
+.rpp.on { border-color: var(--accent); background: var(--accent-soft); }
+.rpp.dead .nm { color: var(--text-3); text-decoration: line-through; }
+.rpp .dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+.rpp .nm { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rpp .hp { color: var(--text-3); font-size: 11px; }
+.rpfeed { display: grid; gap: 6px; font-size: 13px; }
+.rpmain { display: grid; gap: 16px; min-width: 0; }
+.rpctl { display: grid; gap: 12px; }
+.rprow { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.rpbtn { width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--accent); color: var(--accent-ink); font-size: 15px; cursor: pointer; flex: none; }
+.rptime { font-variant-numeric: tabular-nums; color: var(--text-2); min-width: 92px; font-size: 13px; }
+.rpbar { position: relative; flex: 1; min-width: 180px; padding-bottom: 8px; }
+.rpbar input { width: 100%; accent-color: var(--accent); margin: 0; }
+.rpmarks { position: absolute; left: 0; right: 0; bottom: 0; height: 8px; pointer-events: none; }
+.rpmarks span { position: absolute; bottom: 0; width: 2px; height: 8px; background: var(--text-3); }
+.rpmarks i { position: absolute; bottom: 0; width: 2px; height: 4px; background: var(--loss); opacity: .7; }
+.rprounds { gap: 6px; }
+.rprb { cursor: pointer; border: 1px solid transparent; font: inherit; font-size: 12px; min-width: 30px; }
+.rprb.on { border-color: var(--accent); }
+@media (max-width: 900px) { .rpwrap { grid-template-columns: 1fr; } }
 footer { color: var(--text-3); font-size: 12px; padding: 24px 0 40px; border-top: 1px solid var(--line); }
 
 @media (max-width: 640px) {
@@ -280,6 +310,7 @@ footer { color: var(--text-3); font-size: 12px; padding: 24px 0 40px; border-top
       <a href="#/utility" data-r="utility">Utility</a>
       <a href="#/rounds" data-r="rounds">Rounds</a>
       <a href="#/heatmap" data-r="heatmap">Heatmaps</a>
+      <a href="#/replays" data-r="replays">Replays</a>
       <a href="#/attendance" data-r="attendance">Attendance</a>
       <a href="#/awards" data-r="awards">Awards</a>
       <div class="navfoot">
@@ -776,6 +807,11 @@ function viewGame(id) {
     {k: 'tw', l: 'Top weapons', cls: 'l', sort: false, f: (v, r) => Object.entries(r.w).slice(0, 3).map(([w, c]) => `${esc(weaponName(w))} <span class="muted">${c}</span>`).join(', ')},
   ];
   for (const side of ['CT', 'T']) mountTable($('#t' + side), cols, rows.filter(r => r.team === side), {sort: 'rt'});
+  loadReplayIndex().then(list => {
+    const r = list.find(x => x.game === g.id);
+    const head = document.querySelector('.pagehead > div');
+    if (r && head && location.hash === `#/game/${g.id}`) head.insertAdjacentHTML('beforeend', `<div class="sub"><a href="#/replay/${r.id}" style="color:var(--accent)">▶ Watch the replay</a></div>`);
+  });
   $('#app').insertAdjacentHTML('beforeend', `<section><h2>Clutches, trades &amp; bomb</h2><div id="gr"></div></section>`);
   mountTable($('#gr'), [
     {k: 'n', l: 'Player', cls: 'l pname', asc: true, f: (v, r) => plink(r.id, v)},
@@ -1265,7 +1301,7 @@ const radarImg = map => new Promise(res => {
   im.onload = () => res(RADAR.img[map] = im); im.onerror = () => res(RADAR.img[map] = null);
   im.src = `radar/${map}.png`;
 });
-addEventListener('resize', () => { if (hmRedraw && document.getElementById('hm')) hmRedraw(); });
+addEventListener('resize', () => { if (hmRedraw && (document.getElementById('hm') || document.getElementById('rpc'))) hmRedraw(); });
 
 function viewHeatmap(map, gid) {
   const gs = games().filter(g => g.v >= 5);
@@ -1579,6 +1615,242 @@ function viewAttendance(night) {
   mountTable($('#at'), cols, rows, {sort: night ? 'join' : 'nn', asc: !!night, rank: true});
 }
 
+// ---------- replays (GOTV movement) ----------
+let REPLAYS = null;
+const loadReplayIndex = () => REPLAYS ? Promise.resolve(REPLAYS)
+  : fetch('data/replays/index.json', {cache: 'no-cache'}).then(r => r.ok ? r.json() : {replays: []}).catch(() => ({replays: []}))
+    .then(d => (REPLAYS = d.replays || []));
+const fmtClock = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+const utcLocal = iso => new Date(iso);
+
+function viewReplays() {
+  pageTitle('Replays');
+  $('#app').innerHTML = '<div class="pagehead"><div><h1>Replays</h1><div class="sub">Loading…</div></div></div><div id="rt"></div>';
+  loadReplayIndex().then(list => {
+    if (!document.getElementById('rt')) return;
+    $('.sub').textContent = list.length ? `${list.length} recorded matches · watch every player move, round by round` : 'No recordings yet';
+    if (!list.length) {
+      $('#rt').innerHTML = '<p class="sub">Replays appear here once the server records GOTV demos (tv_autorecord) and the daily update converts them.</p>';
+      return;
+    }
+    mountTable($('#rt'), [
+      {k: 'start_utc', l: 'When', cls: 'l', f: v => { const d = utcLocal(v); return `${esc(d.toLocaleDateString('en-US', {weekday: 'short', month: 'short', day: 'numeric'}))} <span class="muted">${esc(d.toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'}))}</span>`; }},
+      {k: 'map', l: 'Map', cls: 'l pname', f: v => esc(mapName(v))},
+      {k: 'dur', l: 'Length', f: v => fmtClock(v)},
+      {k: 'rounds', l: 'Rounds'},
+      {k: 'np', l: 'Players', cls: 'l', v: r => r.players.length, f: (v, r) => `${v} <span class="muted">${esc(r.players.slice(0, 4).join(', '))}${r.players.length > 4 ? '…' : ''}</span>`},
+      {k: 'game', l: 'Stats', cls: 'l', sort: false, f: v => v ? `<a href="#/game/${v}" style="color:var(--accent)">game page →</a>` : '<span class="muted">–</span>'},
+    ], list, {sort: 'start_utc', href: r => `#/replay/${r.id}`});
+  });
+}
+
+function viewReplay(id) {
+  pageTitle('Replay');
+  $('#app').innerHTML = '<p class="sub">Loading replay…</p>';
+  Promise.all([fetch(`data/replays/${id}.json`, {cache: 'no-cache'}).then(r => r.ok ? r.json() : null).catch(() => null), loadRadar()]).then(async ([rp, meta]) => {
+    if (!rp) return notFound();
+    let radar = null;
+    if (meta[rp.map]) { const img = await radarImg(rp.map); if (img) radar = Object.assign({img}, meta[rp.map]); }
+    if (!location.hash.startsWith(`#/replay/${id}`)) return;
+    pageTitle(`Replay · ${mapName(rp.map)}`);
+    playReplay(rp, radar);
+  });
+}
+
+function playReplay(rp, radar) {
+  // decode delta-encoded tracks
+  const P = rp.players.map((p, i) => {
+    const x = new Float64Array(rp.n), y = new Float64Array(rp.n);
+    let ax = 0, ay = 0;
+    for (let k = 0; k < rp.n; k++) { ax += p.x[k] || 0; ay += p.y[k] || 0; x[k] = ax; y[k] = ay; }
+    return {id: p.id, n: p.n, x, y, a: p.a, s: p.s, i};
+  });
+  const dur = (rp.n - 1) / rp.hz;
+  const when = utcLocal(rp.start_utc);
+  const st = {t: rp.rounds.length ? rp.rounds[0][1] : 0, playing: false, speed: 1, focus: new Set(), trails: true, names: true};
+
+  $('#app').innerHTML = `
+    <div class="crumb"><a href="#/replays">Replays</a> / ${esc(mapName(rp.map))}</div>
+    <div class="pagehead"><div><h1>${esc(mapName(rp.map))}</h1>
+      <div class="sub">${esc(when.toLocaleDateString('en-US', {weekday: 'long', month: 'long', day: 'numeric'}))} · ${esc(when.toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'}))} · ${fmtClock(dur)} · ${P.length} players${rp.game ? ` · <a href="#/game/${rp.game}" style="color:var(--accent)">game stats →</a>` : ''}</div></div></div>
+    <div class="rpwrap">
+      <div class="rpmain">
+      <div class="card rpstage"><canvas id="rpc"></canvas><div class="rphud" id="rphud"></div></div>
+    <div class="card pad rpctl">
+      <div class="rprow">
+        <button class="rpbtn" id="rpplay" title="Play / pause (space)">▶</button>
+        <span class="rptime" id="rptime"></span>
+        <div class="rpbar"><input type="range" id="rpseek" min="0" max="${dur}" step="0.1" value="0"><div class="rpmarks" id="rpmarks"></div></div>
+        <select id="rpspeed">${[0.5, 1, 2, 4, 8].map(s => `<option value="${s}" ${s === 1 ? 'selected' : ''}>${s}×</option>`).join('')}</select>
+      </div>
+      <div class="rprow rprounds" id="rprounds"></div>
+      <div class="rprow"><label class="toggle"><input type="checkbox" id="rptrail" checked><span>Trails</span></label>
+        <label class="toggle"><input type="checkbox" id="rpnames" checked><span>Names</span></label>
+        <span class="legend" style="margin:0"><span><i style="background:var(--ct)"></i>CT</span><span><i style="background:var(--t)"></i>T</span><span><i style="background:#9a9a9a"></i>smoke</span><span><i style="background:#e8743b"></i>fire</span></span></div>
+    </div>
+      </div>
+      <div class="rpside">
+        <div class="card pad"><h2>Players</h2><div id="rpplayers" class="rpplayers"></div>
+          <div class="note">Click a player to follow them and show their path.</div></div>
+        <div class="card pad"><h2>Kills</h2><div id="rpfeed" class="rpfeed"></div></div>
+      </div>
+    </div>`;
+
+  const canvas = $('#rpc'), seek = $('#rpseek');
+  // round markers + buttons
+  $('#rpmarks').innerHTML = rp.rounds.map((r, i) => `<span style="left:${(r[1] / dur * 100).toFixed(2)}%" title="Round ${i + 1}"></span>`).join('')
+    + rp.kills.map(k => `<i style="left:${(k[0] / dur * 100).toFixed(2)}%"></i>`).join('');
+  $('#rprounds').innerHTML = rp.rounds.length
+    ? rp.rounds.map((r, i) => `<button class="chip rprb ${r[3] === 'C' ? 'ct' : r[3] === 'T' ? 't' : ''}" data-t="${r[1]}" title="Round ${i + 1}${r[3] !== '-' ? (r[3] === 'C' ? ' · CT won' : ' · T won') : ''}">${i + 1}</button>`).join('')
+    : '<span class="muted">No completed rounds in this recording.</span>';
+  $('#rprounds').onclick = e => { const b = e.target.closest('button'); if (b) { st.t = +b.dataset.t; draw(); } };
+
+  $('#rpplayers').innerHTML = P.map(p => `<button class="rpp" data-i="${p.i}"><i class="dot"></i><span class="nm">${esc(p.n)}</span><span class="hp"></span></button>`).join('');
+  $('#rpplayers').onclick = e => { const b = e.target.closest('.rpp'); if (!b) return; const i = +b.dataset.i; st.focus.has(i) ? st.focus.delete(i) : st.focus.add(i); draw(); };
+  const togglePlay = () => { st.playing = !st.playing; if (st.playing && st.t >= dur) st.t = 0; last = performance.now(); if (st.playing) requestAnimationFrame(loop); draw(); };
+  $('#rpplay').onclick = togglePlay;
+  seek.oninput = () => { st.t = +seek.value; draw(); };
+  $('#rpspeed').onchange = e => { st.speed = +e.target.value; };
+  $('#rptrail').onchange = e => { st.trails = e.target.checked; draw(); };
+  $('#rpnames').onchange = e => { st.names = e.target.checked; draw(); };
+  const onKey = e => {
+    if (!document.body.contains(canvas)) { removeEventListener('keydown', onKey); return; }
+    if (e.target.closest('input, select, textarea')) return;
+    if (e.code === 'Space') { e.preventDefault(); togglePlay(); }
+    else if (e.key === 'ArrowRight') { st.t = Math.min(dur, st.t + 5); draw(); }
+    else if (e.key === 'ArrowLeft') { st.t = Math.max(0, st.t - 5); draw(); }
+  };
+  addEventListener('keydown', onKey);
+
+  // world -> screen
+  let tf, scale = 1, W = 0, H = 0;
+  function layout() {
+    W = canvas.parentElement.clientWidth;
+    if (radar) {
+      const S = Math.min(W, Math.round(innerHeight * 0.8)), k = S / radar.img.naturalWidth, ox = (W - S) / 2;
+      H = S; scale = k / radar.scale;
+      tf = (x, y) => [ox + (x - radar.pos_x) / radar.scale * k, (radar.pos_y - y) / radar.scale * k];
+    } else {
+      let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+      for (const p of P) for (let k = 0; k < rp.n; k++) if (p.s[k] !== '.') { x0 = Math.min(x0, p.x[k]); x1 = Math.max(x1, p.x[k]); y0 = Math.min(y0, p.y[k]); y1 = Math.max(y1, p.y[k]); }
+      const pad = 40, rx = (x1 - x0) || 1, ry = (y1 - y0) || 1;
+      H = Math.min(Math.round((W - 2 * pad) * ry / rx) + 2 * pad, Math.round(innerHeight * 0.75)); H = Math.max(H, 320);
+      scale = Math.min((W - 2 * pad) / rx, (H - 2 * pad) / ry);
+      const ox = (W - rx * scale) / 2, oy = (H - ry * scale) / 2;
+      tf = (x, y) => [ox + (x - x0) * scale, oy + (y1 - y) * scale];
+    }
+    const dpr = devicePixelRatio || 1;
+    canvas.width = W * dpr; canvas.height = H * dpr; canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    canvas.getContext('2d').setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function at(p, t) {
+    const f = Math.max(0, Math.min(rp.n - 1, t * rp.hz)), i = Math.floor(f), j = Math.min(rp.n - 1, i + 1), u = f - i;
+    const s = p.s[i];
+    if (s === '.') return null;
+    let a0 = p.a[i] * 4, a1 = p.a[j] * 4, da = ((a1 - a0 + 540) % 360) - 180;
+    const both = p.s[j] !== '.' && p.s[j].toLowerCase() === s.toLowerCase();
+    return {x: both ? p.x[i] + (p.x[j] - p.x[i]) * u : p.x[i], y: both ? p.y[i] + (p.y[j] - p.y[i]) * u : p.y[i],
+            a: a0 + da * (both ? u : 0), side: s.toUpperCase(), alive: s === 'C' || s === 'T'};
+  }
+
+  function draw() {
+    if (!document.body.contains(canvas)) return;
+    if (!tf || canvas.parentElement.clientWidth !== W) layout();
+    const css = getComputedStyle(document.documentElement), col = v => css.getPropertyValue(v).trim();
+    const c = canvas.getContext('2d');
+    c.clearRect(0, 0, W, H);
+    if (radar) { c.globalAlpha = 0.85; c.drawImage(radar.img, (W - H) / 2, 0, H, H); c.globalAlpha = 1; }
+    const t = st.t;
+    // smokes and fires active now
+    for (const [t0, kind, x, y, d] of rp.nades) {
+      if (t < t0 || t > t0 + d) continue;
+      const [px, py] = tf(x, y), r = Math.max(6, (kind === 's' ? 144 : 120) * scale);
+      c.beginPath(); c.arc(px, py, r, 0, 7);
+      c.fillStyle = kind === 's' ? 'rgba(170,170,170,.55)' : 'rgba(232,116,59,.45)'; c.fill();
+    }
+    // trails
+    if (st.trails) {
+      for (const p of P) {
+        const show = st.focus.size ? st.focus.has(p.i) : true;
+        if (!show) continue;
+        const span = st.focus.size ? 10 : 3, k1 = Math.floor(t * rp.hz), k0 = Math.max(0, k1 - span * rp.hz);
+        c.beginPath(); let started = false;
+        for (let k = k0; k <= k1 && k < rp.n; k++) {
+          if (p.s[k] !== 'C' && p.s[k] !== 'T') { started = false; continue; }
+          const [px, py] = tf(p.x[k], p.y[k]);
+          started ? c.lineTo(px, py) : c.moveTo(px, py); started = true;
+        }
+        const cur = at(p, t);
+        if (cur && cur.alive && started) { const [px, py] = tf(cur.x, cur.y); c.lineTo(px, py); }
+        c.strokeStyle = col(p.s[k1] && p.s[k1].toUpperCase() === 'C' ? '--ct' : '--t'); c.globalAlpha = st.focus.size ? 0.9 : 0.35; c.lineWidth = st.focus.size ? 2.5 : 1.5; c.stroke(); c.globalAlpha = 1;
+      }
+    }
+    // recent kills: a fading line from killer to victim
+    for (const k of rp.kills) {
+      const age = t - k[0];
+      if (age < 0 || age > 2.5) continue;
+      const [kx, ky] = tf(k[5], k[6]), [vx, vy] = tf(k[7], k[8]);
+      c.globalAlpha = 1 - age / 2.5; c.strokeStyle = '#fff'; c.lineWidth = 1.5; c.setLineDash([4, 3]);
+      c.beginPath(); c.moveTo(kx, ky); c.lineTo(vx, vy); c.stroke(); c.setLineDash([]); c.globalAlpha = 1;
+    }
+    // players
+    const hp = {};
+    for (const p of P) {
+      const s = at(p, t);
+      hp[p.i] = s;
+      if (!s) continue;
+      const [px, py] = tf(s.x, s.y), color = col(s.side === 'C' ? '--ct' : '--t'), foc = st.focus.has(p.i);
+      if (!s.alive) {
+        c.strokeStyle = color; c.globalAlpha = 0.7; c.lineWidth = 2;
+        c.beginPath(); c.moveTo(px - 4, py - 4); c.lineTo(px + 4, py + 4); c.moveTo(px + 4, py - 4); c.lineTo(px - 4, py + 4); c.stroke(); c.globalAlpha = 1;
+        continue;
+      }
+      const r = foc ? 8 : 6, ang = -s.a * Math.PI / 180; // game yaw is counter-clockwise from east; screen y points down
+      c.beginPath(); c.moveTo(px + Math.cos(ang) * (r + 7), py + Math.sin(ang) * (r + 7));
+      c.lineTo(px + Math.cos(ang + 0.5) * r, py + Math.sin(ang + 0.5) * r); c.lineTo(px + Math.cos(ang - 0.5) * r, py + Math.sin(ang - 0.5) * r);
+      c.closePath(); c.fillStyle = color; c.fill();
+      c.beginPath(); c.arc(px, py, r, 0, 7); c.fillStyle = color; c.fill();
+      c.lineWidth = foc ? 2.5 : 1.5; c.strokeStyle = foc ? '#fff' : col('--surface'); c.stroke();
+      if (st.names || foc) {
+        c.font = `${foc ? 600 : 500} 11px Inter, sans-serif`; c.textAlign = 'center';
+        c.lineWidth = 3; c.strokeStyle = 'rgba(0,0,0,.7)'; c.strokeText(p.n, px, py - r - 6);
+        c.fillStyle = '#fff'; c.fillText(p.n, px, py - r - 6);
+      }
+    }
+    // HUD, controls, side panel
+    const ri = rp.rounds.findIndex(r => t >= r[0] && t <= r[2] + 4);
+    const done = rp.rounds.filter(r => r[2] <= t);
+    const ct = done.filter(r => r[3] === 'C').length, tt = done.filter(r => r[3] === 'T').length;
+    const r = ri >= 0 ? rp.rounds[ri] : null;
+    $('#rphud').innerHTML = `${r ? `Round ${ri + 1} · ${t < r[1] ? 'freeze time' : fmtClock(Math.max(0, t - r[1]))}` : 'Between rounds'} <span class="rpscore"><b style="color:var(--ct)">${ct}</b> : <b style="color:var(--t)">${tt}</b></span>`;
+    $('#rptime').textContent = `${fmtClock(t)} / ${fmtClock(dur)}`;
+    seek.value = t;
+    $('#rpplay').textContent = st.playing ? '❚❚' : '▶';
+    document.querySelectorAll('.rprb').forEach((b, i) => b.classList.toggle('on', i === ri));
+    document.querySelectorAll('.rpp').forEach(b => {
+      const i = +b.dataset.i, s = hp[i];
+      b.classList.toggle('on', st.focus.has(i)); b.classList.toggle('dead', !s || !s.alive);
+      b.querySelector('.dot').style.background = s ? col(s.side === 'C' ? '--ct' : '--t') : 'var(--line)';
+      b.querySelector('.hp').textContent = !s ? 'away' : s.alive ? '' : 'dead';
+    });
+    const name = id => (P.find(p => p.id === id) || {}).n || '?';
+    const feed = rp.kills.filter(k => k[0] <= t && k[0] > t - 12).slice(-6).reverse();
+    $('#rpfeed').innerHTML = feed.length ? feed.map(k => `<div><b>${esc(k[1] ? name(k[1]) : 'world')}</b> <span class="muted">${esc(weaponName(k[3]))}${k[4] ? ' · HS' : ''}</span> <b>${esc(name(k[2]))}</b></div>`).join('') : '<span class="muted">No recent kills</span>';
+  }
+
+  let last = performance.now();
+  function loop(now) {
+    if (!st.playing || !document.body.contains(canvas)) return;
+    st.t = Math.min(dur, st.t + (now - last) / 1000 * st.speed); last = now;
+    if (st.t >= dur) st.playing = false;
+    draw();
+    requestAnimationFrame(loop);
+  }
+  hmRedraw = () => { tf = null; draw(); };
+  draw();
+}
+
 function notFound() {
   $('#app').innerHTML = `<h1>Not found</h1><p class="sub">Nothing here${onlyFin ? ' with “Completed games only” switched on' : ''}. <a href="#/" style="color:var(--accent)">Back to overview</a></p>`;
 }
@@ -1590,7 +1862,7 @@ function route() {
     a.dataset.r === view || (a.dataset.r && view === a.dataset.r.replace(/s$/, ''))));
   ({'': viewOverview, nights: viewNights, night: () => viewNight(arg), games: viewGames, game: () => viewGame(arg),
     maps: viewMaps, map: () => viewMap(arg), players: viewPlayers, player: () => viewPlayer(arg),
-    weapons: viewWeapons, weapon: () => viewWeapon(arg), awards: viewAwards, utility: () => viewUtility(arg), rounds: () => viewRounds(arg), heatmap: () => viewHeatmap(arg, arg2), attendance: () => viewAttendance(arg)}[view] || notFound)();
+    weapons: viewWeapons, weapon: () => viewWeapon(arg), awards: viewAwards, utility: () => viewUtility(arg), rounds: () => viewRounds(arg), heatmap: () => viewHeatmap(arg, arg2), attendance: () => viewAttendance(arg), replays: viewReplays, replay: () => viewReplay(arg)}[view] || notFound)();
   tip.style.opacity = 0;
 }
 addEventListener('hashchange', () => { route(); scrollTo(0, 0); });

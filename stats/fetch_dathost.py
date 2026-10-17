@@ -10,7 +10,7 @@ Credentials come from environment variables (GitHub Actions secrets):
     DATHOST_ACCOUNT_EMAIL             optional: act on an account this login was invited to
 For local runs they can also come from a .env file in the repo root (never committed).
 
-With --demos DIR it also downloads GOTV demos (.dem in the server's root folder)
+With --demos DIR it also downloads GOTV demos (.dem anywhere on the server, normally replays/)
 that aren't in DIR yet; --list prints the server's root folder listing and exits.
 
 Steps: ask DatHost to sync the server's files to its cache, wait, then download
@@ -91,9 +91,9 @@ def extract_logs(blob, out):
     return n
 
 
-def list_root(server):
-    """Files in the server's root folder (shape of the response isn't documented)."""
-    raw = json.loads(request('GET', f'/game-servers/{server}/files?max_depth=1'))
+def list_files(server, depth=None):
+    """Server files as (path, size); the response is a list of {path, size, deleted}."""
+    raw = json.loads(request('GET', f'/game-servers/{server}/files' + (f'?max_depth={depth}' if depth else '')))
     items = raw if isinstance(raw, list) else raw.get('files', [])
     out = []
     for it in items:
@@ -104,15 +104,24 @@ def list_root(server):
     return out
 
 
-def fetch_demos(server, folder):
+def fetch_demos(server, folder, known=None):
+    """Download demos that are new or have grown. `known` maps demo name -> size already converted."""
     os.makedirs(folder, exist_ok=True)
-    have = set(os.listdir(folder))
-    demos = [(p, size) for p, size in list_root(server) if p.lower().endswith('.dem')]
-    print(f'{len(demos)} demos on the server, {len([d for d in demos if os.path.basename(d[0]) not in have])} new')
-    for p, size in demos:
+    known = known or {}
+
+    def have(name, size):
+        if size is not None and known.get(name) == int(size):
+            return True
+        # a demo still being recorded grows, so download it again when its size changed
+        local = os.path.join(folder, name)
+        return os.path.exists(local) and (size is None or os.path.getsize(local) == int(size))
+
+    # tv_autorecord on DatHost writes to replays/; look everywhere to be safe
+    demos = [(p, size) for p, size in list_files(server) if p.lower().endswith('.dem')]
+    todo = [(p, size) for p, size in demos if not have(os.path.basename(p), size)]
+    print(f'{len(demos)} demos on the server, {len(todo)} new or grown')
+    for p, size in todo:
         name = os.path.basename(p)
-        if name in have:
-            continue
         print(f'  downloading {name}' + (f' ({int(size) / 1e6:.0f} MB)' if size else ''))
         data = request('GET', f'/game-servers/{server}/files/' + urllib.parse.quote(p.lstrip('/')), timeout=900)
         tmp = os.path.join(folder, name + '.part')
@@ -138,6 +147,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--out', help='folder to write the .log files into')
     ap.add_argument('--demos', help='also download new GOTV demos into this folder')
+    ap.add_argument('--known', help='replay index.json; demos it lists at the same size are skipped')
     ap.add_argument('--list', action='store_true', help="print the server's root folder listing and exit")
     ap.add_argument('--wait', type=int, default=60, help='seconds to wait after sync-files (default 60)')
     args = ap.parse_args()
@@ -158,7 +168,11 @@ def main():
         print(f'  warning: {e}; using the cached files')
 
     if args.demos:
-        fetch_demos(server, args.demos)
+        known = {}
+        if args.known and os.path.exists(args.known):
+            with open(args.known, encoding='utf-8') as fh:
+                known = {k: (v.get('size') if isinstance(v, dict) else v) for k, v in json.load(fh).get('demos', {}).items()}
+        fetch_demos(server, args.demos, known)
     if not args.out:
         return
     os.makedirs(args.out, exist_ok=True)
