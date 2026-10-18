@@ -562,12 +562,110 @@
         flex-wrap: wrap;
         gap: 8px;
       }
+      .server-details {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        border-block: 1px solid var(--line);
+        margin: 0;
+      }
+      .server-detail {
+        min-width: 0;
+        padding: 12px 14px 12px 0;
+      }
+      .server-detail dt {
+        color: var(--text-3);
+        font-size: 11px;
+        text-transform: uppercase;
+      }
+      .server-detail dd {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 3px 0 0;
+        font-weight: 600;
+        overflow-wrap: anywhere;
+      }
       .server-actions {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
         border-top: 1px solid var(--line);
         padding-top: 16px;
+      }
+      .server-presets,
+      .server-history,
+      .server-queue {
+        border-top: 1px solid var(--line);
+        margin-top: 16px;
+        padding-top: 14px;
+      }
+      .server-presets h2,
+      .server-history h2,
+      .server-queue h2 {
+        color: var(--text-2);
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+      .server-presets-list,
+      .server-history-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .server-history-entry {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--text-2);
+        font-size: 12px;
+      }
+      .server-history-entry time {
+        color: var(--text-3);
+      }
+      .server-history-entry[data-result="Failed"] {
+        color: var(--loss);
+      }
+      .server-history-entry[data-result="Complete"] {
+        color: var(--win);
+      }
+      .server-presets {
+        border-top: 1px solid var(--line);
+        margin-top: 16px;
+        padding-top: 14px;
+      }
+      .server-presets h2,
+      .server-history h2,
+      .server-queue h2 {
+        color: var(--text-2);
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+      .server-presets-list,
+      .server-history-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .server-history {
+        border-top: 1px solid var(--line);
+        margin-top: 16px;
+        padding-top: 14px;
+      }
+      .server-history-entry {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--text-2);
+        font-size: 12px;
+      }
+      .server-history-entry time {
+        color: var(--text-3);
+      }
+      .server-history-entry[data-result="Failed"] {
+        color: var(--loss);
+      }
+      .server-history-entry[data-result="Complete"] {
+        color: var(--win);
       }
       .server-map-control {
         margin-top: 24px;
@@ -593,6 +691,46 @@
         color: var(--text-3);
         font-size: 12px;
         white-space: nowrap;
+      }
+      .map-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin: 14px 0 4px;
+      }
+      .map-filter {
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--text-2);
+        border-radius: 6px;
+        padding: 6px 10px;
+        font: inherit;
+        cursor: pointer;
+      }
+      .map-filter[aria-pressed="true"] {
+        color: var(--text);
+        background: var(--surface-2);
+        border-color: var(--accent);
+      }
+      .map-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin: 14px 0 4px;
+      }
+      .map-filter {
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--text-2);
+        border-radius: 6px;
+        padding: 6px 10px;
+        font: inherit;
+        cursor: pointer;
+      }
+      .map-filter[aria-pressed="true"] {
+        color: var(--text);
+        background: var(--surface-2);
+        border-color: var(--accent);
       }
       .map-group {
         margin-top: 20px;
@@ -642,6 +780,119 @@
       }
       .map-card-change {
         justify-self: start;
+      }
+      .map-card-tools {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px;
+      }
+      .map-card-tool {
+        min-height: 30px;
+        padding: 4px 7px;
+        color: var(--text-2);
+        background: transparent;
+        border: 1px solid var(--line);
+        border-radius: 5px;
+        font: inherit;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      .map-card-tool:hover:not(:disabled) {
+        border-color: var(--accent);
+      }
+      .map-card-tool:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .server-queue-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .server-queue-list {
+        display: grid;
+        gap: 6px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .server-queue-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        border-bottom: 1px solid var(--line);
+        padding: 7px 0;
+      }
+      .server-queue-item:first-child {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .server-queue-empty {
+        color: var(--text-3);
+        font-size: 12px;
+        padding: 8px 0;
+      }
+      .map-card-tools {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px;
+      }
+      .map-card-tool {
+        min-height: 30px;
+        padding: 4px 7px;
+        color: var(--text-2);
+        background: transparent;
+        border: 1px solid var(--line);
+        border-radius: 5px;
+        font: inherit;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      .map-card-tool:hover:not(:disabled) {
+        border-color: var(--accent);
+      }
+      .map-card-tool:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .server-queue {
+        border-top: 1px solid var(--line);
+        margin-top: 22px;
+        padding-top: 14px;
+      }
+      .server-queue-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .server-queue-list {
+        display: grid;
+        gap: 6px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .server-queue-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        border-bottom: 1px solid var(--line);
+        padding: 7px 0;
+      }
+      .server-queue-item:first-child {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .server-queue-empty {
+        color: var(--text-3);
+        font-size: 12px;
+        padding: 8px 0;
       }
       .map-empty {
         color: var(--text-3);
@@ -5864,6 +6115,7 @@
               `<div class="pagehead"><div><h1>Server</h1><div class="sub">Power controls</div></div><button class="iconbtn" id="server-refresh" type="button" title="Refresh status" aria-label="Refresh status">↻</button></div>
     <div class="server-state"><div><div class="server-state-label">DatHost status</div><div class="server-state-value" id="server-state">Not connected</div><div class="server-state-meta" id="server-meta"></div></div></div>
     <section class="server-current"><div><div class="server-current-label">Current map</div><div class="server-current-map" id="server-current-map">Unlock to load status</div></div><div class="server-current-actions"><button class="server-btn" type="button" data-server-action="match_restart" disabled>Restart match</button><button class="server-btn" type="button" data-server-action="warmup_end" disabled>End warmup</button></div></section>
+    <dl class="server-details"><div class="server-detail"><dt>Address</dt><dd><span id="server-address">Unavailable</span><button class="iconbtn" id="server-copy-address" type="button" title="Copy server address" aria-label="Copy server address" disabled>⧉</button></dd></div><div class="server-detail"><dt>Players</dt><dd id="server-players">Unavailable</dd></div><div class="server-detail"><dt>Uptime</dt><dd id="server-uptime">Unavailable</dd></div></dl>
     <form class="server-connection" id="server-connect">
       <label class="server-field">Worker URL<input id="server-url" type="url" inputmode="url" placeholder="https://your-worker.your-account.workers.dev" autocomplete="url" required></label>
       <label class="server-field">Control passphrase<input id="server-passphrase" type="password" autocomplete="current-password" required></label>
@@ -5871,7 +6123,10 @@
       <button class="server-btn" id="server-signout" type="button">Sign out</button>
     </form>
     <div class="server-actions"><button class="server-btn start" type="button" data-server-action="start" disabled>Start</button><button class="server-btn stop" type="button" data-server-action="stop" disabled>Stop</button><button class="server-btn" type="button" data-server-action="restart" disabled>Restart server</button><button class="server-btn" type="button" data-server-action="forcecamera" disabled>Force camera</button></div>
-    <section class="server-map-control"><h2>Change map</h2><div class="map-search-row"><input class="map-search" id="server-map-search" type="search" placeholder="Search maps" aria-label="Search maps" disabled><span class="map-count" id="server-map-count"></span></div><div id="server-map-cards"></div></section>
+    <section class="server-presets"><h2>Quick presets</h2><div class="server-presets-list"><button class="server-btn" type="button" data-server-action="preset_warmup" disabled>Warmup</button><button class="server-btn" type="button" data-server-action="preset_competitive" disabled>Competitive</button><button class="server-btn" type="button" data-server-action="preset_aim" disabled>Aim practice</button></div></section>
+    <section class="server-map-control"><h2>Change map</h2><div class="map-search-row"><input class="map-search" id="server-map-search" type="search" placeholder="Search maps" aria-label="Search maps" disabled><span class="map-count" id="server-map-count"></span></div><div class="map-filters" role="group" aria-label="Map lists"><button class="map-filter" type="button" data-map-filter="all" aria-pressed="true">All</button><button class="map-filter" type="button" data-map-filter="favorites" aria-pressed="false">Favorites</button><button class="map-filter" type="button" data-map-filter="recent" aria-pressed="false">Recent</button></div><div id="server-map-cards"></div></section>
+    <section class="server-queue"><div class="server-queue-head"><h2>Rotation queue</h2><button class="server-btn" id="server-queue-next" type="button" disabled>Next map</button></div><ol class="server-queue-list" id="server-queue-list"></ol><div class="server-queue-empty" id="server-queue-empty">No maps queued</div></section>
+    <section class="server-history"><h2>Recent actions</h2><div class="server-history-list" id="server-history-list"></div></section>
     <p class="server-message" id="server-message" role="status" aria-live="polite"></p>`;
 
             const urlInput = $("#server-url");
@@ -5880,11 +6135,25 @@
             const state = $("#server-state");
             const meta = $("#server-meta");
             const currentMap = $("#server-current-map");
+            const addressValue = $("#server-address");
+            const copyAddress = $("#server-copy-address");
+            const playersValue = $("#server-players");
+            const uptimeValue = $("#server-uptime");
             const mapSearch = $("#server-map-search");
             const mapCards = $("#server-map-cards");
             const mapCount = $("#server-map-count");
+            const mapFilters = [
+              ...document.querySelectorAll("[data-map-filter]"),
+            ];
+            const queueList = $("#server-queue-list");
+            const queueEmpty = $("#server-queue-empty");
+            const queueNext = $("#server-queue-next");
+            const historyList = $("#server-history-list");
             const unlockButton = $('#server-connect button[type="submit"]');
             const signoutButton = $("#server-signout");
+            const presetButtons = [
+              ...document.querySelectorAll('[data-server-action^="preset_"]'),
+            ];
             const actionButtons = [
               ...document.querySelectorAll("[data-server-action]"),
             ];
@@ -5892,6 +6161,19 @@
             let maps = [];
             let selectedMap = null;
             let latestServer = null;
+            let mapFilter = "all";
+            const readStored = (key, fallback) => {
+              try {
+                const value = JSON.parse(localStorage.getItem(key) || "null");
+                return value == null ? fallback : value;
+              } catch (e) {
+                return fallback;
+              }
+            };
+            let favoriteMaps = new Set(readStored("cs2.mapFavorites", []));
+            let recentMaps = readStored("cs2.mapRecents", []);
+            let rotationQueue = readStored("cs2.mapQueue", []);
+            let actionHistory = readStored("cs2.actionHistory", []);
             const savedUrl =
               localStorage.getItem("cs2.controlWorkerUrl") ||
               "https://cs2-server-control.prasaadem.workers.dev";
@@ -5944,28 +6226,153 @@
                 .forEach((button) => {
                   button.disabled = mapsDisabled;
                 });
+              mapCards.querySelectorAll(".map-card-tool").forEach((button) => {
+                button.disabled = !getSession() || pendingAction !== null;
+              });
+              queueNext.disabled = mapsDisabled || rotationQueue.length === 0;
+              queueList.querySelectorAll("button").forEach((button) => {
+                button.disabled = pendingAction !== null;
+              });
+              copyAddress.disabled = !getSession() || !server?.address;
+              presetButtons.forEach((button) => {
+                button.disabled =
+                  !getSession() ||
+                  !server?.running ||
+                  server.transitioning ||
+                  pendingAction !== null;
+              });
+            };
+            const saveStored = (key, value) => {
+              try {
+                localStorage.setItem(key, JSON.stringify(value));
+              } catch (e) {}
+            };
+            const mapLabel = (key) =>
+              maps.find((map) => map.key === key)?.label || key;
+            const renderQueue = () => {
+              queueList.replaceChildren();
+              queueEmpty.hidden = rotationQueue.length > 0;
+              for (const [index, key] of rotationQueue.entries()) {
+                const item = document.createElement("li");
+                item.className = "server-queue-item";
+                const label = document.createElement("span");
+                label.textContent = `${index + 1}. ${mapLabel(key)}`;
+                const remove = document.createElement("button");
+                remove.type = "button";
+                remove.className = "map-card-tool";
+                remove.textContent = "Remove";
+                remove.setAttribute(
+                  "aria-label",
+                  `Remove ${mapLabel(key)} from queue`,
+                );
+                remove.onclick = () => {
+                  rotationQueue = rotationQueue.filter(
+                    (entry) => entry !== key,
+                  );
+                  saveStored("cs2.mapQueue", rotationQueue);
+                  renderQueue();
+                  setActions(latestServer);
+                };
+                item.append(label, remove);
+                queueList.append(item);
+              }
+              queueNext.disabled =
+                !getSession() ||
+                !latestServer?.running ||
+                latestServer.transitioning ||
+                pendingAction !== null ||
+                rotationQueue.length === 0;
+            };
+            const renderHistory = () => {
+              historyList.replaceChildren();
+              for (const entry of actionHistory.slice(0, 12)) {
+                const item = document.createElement("div");
+                item.className = "server-history-entry";
+                item.dataset.result = entry.result;
+                const action = document.createElement("span");
+                action.textContent = entry.label;
+                const result = document.createElement("span");
+                result.textContent = entry.result;
+                const time = document.createElement("time");
+                time.dateTime = entry.time;
+                time.textContent = new Date(entry.time).toLocaleTimeString();
+                item.append(action, result, time);
+                historyList.append(item);
+              }
+            };
+            const logAction = (label, result) => {
+              const id = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+              actionHistory.unshift({
+                id,
+                label,
+                result,
+                time: new Date().toISOString(),
+              });
+              actionHistory = actionHistory.slice(0, 12);
+              saveStored("cs2.actionHistory", actionHistory);
+              renderHistory();
+              return id;
+            };
+            const updateActionLog = (id, result) => {
+              actionHistory = actionHistory.map((entry) =>
+                entry.id === id
+                  ? { ...entry, result, time: new Date().toISOString() }
+                  : entry,
+              );
+              saveStored("cs2.actionHistory", actionHistory);
+              renderHistory();
+            };
+            const formatUptime = (seconds) => {
+              if (!Number.isFinite(seconds) || seconds < 0)
+                return "Unavailable";
+              const days = Math.floor(seconds / 86400);
+              const hours = Math.floor((seconds % 86400) / 3600);
+              const minutes = Math.floor((seconds % 3600) / 60);
+              return days
+                ? `${days}d ${hours}h`
+                : hours
+                  ? `${hours}h ${minutes}m`
+                  : `${minutes}m`;
+            };
+            const rememberMap = (key) => {
+              if (!key) return;
+              recentMaps = [
+                key,
+                ...recentMaps.filter((entry) => entry !== key),
+              ].slice(0, 12);
+              saveStored("cs2.mapRecents", recentMaps);
             };
             const renderMapCards = () => {
               const query = mapSearch.value.trim().toLowerCase();
-              const filtered = maps.filter((map) =>
+              let source = maps;
+              if (mapFilter === "favorites")
+                source = maps.filter((map) => favoriteMaps.has(map.key));
+              if (mapFilter === "recent")
+                source = recentMaps
+                  .map((key) => maps.find((map) => map.key === key))
+                  .filter(Boolean);
+              const filtered = source.filter((map) =>
                 `${map.label} ${map.category} ${map.key}`
                   .toLowerCase()
                   .includes(query),
               );
               mapCount.textContent = `${filtered.length} of ${maps.length} maps`;
               mapCards.replaceChildren();
-              for (const category of [
-                ...new Set(filtered.map((map) => map.category)),
-              ]) {
+              for (const category of mapFilter === "recent"
+                ? ["Recently played"]
+                : mapFilter === "favorites"
+                  ? ["Favorites"]
+                  : [...new Set(filtered.map((map) => map.category))]) {
                 const section = document.createElement("section");
                 section.className = "map-group";
                 const heading = document.createElement("h2");
                 heading.textContent = category;
                 const grid = document.createElement("div");
                 grid.className = "map-grid";
-                for (const map of filtered.filter(
-                  (item) => item.category === category,
-                )) {
+                for (const map of mapFilter === "recent" ||
+                mapFilter === "favorites"
+                  ? filtered
+                  : filtered.filter((item) => item.category === category)) {
                   const card = document.createElement("div");
                   card.className = `map-card${selectedMap === map.key ? " selected" : ""}`;
                   const selectButton = document.createElement("button");
@@ -5990,6 +6397,52 @@
                     setActions(latestServer);
                   };
                   card.append(selectButton);
+                  const tools = document.createElement("div");
+                  tools.className = "map-card-tools";
+                  const favorite = document.createElement("button");
+                  favorite.type = "button";
+                  favorite.className = "map-card-tool";
+                  favorite.textContent = favoriteMaps.has(map.key)
+                    ? "★ Saved"
+                    : "☆ Favorite";
+                  favorite.setAttribute(
+                    "aria-pressed",
+                    favoriteMaps.has(map.key) ? "true" : "false",
+                  );
+                  favorite.onclick = () => {
+                    if (favoriteMaps.has(map.key)) favoriteMaps.delete(map.key);
+                    else favoriteMaps.add(map.key);
+                    saveStored("cs2.mapFavorites", [...favoriteMaps]);
+                    renderMapCards();
+                    setActions(latestServer);
+                  };
+                  const queue = document.createElement("button");
+                  queue.type = "button";
+                  queue.className = "map-card-tool";
+                  const queued = rotationQueue.includes(map.key);
+                  queue.textContent = queued ? "Queued" : "+ Queue";
+                  queue.disabled =
+                    queued ||
+                    rotationQueue.length >= 20 ||
+                    pendingAction !== null;
+                  queue.title =
+                    rotationQueue.length >= 20 && !queued
+                      ? "Queue limit reached"
+                      : "Add to rotation queue";
+                  queue.onclick = () => {
+                    if (
+                      rotationQueue.includes(map.key) ||
+                      rotationQueue.length >= 20
+                    )
+                      return;
+                    rotationQueue.push(map.key);
+                    saveStored("cs2.mapQueue", rotationQueue);
+                    renderQueue();
+                    renderMapCards();
+                    setActions(latestServer);
+                  };
+                  tools.append(favorite, queue);
+                  card.append(tools);
                   if (selectedMap === map.key) {
                     const changeButton = document.createElement("button");
                     changeButton.type = "button";
@@ -6013,25 +6466,51 @@
               if (!filtered.length) {
                 const empty = document.createElement("p");
                 empty.className = "map-empty";
-                empty.textContent = "No maps match your search.";
+                empty.textContent = maps.length
+                  ? mapFilter === "recent" && !recentMaps.length
+                    ? "No recently played maps yet."
+                    : mapFilter === "favorites" && !favoriteMaps.size
+                      ? "No favorite maps yet. Save one with ☆ Favorite."
+                      : "No maps match your search."
+                  : "No maps available.";
                 mapCards.append(empty);
               }
+            };
+            const setMapFilter = (filter) => {
+              mapFilter = filter;
+              mapFilters.forEach((button) => {
+                button.setAttribute(
+                  "aria-pressed",
+                  button.dataset.mapFilter === filter ? "true" : "false",
+                );
+              });
+              renderMapCards();
             };
             const loadMaps = async () => {
               const result = await call("/api/maps");
               maps = result.maps || [];
               renderMapCards();
+              renderQueue();
             };
-            async function performAction(action, mapKey = selectedMap) {
+            async function performAction(
+              action,
+              mapKey = selectedMap,
+              fromQueue = false,
+            ) {
               const labels = {
-                start: "Start",
-                stop: "Stop",
-                restart: "Restart",
+                start: "Start server",
+                stop: "Stop server",
+                restart: "Restart server",
                 match_restart: "Restart match",
-                forcecamera: "Force camera",
                 warmup_end: "End warmup",
-                change_map: "Change map",
+                forcecamera: "Force camera",
+                preset_warmup: "Warmup preset",
+                preset_competitive: "Competitive preset",
+                preset_aim: "Aim practice preset",
+                change_map: `Change map to ${mapLabel(mapKey)}`,
               };
+              const label = labels[action] || action;
+              const logId = logAction(label, "Running");
               pendingAction = action;
               setActions(null, true);
               if (["start", "stop", "restart"].includes(action)) {
@@ -6042,7 +6521,7 @@
                       ? "Stopping"
                       : "Restarting";
               }
-              message.textContent = "";
+              message.textContent = `${label}…`;
               try {
                 await call("/api/action", {
                   method: "POST",
@@ -6051,27 +6530,64 @@
                     ...(action === "change_map" ? { mapKey } : {}),
                   }),
                 });
+
+                if (action === "change_map") {
+                  const expected = maps.find((map) => map.key === mapKey);
+                  const expectedToken = expected?.line.split(" ").at(-1);
+                  const deadline = Date.now() + 60000;
+                  message.textContent = `Waiting for server to load ${expected?.label || "selected map"}…`;
+                  while (Date.now() < deadline) {
+                    await new Promise((resolve) => setTimeout(resolve, 2500));
+                    const current = await refresh();
+                    const actual = current?.map;
+                    if (
+                      actual &&
+                      (actual.key === mapKey ||
+                        actual.value?.toLowerCase() ===
+                          expectedToken?.toLowerCase())
+                    ) {
+                      pendingAction = null;
+                      rememberMap(mapKey);
+                      if (fromQueue && rotationQueue[0] === mapKey)
+                        rotationQueue.shift();
+                      saveStored("cs2.mapQueue", rotationQueue);
+                      selectedMap = null;
+                      renderMapCards();
+                      renderQueue();
+                      setActions(current);
+                      updateActionLog(logId, "Complete");
+                      message.textContent = `${expected?.label || "Map change"} complete.`;
+                      return;
+                    }
+                    message.textContent = `Waiting for server to load ${expected?.label || "selected map"}…`;
+                  }
+                  pendingAction = null;
+                  await refresh();
+                  setActions(latestServer);
+                  updateActionLog(logId, "Unconfirmed");
+                  message.textContent = `${expected?.label || "Map change"} was requested, but DatHost has not reported the new map yet.`;
+                  return;
+                }
+
                 if (
                   [
                     "warmup_end",
                     "match_restart",
                     "forcecamera",
-                    "change_map",
+                    "preset_warmup",
+                    "preset_competitive",
+                    "preset_aim",
                   ].includes(action)
                 ) {
                   pendingAction = null;
-                  if (action === "change_map") {
-                    selectedMap = null;
-                    renderMapCards();
-                  }
-                  await new Promise((resolve) =>
-                    setTimeout(resolve, action === "change_map" ? 2500 : 1000),
-                  );
                   await refresh();
-                  message.textContent = `${labels[action]} command sent.`;
+                  setActions(latestServer);
+                  updateActionLog(logId, "Sent");
+                  message.textContent = `${label} command sent.`;
                   return;
                 }
-                message.textContent = `${labels[action]} requested. Checking server status…`;
+
+                message.textContent = `${label} requested. Checking server status…`;
                 const targetRunning = action !== "stop";
                 const actionStartedAt = Date.now();
                 const deadline = actionStartedAt + 60000;
@@ -6079,10 +6595,7 @@
                 while (Date.now() < deadline) {
                   await new Promise((resolve) => setTimeout(resolve, 2500));
                   const current = await refresh();
-                  if (!current) {
-                    pendingAction = null;
-                    break;
-                  }
+                  if (!current) break;
                   if (action === "restart" && current.transitioning)
                     sawRestartTransition = true;
                   if (
@@ -6094,19 +6607,21 @@
                   ) {
                     pendingAction = null;
                     setActions(current);
-                    message.textContent = `${labels[action]} complete.`;
-                    break;
+                    updateActionLog(logId, "Complete");
+                    message.textContent = `${label} complete.`;
+                    return;
                   }
-                  message.textContent = `Waiting for server to ${action === "restart" ? "restart" : targetRunning ? "start" : "stop"}…`;
                 }
-                if (Date.now() >= deadline) {
-                  pendingAction = null;
-                  await refresh();
-                  message.textContent = `${labels[action]} was requested, but the server has not reached the expected state yet. Refresh status to check again.`;
-                }
+                pendingAction = null;
+                await refresh();
+                setActions(latestServer);
+                updateActionLog(logId, "Unconfirmed");
+                message.textContent = `${label} was requested, but the server has not reached the expected state yet.`;
               } catch (error) {
                 pendingAction = null;
                 await refresh();
+                setActions(latestServer);
+                updateActionLog(logId, "Failed");
                 message.textContent = error.message;
               }
             }
@@ -6186,6 +6701,13 @@
                 state.textContent = result.status || "unknown";
                 currentMap.textContent =
                   result.map?.label || result.map?.value || "Map unavailable";
+                if (result.map?.key) rememberMap(result.map.key);
+                addressValue.textContent = result.address || "Unavailable";
+                playersValue.textContent =
+                  result.players == null
+                    ? "Unavailable"
+                    : String(result.players);
+                uptimeValue.textContent = formatUptime(result.uptimeSeconds);
                 meta.textContent = `${result.players == null ? "Player count unavailable" : `${result.players} player${result.players === 1 ? "" : "s"}`} · Checked ${new Date(result.checkedAt).toLocaleTimeString()}`;
                 if (!maps.length) await loadMaps();
                 setActions(result);
@@ -6194,6 +6716,9 @@
               } catch (error) {
                 state.textContent = getSession() ? "Unavailable" : "Locked";
                 currentMap.textContent = "Unavailable";
+                addressValue.textContent = "Unavailable";
+                playersValue.textContent = "Unavailable";
+                uptimeValue.textContent = "Unavailable";
                 meta.textContent = "";
                 mapSearch.disabled = true;
                 setConnectionControls();
@@ -6245,10 +6770,38 @@
             };
             $("#server-refresh").onclick = refresh;
             mapSearch.oninput = renderMapCards;
+            mapFilters.forEach((button) => {
+              button.onclick = () => {
+                mapFilter = button.dataset.mapFilter;
+                mapFilters.forEach((filter) =>
+                  filter.setAttribute(
+                    "aria-pressed",
+                    filter === button ? "true" : "false",
+                  ),
+                );
+                renderMapCards();
+              };
+            });
+            copyAddress.onclick = async () => {
+              if (!latestServer?.address) return;
+              try {
+                await navigator.clipboard.writeText(latestServer.address);
+                message.textContent = "Server address copied.";
+              } catch {
+                message.textContent =
+                  "Could not copy address from this browser.";
+              }
+            };
             actionButtons.forEach((button) => {
               button.onclick = () => performAction(button.dataset.serverAction);
             });
+            queueNext.onclick = () => {
+              if (rotationQueue[0])
+                performAction("change_map", rotationQueue[0], true);
+            };
 
+            renderQueue();
+            renderHistory();
             setConnectionControls();
             if (getSession()) refresh();
             else {

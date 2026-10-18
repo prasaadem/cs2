@@ -353,6 +353,26 @@ const CONSOLE_PRESETS = {
   match_restart: "mp_restartgame 1",
   warmup_end: "mp_warmup_end 1",
 };
+const CONFIG_PRESETS = {
+  preset_warmup: ["mp_warmup_start", "mp_warmup_pausetimer 1"],
+  preset_competitive: [
+    "mp_warmup_end 1",
+    "mp_maxrounds 24",
+    "mp_halftime 1",
+    "mp_freezetime 15",
+    "mp_restartgame 1",
+  ],
+  preset_aim: [
+    "mp_warmup_start",
+    "mp_freezetime 0",
+    "mp_buy_anywhere 1",
+    "mp_buytime 9999",
+    "sv_infinite_ammo 1",
+    "mp_roundtime 60",
+    "mp_roundtime_defuse 60",
+    "mp_restartgame 1",
+  ],
+};
 
 function json(data, status, headers = {}) {
   return new Response(JSON.stringify(data), {
@@ -598,6 +618,45 @@ function currentMap(server) {
   };
 }
 
+function statusEntry(server, names) {
+  const wanted = new Set(
+    names.map((name) => name.toLowerCase().replace(/[^a-z0-9]/g, "")),
+  );
+  const entries = Array.isArray(server.status)
+    ? server.status
+    : server.status && typeof server.status === "object"
+      ? Object.entries(server.status).map(([key, value]) => ({ key, value }))
+      : [];
+  return entries.find(
+    (entry) =>
+      typeof entry.key === "string" &&
+      wanted.has(entry.key.toLowerCase().replace(/[^a-z0-9]/g, "")),
+  )?.value;
+}
+
+function serverUptime(server) {
+  const value = statusEntry(server, [
+    "uptime",
+    "server_uptime",
+    "uptime_seconds",
+  ]);
+  if (typeof value === "number" && Number.isFinite(value) && value >= 0)
+    return Math.floor(value);
+  if (typeof value !== "string") return null;
+  const text = value.trim();
+  if (/^\d+(\.\d+)?$/.test(text)) return Math.floor(Number(text));
+  const clock = text.match(/^(\d+):([0-5]?\d):([0-5]?\d)$/);
+  if (clock)
+    return Number(clock[1]) * 3600 + Number(clock[2]) * 60 + Number(clock[3]);
+  const parts = [...text.matchAll(/(\d+)\s*(d|h|m|s)/gi)];
+  if (!parts.length) return null;
+  const units = { d: 86400, h: 3600, m: 60, s: 1 };
+  return parts.reduce(
+    (sum, [, amount, unit]) => sum + Number(amount) * units[unit.toLowerCase()],
+    0,
+  );
+}
+
 async function handle(request, env) {
   const origin = allowedOrigin(request, env);
   if (!origin) return json({ error: "Origin is not allowed" }, 403);
@@ -664,16 +723,24 @@ async function handle(request, env) {
     if (url.pathname === "/api/status" && request.method === "GET") {
       const server = await dathost(`/game-servers/${id}`, "GET", env);
       const state = serverState(server);
-      const players = Array.isArray(server.players)
-        ? server.players.length
-        : Number.isInteger(server.players)
-          ? server.players
+      const players = Number.isInteger(server.players_online)
+        ? server.players_online
+        : Array.isArray(server.players)
+          ? server.players.length
+          : Number.isInteger(server.players)
+            ? server.players
+            : null;
+      const address =
+        typeof server.ip === "string" && server.ip
+          ? `${server.ip}${Number.isInteger(server.ports?.game) ? `:${server.ports.game}` : ""}`
           : null;
       return json(
         {
           ...state,
           map: currentMap(server),
           players,
+          address,
+          uptimeSeconds: serverUptime(server),
           checkedAt: new Date().toISOString(),
         },
         200,
@@ -693,6 +760,11 @@ async function handle(request, env) {
 
       if (Object.hasOwn(CONSOLE_PRESETS, body.action)) {
         await dathostConsole(CONSOLE_PRESETS[body.action], env);
+        return json({ ok: true, action: body.action }, 200, cors);
+      }
+      if (Object.hasOwn(CONFIG_PRESETS, body.action)) {
+        for (const line of CONFIG_PRESETS[body.action])
+          await dathostConsole(line, env);
         return json({ ok: true, action: body.action }, 200, cors);
       }
       if (body.action === "change_map") {

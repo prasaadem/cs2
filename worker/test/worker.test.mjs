@@ -175,6 +175,25 @@ test("recognizes alternate DatHost map keys and Source map paths", async () => {
   }
 });
 
+test("returns documented connection details and reported uptime", async () => {
+  globalThis.fetch = async () =>
+    Response.json({
+      on: true,
+      ip: "server.example.net",
+      ports: { game: 27015 },
+      players_online: 4,
+      status: [{ key: "server uptime", value: "1d 2h 3m 4s" }],
+    });
+  const response = await worker.fetch(
+    request("/api/status", { token: await login() }),
+    env,
+  );
+  const result = await response.json();
+  assert.equal(result.players, 4);
+  assert.equal(result.address, "server.example.net:27015");
+  assert.equal(result.uptimeSeconds, 93784);
+});
+
 test("allows only the three server power actions", async () => {
   let calledUrl;
   let calledMethod;
@@ -242,6 +261,63 @@ test("sends only fixed game-console presets to DatHost", async () => {
     assert.equal(calledMethod, "POST");
     assert.equal(calledLine, expectedLine);
   }
+});
+
+test("runs fixed warmup, competitive, and aim presets", async () => {
+  const calls = [];
+  globalThis.fetch = async (_url, options) => {
+    calls.push(options.body.get("line"));
+    return new Response(null, { status: 200 });
+  };
+  const presets = [
+    ["preset_warmup", ["mp_warmup_start", "mp_warmup_pausetimer 1"]],
+    [
+      "preset_competitive",
+      [
+        "mp_warmup_end 1",
+        "mp_maxrounds 24",
+        "mp_halftime 1",
+        "mp_freezetime 15",
+        "mp_restartgame 1",
+      ],
+    ],
+    [
+      "preset_aim",
+      [
+        "mp_warmup_start",
+        "mp_freezetime 0",
+        "mp_buy_anywhere 1",
+        "mp_buytime 9999",
+        "sv_infinite_ammo 1",
+        "mp_roundtime 60",
+        "mp_roundtime_defuse 60",
+        "mp_restartgame 1",
+      ],
+    ],
+  ];
+  for (const [action, expected] of presets) {
+    calls.length = 0;
+    const response = await worker.fetch(
+      request("/api/action", {
+        method: "POST",
+        body: { action },
+        token: await login(),
+      }),
+      env,
+    );
+    assert.equal(response.status, 200);
+    assert.deepEqual(calls, expected);
+  }
+
+  const invalid = await worker.fetch(
+    request("/api/action", {
+      method: "POST",
+      body: { action: "preset_arbitrary", command: "quit" },
+      token: await login(),
+    }),
+    env,
+  );
+  assert.equal(invalid.status, 400);
 });
 
 test("lists supplied maps and changes map using only the selected preset", async () => {
