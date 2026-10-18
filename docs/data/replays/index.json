@@ -77,6 +77,42 @@
    "ids": [
     "20261017-0420-de_dust2"
    ]
+  },
+  "auto-20261018-1649-de_dust2-cupcake.dem": {
+   "size": 6465739,
+   "ids": []
+  },
+  "auto-20261018-1712-de_mirage-cupcake.dem": {
+   "size": 1021333,
+   "ids": []
+  },
+  "auto-20261018-1715-de_mirage-cupcake.dem": {
+   "size": 736740,
+   "ids": []
+  },
+  "auto-20261018-1718-de_mirage-cupcake.dem": {
+   "size": 233778,
+   "ids": []
+  },
+  "auto-20261018-1718-de_overpass-cupcake.dem": {
+   "size": 368428,
+   "ids": []
+  },
+  "auto-20261018-1719-awp_india_cs2-cupcake.dem": {
+   "size": 375329,
+   "ids": []
+  },
+  "auto-20261018-1721-de_seaside_d_prefab-cupcake.dem": {
+   "size": 917131,
+   "ids": []
+  },
+  "auto-20261018-1724-de_anubis-cupcake.dem": {
+   "size": 18819562,
+   "ids": []
+  },
+  "auto-20261018-1741-de_seaside_d_prefab-cupcake.dem": {
+   "size": 483765,
+   "ids": []
   }
  }
 }
