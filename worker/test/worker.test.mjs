@@ -138,6 +138,43 @@ test("normalizes DatHost on flags and alternate running states", async () => {
   assert.equal(state.transitioning, true);
 });
 
+test("returns the current map from DatHost status key/value entries", async () => {
+  globalThis.fetch = async () =>
+    Response.json({
+      on: true,
+      status: [
+        { key: "map", value: "de_dust2" },
+        { key: "version", value: "1.0" },
+      ],
+    });
+  const response = await worker.fetch(
+    request("/api/status", { token: await login() }),
+    env,
+  );
+  const result = await response.json();
+  assert.deepEqual(result.map, {
+    key: "official:de_dust2",
+    label: "Dust 2",
+    value: "de_dust2",
+  });
+});
+
+test("recognizes alternate DatHost map keys and Source map paths", async () => {
+  for (const status of [
+    [{ key: "Map Name", value: "maps/de_mirage.bsp" }],
+    { current_map: "de_mirage" },
+    [{ key: "level", value: "de_mirage.vpk" }],
+  ]) {
+    globalThis.fetch = async () => Response.json({ on: true, status });
+    const response = await worker.fetch(
+      request("/api/status", { token: await login() }),
+      env,
+    );
+    assert.equal(response.status, 200);
+    assert.equal((await response.json()).map?.label, "Mirage");
+  }
+});
+
 test("allows only the three server power actions", async () => {
   let calledUrl;
   let calledMethod;
@@ -173,7 +210,7 @@ test("allows only the three server power actions", async () => {
   assert.equal(invalid.status, 400);
 });
 
-test("sends only the fixed warmup-end command to DatHost console", async () => {
+test("sends only fixed game-console presets to DatHost", async () => {
   let calledUrl;
   let calledMethod;
   let calledLine;
@@ -184,11 +221,57 @@ test("sends only the fixed warmup-end command to DatHost console", async () => {
     return new Response(null, { status: 200 });
   };
 
+  for (const [action, expectedLine] of [
+    ["warmup_end", "mp_warmup_end 1"],
+    ["match_restart", "mp_restartgame 1"],
+    ["forcecamera", "mp_forcecamera 1"],
+  ]) {
+    const response = await worker.fetch(
+      request("/api/action", {
+        method: "POST",
+        body: { action },
+        token: await login(),
+      }),
+      env,
+    );
+    assert.equal(response.status, 200);
+    assert.equal(
+      calledUrl,
+      "https://dathost.com/api/0.1/game-servers/test-server/console",
+    );
+    assert.equal(calledMethod, "POST");
+    assert.equal(calledLine, expectedLine);
+  }
+});
+
+test("lists supplied maps and changes map using only the selected preset", async () => {
+  const token = await login();
+  const listResponse = await worker.fetch(request("/api/maps", { token }), env);
+  assert.equal(listResponse.status, 200);
+  const { maps } = await listResponse.json();
+  assert.ok(
+    maps.some(
+      (map) => map.key === "official:de_dust2" && map.label === "Dust 2",
+    ),
+  );
+  assert.ok(
+    maps.some(
+      (map) => map.key === "workshop:3078980631" && map.label === "Guard",
+    ),
+  );
+
+  let calledUrl;
+  let calledLine;
+  globalThis.fetch = async (url, options) => {
+    calledUrl = url;
+    calledLine = options.body.get("line");
+    return new Response(null, { status: 200 });
+  };
   const response = await worker.fetch(
     request("/api/action", {
       method: "POST",
-      body: { action: "warmup_end" },
-      token: await login(),
+      body: { action: "change_map", mapKey: "workshop:3078980631" },
+      token,
     }),
     env,
   );
@@ -197,6 +280,15 @@ test("sends only the fixed warmup-end command to DatHost console", async () => {
     calledUrl,
     "https://dathost.com/api/0.1/game-servers/test-server/console",
   );
-  assert.equal(calledMethod, "POST");
-  assert.equal(calledLine, "mp_warmup_end");
+  assert.equal(calledLine, "host_workshop_map 3078980631");
+
+  const invalidMap = await worker.fetch(
+    request("/api/action", {
+      method: "POST",
+      body: { action: "change_map", mapKey: "map arbitrary_command" },
+      token,
+    }),
+    env,
+  );
+  assert.equal(invalidMap.status, 400);
 });

@@ -63,7 +63,7 @@ The page loads `data/games.json`, so it must be served over HTTP. Opening the fi
 
 ## Server controls
 
-The Server page calls a Cloudflare Worker; DatHost credentials are never placed in the static site. The Worker provides status, start, stop, restart, and a fixed `mp_warmup_end` console action behind a passphrase and short-lived signed sessions. Stop, restart, and ending warmup require confirmation in the page.
+The Server page calls a Cloudflare Worker; DatHost credentials are never placed in the static site. The Worker provides status and power controls, a map selector from the server's approved map list, and fixed console presets for `mp_forcecamera 1`, `mp_warmup_end 1`, and `mp_restartgame 1`. Console commands and map names are allow-listed in the Worker; arbitrary browser-supplied commands are rejected. Server stop/restart, match restart, warmup end, and map changes require confirmation in the page.
 
 Deploy the Worker from the repository root with Wrangler (Node.js required):
 

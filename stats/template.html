@@ -537,12 +537,115 @@
         color: var(--text-2);
         margin-top: 4px;
       }
+      .server-current {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        border-block: 1px solid var(--line);
+        padding: 18px 0;
+      }
+      .server-current-label {
+        color: var(--text-3);
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+      .server-current-map {
+        font:
+          700 24px/1.2 Oxanium,
+          sans-serif;
+        margin-top: 4px;
+      }
+      .server-current-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
       .server-actions {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
         border-top: 1px solid var(--line);
         padding-top: 16px;
+      }
+      .server-map-control {
+        margin-top: 24px;
+      }
+      .map-search-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin: 12px 0;
+      }
+      .map-search {
+        width: min(100%, 420px);
+        min-height: 40px;
+        padding: 8px 11px;
+        color: var(--text);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        font: inherit;
+      }
+      .map-count {
+        color: var(--text-3);
+        font-size: 12px;
+        white-space: nowrap;
+      }
+      .map-group {
+        margin-top: 20px;
+      }
+      .map-group h2 {
+        color: var(--text-2);
+        font-size: 14px;
+        margin-bottom: 9px;
+      }
+      .map-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 8px;
+      }
+      .map-card {
+        display: grid;
+        min-height: 66px;
+        align-content: start;
+        gap: 8px;
+        padding: 8px;
+        color: var(--text);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+      }
+      .map-card.selected {
+        border-color: var(--accent);
+        background: var(--accent-soft);
+      }
+      .map-card-select {
+        min-height: 42px;
+        padding: 5px 6px;
+        color: var(--text);
+        text-align: left;
+        background: transparent;
+        border: 0;
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .map-card-select:hover:not(:disabled) {
+        color: var(--accent);
+      }
+      .map-card-select:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+      }
+      .map-card-change {
+        justify-self: start;
+      }
+      .map-empty {
+        color: var(--text-3);
+        padding: 18px 0;
       }
       .server-message {
         min-height: 1.5em;
@@ -5760,13 +5863,15 @@
             $("#app").innerHTML =
               `<div class="pagehead"><div><h1>Server</h1><div class="sub">Power controls</div></div><button class="iconbtn" id="server-refresh" type="button" title="Refresh status" aria-label="Refresh status">↻</button></div>
     <div class="server-state"><div><div class="server-state-label">DatHost status</div><div class="server-state-value" id="server-state">Not connected</div><div class="server-state-meta" id="server-meta"></div></div></div>
+    <section class="server-current"><div><div class="server-current-label">Current map</div><div class="server-current-map" id="server-current-map">Unlock to load status</div></div><div class="server-current-actions"><button class="server-btn" type="button" data-server-action="match_restart" disabled>Restart match</button><button class="server-btn" type="button" data-server-action="warmup_end" disabled>End warmup</button></div></section>
     <form class="server-connection" id="server-connect">
       <label class="server-field">Worker URL<input id="server-url" type="url" inputmode="url" placeholder="https://your-worker.your-account.workers.dev" autocomplete="url" required></label>
       <label class="server-field">Control passphrase<input id="server-passphrase" type="password" autocomplete="current-password" required></label>
       <button class="server-btn" type="submit">Unlock</button>
       <button class="server-btn" id="server-signout" type="button">Sign out</button>
     </form>
-    <div class="server-actions"><button class="server-btn start" type="button" data-server-action="start" disabled>Start</button><button class="server-btn stop" type="button" data-server-action="stop" disabled>Stop</button><button class="server-btn" type="button" data-server-action="restart" disabled>Restart</button><button class="server-btn" type="button" data-server-action="warmup_end" disabled>End warmup</button></div>
+    <div class="server-actions"><button class="server-btn start" type="button" data-server-action="start" disabled>Start</button><button class="server-btn stop" type="button" data-server-action="stop" disabled>Stop</button><button class="server-btn" type="button" data-server-action="restart" disabled>Restart server</button><button class="server-btn" type="button" data-server-action="forcecamera" disabled>Force camera</button></div>
+    <section class="server-map-control"><h2>Change map</h2><div class="map-search-row"><input class="map-search" id="server-map-search" type="search" placeholder="Search maps" aria-label="Search maps" disabled><span class="map-count" id="server-map-count"></span></div><div id="server-map-cards"></div></section>
     <p class="server-message" id="server-message" role="status" aria-live="polite"></p>`;
 
             const urlInput = $("#server-url");
@@ -5774,12 +5879,19 @@
             const message = $("#server-message");
             const state = $("#server-state");
             const meta = $("#server-meta");
+            const currentMap = $("#server-current-map");
+            const mapSearch = $("#server-map-search");
+            const mapCards = $("#server-map-cards");
+            const mapCount = $("#server-map-count");
             const unlockButton = $('#server-connect button[type="submit"]');
             const signoutButton = $("#server-signout");
             const actionButtons = [
               ...document.querySelectorAll("[data-server-action]"),
             ];
             let pendingAction = null;
+            let maps = [];
+            let selectedMap = null;
+            let latestServer = null;
             const savedUrl =
               localStorage.getItem("cs2.controlWorkerUrl") ||
               "https://cs2-server-control.prasaadem.workers.dev";
@@ -5809,6 +5921,7 @@
               return null;
             };
             const setActions = (server, pending = false) => {
+              latestServer = server;
               actionButtons.forEach((button) => {
                 button.disabled =
                   pending ||
@@ -5819,7 +5932,184 @@
                   (button.dataset.serverAction === "start" && server.running) ||
                   (button.dataset.serverAction !== "start" && !server.running);
               });
+              const mapsDisabled =
+                !getSession() ||
+                !server?.known ||
+                !server.running ||
+                server.transitioning ||
+                pendingAction !== null;
+              mapSearch.disabled = mapsDisabled;
+              mapCards
+                .querySelectorAll(".map-card-select, .map-card-change")
+                .forEach((button) => {
+                  button.disabled = mapsDisabled;
+                });
             };
+            const renderMapCards = () => {
+              const query = mapSearch.value.trim().toLowerCase();
+              const filtered = maps.filter((map) =>
+                `${map.label} ${map.category} ${map.key}`
+                  .toLowerCase()
+                  .includes(query),
+              );
+              mapCount.textContent = `${filtered.length} of ${maps.length} maps`;
+              mapCards.replaceChildren();
+              for (const category of [
+                ...new Set(filtered.map((map) => map.category)),
+              ]) {
+                const section = document.createElement("section");
+                section.className = "map-group";
+                const heading = document.createElement("h2");
+                heading.textContent = category;
+                const grid = document.createElement("div");
+                grid.className = "map-grid";
+                for (const map of filtered.filter(
+                  (item) => item.category === category,
+                )) {
+                  const card = document.createElement("div");
+                  card.className = `map-card${selectedMap === map.key ? " selected" : ""}`;
+                  const selectButton = document.createElement("button");
+                  selectButton.type = "button";
+                  selectButton.className = "map-card-select";
+                  card.setAttribute("aria-label", `Select ${map.label}`);
+                  selectButton.setAttribute(
+                    "aria-pressed",
+                    selectedMap === map.key ? "true" : "false",
+                  );
+                  card.dataset.mapKey = map.key;
+                  selectButton.textContent = map.label;
+                  selectButton.disabled =
+                    !getSession() ||
+                    !latestServer?.known ||
+                    !latestServer.running ||
+                    latestServer.transitioning ||
+                    pendingAction !== null;
+                  selectButton.onclick = () => {
+                    selectedMap = map.key;
+                    renderMapCards();
+                    setActions(latestServer);
+                  };
+                  card.append(selectButton);
+                  if (selectedMap === map.key) {
+                    const changeButton = document.createElement("button");
+                    changeButton.type = "button";
+                    changeButton.className = "server-btn map-card-change";
+                    changeButton.textContent = "Change map";
+                    changeButton.disabled =
+                      !getSession() ||
+                      !latestServer?.known ||
+                      !latestServer.running ||
+                      latestServer.transitioning ||
+                      pendingAction !== null;
+                    changeButton.onclick = () =>
+                      performAction("change_map", map.key);
+                    card.append(changeButton);
+                  }
+                  grid.append(card);
+                }
+                section.append(heading, grid);
+                mapCards.append(section);
+              }
+              if (!filtered.length) {
+                const empty = document.createElement("p");
+                empty.className = "map-empty";
+                empty.textContent = "No maps match your search.";
+                mapCards.append(empty);
+              }
+            };
+            const loadMaps = async () => {
+              const result = await call("/api/maps");
+              maps = result.maps || [];
+              renderMapCards();
+            };
+            async function performAction(action, mapKey = selectedMap) {
+              const labels = {
+                start: "Start",
+                stop: "Stop",
+                restart: "Restart",
+                match_restart: "Restart match",
+                forcecamera: "Force camera",
+                warmup_end: "End warmup",
+                change_map: "Change map",
+              };
+              pendingAction = action;
+              setActions(null, true);
+              if (["start", "stop", "restart"].includes(action)) {
+                state.textContent =
+                  action === "start"
+                    ? "Starting"
+                    : action === "stop"
+                      ? "Stopping"
+                      : "Restarting";
+              }
+              message.textContent = "";
+              try {
+                await call("/api/action", {
+                  method: "POST",
+                  body: JSON.stringify({
+                    action,
+                    ...(action === "change_map" ? { mapKey } : {}),
+                  }),
+                });
+                if (
+                  [
+                    "warmup_end",
+                    "match_restart",
+                    "forcecamera",
+                    "change_map",
+                  ].includes(action)
+                ) {
+                  pendingAction = null;
+                  if (action === "change_map") {
+                    selectedMap = null;
+                    renderMapCards();
+                  }
+                  await new Promise((resolve) =>
+                    setTimeout(resolve, action === "change_map" ? 2500 : 1000),
+                  );
+                  await refresh();
+                  message.textContent = `${labels[action]} command sent.`;
+                  return;
+                }
+                message.textContent = `${labels[action]} requested. Checking server status…`;
+                const targetRunning = action !== "stop";
+                const actionStartedAt = Date.now();
+                const deadline = actionStartedAt + 60000;
+                let sawRestartTransition = action !== "restart";
+                while (Date.now() < deadline) {
+                  await new Promise((resolve) => setTimeout(resolve, 2500));
+                  const current = await refresh();
+                  if (!current) {
+                    pendingAction = null;
+                    break;
+                  }
+                  if (action === "restart" && current.transitioning)
+                    sawRestartTransition = true;
+                  if (
+                    current.known &&
+                    !current.transitioning &&
+                    current.running === targetRunning &&
+                    (sawRestartTransition ||
+                      Date.now() >= actionStartedAt + 8000)
+                  ) {
+                    pendingAction = null;
+                    setActions(current);
+                    message.textContent = `${labels[action]} complete.`;
+                    break;
+                  }
+                  message.textContent = `Waiting for server to ${action === "restart" ? "restart" : targetRunning ? "start" : "stop"}…`;
+                }
+                if (Date.now() >= deadline) {
+                  pendingAction = null;
+                  await refresh();
+                  message.textContent = `${labels[action]} was requested, but the server has not reached the expected state yet. Refresh status to check again.`;
+                }
+              } catch (error) {
+                pendingAction = null;
+                await refresh();
+                message.textContent = error.message;
+              }
+            }
             const setConnectionControls = () => {
               const unlocked = Boolean(getSession());
               urlInput.disabled = unlocked;
@@ -5894,13 +6184,18 @@
               try {
                 const result = await call("/api/status");
                 state.textContent = result.status || "unknown";
+                currentMap.textContent =
+                  result.map?.label || result.map?.value || "Map unavailable";
                 meta.textContent = `${result.players == null ? "Player count unavailable" : `${result.players} player${result.players === 1 ? "" : "s"}`} · Checked ${new Date(result.checkedAt).toLocaleTimeString()}`;
+                if (!maps.length) await loadMaps();
                 setActions(result);
                 message.textContent = "";
                 return result;
               } catch (error) {
                 state.textContent = getSession() ? "Unavailable" : "Locked";
+                currentMap.textContent = "Unavailable";
                 meta.textContent = "";
+                mapSearch.disabled = true;
                 setConnectionControls();
                 setActions(null);
                 message.textContent = error.message;
@@ -5949,89 +6244,19 @@
               setActions("unknown");
             };
             $("#server-refresh").onclick = refresh;
-            actionButtons.forEach(
-              (button) =>
-                (button.onclick = async () => {
-                  const action = button.dataset.serverAction;
-                  const labels = {
-                    start: "Start",
-                    stop: "Stop",
-                    restart: "Restart",
-                    warmup_end: "End warmup",
-                  };
-                  const confirmation = {
-                    stop: "Stop the game server? Current players will be disconnected.",
-                    restart: "Restart the game server? Current players will be disconnected.",
-                    warmup_end: "End warmup and begin the match?",
-                  }[action];
-                  if (confirmation && !confirm(confirmation))
-                    return;
-                  pendingAction = action;
-                  setActions(null, true);
-                  state.textContent =
-                    action === "start"
-                      ? "Starting"
-                      : action === "stop"
-                        ? "Stopping"
-                        : "Restarting";
-                  message.textContent = "";
-                  try {
-                    await call("/api/action", {
-                      method: "POST",
-                      body: JSON.stringify({ action }),
-                    });
-                    if (action === "warmup_end") {
-                      pendingAction = null;
-                      await refresh();
-                      message.textContent = "Warmup end command sent.";
-                      return;
-                    }
-                    message.textContent = `${labels[action]} requested. Checking server status…`;
-                    const targetRunning = action !== "stop";
-                    const actionStartedAt = Date.now();
-                    const deadline = actionStartedAt + 60000;
-                    let sawRestartTransition = action !== "restart";
-                    while (Date.now() < deadline) {
-                      await new Promise((resolve) => setTimeout(resolve, 2500));
-                      const current = await refresh();
-                      if (!current) {
-                        pendingAction = null;
-                        break;
-                      }
-                      if (action === "restart" && current.transitioning)
-                        sawRestartTransition = true;
-                      if (
-                        current.known &&
-                        !current.transitioning &&
-                        current.running === targetRunning &&
-                        (sawRestartTransition ||
-                          Date.now() >= actionStartedAt + 8000)
-                      ) {
-                        pendingAction = null;
-                        setActions(current);
-                        message.textContent = `${labels[action]} complete.`;
-                        break;
-                      }
-                      message.textContent = `Waiting for server to ${action === "restart" ? "restart" : targetRunning ? "start" : "stop"}…`;
-                    }
-                    if (Date.now() >= deadline) {
-                      pendingAction = null;
-                      await refresh();
-                      message.textContent = `${labels[action]} was requested, but the server has not reached the expected state yet. Refresh status to check again.`;
-                    }
-                  } catch (error) {
-                    pendingAction = null;
-                    await refresh();
-                    message.textContent = error.message;
-                  }
-                }),
-            );
+            mapSearch.oninput = renderMapCards;
+            actionButtons.forEach((button) => {
+              button.onclick = () => performAction(button.dataset.serverAction);
+            });
 
             setConnectionControls();
             if (getSession()) refresh();
             else {
               state.textContent = "Locked";
+              currentMap.textContent = "Unlock to load status";
               meta.textContent = "Sign in to view status";
+              mapSearch.disabled = true;
+              renderMapCards();
               setActions(null);
             }
           }
