@@ -61,6 +61,35 @@ python -m http.server 8765 --directory docs        # view at http://localhost:87
 
 The page loads `data/games.json`, so it must be served over HTTP. Opening the file directly won't load the data.
 
+## Server controls
+
+The Server page calls a Cloudflare Worker; DatHost credentials are never placed in the static site. The Worker provides status, start, stop, restart, and a fixed `mp_warmup_end` console action behind a passphrase and short-lived signed sessions. Stop, restart, and ending warmup require confirmation in the page.
+
+Deploy the Worker from the repository root with Wrangler (Node.js required):
+
+```bash
+npx wrangler login
+npx wrangler deploy --config worker/wrangler.toml
+```
+
+Add these Worker secrets. Wrangler prompts for each value; use the DatHost values from your local `.env` without pasting them into source files or chat:
+
+```bash
+npx wrangler secret put DATHOST_EMAIL --config worker/wrangler.toml
+npx wrangler secret put DATHOST_PASSWORD --config worker/wrangler.toml
+npx wrangler secret put DATHOST_SERVER_ID --config worker/wrangler.toml
+npx wrangler secret put DATHOST_ACCOUNT_EMAIL --config worker/wrangler.toml  # optional
+npx wrangler secret put CONTROL_PASSPHRASE --config worker/wrangler.toml
+openssl rand -hex 32 | npx wrangler secret put SESSION_SECRET --config worker/wrangler.toml
+npx wrangler deploy --config worker/wrangler.toml
+```
+
+Use a unique, randomly generated control passphrase of at least 32 characters and save it in a password manager. The random session-signing key is generated locally and piped directly to Wrangler. The free Workers plan has usage limits; check Cloudflare's current limits for your account before deploying.
+
+The allowed site origins are configured in `worker/wrangler.toml` for `https://prasaadem.github.io` and local preview on port 8765. If the Pages domain changes, update `ALLOWED_ORIGINS` and redeploy. After deployment, open `#/server` on the site, enter the Worker URL shown by Wrangler and the control passphrase, then unlock. The passphrase is sent only to the Worker over HTTPS; the returned token expires after 15 minutes and is kept in browser local storage so the session survives reloads until expiry or sign-out.
+
+Run the Worker unit tests locally with `node --test worker/test/worker.test.mjs`.
+
 ## Stats notes
 
 - **Rating** is an HLTV 1.0-style rating, where 1.00 is average.

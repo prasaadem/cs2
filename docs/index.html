@@ -467,6 +467,104 @@
         font-size: 12px;
         margin-top: 8px;
       }
+      .server-connection {
+        display: grid;
+        grid-template-columns: minmax(240px, 1fr) minmax(200px, 1fr) auto auto;
+        gap: 10px;
+        align-items: end;
+        border-block: 1px solid var(--line);
+        padding: 18px 0;
+      }
+      .server-field {
+        display: grid;
+        gap: 5px;
+        color: var(--text-2);
+        font-size: 12px;
+      }
+      .server-field input {
+        width: 100%;
+        min-width: 0;
+        font: inherit;
+        color: var(--text);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 9px 10px;
+      }
+      .server-btn {
+        min-height: 38px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 7px 13px;
+        color: var(--text);
+        background: var(--surface);
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .server-btn:hover:not(:disabled) {
+        border-color: var(--accent);
+      }
+      .server-btn:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+      .server-btn.start {
+        color: var(--win);
+      }
+      .server-btn.stop {
+        color: var(--loss);
+      }
+      .server-state {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 24px 0;
+      }
+      .server-state-label {
+        color: var(--text-3);
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+      .server-state-value {
+        font:
+          700 28px/1.15 Oxanium,
+          sans-serif;
+        text-transform: capitalize;
+      }
+      .server-state-meta {
+        color: var(--text-2);
+        margin-top: 4px;
+      }
+      .server-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        border-top: 1px solid var(--line);
+        padding-top: 16px;
+      }
+      .server-message {
+        min-height: 1.5em;
+        color: var(--text-2);
+        margin: 12px 0 0;
+      }
+      @media (max-width: 700px) {
+        .server-connection {
+          grid-template-columns: 1fr 1fr;
+        }
+        .server-connection .server-field:first-child {
+          grid-column: 1 / -1;
+        }
+      }
+      @media (max-width: 420px) {
+        .server-connection {
+          grid-template-columns: 1fr;
+        }
+        .server-connection .server-field:first-child {
+          grid-column: auto;
+        }
+      }
 
       /* night cards */
       .ncards {
@@ -1291,6 +1389,15 @@
               <path d="m8 3 4 4 4-4" />
               <path d="m10.5 11 4 2.5-4 2.5z" /></svg
             ><span>TV</span></a
+          >
+          <a href="#/server" data-r="server"
+            ><svg class="ni" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"
+              />
+              <circle cx="12" cy="12" r="5" />
+              <circle cx="12" cy="12" r="1.5" /></svg
+            ><span>Server</span></a
           >
           <a href="#/attendance" data-r="attendance"
             ><svg class="ni" viewBox="0 0 24 24" aria-hidden="true">
@@ -4765,8 +4872,7 @@
         <select id="rpspeed">${[0.5, 1, 2, 4, 8].map((s) => `<option value="${s}" ${s === 1 ? "selected" : ""}>${s}×</option>`).join("")}</select>
       </div>
       <div class="rprow rprounds" id="rprounds"></div>
-      <div class="rprow"><label class="toggle"><input type="checkbox" id="rpsound" checked><span>Sound</span></label>
-        <label class="toggle"><input type="checkbox" id="rptrail" checked><span>Trails</span></label>
+      <div class="rprow"><label class="toggle"><input type="checkbox" id="rptrail" checked><span>Trails</span></label>
         <label class="toggle"><input type="checkbox" id="rpnames" checked><span>Names &amp; weapons</span></label>
         <label class="toggle"><input type="checkbox" id="rpcones" checked><span>View cones</span></label>
         <span class="legend" style="margin:0"><span><i style="background:var(--ct)"></i>CT</span><span><i style="background:var(--t)"></i>T</span><span><i style="background:#b9b9b9"></i>smoke</span><span><i style="background:#f07a2e"></i>fire</span><span><i style="background:#e5484d"></i>HE</span><span><i style="background:#fff;box-shadow:inset 0 0 0 1px var(--line)"></i>flash</span><span><i style="background:#ffe27a"></i>shots</span><span><i style="background:#e5484d"></i>bomb</span></span></div>
@@ -4813,7 +4919,6 @@
               const b = e.target.closest("button");
               if (b) {
                 st.t = +b.dataset.t;
-                seekCueCursor(st.t);
                 draw();
               }
             };
@@ -4829,140 +4934,9 @@
               st.focus.has(i) ? st.focus.delete(i) : st.focus.add(i);
               draw();
             };
-            const soundToggle = $("#rpsound");
-            const cueEvents = (rp.shots || []).map(([t, i]) => {
-              const p = P[i],
-                k = Math.max(0, Math.min(rp.n - 1, Math.floor(t * rp.hz)));
-              return {
-                t,
-                kind: "shot",
-                weapon: p ? String(WN[p.w[k]] || "") : "",
-              };
-            });
-            G.filter((g) => ["h", "f", "m", "mx"].includes(g.kind)).forEach(
-              (g) =>
-                cueEvents.push({
-                  t: g.t1,
-                  kind:
-                    g.kind === "h"
-                      ? "grenade_he"
-                      : g.kind === "f"
-                        ? "grenade_flash"
-                        : "molotov",
-                }),
-            );
-            (rp.bomb || []).forEach(([t, code]) => {
-              if (code === "plant" || code === "boom" || code === "defuse")
-                cueEvents.push({ t, kind: `bomb_${code}` });
-            });
-            cueEvents.sort((a, b) => a.t - b.t);
-            let cueIndex = 0,
-              audioCtx = null,
-              noiseBuffer = null;
-            const seekCueCursor = (t) => {
-              let lo = 0,
-                hi = cueEvents.length;
-              while (lo < hi) {
-                const mid = (lo + hi) >> 1;
-                if (cueEvents[mid].t <= t) lo = mid + 1;
-                else hi = mid;
-              }
-              cueIndex = lo;
-            };
-            const initAudio = () => {
-              const AudioCtx = window.AudioContext || window.webkitAudioContext;
-              if (!AudioCtx) return null;
-              if (!audioCtx) {
-                audioCtx = new AudioCtx();
-                noiseBuffer = audioCtx.createBuffer(
-                  1,
-                  Math.ceil(audioCtx.sampleRate * 0.3),
-                  audioCtx.sampleRate,
-                );
-                const data = noiseBuffer.getChannelData(0);
-                for (let i = 0; i < data.length; i++)
-                  data[i] = Math.random() * 2 - 1;
-              }
-              if (audioCtx.state === "suspended")
-                audioCtx.resume().catch(() => {});
-              return audioCtx;
-            };
-            const playSynthCue = (kind) => {
-              if (!soundToggle.checked) return;
-              const ctx = initAudio();
-              if (!ctx) return;
-              const now = ctx.currentTime,
-                shot = kind === "shot",
-                flash = kind === "grenade_flash",
-                plant = kind === "bomb_plant",
-                defuse = kind === "bomb_defuse";
-              const duration = shot
-                ? 0.075
-                : flash
-                  ? 0.12
-                  : plant || defuse
-                    ? 0.22
-                    : 0.42;
-              const source = ctx.createBufferSource(),
-                filter = ctx.createBiquadFilter(),
-                gain = ctx.createGain();
-              source.buffer = noiseBuffer;
-              filter.type = shot || flash ? "highpass" : "lowpass";
-              filter.frequency.setValueAtTime(
-                shot ? 1100 : flash ? 1800 : 900,
-                now,
-              );
-              gain.gain.setValueAtTime(
-                shot ? 0.035 : flash ? 0.045 : 0.09,
-                now,
-              );
-              gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
-              source.connect(filter).connect(gain).connect(ctx.destination);
-              source.start(now);
-              source.stop(now + duration);
-              if (!shot && !flash && !plant && !defuse) {
-                const osc = ctx.createOscillator(),
-                  og = ctx.createGain();
-                osc.type = "sine";
-                osc.frequency.setValueAtTime(
-                  kind === "bomb_boom" ? 95 : 130,
-                  now,
-                );
-                osc.frequency.exponentialRampToValueAtTime(38, now + duration);
-                og.gain.setValueAtTime(0.12, now);
-                og.gain.exponentialRampToValueAtTime(0.001, now + duration);
-                osc.connect(og).connect(ctx.destination);
-                osc.start(now);
-                osc.stop(now + duration);
-              } else if (plant || defuse) {
-                const osc = ctx.createOscillator(),
-                  og = ctx.createGain();
-                osc.type = "sine";
-                osc.frequency.setValueAtTime(plant ? 880 : 660, now);
-                og.gain.setValueAtTime(0.045, now);
-                og.gain.exponentialRampToValueAtTime(0.001, now + duration);
-                osc.connect(og).connect(ctx.destination);
-                osc.start(now);
-                osc.stop(now + duration);
-              }
-            };
-            const playCuesThrough = (t) => {
-              let count = 0;
-              while (
-                cueIndex < cueEvents.length &&
-                cueEvents[cueIndex].t <= t
-              ) {
-                if (count++ < 12) playSynthCue(cueEvents[cueIndex].kind);
-                cueIndex++;
-              }
-            };
             const togglePlay = () => {
               st.playing = !st.playing;
               if (st.playing && st.t >= dur) st.t = 0;
-              if (st.playing) {
-                seekCueCursor(st.t);
-                initAudio();
-              }
               last = performance.now();
               if (st.playing) requestAnimationFrame(loop);
               draw();
@@ -4970,7 +4944,6 @@
             $("#rpplay").onclick = togglePlay;
             seek.oninput = () => {
               st.t = +seek.value;
-              seekCueCursor(st.t);
               draw();
             };
             $("#rpspeed").onchange = (e) => {
@@ -4988,11 +4961,6 @@
               st.cones = e.target.checked;
               draw();
             };
-            soundToggle.onchange = () => {
-              if (soundToggle.checked && st.playing) initAudio();
-              else if (!soundToggle.checked && audioCtx)
-                audioCtx.suspend().catch(() => {});
-            };
             const onKey = (e) => {
               if (!document.body.contains(canvas)) {
                 removeEventListener("keydown", onKey);
@@ -5004,13 +4972,10 @@
                 togglePlay();
               } else if (e.key === "ArrowRight") {
                 st.t = Math.min(dur, st.t + 5);
-                seekCueCursor(st.t);
                 draw();
               } else if (e.key === "ArrowLeft") {
                 st.t = Math.max(0, st.t - 5);
-                seekCueCursor(st.t);
                 draw();
-                syncFireLoop(st.t);
               }
             };
             addEventListener("keydown", onKey);
@@ -5771,14 +5736,9 @@
 
             let last = performance.now();
             function loop(now) {
-              if (!document.body.contains(canvas)) {
-                st.playing = false;
-                return;
-              }
-              if (!st.playing) return;
+              if (!st.playing || !document.body.contains(canvas)) return;
               st.t = Math.min(dur, st.t + ((now - last) / 1000) * st.speed);
               last = now;
-              playCuesThrough(st.t);
               if (st.t >= dur) st.playing = false;
               draw();
               requestAnimationFrame(loop);
@@ -5793,6 +5753,287 @@
           function notFound() {
             $("#app").innerHTML =
               `<h1>Not found</h1><p class="sub">Nothing here${onlyFin ? " with “Completed games only” switched on" : ""}. <a href="#/" style="color:var(--accent)">Back to overview</a></p>`;
+          }
+
+          function viewServer() {
+            pageTitle("Server");
+            $("#app").innerHTML =
+              `<div class="pagehead"><div><h1>Server</h1><div class="sub">Power controls</div></div><button class="iconbtn" id="server-refresh" type="button" title="Refresh status" aria-label="Refresh status">↻</button></div>
+    <div class="server-state"><div><div class="server-state-label">DatHost status</div><div class="server-state-value" id="server-state">Not connected</div><div class="server-state-meta" id="server-meta"></div></div></div>
+    <form class="server-connection" id="server-connect">
+      <label class="server-field">Worker URL<input id="server-url" type="url" inputmode="url" placeholder="https://your-worker.your-account.workers.dev" autocomplete="url" required></label>
+      <label class="server-field">Control passphrase<input id="server-passphrase" type="password" autocomplete="current-password" required></label>
+      <button class="server-btn" type="submit">Unlock</button>
+      <button class="server-btn" id="server-signout" type="button">Sign out</button>
+    </form>
+    <div class="server-actions"><button class="server-btn start" type="button" data-server-action="start" disabled>Start</button><button class="server-btn stop" type="button" data-server-action="stop" disabled>Stop</button><button class="server-btn" type="button" data-server-action="restart" disabled>Restart</button><button class="server-btn" type="button" data-server-action="warmup_end" disabled>End warmup</button></div>
+    <p class="server-message" id="server-message" role="status" aria-live="polite"></p>`;
+
+            const urlInput = $("#server-url");
+            const passInput = $("#server-passphrase");
+            const message = $("#server-message");
+            const state = $("#server-state");
+            const meta = $("#server-meta");
+            const unlockButton = $('#server-connect button[type="submit"]');
+            const signoutButton = $("#server-signout");
+            const actionButtons = [
+              ...document.querySelectorAll("[data-server-action]"),
+            ];
+            let pendingAction = null;
+            const savedUrl =
+              localStorage.getItem("cs2.controlWorkerUrl") ||
+              "https://cs2-server-control.prasaadem.workers.dev";
+            urlInput.value = savedUrl;
+
+            const getSession = () => {
+              try {
+                const stored =
+                  localStorage.getItem("cs2.serverSession") ||
+                  sessionStorage.getItem("cs2.serverSession");
+                const session = JSON.parse(stored || "null");
+                if (
+                  session?.expiresAt > Date.now() &&
+                  typeof session.token === "string" &&
+                  session.workerUrl === apiUrl()
+                ) {
+                  localStorage.setItem(
+                    "cs2.serverSession",
+                    JSON.stringify(session),
+                  );
+                  sessionStorage.removeItem("cs2.serverSession");
+                  return session;
+                }
+              } catch (e) {}
+              localStorage.removeItem("cs2.serverSession");
+              sessionStorage.removeItem("cs2.serverSession");
+              return null;
+            };
+            const setActions = (server, pending = false) => {
+              actionButtons.forEach((button) => {
+                button.disabled =
+                  pending ||
+                  pendingAction !== null ||
+                  !getSession() ||
+                  !server?.known ||
+                  server.transitioning ||
+                  (button.dataset.serverAction === "start" && server.running) ||
+                  (button.dataset.serverAction !== "start" && !server.running);
+              });
+            };
+            const setConnectionControls = () => {
+              const unlocked = Boolean(getSession());
+              urlInput.disabled = unlocked;
+              passInput.disabled = unlocked;
+              unlockButton.disabled = unlocked;
+              signoutButton.disabled = !unlocked;
+            };
+            const apiUrl = () => {
+              const value = urlInput.value.trim();
+              if (!value) throw new Error("Enter the Worker URL first.");
+              let target;
+              try {
+                target = new URL(value);
+              } catch (e) {
+                throw new Error("Enter a valid Worker URL.");
+              }
+              if (
+                target.protocol !== "https:" &&
+                !["localhost", "127.0.0.1"].includes(target.hostname)
+              )
+                throw new Error("Worker URL must use HTTPS.");
+              if (
+                !target.hostname.endsWith(".workers.dev") &&
+                !["localhost", "127.0.0.1"].includes(target.hostname)
+              )
+                throw new Error(
+                  "Enter the workers.dev URL printed by Wrangler.",
+                );
+              if (target.pathname !== "/" || target.search || target.hash)
+                throw new Error("Enter the Worker origin without a path.");
+              return target.origin;
+            };
+            const call = async (path, options = {}) => {
+              const session = getSession();
+              const headers = { "Content-Type": "application/json" };
+              if (session) headers.Authorization = `Bearer ${session.token}`;
+              let response;
+              try {
+                response = await fetch(apiUrl() + path, {
+                  ...options,
+                  headers: { ...headers, ...options.headers },
+                  cache: "no-store",
+                });
+              } catch (e) {
+                throw new Error(
+                  "Could not reach the Worker. Check its URL and allowed origin.",
+                );
+              }
+              const result = await response.json().catch(() => ({}));
+              if (!response.ok) {
+                if (response.status === 401 && path !== "/api/login")
+                  localStorage.removeItem("cs2.serverSession");
+                if (response.status === 401 && path !== "/api/login")
+                  sessionStorage.removeItem("cs2.serverSession");
+                throw new Error(
+                  result.error || `Request failed (${response.status}).`,
+                );
+              }
+              return result;
+            };
+            const refresh = async () => {
+              const session = getSession();
+              if (!session) {
+                state.textContent = "Locked";
+                meta.textContent = "Sign in to view status";
+                setConnectionControls();
+                setActions(null);
+                return null;
+              }
+              $("#server-refresh").disabled = true;
+              message.textContent = "Checking status…";
+              try {
+                const result = await call("/api/status");
+                state.textContent = result.status || "unknown";
+                meta.textContent = `${result.players == null ? "Player count unavailable" : `${result.players} player${result.players === 1 ? "" : "s"}`} · Checked ${new Date(result.checkedAt).toLocaleTimeString()}`;
+                setActions(result);
+                message.textContent = "";
+                return result;
+              } catch (error) {
+                state.textContent = getSession() ? "Unavailable" : "Locked";
+                meta.textContent = "";
+                setConnectionControls();
+                setActions(null);
+                message.textContent = error.message;
+                return null;
+              } finally {
+                $("#server-refresh").disabled = false;
+              }
+            };
+
+            urlInput.addEventListener("change", () => {
+              if (urlInput.value.trim() !== savedUrl)
+                localStorage.removeItem("cs2.serverSession");
+            });
+            $("#server-connect").onsubmit = async (event) => {
+              event.preventDefault();
+              try {
+                const endpoint = apiUrl();
+                localStorage.setItem("cs2.controlWorkerUrl", endpoint);
+                const result = await call("/api/login", {
+                  method: "POST",
+                  body: JSON.stringify({ passphrase: passInput.value }),
+                });
+                localStorage.setItem(
+                  "cs2.serverSession",
+                  JSON.stringify({
+                    token: result.token,
+                    expiresAt: Date.now() + result.expiresIn * 1000,
+                    workerUrl: endpoint,
+                  }),
+                );
+                passInput.value = "";
+                setConnectionControls();
+                message.textContent = "";
+                await refresh();
+              } catch (error) {
+                message.textContent = error.message;
+              }
+            };
+            $("#server-signout").onclick = () => {
+              localStorage.removeItem("cs2.serverSession");
+              passInput.value = "";
+              state.textContent = "Locked";
+              meta.textContent = "Sign in to view status";
+              setConnectionControls();
+              message.textContent = "";
+              setActions("unknown");
+            };
+            $("#server-refresh").onclick = refresh;
+            actionButtons.forEach(
+              (button) =>
+                (button.onclick = async () => {
+                  const action = button.dataset.serverAction;
+                  const labels = {
+                    start: "Start",
+                    stop: "Stop",
+                    restart: "Restart",
+                    warmup_end: "End warmup",
+                  };
+                  const confirmation = {
+                    stop: "Stop the game server? Current players will be disconnected.",
+                    restart:
+                      "Restart the game server? Current players will be disconnected.",
+                    warmup_end: "End warmup and begin the match?",
+                  }[action];
+                  if (confirmation && !confirm(confirmation)) return;
+                  pendingAction = action;
+                  setActions(null, true);
+                  state.textContent =
+                    action === "start"
+                      ? "Starting"
+                      : action === "stop"
+                        ? "Stopping"
+                        : "Restarting";
+                  message.textContent = "";
+                  try {
+                    await call("/api/action", {
+                      method: "POST",
+                      body: JSON.stringify({ action }),
+                    });
+                    if (action === "warmup_end") {
+                      pendingAction = null;
+                      await refresh();
+                      message.textContent = "Warmup end command sent.";
+                      return;
+                    }
+                    message.textContent = `${labels[action]} requested. Checking server status…`;
+                    const targetRunning = action !== "stop";
+                    const actionStartedAt = Date.now();
+                    const deadline = actionStartedAt + 60000;
+                    let sawRestartTransition = action !== "restart";
+                    while (Date.now() < deadline) {
+                      await new Promise((resolve) => setTimeout(resolve, 2500));
+                      const current = await refresh();
+                      if (!current) {
+                        pendingAction = null;
+                        break;
+                      }
+                      if (action === "restart" && current.transitioning)
+                        sawRestartTransition = true;
+                      if (
+                        current.known &&
+                        !current.transitioning &&
+                        current.running === targetRunning &&
+                        (sawRestartTransition ||
+                          Date.now() >= actionStartedAt + 8000)
+                      ) {
+                        pendingAction = null;
+                        setActions(current);
+                        message.textContent = `${labels[action]} complete.`;
+                        break;
+                      }
+                      message.textContent = `Waiting for server to ${action === "restart" ? "restart" : targetRunning ? "start" : "stop"}…`;
+                    }
+                    if (Date.now() >= deadline) {
+                      pendingAction = null;
+                      await refresh();
+                      message.textContent = `${labels[action]} was requested, but the server has not reached the expected state yet. Refresh status to check again.`;
+                    }
+                  } catch (error) {
+                    pendingAction = null;
+                    await refresh();
+                    message.textContent = error.message;
+                  }
+                }),
+            );
+
+            setConnectionControls();
+            if (getSession()) refresh();
+            else {
+              state.textContent = "Locked";
+              meta.textContent = "Sign in to view status";
+              setActions(null);
+            }
           }
 
           // ---------- router ----------
@@ -5820,6 +6061,7 @@
                 map: () => viewMap(arg),
                 players: viewPlayers,
                 player: () => viewPlayer(arg),
+                server: viewServer,
                 weapons: viewWeapons,
                 weapon: () => viewWeapon(arg),
                 awards: viewAwards,

@@ -1,0 +1,6 @@
+name = "cs2-server-control"
+main = "src/index.js"
+compatibility_date = "2026-10-18"
+
+[vars]
+ALLOWED_ORIGINS = "https://prasaadem.github.io,http://127.0.0.1:8765,http://localhost:8765"
