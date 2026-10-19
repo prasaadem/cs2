@@ -467,13 +467,113 @@
         font-size: 12px;
         margin-top: 8px;
       }
+      /* server page */
+      .srv-layout {
+        display: grid;
+        grid-template-columns: 300px minmax(0, 1fr);
+        gap: 16px;
+        align-items: start;
+      }
+      .srv-side {
+        display: grid;
+        gap: 12px;
+        position: sticky;
+        top: 76px;
+        max-height: calc(100vh - 92px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+      }
+      .srv-main {
+        display: grid;
+        gap: 12px;
+        min-width: 0;
+      }
+      .srv-layout section,
+      .srv-layout details {
+        margin: 0;
+        padding: 16px;
+      }
+      .srv-layout h2 {
+        color: var(--text-2);
+        font-size: 14px;
+        margin: 0 0 10px;
+      }
+      .srv-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .srv-head h2 {
+        margin: 0;
+      }
+      .srv-label {
+        color: var(--text-3);
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .srv-tools {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .srv-session {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        height: 32px;
+        padding: 0 4px 0 12px;
+        color: var(--text-2);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        font-size: 13px;
+      }
+      .srv-session[hidden] {
+        display: none;
+      }
+      .srv-session::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--win);
+      }
+      .srv-session button {
+        height: 24px;
+        padding: 0 10px;
+        color: var(--text);
+        background: var(--surface-2);
+        border: 0;
+        border-radius: 999px;
+        font: inherit;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      .srv-session button:hover {
+        color: var(--accent);
+      }
+      .server-message {
+        min-height: 1.5em;
+        color: var(--text-2);
+        margin: -12px 0 12px;
+        font-size: 13px;
+      }
+      .server-message:empty {
+        min-height: 0;
+        margin: 0;
+      }
       .server-connection {
         display: grid;
-        grid-template-columns: minmax(240px, 1fr) minmax(200px, 1fr) auto auto;
+        grid-template-columns: minmax(240px, 1fr) minmax(200px, 1fr) auto;
         gap: 10px;
         align-items: end;
-        border-block: 1px solid var(--line);
-        padding: 18px 0;
+        padding: 16px;
+        margin-bottom: 16px;
+      }
+      .server-connection[hidden] {
+        display: none;
       }
       .server-field {
         display: grid;
@@ -486,7 +586,7 @@
         min-width: 0;
         font: inherit;
         color: var(--text);
-        background: var(--surface);
+        background: var(--bg, var(--surface));
         border: 1px solid var(--line);
         border-radius: 6px;
         padding: 9px 10px;
@@ -515,62 +615,52 @@
       .server-btn.stop {
         color: var(--loss);
       }
-      .server-state {
+      .server-state-value {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        padding: 24px 0;
-      }
-      .server-state-label {
-        color: var(--text-3);
-        font-size: 12px;
-        text-transform: uppercase;
-      }
-      .server-state-value {
+        gap: 9px;
+        margin-top: 2px;
         font:
-          700 28px/1.15 Oxanium,
+          700 24px/1.15 Oxanium,
           sans-serif;
         text-transform: capitalize;
       }
+      .server-state-value::before {
+        content: "";
+        flex: none;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--text-3);
+      }
+      .srv-status[data-state="on"] .server-state-value::before {
+        background: var(--win);
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--win) 22%, transparent);
+      }
+      .srv-status[data-state="off"] .server-state-value::before {
+        background: var(--loss);
+      }
+      .srv-status[data-state="busy"] .server-state-value::before {
+        background: var(--accent);
+      }
       .server-state-meta {
-        color: var(--text-2);
-        margin-top: 4px;
-      }
-      .server-current {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        border-block: 1px solid var(--line);
-        padding: 18px 0;
-      }
-      .server-current-label {
         color: var(--text-3);
         font-size: 12px;
-        text-transform: uppercase;
-      }
-      .server-current-map {
-        font:
-          700 24px/1.2 Oxanium,
-          sans-serif;
         margin-top: 4px;
-      }
-      .server-current-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
       }
       .server-details {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        grid-template-columns: 1fr 1fr;
+        gap: 10px 12px;
+        margin: 14px 0;
+        padding: 12px 0;
         border-block: 1px solid var(--line);
-        margin: 0;
       }
       .server-detail {
         min-width: 0;
-        padding: 12px 14px 12px 0;
+      }
+      .server-detail:first-child {
+        grid-column: 1 / -1;
       }
       .server-detail dt {
         color: var(--text-3);
@@ -585,124 +675,126 @@
         font-weight: 600;
         overflow-wrap: anywhere;
       }
-      .server-player-panel {
-        border-bottom: 1px solid var(--line);
-        padding: 14px 0 18px;
+      .server-detail .iconbtn {
+        flex: none;
+        width: 28px;
+        height: 28px;
       }
-      .server-player-head {
+      .server-actions,
+      .server-current-actions,
+      .server-presets-list {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
+        flex-wrap: wrap;
+        gap: 8px;
       }
-      .server-player-head h2 { color: var(--text-2); font-size: 14px; margin: 0; }
-      .server-player-list { display: grid; gap: 6px; margin-top: 10px; }
+      .server-actions .server-btn {
+        flex: 1 1 auto;
+      }
+      .server-player-list {
+        display: grid;
+      }
       .server-player-row {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 12px;
+        gap: 10px;
         border-top: 1px solid var(--line);
-        padding: 9px 0;
+        padding: 8px 0;
       }
-      .server-player-name { font-weight: 600; overflow-wrap: anywhere; }
-      .server-player-meta { color: var(--text-3); font-size: 12px; margin-top: 2px; }
-      .server-player-empty { color: var(--text-3); font-size: 12px; padding-top: 10px; }
-      .server-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        border-top: 1px solid var(--line);
-        padding-top: 16px;
+      .server-player-row > div {
+        min-width: 0;
       }
-      .server-presets,
-      .server-history,
-      .server-queue {
-        border-top: 1px solid var(--line);
-        margin-top: 16px;
-        padding-top: 14px;
+      .server-player-name {
+        font-weight: 600;
+        overflow-wrap: anywhere;
       }
-      .server-presets h2,
-      .server-history h2,
-      .server-queue h2 {
-        color: var(--text-2);
-        font-size: 14px;
-        margin-bottom: 10px;
+      .server-player-meta {
+        color: var(--text-3);
+        font-size: 12px;
+        margin-top: 2px;
       }
-      .server-presets-list,
-      .server-history-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
+      .server-player-empty,
+      .server-queue-empty {
+        color: var(--text-3);
+        font-size: 12px;
       }
-      .server-history-entry {
+      .server-queue-list {
+        display: grid;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .server-queue-item {
         display: flex;
         align-items: center;
-        gap: 7px;
+        justify-content: space-between;
+        gap: 8px;
+        border-top: 1px solid var(--line);
+        padding: 6px 0;
+      }
+      .server-queue-item:first-child {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .server-history summary {
+        color: var(--text-2);
+        font: 700 14px/1.2 Oxanium, sans-serif;
+        letter-spacing: 0.02em;
+        cursor: pointer;
+      }
+      .server-history[open] summary {
+        margin-bottom: 8px;
+      }
+      .server-history-list {
+        display: grid;
+      }
+      .server-history-entry {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto auto;
+        align-items: baseline;
+        gap: 8px;
+        border-top: 1px solid var(--line);
+        padding: 6px 0;
         color: var(--text-2);
         font-size: 12px;
+      }
+      .server-history-entry span:first-child {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
       .server-history-entry time {
         color: var(--text-3);
       }
-      .server-history-entry[data-result="Failed"] {
+      .server-history-entry[data-result="Failed"] span:nth-child(2) {
         color: var(--loss);
       }
-      .server-history-entry[data-result="Complete"] {
+      .server-history-entry[data-result="Complete"] span:nth-child(2) {
         color: var(--win);
       }
-      .server-presets {
-        border-top: 1px solid var(--line);
-        margin-top: 16px;
-        padding-top: 14px;
-      }
-      .server-presets h2,
-      .server-history h2,
-      .server-queue h2 {
-        color: var(--text-2);
-        font-size: 14px;
-        margin-bottom: 10px;
-      }
-      .server-presets-list,
-      .server-history-list {
+      .server-current {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
-      }
-      .server-history {
-        border-top: 1px solid var(--line);
-        margin-top: 16px;
-        padding-top: 14px;
-      }
-      .server-history-entry {
-        display: flex;
         align-items: center;
-        gap: 7px;
-        color: var(--text-2);
-        font-size: 12px;
+        justify-content: space-between;
+        gap: 16px;
       }
-      .server-history-entry time {
-        color: var(--text-3);
-      }
-      .server-history-entry[data-result="Failed"] {
-        color: var(--loss);
-      }
-      .server-history-entry[data-result="Complete"] {
-        color: var(--win);
-      }
-      .server-map-control {
-        margin-top: 24px;
+      .server-current-map {
+        font:
+          700 26px/1.2 Oxanium,
+          sans-serif;
+        margin-top: 4px;
+        overflow-wrap: anywhere;
       }
       .map-search-row {
         display: flex;
-        justify-content: space-between;
+        flex-wrap: wrap;
         align-items: center;
-        gap: 12px;
-        margin: 12px 0;
+        gap: 10px;
       }
       .map-search {
-        width: min(100%, 420px);
-        min-height: 40px;
+        flex: 1 1 220px;
+        min-height: 38px;
         padding: 8px 11px;
         color: var(--text);
         background: var(--surface);
@@ -717,9 +809,7 @@
       }
       .map-filters {
         display: flex;
-        flex-wrap: wrap;
         gap: 4px;
-        margin: 14px 0 4px;
       }
       .map-filter {
         border: 1px solid var(--line);
@@ -735,84 +825,189 @@
         background: var(--surface-2);
         border-color: var(--accent);
       }
-      .map-filters {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 4px;
-        margin: 14px 0 4px;
+      .srv-layout .map-group {
+        padding: 0;
+        margin-top: 18px;
       }
-      .map-filter {
-        border: 1px solid var(--line);
-        background: transparent;
-        color: var(--text-2);
-        border-radius: 6px;
-        padding: 6px 10px;
-        font: inherit;
-        cursor: pointer;
-      }
-      .map-filter[aria-pressed="true"] {
-        color: var(--text);
-        background: var(--surface-2);
-        border-color: var(--accent);
-      }
-      .map-group {
-        margin-top: 20px;
-      }
-      .map-group h2 {
-        color: var(--text-2);
-        font-size: 14px;
-        margin-bottom: 9px;
+      .srv-layout .map-group h2 {
+        color: var(--text-3);
+        font-size: 12px;
+        margin-bottom: 8px;
       }
       .map-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 8px;
+        grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+        gap: 10px;
       }
       .map-card {
+        position: relative;
         display: grid;
-        min-height: 66px;
-        align-content: start;
-        gap: 8px;
-        padding: 8px;
+        grid-template-rows: auto 1fr;
         color: var(--text);
         background: var(--surface);
         border: 1px solid var(--line);
-        border-radius: 6px;
+        border-radius: 10px;
+        overflow: hidden;
+        transition:
+          border-color 0.15s,
+          transform 0.15s;
+      }
+      .map-card:hover {
+        border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
       }
       .map-card.selected {
         border-color: var(--accent);
-        background: var(--accent-soft);
+        box-shadow: 0 0 0 1px var(--accent);
+      }
+      .map-card.current {
+        border-color: color-mix(in srgb, var(--win) 60%, var(--line));
       }
       .map-card-select {
-        min-height: 42px;
-        padding: 5px 6px;
-        color: var(--text);
+        display: grid;
+        padding: 0;
+        color: inherit;
         text-align: left;
         background: transparent;
         border: 0;
         font: inherit;
-        font-weight: 600;
         cursor: pointer;
-      }
-      .map-card-select:hover:not(:disabled) {
-        color: var(--accent);
       }
       .map-card-select:disabled {
-        opacity: 0.55;
         cursor: not-allowed;
+      }
+      .map-card-select:disabled .map-thumb {
+        filter: grayscale(0.6);
+        opacity: 0.6;
+      }
+      .map-card-select:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: -2px;
+      }
+      .map-thumb {
+        position: relative;
+        display: grid;
+        place-items: center;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        background:
+          radial-gradient(
+            circle at 30% 20%,
+            hsl(var(--hue) 55% 42% / 0.9),
+            transparent 70%
+          ),
+          hsl(var(--hue) 35% 18%);
+      }
+      .map-thumb::before {
+        content: attr(data-initials);
+        color: hsl(var(--hue) 70% 88% / 0.85);
+        font:
+          800 26px/1 Oxanium,
+          sans-serif;
+        letter-spacing: 0.06em;
+      }
+      .map-thumb img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.35);
+        background: #15161a;
+        transition: transform 0.3s;
+      }
+      .map-thumb::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(transparent 55%, rgb(0 0 0 / 0.45));
+      }
+      .map-card:hover .map-thumb img {
+        transform: scale(1.45);
+      }
+      .map-card-body {
+        display: grid;
+        gap: 2px;
+        padding: 9px 11px 4px;
+      }
+      .map-card-name {
+        font-weight: 700;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .map-card-meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px;
+        color: var(--text-3);
+        font-size: 12px;
+      }
+      .map-good {
+        padding: 1px 6px;
+        color: var(--win);
+        background: color-mix(in srgb, var(--win) 14%, transparent);
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .map-badge {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        padding: 3px 8px;
+        color: #fff;
+        background: rgb(0 0 0 / 0.6);
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 700;
+        pointer-events: none;
+        backdrop-filter: blur(4px);
+      }
+      .map-badge.live {
+        background: color-mix(in srgb, var(--win) 85%, black);
+      }
+      .map-fav {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        display: grid;
+        place-items: center;
+        width: 30px;
+        height: 30px;
+        color: #fff;
+        background: rgb(0 0 0 / 0.45);
+        border: 0;
+        border-radius: 50%;
+        font-size: 16px;
+        line-height: 1;
+        cursor: pointer;
+        backdrop-filter: blur(4px);
+      }
+      .map-fav[aria-pressed="true"] {
+        color: #ffc940;
+      }
+      .map-fav:hover {
+        background: rgb(0 0 0 / 0.7);
+      }
+      .map-card-tools {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 11px 11px;
       }
       .map-card-change {
-        justify-self: start;
-      }
-      .map-card-tools {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 6px;
+        min-height: 30px;
+        padding: 4px 10px;
+        color: var(--bg);
+        background: var(--accent);
+        border-color: var(--accent);
+        font-size: 12px;
       }
       .map-card-tool {
         min-height: 30px;
-        padding: 4px 7px;
+        padding: 4px 8px;
         color: var(--text-2);
         background: transparent;
         border: 1px solid var(--line);
@@ -827,119 +1022,31 @@
       .map-card-tool:disabled {
         opacity: 0.5;
         cursor: not-allowed;
-      }
-      .server-queue-head {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-      }
-      .server-queue-list {
-        display: grid;
-        gap: 6px;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-      }
-      .server-queue-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 8px;
-        border-bottom: 1px solid var(--line);
-        padding: 7px 0;
-      }
-      .server-queue-item:first-child {
-        color: var(--text);
-        font-weight: 600;
-      }
-      .server-queue-empty {
-        color: var(--text-3);
-        font-size: 12px;
-        padding: 8px 0;
-      }
-      .map-card-tools {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 6px;
-      }
-      .map-card-tool {
-        min-height: 30px;
-        padding: 4px 7px;
-        color: var(--text-2);
-        background: transparent;
-        border: 1px solid var(--line);
-        border-radius: 5px;
-        font: inherit;
-        font-size: 12px;
-        cursor: pointer;
-      }
-      .map-card-tool:hover:not(:disabled) {
-        border-color: var(--accent);
-      }
-      .map-card-tool:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-      .server-queue {
-        border-top: 1px solid var(--line);
-        margin-top: 22px;
-        padding-top: 14px;
-      }
-      .server-queue-head {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-      }
-      .server-queue-list {
-        display: grid;
-        gap: 6px;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-      }
-      .server-queue-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 8px;
-        border-bottom: 1px solid var(--line);
-        padding: 7px 0;
-      }
-      .server-queue-item:first-child {
-        color: var(--text);
-        font-weight: 600;
-      }
-      .server-queue-empty {
-        color: var(--text-3);
-        font-size: 12px;
-        padding: 8px 0;
       }
       .map-empty {
         color: var(--text-3);
-        padding: 18px 0;
+        padding: 18px 0 0;
       }
-      .server-message {
-        min-height: 1.5em;
-        color: var(--text-2);
-        margin: 12px 0 0;
+      @media (max-width: 900px) {
+        .srv-layout {
+          grid-template-columns: minmax(0, 1fr);
+        }
+        .srv-side {
+          position: static;
+          max-height: none;
+          overflow: visible;
+        }
       }
       @media (max-width: 700px) {
         .server-connection {
-          grid-template-columns: 1fr 1fr;
-        }
-        .server-connection .server-field:first-child {
-          grid-column: 1 / -1;
-        }
-      }
-      @media (max-width: 420px) {
-        .server-connection {
           grid-template-columns: 1fr;
         }
-        .server-connection .server-field:first-child {
-          grid-column: auto;
+        .map-grid {
+          grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        }
+        .srv-tools {
+          width: 100%;
+          justify-content: space-between;
         }
       }
 
@@ -6135,23 +6242,28 @@
           function viewServer() {
             pageTitle("Server");
             $("#app").innerHTML =
-              `<div class="pagehead"><div><h1>Server</h1><div class="sub">Power controls</div></div><button class="iconbtn" id="server-refresh" type="button" title="Refresh status" aria-label="Refresh status">↻</button></div>
-    <div class="server-state"><div><div class="server-state-label">DatHost status</div><div class="server-state-value" id="server-state">Not connected</div><div class="server-state-meta" id="server-meta"></div></div></div>
-    <section class="server-current"><div><div class="server-current-label">Current map</div><div class="server-current-map" id="server-current-map">Unlock to load status</div></div><div class="server-current-actions"><button class="server-btn" type="button" data-server-action="match_restart" disabled>Restart match</button><button class="server-btn" type="button" data-server-action="warmup_end" disabled>End warmup</button><button class="server-btn" type="button" data-server-action="forcecamera" disabled>Force camera</button></div></section>
-    <dl class="server-details"><div class="server-detail"><dt>Address</dt><dd><span id="server-address">Unavailable</span><button class="iconbtn" id="server-copy-address" type="button" title="Copy server address" aria-label="Copy server address" disabled>⧉</button></dd></div><div class="server-detail"><dt>Players</dt><dd id="server-players">Unavailable</dd></div><div class="server-detail"><dt>Uptime</dt><dd id="server-uptime">Unavailable</dd></div></dl>
-    <section class="server-player-panel"><div class="server-player-head"><h2>Connected players</h2><button class="server-btn" id="server-refresh-players" type="button" disabled>Refresh players</button></div><div class="server-player-empty" id="server-player-empty">Unlock to load connected players</div><div class="server-player-list" id="server-player-list"></div></section>
-    <form class="server-connection" id="server-connect">
+              `<div class="pagehead"><div><h1>Server</h1><div class="sub">Power controls</div></div><div class="srv-tools"><div class="srv-session" id="server-session" hidden>Unlocked<button id="server-signout" type="button">Sign out</button></div><button class="iconbtn" id="server-refresh" type="button" title="Refresh status" aria-label="Refresh status">↻</button></div></div>
+    <p class="server-message" id="server-message" role="status" aria-live="polite"></p>
+    <form class="server-connection card" id="server-connect">
       <label class="server-field">Worker URL<input id="server-url" type="url" inputmode="url" placeholder="https://your-worker.your-account.workers.dev" autocomplete="url" required></label>
       <label class="server-field">Control passphrase<input id="server-passphrase" type="password" autocomplete="current-password" required></label>
       <button class="server-btn" type="submit">Unlock</button>
-      <button class="server-btn" id="server-signout" type="button">Sign out</button>
     </form>
-    <div class="server-actions"><button class="server-btn start" type="button" data-server-action="start" disabled>Start</button><button class="server-btn stop" type="button" data-server-action="stop" disabled>Stop</button><button class="server-btn" type="button" data-server-action="restart" disabled>Restart server</button></div>
-    <section class="server-presets"><h2>Quick presets</h2><div class="server-presets-list"><button class="server-btn" type="button" data-server-action="preset_warmup" disabled>Warmup</button><button class="server-btn" type="button" data-server-action="preset_competitive" disabled>Competitive</button><button class="server-btn" type="button" data-server-action="preset_aim" disabled>Aim practice</button></div></section>
-    <section class="server-map-control"><h2>Change map</h2><div class="map-search-row"><input class="map-search" id="server-map-search" type="search" placeholder="Search maps" aria-label="Search maps" disabled><span class="map-count" id="server-map-count"></span></div><div class="map-filters" role="group" aria-label="Map lists"><button class="map-filter" type="button" data-map-filter="all" aria-pressed="true">All</button><button class="map-filter" type="button" data-map-filter="favorites" aria-pressed="false">Favorites</button><button class="map-filter" type="button" data-map-filter="recent" aria-pressed="false">Recent</button></div><div id="server-map-cards"></div></section>
-    <section class="server-queue"><div class="server-queue-head"><h2>Rotation queue</h2><button class="server-btn" id="server-queue-next" type="button" disabled>Next map</button></div><ol class="server-queue-list" id="server-queue-list"></ol><div class="server-queue-empty" id="server-queue-empty">No maps queued</div></section>
-    <section class="server-history"><h2>Recent actions</h2><div class="server-history-list" id="server-history-list"></div></section>
-    <p class="server-message" id="server-message" role="status" aria-live="polite"></p>`;
+    <div class="srv-layout">
+      <aside class="srv-side">
+        <section class="card srv-status" id="server-status-card"><div class="srv-label">DatHost status</div><div class="server-state-value" id="server-state">Not connected</div><div class="server-state-meta" id="server-meta"></div>
+          <dl class="server-details"><div class="server-detail"><dt>Address</dt><dd><span id="server-address">Unavailable</span><button class="iconbtn" id="server-copy-address" type="button" title="Copy server address" aria-label="Copy server address" disabled>⧉</button></dd></div><div class="server-detail"><dt>Players</dt><dd id="server-players">Unavailable</dd></div><div class="server-detail"><dt>Uptime</dt><dd id="server-uptime">Unavailable</dd></div></dl>
+          <div class="server-actions"><button class="server-btn start" type="button" data-server-action="start" disabled>Start</button><button class="server-btn stop" type="button" data-server-action="stop" disabled>Stop</button><button class="server-btn" type="button" data-server-action="restart" disabled>Restart</button></div></section>
+        <section class="card server-player-panel"><div class="srv-head"><h2>Players</h2><button class="iconbtn" id="server-refresh-players" type="button" title="Refresh players" aria-label="Refresh players" disabled>↻</button></div><div class="server-player-empty" id="server-player-empty">Unlock to load connected players</div><div class="server-player-list" id="server-player-list"></div></section>
+        <section class="card server-queue"><div class="srv-head"><h2>Rotation queue</h2><button class="server-btn" id="server-queue-next" type="button" disabled>Next map</button></div><ol class="server-queue-list" id="server-queue-list"></ol><div class="server-queue-empty" id="server-queue-empty">No maps queued</div></section>
+        <details class="card server-history"><summary>Recent actions</summary><div class="server-history-list" id="server-history-list"></div></details>
+      </aside>
+      <div class="srv-main">
+        <section class="card server-current"><div><div class="srv-label">Current map</div><div class="server-current-map" id="server-current-map">Unlock to load status</div></div><div class="server-current-actions"><button class="server-btn" type="button" data-server-action="match_restart" disabled>Restart match</button><button class="server-btn" type="button" data-server-action="warmup_end" disabled>End warmup</button><button class="server-btn" type="button" data-server-action="forcecamera" disabled>Force camera</button></div></section>
+        <section class="card server-presets"><h2>Quick presets</h2><div class="server-presets-list"><button class="server-btn" type="button" data-server-action="preset_warmup" disabled>Warmup</button><button class="server-btn" type="button" data-server-action="preset_competitive" disabled>Competitive</button><button class="server-btn" type="button" data-server-action="preset_aim" disabled>Aim practice</button></div></section>
+        <section class="card server-map-control"><h2>Change map</h2><div class="map-search-row"><input class="map-search" id="server-map-search" type="search" placeholder="Search maps" aria-label="Search maps" disabled><span class="map-count" id="server-map-count"></span></div><div class="map-filters" role="group" aria-label="Map lists"><button class="map-filter" type="button" data-map-filter="all" aria-pressed="true">All</button><button class="map-filter" type="button" data-map-filter="favorites" aria-pressed="false">Favorites</button><button class="map-filter" type="button" data-map-filter="recent" aria-pressed="false">Recent</button></div><div id="server-map-cards"></div></section>
+      </div>
+    </div>`;
 
             const urlInput = $("#server-url");
             const passInput = $("#server-passphrase");
@@ -6177,7 +6289,6 @@
             const playerEmpty = $("#server-player-empty");
             const refreshPlayers = $("#server-refresh-players");
             const unlockButton = $('#server-connect button[type="submit"]');
-            const signoutButton = $("#server-signout");
             const presetButtons = [
               ...document.querySelectorAll('[data-server-action^="preset_"]'),
             ];
@@ -6232,6 +6343,14 @@
             };
             const setActions = (server, pending = false) => {
               latestServer = server;
+              $("#server-status-card").dataset.state =
+                pending || server?.transitioning
+                  ? "busy"
+                  : server?.running
+                    ? "on"
+                    : server?.known
+                      ? "off"
+                      : "";
               actionButtons.forEach((button) => {
                 button.disabled =
                   pending ||
@@ -6255,7 +6374,10 @@
                   button.disabled = mapsDisabled;
                 });
               mapCards.querySelectorAll(".map-card-tool").forEach((button) => {
-                button.disabled = !getSession() || pendingAction !== null;
+                button.disabled =
+                  !getSession() ||
+                  pendingAction !== null ||
+                  button.dataset.queued === "true";
               });
               queueNext.disabled = mapsDisabled || rotationQueue.length === 0;
               queueList.querySelectorAll("button").forEach((button) => {
@@ -6385,11 +6507,11 @@
                 name.textContent = player.name || `Player #${player.id}`;
                 const details = document.createElement("div");
                 details.className = "server-player-meta";
-                details.textContent = `#${player.id} · ${player.ping} ms · ${player.connected} · ${player.state}`;
+                details.textContent = `${player.ping} ms · ${player.connected}`;
                 info.append(name, details);
                 const disconnect = document.createElement("button");
                 disconnect.type = "button";
-                disconnect.className = "server-btn";
+                disconnect.className = "map-card-tool";
                 disconnect.textContent = "Disconnect";
                 disconnect.setAttribute(
                   "aria-label",
@@ -6461,7 +6583,17 @@
               ].slice(0, 12);
               saveStored("cs2.mapRecents", recentMaps);
             };
+            // official maps and by-name workshop maps (workshop:de_cache) have a map name; numeric workshop IDs don't
+            const mapToken = (map) => {
+              const name = map.key.split(":")[1];
+              return name && !/^\d+$/.test(name) ? name : null;
+            };
+            const playCounts = new Map();
+            for (const game of ALL)
+              playCounts.set(game.map, (playCounts.get(game.map) || 0) + 1);
+            let renderedMapKey = null;
             const renderMapCards = () => {
+              renderedMapKey = latestServer?.map?.key || null;
               const query = mapSearch.value.trim().toLowerCase();
               let source = maps;
               if (mapFilter === "favorites")
@@ -6477,33 +6609,51 @@
               );
               mapCount.textContent = `${filtered.length} of ${maps.length} maps`;
               mapCards.replaceChildren();
-              for (const category of mapFilter === "recent"
-                ? ["Recently played"]
-                : mapFilter === "favorites"
-                  ? ["Favorites"]
-                  : [...new Set(filtered.map((map) => map.category))]) {
+              const groups = [];
+              if (mapFilter === "recent")
+                groups.push(["Recently played", filtered]);
+              else if (mapFilter === "favorites")
+                groups.push(["Favorites", filtered]);
+              else
+                for (const category of new Set(
+                  filtered.map((map) => map.category),
+                )) {
+                  const inCategory = filtered.filter(
+                    (map) => map.category === category,
+                  );
+                  const sized = inCategory.some((map) => map.size);
+                  for (const size of ["Big", "Medium", "Small", null]) {
+                    const group = inCategory
+                      .filter((map) => (map.size || null) === size)
+                      .sort((a, b) => Number(!!b.good) - Number(!!a.good));
+                    if (group.length)
+                      groups.push([
+                        sized ? `${category} · ${size || "Other"}` : category,
+                        group,
+                      ]);
+                  }
+                }
+              for (const [title, group] of groups) {
                 const section = document.createElement("section");
                 section.className = "map-group";
                 const heading = document.createElement("h2");
-                heading.textContent = category;
+                heading.textContent = `${title} (${group.length})`;
                 const grid = document.createElement("div");
                 grid.className = "map-grid";
-                for (const map of mapFilter === "recent" ||
-                mapFilter === "favorites"
-                  ? filtered
-                  : filtered.filter((item) => item.category === category)) {
+                for (const map of group) {
+                  const current = latestServer?.map?.key === map.key;
+                  const queuePos = rotationQueue.indexOf(map.key);
                   const card = document.createElement("div");
-                  card.className = `map-card${selectedMap === map.key ? " selected" : ""}`;
+                  card.className = `map-card${selectedMap === map.key ? " selected" : ""}${current ? " current" : ""}`;
+                  card.dataset.mapKey = map.key;
                   const selectButton = document.createElement("button");
                   selectButton.type = "button";
                   selectButton.className = "map-card-select";
-                  card.setAttribute("aria-label", `Select ${map.label}`);
                   selectButton.setAttribute(
                     "aria-pressed",
                     selectedMap === map.key ? "true" : "false",
                   );
-                  card.dataset.mapKey = map.key;
-                  selectButton.textContent = map.label;
+                  selectButton.setAttribute("aria-label", `Select ${map.label}`);
                   selectButton.disabled =
                     !getSession() ||
                     !latestServer?.known ||
@@ -6511,23 +6661,79 @@
                     latestServer.transitioning ||
                     pendingAction !== null;
                   selectButton.onclick = () => {
-                    selectedMap = map.key;
+                    selectedMap = selectedMap === map.key ? null : map.key;
                     renderMapCards();
                     setActions(latestServer);
                   };
+                  const thumb = document.createElement("span");
+                  thumb.className = "map-thumb";
+                  const initials = map.label
+                    .replace(/\(.*?\)/g, "")
+                    .split(/\s+/)
+                    .filter(Boolean)
+                    .slice(0, 2)
+                    .map((word) => word[0])
+                    .join("")
+                    .toUpperCase();
+                  thumb.dataset.initials = initials;
+                  let hue = 0;
+                  for (const ch of map.key) hue = (hue * 31 + ch.charCodeAt(0)) % 360;
+                  thumb.style.setProperty("--hue", hue);
+                  const token = mapToken(map);
+                  if (token) {
+                    const img = document.createElement("img");
+                    img.src = `radar/${token}.png`;
+                    img.alt = "";
+                    img.loading = "lazy";
+                    img.onerror = () => img.remove();
+                    thumb.append(img);
+                  }
+                  const body = document.createElement("span");
+                  body.className = "map-card-body";
+                  const name = document.createElement("span");
+                  name.className = "map-card-name";
+                  name.textContent = map.label;
+                  const metaLine = document.createElement("span");
+                  metaLine.className = "map-card-meta";
+                  const plays = token ? playCounts.get(token) || 0 : 0;
+                  metaLine.textContent = [
+                    map.note,
+                    plays
+                      ? `Played ${plays}×`
+                      : map.category === "Workshop"
+                        ? "Workshop"
+                        : "Not played yet",
+                  ]
+                    .filter(Boolean)
+                    .join(" · ");
+                  if (map.good) {
+                    const good = document.createElement("span");
+                    good.className = "map-good";
+                    good.textContent = "Good";
+                    metaLine.prepend(good);
+                  }
+                  body.append(name, metaLine);
+                  selectButton.append(thumb, body);
                   card.append(selectButton);
-                  const tools = document.createElement("div");
-                  tools.className = "map-card-tools";
+                  if (current || queuePos >= 0) {
+                    const badge = document.createElement("span");
+                    badge.className = `map-badge${current ? " live" : ""}`;
+                    badge.textContent = current
+                      ? "Now playing"
+                      : `Queue #${queuePos + 1}`;
+                    card.append(badge);
+                  }
                   const favorite = document.createElement("button");
                   favorite.type = "button";
-                  favorite.className = "map-card-tool";
-                  favorite.textContent = favoriteMaps.has(map.key)
-                    ? "★ Saved"
-                    : "☆ Favorite";
+                  favorite.className = "map-fav";
+                  const saved = favoriteMaps.has(map.key);
+                  favorite.textContent = saved ? "★" : "☆";
+                  favorite.title = saved ? "Remove favorite" : "Add favorite";
                   favorite.setAttribute(
-                    "aria-pressed",
-                    favoriteMaps.has(map.key) ? "true" : "false",
+                    "aria-label",
+                    `${saved ? "Remove" : "Add"} ${map.label} ${saved ? "from" : "to"} favorites`,
                   );
+                  favorite.setAttribute("aria-pressed", saved ? "true" : "false");
                   favorite.onclick = () => {
                     if (favoriteMaps.has(map.key)) favoriteMaps.delete(map.key);
                     else favoriteMaps.add(map.key);
@@ -6535,10 +6741,14 @@
                     renderMapCards();
                     setActions(latestServer);
                   };
+                  card.append(favorite);
+                  const actions = document.createElement("div");
+                  actions.className = "map-card-tools";
                   const queue = document.createElement("button");
                   queue.type = "button";
                   queue.className = "map-card-tool";
-                  const queued = rotationQueue.includes(map.key);
+                  const queued = queuePos >= 0;
+                  queue.dataset.queued = String(queued);
                   queue.textContent = queued ? "Queued" : "+ Queue";
                   queue.disabled =
                     queued ||
@@ -6560,13 +6770,12 @@
                     renderMapCards();
                     setActions(latestServer);
                   };
-                  tools.append(favorite, queue);
-                  card.append(tools);
+                  actions.append(queue);
                   if (selectedMap === map.key) {
                     const changeButton = document.createElement("button");
                     changeButton.type = "button";
                     changeButton.className = "server-btn map-card-change";
-                    changeButton.textContent = "Change map";
+                    changeButton.textContent = current ? "Reload map" : "Change map";
                     changeButton.disabled =
                       !getSession() ||
                       !latestServer?.known ||
@@ -6575,8 +6784,9 @@
                       pendingAction !== null;
                     changeButton.onclick = () =>
                       performAction("change_map", map.key);
-                    card.append(changeButton);
+                    actions.append(changeButton);
                   }
+                  card.append(actions);
                   grid.append(card);
                 }
                 section.append(heading, grid);
@@ -6589,7 +6799,7 @@
                   ? mapFilter === "recent" && !recentMaps.length
                     ? "No recently played maps yet."
                     : mapFilter === "favorites" && !favoriteMaps.size
-                      ? "No favorite maps yet. Save one with ☆ Favorite."
+                      ? "No favorite maps yet. Tap ☆ on a map to save it."
                       : "No maps match your search."
                   : "No maps available.";
                 mapCards.append(empty);
@@ -6740,10 +6950,9 @@
             }
             const setConnectionControls = () => {
               const unlocked = Boolean(getSession());
-              urlInput.disabled = unlocked;
-              passInput.disabled = unlocked;
+              $("#server-connect").hidden = unlocked;
+              $("#server-session").hidden = !unlocked;
               unlockButton.disabled = unlocked;
-              signoutButton.disabled = !unlocked;
             };
             const apiUrl = () => {
               const value = urlInput.value.trim();
@@ -6815,6 +7024,9 @@
                 currentMap.textContent =
                   result.map?.label || result.map?.value || "Map unavailable";
                 if (result.map?.key) rememberMap(result.map.key);
+                latestServer = result;
+                if ((result.map?.key || null) !== renderedMapKey && maps.length)
+                  renderMapCards();
                 addressValue.textContent = result.address || "Unavailable";
                 playersValue.textContent =
                   result.players == null

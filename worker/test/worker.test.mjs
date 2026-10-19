@@ -412,6 +412,12 @@ test("lists supplied maps and changes map using only the selected preset", async
       (map) => map.key === "workshop:3078980631" && map.label === "Guard",
     ),
   );
+  const guard = maps.find((map) => map.key === "workshop:3078980631");
+  assert.equal(guard.size, "Small");
+  assert.equal(guard.good, true);
+  const sugarcane = maps.find((map) => map.key === "workshop:3070579459");
+  assert.equal(sugarcane.note, "Pistol only");
+  assert.ok(maps.every((map) => !("line" in map)));
 
   let calledUrl;
   let calledLine;

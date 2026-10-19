@@ -346,7 +346,67 @@ const MAP_ROWS = [
   ],
 ].map(([key, label, category, line]) => ({ key, label, category, line }));
 
-const MAPS = MAP_ROWS;
+// Size and "good" flags from the server's map sheet; maps without an entry are unsized.
+const MAP_META = {
+  "workshop:3437809122": { size: "Big", good: true },
+  "workshop:3330441546": { size: "Big" },
+  "workshop:3127729110": { size: "Big", good: true },
+  "workshop:de_train": { size: "Big", good: true },
+  "workshop:de_biome": { size: "Big" },
+  "workshop:de_cache": { size: "Big", good: true },
+  "workshop:3079692971": { size: "Big", good: true },
+  "workshop:3070598534": { size: "Big" },
+  "workshop:3079872050": { size: "Big", good: true },
+  "workshop:3070293560": { size: "Big", good: true },
+  "workshop:3089953774": { size: "Big", good: true },
+  "workshop:3070226055": { size: "Big", good: true },
+  "workshop:3070584943": { size: "Big", good: true },
+  "workshop:3072397323": { size: "Big", good: true },
+  "workshop:3114174859": { size: "Big", good: true },
+  "workshop:3121217565": { size: "Big", good: true },
+  "workshop:3165559377": { size: "Big" },
+  "workshop:3112468244": { size: "Big" },
+  "workshop:3074691772": { size: "Big" },
+  "workshop:3152430710": { size: "Big" },
+  "workshop:3070766070": { size: "Big", good: true },
+  "workshop:3108513658": { size: "Big" },
+  "workshop:3074700924": { size: "Big" },
+  "workshop:3196360672": { size: "Big", good: true },
+  "workshop:3252689713": { size: "Big" },
+  "workshop:3276538015": { size: "Medium", good: true },
+  "workshop:de_lake": { size: "Small", good: true },
+  "workshop:de_safehouse": { size: "Small", good: true },
+  "workshop:3118830933": { size: "Small", good: true },
+  "workshop:3078980631": { size: "Small", good: true },
+  "workshop:gd_rialto": { size: "Small", good: true },
+  "workshop:3070923343": { size: "Small", good: true },
+  "workshop:3322402053": { size: "Small", good: true },
+  "workshop:3071005299": { size: "Small", good: true },
+  "workshop:3070612859": { size: "Small", good: true },
+  "workshop:3483894219": { size: "Medium", good: true },
+  "workshop:3132854332": { size: "Small", good: true },
+  "workshop:3131775712": { size: "Small", good: true },
+  "workshop:3081154235": { size: "Small", good: true },
+  "workshop:3072052900": { size: "Small", good: true },
+  "workshop:3082605693": { size: "Small", good: true },
+  "workshop:3073259920": { size: "Small" },
+  "workshop:3159423932": { size: "Small" },
+  "workshop:3125119625": { size: "Small" },
+  "workshop:3159212000": { size: "Small" },
+  "workshop:3070290240": { size: "Small" },
+  "workshop:3171290420": { size: "Small" },
+  "workshop:3165369649": { size: "Small" },
+  "workshop:3070411770": { size: "Small" },
+  "workshop:3329381619": { size: "Small" },
+  "workshop:3146105097": { size: "Small" },
+  "workshop:3108198185": { size: "Small" },
+  "workshop:3075996446": { size: "Small" },
+  "workshop:3070579459": { size: "Small", note: "Pistol only" },
+  "workshop:3517550687": { size: "Small", good: true },
+  "workshop:3376496698": { size: "Small", good: true },
+};
+
+const MAPS = MAP_ROWS.map((map) => ({ ...map, ...MAP_META[map.key] }));
 const MAP_BY_KEY = new Map(MAPS.map((map) => [map.key, map]));
 const CONSOLE_PRESETS = {
   forcecamera: "mp_forcecamera 1",
@@ -777,10 +837,13 @@ async function handle(request, env) {
     if (url.pathname === "/api/maps" && request.method === "GET") {
       return json(
         {
-          maps: MAPS.map(({ key, label, category }) => ({
+          maps: MAPS.map(({ key, label, category, size, good, note }) => ({
             key,
             label,
             category,
+            size: size || null,
+            good: Boolean(good),
+            note: note || null,
           })),
         },
         200,
