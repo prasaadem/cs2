@@ -194,6 +194,83 @@ test("returns documented connection details and reported uptime", async () => {
   assert.equal(result.uptimeSeconds, 93784);
 });
 
+test("lists connected human players without exposing Steam IDs", async () => {
+  const consoleLines = [
+    "# userid name uniqueid connected ping loss state rate",
+    '# 2 "Alpha Player" STEAM_1:0:123 00:10:20 42 0 active 786432',
+    '# 3 "Practice Bot" BOT 00:10:20 5 0 active 786432',
+  ];
+  globalThis.fetch = async (url, options) => {
+    if (options.method === "GET") return Response.json(consoleLines);
+    return new Response(null, { status: 200 });
+  };
+  const response = await worker.fetch(
+    request("/api/players", { token: await login() }),
+    env,
+  );
+  assert.equal(response.status, 200);
+  assert.deepEqual((await response.json()).players, [
+    {
+      id: "2",
+      name: "Alpha Player",
+      connected: "00:10:20",
+      ping: 42,
+      state: "active",
+    },
+  ]);
+});
+
+test("disconnects only a currently connected session and never bans", async () => {
+  const consoleLines = [
+    "# userid name uniqueid connected ping loss state rate",
+    '# 2 "Alpha Player" STEAM_1:0:123 00:10:20 42 0 active 786432',
+  ];
+  const sentLines = [];
+  globalThis.fetch = async (_url, options) => {
+    if (options.method === "GET") return Response.json(consoleLines);
+    sentLines.push(options.body.get("line"));
+    return new Response(null, { status: 200 });
+  };
+  const response = await worker.fetch(
+    request("/api/action", {
+      method: "POST",
+      body: { action: "disconnect_player", playerId: "2" },
+      token: await login(),
+    }),
+    env,
+  );
+  assert.equal(response.status, 200);
+  assert.deepEqual(sentLines, [
+    "status",
+    'kickid 2 "Disconnected by server admin"',
+  ]);
+  assert.equal(sentLines.some((line) => /\\bban(id)?\\b/i.test(line)), false);
+});
+
+test("rejects stale and malformed player session IDs without disconnecting", async () => {
+  const sentLines = [];
+  globalThis.fetch = async (_url, options) => {
+    if (options.method === "GET")
+      return Response.json([
+        "# userid name uniqueid connected ping loss state rate",
+      ]);
+    sentLines.push(options.body.get("line"));
+    return new Response(null, { status: 200 });
+  };
+  for (const playerId of ["999", "2;quit", "0"] ) {
+    const response = await worker.fetch(
+      request("/api/action", {
+        method: "POST",
+        body: { action: "disconnect_player", playerId },
+        token: await login(),
+      }),
+      env,
+    );
+    assert.ok([400, 409].includes(response.status));
+  }
+  assert.deepEqual(sentLines, ["status", "status"]);
+});
+
 test("allows only the three server power actions", async () => {
   let calledUrl;
   let calledMethod;

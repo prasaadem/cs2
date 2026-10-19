@@ -585,6 +585,29 @@
         font-weight: 600;
         overflow-wrap: anywhere;
       }
+      .server-player-panel {
+        border-bottom: 1px solid var(--line);
+        padding: 14px 0 18px;
+      }
+      .server-player-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .server-player-head h2 { color: var(--text-2); font-size: 14px; margin: 0; }
+      .server-player-list { display: grid; gap: 6px; margin-top: 10px; }
+      .server-player-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        border-top: 1px solid var(--line);
+        padding: 9px 0;
+      }
+      .server-player-name { font-weight: 600; overflow-wrap: anywhere; }
+      .server-player-meta { color: var(--text-3); font-size: 12px; margin-top: 2px; }
+      .server-player-empty { color: var(--text-3); font-size: 12px; padding-top: 10px; }
       .server-actions {
         display: flex;
         flex-wrap: wrap;
@@ -6116,6 +6139,7 @@
     <div class="server-state"><div><div class="server-state-label">DatHost status</div><div class="server-state-value" id="server-state">Not connected</div><div class="server-state-meta" id="server-meta"></div></div></div>
     <section class="server-current"><div><div class="server-current-label">Current map</div><div class="server-current-map" id="server-current-map">Unlock to load status</div></div><div class="server-current-actions"><button class="server-btn" type="button" data-server-action="match_restart" disabled>Restart match</button><button class="server-btn" type="button" data-server-action="warmup_end" disabled>End warmup</button><button class="server-btn" type="button" data-server-action="forcecamera" disabled>Force camera</button></div></section>
     <dl class="server-details"><div class="server-detail"><dt>Address</dt><dd><span id="server-address">Unavailable</span><button class="iconbtn" id="server-copy-address" type="button" title="Copy server address" aria-label="Copy server address" disabled>⧉</button></dd></div><div class="server-detail"><dt>Players</dt><dd id="server-players">Unavailable</dd></div><div class="server-detail"><dt>Uptime</dt><dd id="server-uptime">Unavailable</dd></div></dl>
+    <section class="server-player-panel"><div class="server-player-head"><h2>Connected players</h2><button class="server-btn" id="server-refresh-players" type="button" disabled>Refresh players</button></div><div class="server-player-empty" id="server-player-empty">Unlock to load connected players</div><div class="server-player-list" id="server-player-list"></div></section>
     <form class="server-connection" id="server-connect">
       <label class="server-field">Worker URL<input id="server-url" type="url" inputmode="url" placeholder="https://your-worker.your-account.workers.dev" autocomplete="url" required></label>
       <label class="server-field">Control passphrase<input id="server-passphrase" type="password" autocomplete="current-password" required></label>
@@ -6149,6 +6173,9 @@
             const queueEmpty = $("#server-queue-empty");
             const queueNext = $("#server-queue-next");
             const historyList = $("#server-history-list");
+            const playerList = $("#server-player-list");
+            const playerEmpty = $("#server-player-empty");
+            const refreshPlayers = $("#server-refresh-players");
             const unlockButton = $('#server-connect button[type="submit"]');
             const signoutButton = $("#server-signout");
             const presetButtons = [
@@ -6162,6 +6189,7 @@
             let selectedMap = null;
             let latestServer = null;
             let mapFilter = "all";
+            let playersLoading = false;
             const readStored = (key, fallback) => {
               try {
                 const value = JSON.parse(localStorage.getItem(key) || "null");
@@ -6234,6 +6262,16 @@
                 button.disabled = pendingAction !== null;
               });
               copyAddress.disabled = !getSession() || !server?.address;
+              const playersDisabled =
+                !getSession() ||
+                !server?.running ||
+                server.transitioning ||
+                pendingAction !== null ||
+                playersLoading;
+              refreshPlayers.disabled = playersDisabled;
+              playerList
+                .querySelectorAll("button")
+                .forEach((button) => (button.disabled = playersDisabled));
               presetButtons.forEach((button) => {
                 button.disabled =
                   !getSession() ||
@@ -6334,6 +6372,87 @@
                   ? `${hours}h ${minutes}m`
                   : `${minutes}m`;
             };
+            const renderPlayers = (players, note) => {
+              playerList.replaceChildren();
+              playerEmpty.hidden = Boolean(players?.length);
+              playerEmpty.textContent = note || "No players connected";
+              for (const player of players || []) {
+                const row = document.createElement("div");
+                row.className = "server-player-row";
+                const info = document.createElement("div");
+                const name = document.createElement("div");
+                name.className = "server-player-name";
+                name.textContent = player.name || `Player #${player.id}`;
+                const details = document.createElement("div");
+                details.className = "server-player-meta";
+                details.textContent = `#${player.id} · ${player.ping} ms · ${player.connected} · ${player.state}`;
+                info.append(name, details);
+                const disconnect = document.createElement("button");
+                disconnect.type = "button";
+                disconnect.className = "server-btn";
+                disconnect.textContent = "Disconnect";
+                disconnect.setAttribute(
+                  "aria-label",
+                  `Disconnect ${player.name || `player #${player.id}`}`,
+                );
+                disconnect.onclick = () => disconnectPlayer(player);
+                row.append(info, disconnect);
+                playerList.append(row);
+              }
+              setActions(latestServer);
+            };
+            const loadPlayers = async () => {
+              if (!getSession() || !latestServer?.running) {
+                renderPlayers(
+                  [],
+                  getSession()
+                    ? "Server is not running"
+                    : "Unlock to load connected players",
+                );
+                return;
+              }
+              playersLoading = true;
+              setActions(latestServer);
+              playerEmpty.hidden = false;
+              playerEmpty.textContent = "Loading connected players…";
+              try {
+                const result = await call("/api/players");
+                playersLoading = false;
+                renderPlayers(
+                  result.players,
+                  `No players connected · Checked ${new Date(result.checkedAt).toLocaleTimeString()}`,
+                );
+              } catch (error) {
+                playersLoading = false;
+                renderPlayers([], error.message);
+              }
+            };
+            async function disconnectPlayer(player) {
+              const who = player.name || `player #${player.id}`;
+              if (!confirm(`Disconnect ${who} from the server?`)) return;
+              const logId = logAction(`Disconnect ${who}`, "Running");
+              pendingAction = "disconnect_player";
+              setActions(latestServer);
+              message.textContent = `Disconnecting ${who}…`;
+              try {
+                await call("/api/action", {
+                  method: "POST",
+                  body: JSON.stringify({
+                    action: "disconnect_player",
+                    playerId: player.id,
+                  }),
+                });
+                updateActionLog(logId, "Sent");
+                message.textContent = `${who} disconnected.`;
+              } catch (error) {
+                updateActionLog(logId, "Failed");
+                message.textContent = error.message;
+              } finally {
+                pendingAction = null;
+                setActions(latestServer);
+                await loadPlayers();
+              }
+            }
             const rememberMap = (key) => {
               if (!key) return;
               recentMaps = [
@@ -6533,19 +6652,13 @@
 
                 if (action === "change_map") {
                   const expected = maps.find((map) => map.key === mapKey);
-                  const expectedToken = expected?.line.split(" ").at(-1);
                   const deadline = Date.now() + 60000;
                   message.textContent = `Waiting for server to load ${expected?.label || "selected map"}…`;
                   while (Date.now() < deadline) {
                     await new Promise((resolve) => setTimeout(resolve, 2500));
                     const current = await refresh();
                     const actual = current?.map;
-                    if (
-                      actual &&
-                      (actual.key === mapKey ||
-                        actual.value?.toLowerCase() ===
-                          expectedToken?.toLowerCase())
-                    ) {
+                    if (actual?.key === mapKey) {
                       pendingAction = null;
                       rememberMap(mapKey);
                       if (fromQueue && rotationQueue[0] === mapKey)
@@ -6754,7 +6867,7 @@
                 passInput.value = "";
                 setConnectionControls();
                 message.textContent = "";
-                await refresh();
+                if (await refresh()) await loadPlayers();
               } catch (error) {
                 message.textContent = error.message;
               }
@@ -6767,8 +6880,12 @@
               setConnectionControls();
               message.textContent = "";
               setActions("unknown");
+              renderPlayers([], "Unlock to load connected players");
             };
-            $("#server-refresh").onclick = refresh;
+            $("#server-refresh").onclick = async () => {
+              if (await refresh()) await loadPlayers();
+            };
+            refreshPlayers.onclick = loadPlayers;
             mapSearch.oninput = renderMapCards;
             mapFilters.forEach((button) => {
               button.onclick = () => {
@@ -6803,7 +6920,8 @@
             renderQueue();
             renderHistory();
             setConnectionControls();
-            if (getSession()) refresh();
+            if (getSession())
+              refresh().then((result) => result && loadPlayers());
             else {
               state.textContent = "Locked";
               currentMap.textContent = "Unlock to load status";

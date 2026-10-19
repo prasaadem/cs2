@@ -527,6 +527,69 @@ async function dathostConsole(line, env) {
   if (!response.ok) throw new Error(`DatHost returned HTTP ${response.status}`);
 }
 
+async function dathostConsoleLines(env) {
+  const response = await fetch(
+    `${API_ROOT}/game-servers/${serverId(env)}/console?max_lines=500`,
+    {
+      method: "GET",
+      headers: accountHeaders(env),
+      signal: AbortSignal.timeout(15000),
+    },
+  );
+  if (!response.ok) throw new Error(`DatHost returned HTTP ${response.status}`);
+  const text = await response.text();
+  let payload;
+  try {
+    payload = JSON.parse(text);
+  } catch {
+    payload = text.split(/\r?\n/);
+  }
+  if (Array.isArray(payload)) return payload.map(String);
+  if (payload && typeof payload === "object") {
+    const lines = payload.lines || payload.console || payload.backlog;
+    if (Array.isArray(lines)) return lines.map(String);
+  }
+  if (typeof payload === "string") return payload.split(/\r?\n/);
+  throw new Error("DatHost console backlog format is not recognized");
+}
+
+function parseConsolePlayers(lines) {
+  const headerIndex = lines.findLastIndex((line) =>
+    /\buserid\b.*\buniqueid\b/i.test(line),
+  );
+  if (headerIndex < 0) return { available: false, players: [] };
+
+  const players = [];
+  const rowPattern = /#\s*(\d+)\s+"((?:[^"\\]|\\.)*)"\s+(\S+)\s+(\S+)\s+(\d+)\s+(\d+)\s+(\S+)/;
+  for (const line of lines.slice(headerIndex + 1)) {
+    const match = line.match(rowPattern);
+    if (!match) {
+      if (players.length) break;
+      continue;
+    }
+    const [, userId, rawName, uniqueId, connected, ping, , state] = match;
+    if (!/^(STEAM_|\[U:\d+:)/i.test(uniqueId)) continue;
+    players.push({
+      id: userId,
+      name: rawName.replace(/\\"/g, '"').replace(/\\\\/g, "\\"),
+      connected,
+      ping: Number(ping),
+      state,
+    });
+  }
+  return { available: true, players };
+}
+
+async function getConnectedPlayers(env) {
+  await dathostConsole("status", env);
+  for (let attempt = 0; attempt < 4; attempt++) {
+    await new Promise((resolve) => setTimeout(resolve, 250));
+    const result = parseConsolePlayers(await dathostConsoleLines(env));
+    if (result.available) return result;
+  }
+  return { available: false, players: [] };
+}
+
 function serverState(server) {
   const rawStatus = [server.status, server.state].find(
     (value) => typeof value === "string",
@@ -693,7 +756,12 @@ async function handle(request, env) {
     );
   }
 
-  if (!["/api/status", "/api/maps", "/api/action"].includes(url.pathname))
+  if (![
+    "/api/status",
+    "/api/maps",
+    "/api/players",
+    "/api/action",
+  ].includes(url.pathname))
     return json({ error: "Not found" }, 404, cors);
   if (!env.SESSION_SECRET)
     return json({ error: "Worker secrets are not configured" }, 503, cors);
@@ -715,6 +783,21 @@ async function handle(request, env) {
             category,
           })),
         },
+        200,
+        cors,
+      );
+    }
+
+    if (url.pathname === "/api/players" && request.method === "GET") {
+      const result = await getConnectedPlayers(env);
+      if (!result.available)
+        return json(
+          { error: "Could not read the live player list from the server console" },
+          502,
+          cors,
+        );
+      return json(
+        { players: result.players, checkedAt: new Date().toISOString() },
         200,
         cors,
       );
@@ -757,6 +840,27 @@ async function handle(request, env) {
       }
       if (!body || typeof body !== "object")
         return json({ error: "Invalid action" }, 400, cors);
+
+      if (body.action === "disconnect_player") {
+        const playerId = typeof body.playerId === "string" ? body.playerId : "";
+        if (!/^\d{1,6}$/.test(playerId))
+          return json({ error: "Invalid player session ID" }, 400, cors);
+        const live = await getConnectedPlayers(env);
+        if (!live.available)
+          return json({ error: "Could not verify the current player list" }, 502, cors);
+        const player = live.players.find((candidate) => candidate.id === playerId);
+        if (!player)
+          return json({ error: "That player is no longer connected" }, 409, cors);
+        await dathostConsole(
+          `kickid ${player.id} "Disconnected by server admin"`,
+          env,
+        );
+        return json(
+          { ok: true, action: "disconnect_player", playerId: player.id },
+          200,
+          cors,
+        );
+      }
 
       if (Object.hasOwn(CONSOLE_PRESETS, body.action)) {
         await dathostConsole(CONSOLE_PRESETS[body.action], env);
