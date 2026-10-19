@@ -47,6 +47,20 @@
    "players": [
     "prasaadem"
    ]
+  },
+  {
+   "id": "20261019-0406-aim_ak_bench",
+   "game": "20261019-0406-aim_ak_bench",
+   "map": "aim_ak_bench",
+   "start_utc": "2026-10-19T04:05:29Z",
+   "dur": 192,
+   "rounds": 4,
+   "trimmed": 104,
+   "players": [
+    "pichekistha",
+    "prasaadem",
+    "Sheldor"
+   ]
   }
  ],
  "demos": {
@@ -112,6 +126,32 @@
   },
   "auto-20261018-1741-de_seaside_d_prefab-cupcake.dem": {
    "size": 483765,
+   "ids": []
+  },
+  "auto-20261019-0045-de_dust2-cupcake.dem": {
+   "size": 201641,
+   "ids": []
+  },
+  "auto-20261019-0046-de_mirage-cupcake.dem": {
+   "size": 558079,
+   "ids": []
+  },
+  "auto-20261019-0048-de_brewery-cupcake.dem": {
+   "size": 3862832,
+   "ids": []
+  },
+  "auto-20261019-0104-de_dust2-cupcake.dem": {
+   "size": 20485103,
+   "ids": []
+  },
+  "auto-20261019-0404-aim_ak_bench-cupcake.dem": {
+   "size": 7368704,
+   "ids": [
+    "20261019-0406-aim_ak_bench"
+   ]
+  },
+  "auto-20261019-0404-de_dust2-cupcake.dem": {
+   "size": 210752,
    "ids": []
   }
  }
