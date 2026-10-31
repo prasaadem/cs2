@@ -1397,15 +1397,35 @@
    ]
   },
   {
-   "id": "20261031-0755-de_safehouse",
-   "game": null,
+   "id": "20261031-0756-de_safehouse",
+   "game": "20261031-0756-de_safehouse",
    "map": "de_safehouse",
    "start_utc": "2026-10-31T07:55:54Z",
-   "dur": 46,
-   "rounds": 1,
+   "dur": 534,
+   "rounds": 8,
    "trimmed": 0,
    "players": [
     "pichekistha",
+    "mcdreamy111",
+    "whitefe@ther",
+    "KaiZen",
+    "BigHero",
+    "Rat",
+    "prasaadem",
+    "Sheldor"
+   ]
+  },
+  {
+   "id": "20261031-0805-de_shortdust",
+   "game": "20261031-0805-de_shortdust",
+   "map": "de_shortdust",
+   "start_utc": "2026-10-31T08:05:34Z",
+   "dur": 768,
+   "rounds": 14,
+   "trimmed": 0,
+   "players": [
+    "pichekistha",
+    "mcdreamy111",
     "whitefe@ther",
     "KaiZen",
     "BigHero",
@@ -1920,9 +1940,15 @@
    "ids": []
   },
   "auto-20261031-0755-de_safehouse-cupcake.dem": {
-   "size": 7901184,
+   "size": 47199639,
    "ids": [
-    "20261031-0755-de_safehouse"
+    "20261031-0756-de_safehouse"
+   ]
+  },
+  "auto-20261031-0805-de_shortdust-cupcake.dem": {
+   "size": 70628825,
+   "ids": [
+    "20261031-0805-de_shortdust"
    ]
   }
  }
