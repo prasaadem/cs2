@@ -1433,6 +1433,272 @@
     "prasaadem",
     "Sheldor"
    ]
+  },
+  {
+   "id": "20261105-0506-aim_deagle",
+   "game": "20261105-0506-aim_deagle",
+   "map": "aim_deagle",
+   "start_utc": "2026-11-05T05:09:46Z",
+   "dur": 366,
+   "rounds": 14,
+   "trimmed": 81,
+   "players": [
+    "pichekistha",
+    "KaiZen"
+   ]
+  },
+  {
+   "id": "20261105-0525-de_sugarcane",
+   "game": null,
+   "map": "de_sugarcane",
+   "start_utc": "2026-11-05T05:25:03Z",
+   "dur": 68,
+   "rounds": 1,
+   "trimmed": 0,
+   "players": [
+    "pichekistha",
+    "KaiZen",
+    "prasaadem"
+   ]
+  },
+  {
+   "id": "20261105-0528-de_lake",
+   "game": "20261105-0528-de_lake",
+   "map": "de_lake",
+   "start_utc": "2026-11-05T05:27:11Z",
+   "dur": 264,
+   "rounds": 5,
+   "trimmed": 0,
+   "players": [
+    "pichekistha",
+    "whitefe@ther",
+    "KaiZen",
+    "prasaadem",
+    "Sheldor"
+   ]
+  },
+  {
+   "id": "20261105-0533-de_assembly",
+   "game": "20261105-0533-de_assembly",
+   "map": "de_assembly",
+   "start_utc": "2026-11-05T05:32:42Z",
+   "dur": 688,
+   "rounds": 13,
+   "trimmed": 14,
+   "players": [
+    "pichekistha",
+    "whitefe@ther",
+    "KaiZen",
+    "MAXROY",
+    "prasaadem",
+    "Sheldor"
+   ]
+  },
+  {
+   "id": "20261105-0545-de_guard_s2",
+   "game": "20261105-0545-de_guard_s2",
+   "map": "de_guard_s2",
+   "start_utc": "2026-11-05T05:44:57Z",
+   "dur": 496,
+   "rounds": 8,
+   "trimmed": 0,
+   "players": [
+    "pichekistha",
+    "mcdreamy111",
+    "whitefe@ther",
+    "KaiZen",
+    "It's Thief",
+    "MAXROY",
+    "BigHero",
+    "Rat",
+    "prasaadem",
+    "Sheldor"
+   ]
+  },
+  {
+   "id": "20261105-0557-de_mirage",
+   "game": "20261105-0557-de_mirage",
+   "map": "de_mirage",
+   "start_utc": "2026-11-05T05:57:24Z",
+   "dur": 1036,
+   "rounds": 10,
+   "trimmed": 0,
+   "players": [
+    "pichekistha",
+    "Pheonix",
+    "mcdreamy111",
+    "whitefe@ther",
+    "kiiiiiira",
+    "KaiZen",
+    "It's Thief",
+    "MAXROY",
+    "BigHero",
+    "Rat",
+    "prasaadem",
+    "Sheldor"
+   ]
+  },
+  {
+   "id": "20261105-0617-de_inferno",
+   "game": "20261105-0617-de_inferno",
+   "map": "de_inferno",
+   "start_utc": "2026-11-05T06:17:13Z",
+   "dur": 1256,
+   "rounds": 13,
+   "trimmed": 22,
+   "players": [
+    "pichekistha",
+    "Pheonix",
+    "mcdreamy111",
+    "whitefe@ther",
+    "kiiiiiira",
+    "KaiZen",
+    "It's Thief",
+    "MAXROY",
+    "BigHero",
+    "Rat",
+    "prasaadem",
+    "Sheldor",
+    "blazingshack"
+   ]
+  },
+  {
+   "id": "20261105-0640-de_dust2",
+   "game": "20261105-0640-de_dust2",
+   "map": "de_dust2",
+   "start_utc": "2026-11-05T06:40:44Z",
+   "dur": 994,
+   "rounds": 11,
+   "trimmed": 5,
+   "players": [
+    "pichekistha",
+    "Pheonix",
+    "mcdreamy111",
+    "whitefe@ther",
+    "kiiiiiira",
+    "KaiZen",
+    "It's Thief",
+    "MAXROY",
+    "BigHero",
+    "Rat",
+    "prasaadem",
+    "Sheldor",
+    "blazingshack"
+   ]
+  },
+  {
+   "id": "20261105-0659-de_anubis",
+   "game": "20261105-0659-de_anubis",
+   "map": "de_anubis",
+   "start_utc": "2026-11-05T06:58:46Z",
+   "dur": 1596,
+   "rounds": 13,
+   "trimmed": 4,
+   "players": [
+    "pichekistha",
+    "Pheonix",
+    "mcdreamy111",
+    "whitefe@ther",
+    "kiiiiiira",
+    "KaiZen",
+    "It's Thief",
+    "MAXROY",
+    "BigHero",
+    "Rat",
+    "prasaadem",
+    "Sheldor",
+    "blazingshack"
+   ]
+  },
+  {
+   "id": "20261105-0727-de_vertigo",
+   "game": "20261105-0727-de_vertigo",
+   "map": "de_vertigo",
+   "start_utc": "2026-11-05T07:27:07Z",
+   "dur": 1179,
+   "rounds": 13,
+   "trimmed": 0,
+   "players": [
+    "pichekistha",
+    "Pheonix",
+    "mcdreamy111",
+    "whitefe@ther",
+    "kiiiiiira",
+    "KaiZen",
+    "It's Thief",
+    "MAXROY",
+    "BigHero",
+    "Rat",
+    "prasaadem",
+    "Sheldor",
+    "blazingshack"
+   ]
+  },
+  {
+   "id": "20261105-0748-de_nuke",
+   "game": "20261105-0748-de_nuke",
+   "map": "de_nuke",
+   "start_utc": "2026-11-05T07:47:20Z",
+   "dur": 1119,
+   "rounds": 11,
+   "trimmed": 20,
+   "players": [
+    "pichekistha",
+    "Pheonix",
+    "mcdreamy111",
+    "whitefe@ther",
+    "kiiiiiira",
+    "KaiZen",
+    "It's Thief",
+    "MAXROY",
+    "BigHero",
+    "Rat",
+    "prasaadem",
+    "Sheldor",
+    "blazingshack"
+   ]
+  },
+  {
+   "id": "20261105-0809-de_cache",
+   "game": "20261105-0809-de_cache",
+   "map": "de_cache",
+   "start_utc": "2026-11-05T08:09:03Z",
+   "dur": 968,
+   "rounds": 13,
+   "trimmed": 5,
+   "players": [
+    "pichekistha",
+    "Pheonix",
+    "mcdreamy111",
+    "whitefe@ther",
+    "It's Thief",
+    "MAXROY",
+    "BigHero",
+    "Rat",
+    "prasaadem",
+    "Sheldor",
+    "blazingshack"
+   ]
+  },
+  {
+   "id": "20261105-0826-awp_india_cs2",
+   "game": "20261105-0826-awp_india_cs2",
+   "map": "awp_india_cs2",
+   "start_utc": "2026-11-05T08:25:36Z",
+   "dur": 530,
+   "rounds": 15,
+   "trimmed": 0,
+   "players": [
+    "pichekistha",
+    "mcdreamy111",
+    "whitefe@ther",
+    "It's Thief",
+    "MAXROY",
+    "BigHero",
+    "Rat",
+    "prasaadem",
+    "Sheldor"
+   ]
   }
  ],
  "demos": {
@@ -1949,6 +2215,100 @@
    "size": 70628825,
    "ids": [
     "20261031-0805-de_shortdust"
+   ]
+  },
+  "auto-20261105-0433-de_dust2-cupcake.dem": {
+   "size": 3891820,
+   "ids": []
+  },
+  "auto-20261105-0447-aim_deagle-cupcake.dem": {
+   "size": 443563,
+   "ids": []
+  },
+  "auto-20261105-0448-aim_deagle-cupcake.dem": {
+   "size": 25325309,
+   "ids": [
+    "20261105-0506-aim_deagle",
+    "20261105-0506-aim_deagle"
+   ]
+  },
+  "auto-20261105-0525-de_sugarcane-cupcake.dem": {
+   "size": 2178143,
+   "ids": [
+    "20261105-0525-de_sugarcane"
+   ]
+  },
+  "auto-20261105-0526-de_lake-cupcake.dem": {
+   "size": 19691054,
+   "ids": [
+    "20261105-0528-de_lake"
+   ]
+  },
+  "auto-20261105-0532-de_assembly-cupcake.dem": {
+   "size": 43549768,
+   "ids": [
+    "20261105-0533-de_assembly"
+   ]
+  },
+  "auto-20261105-0544-de_guard_s2-cupcake.dem": {
+   "size": 44079967,
+   "ids": [
+    "20261105-0545-de_guard_s2"
+   ]
+  },
+  "auto-20261105-0554-de_mirage-cupcake.dem": {
+   "size": 148990428,
+   "ids": [
+    "20261105-0557-de_mirage",
+    "20261105-0557-de_mirage"
+   ]
+  },
+  "auto-20261105-0614-de_inferno-cupcake.dem": {
+   "size": 199012333,
+   "ids": [
+    "20261105-0617-de_inferno",
+    "20261105-0617-de_inferno"
+   ]
+  },
+  "auto-20261105-0639-de_dust2-cupcake.dem": {
+   "size": 152299429,
+   "ids": [
+    "20261105-0640-de_dust2",
+    "20261105-0640-de_dust2"
+   ]
+  },
+  "auto-20261105-0657-de_anubis-cupcake.dem": {
+   "size": 223851745,
+   "ids": [
+    "20261105-0659-de_anubis"
+   ]
+  },
+  "auto-20261105-0726-de_vertigo-cupcake.dem": {
+   "size": 162598240,
+   "ids": [
+    "20261105-0727-de_vertigo"
+   ]
+  },
+  "auto-20261105-0746-de_nuke-cupcake.dem": {
+   "size": 151318814,
+   "ids": [
+    "20261105-0748-de_nuke"
+   ]
+  },
+  "auto-20261105-0807-de_cache-cupcake.dem": {
+   "size": 113891967,
+   "ids": [
+    "20261105-0809-de_cache"
+   ]
+  },
+  "auto-20261105-0807-de_overpass-cupcake.dem": {
+   "size": 1838386,
+   "ids": []
+  },
+  "auto-20261105-0825-awp_india_cs2-cupcake.dem": {
+   "size": 54130551,
+   "ids": [
+    "20261105-0826-awp_india_cs2"
    ]
   }
  }
