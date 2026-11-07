@@ -17,8 +17,8 @@ const command = {
     {
       type: 3, // string
       name: "players",
-      description: "In-game names, separated by commas",
-      required: true,
+      description: "Optional: type names (comma-separated) instead of picking from a list",
+      required: false,
       max_length: 1000,
     },
   ],

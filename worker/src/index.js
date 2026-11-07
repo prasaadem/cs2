@@ -990,7 +990,59 @@ async function makeSplit(requested, env) {
 // also what Discord checks for when the endpoint URL is saved.
 const DISCORD_PING = 1;
 const DISCORD_COMMAND = 2;
+const DISCORD_COMPONENT = 3;
 const DISCORD_EPHEMERAL = 64;
+const PICKER_ID = "teams:pick";
+const PICKER_MAX_OPTIONS = 25; // Discord's limit for one select menu
+
+// A private reply with a multi-select of known players, most recent first.
+// Values are account IDs, so the split needs no name matching.
+async function playerPicker(env) {
+  const stored = await env.RATINGS.get(RATINGS_KEY, { type: "json" });
+  if (!stored || !stored.players)
+    return discordReply("No ratings have been published yet.", true);
+  const options = Object.entries(stored.players)
+    .sort(
+      ([, a], [, b]) =>
+        String(b.last_night || "").localeCompare(String(a.last_night || "")) ||
+        (b.games || 0) - (a.games || 0) ||
+        a.name.localeCompare(b.name),
+    )
+    .slice(0, PICKER_MAX_OPTIONS)
+    .map(([id, p]) => ({
+      label: p.name.slice(0, 100),
+      value: id,
+      ...(p.provisional ? { description: "new player" } : {}),
+    }));
+  if (options.length < SPLIT_MIN_PLAYERS)
+    return discordReply("Not enough rated players to pick from.", true);
+  return json(
+    {
+      type: 4,
+      data: {
+        content:
+          "Pick who's playing, then close the menu. To include a guest who isn't listed, use `/teams players:` and type the names.",
+        flags: DISCORD_EPHEMERAL,
+        components: [
+          {
+            type: 1,
+            components: [
+              {
+                type: 3, // string select
+                custom_id: PICKER_ID,
+                placeholder: "Select players",
+                min_values: SPLIT_MIN_PLAYERS,
+                max_values: Math.min(SPLIT_MAX_PLAYERS, options.length),
+                options,
+              },
+            ],
+          },
+        ],
+      },
+    },
+    200,
+  );
+}
 
 function hexToBytes(hex) {
   if (!/^(?:[0-9a-f]{2})+$/i.test(hex)) return null;
@@ -1072,15 +1124,30 @@ async function discordInteraction(request, env) {
     return json({ error: "Invalid JSON" }, 400);
   }
   if (interaction.type === DISCORD_PING) return json({ type: 1 }, 200);
-  if (interaction.type !== DISCORD_COMMAND || interaction.data?.name !== "teams")
-    return discordReply("Unknown command.", true);
   if (!env.RATINGS) return discordReply("Ratings storage is not configured.", true);
 
-  const option = interaction.data.options?.find((o) => o.name === "players");
-  const requested = String(option?.value || "")
-    .split(/[,\n]/)
-    .map((name) => name.trim())
-    .filter(Boolean);
+  let requested;
+  if (
+    interaction.type === DISCORD_COMPONENT &&
+    interaction.data?.custom_id === PICKER_ID
+  ) {
+    requested = Array.isArray(interaction.data.values)
+      ? interaction.data.values.map(String)
+      : [];
+  } else if (
+    interaction.type === DISCORD_COMMAND &&
+    interaction.data?.name === "teams"
+  ) {
+    const option = interaction.data.options?.find((o) => o.name === "players");
+    requested = String(option?.value || "")
+      .split(/[,\n]/)
+      .map((name) => name.trim())
+      .filter(Boolean);
+    // No names typed: show a multi-select of known players instead.
+    if (!requested.length) return playerPicker(env);
+  } else {
+    return discordReply("Unknown command.", true);
+  }
   const result = await makeSplit(requested.length ? requested : null, env);
   if (result.status !== 200)
     return discordReply(

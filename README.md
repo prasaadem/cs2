@@ -110,7 +110,7 @@ Then set the GitHub secret `RATINGS_PUBLISH_URL` to the Worker URL followed by `
 
 ### Discord `/teams`
 
-In Discord, `/teams players: Sheldor, Rat, BigHero, ...` posts two balanced teams to the channel. Names are in-game names or Steam IDs, separated by commas. Players with fewer than 5 games are marked "(new)". Ratings are never shown. Discord sends each command to `POST /discord/interactions`, and the Worker checks Discord's signature with `DISCORD_PUBLIC_KEY` (set in `wrangler.toml`).
+In Discord, typing `/teams` shows you a private dropdown of the 25 most recent players. Tick who's playing and close it, and the bot posts two balanced teams to the channel. To include a guest who isn't in the list, use `/teams players: Sheldor, Rat, Guest, ...` with in-game names or Steam IDs separated by commas. Players with fewer than 5 games are marked "(new)". Ratings are never shown. Discord sends each command to `POST /discord/interactions`, and the Worker checks Discord's signature with `DISCORD_PUBLIC_KEY` (set in `wrangler.toml`).
 
 Setup (once):
 

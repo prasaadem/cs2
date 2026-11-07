@@ -656,3 +656,32 @@ test("discord: bad player lists get a private hint", async () => {
   assert.equal(body.data.flags, 64);
   assert.match(body.data.content, /separated by commas/);
 });
+
+test("discord: /teams with no names shows a private multi-select of players", async () => {
+  const send = await discordSetup();
+  const body = await (await send({ type: 2, data: { name: "teams" } })).json();
+  assert.equal(body.type, 4);
+  assert.equal(body.data.flags, 64);
+  const menu = body.data.components[0].components[0];
+  assert.equal(menu.type, 3);
+  assert.equal(menu.custom_id, "teams:pick");
+  assert.equal(menu.min_values, 2);
+  assert.equal(menu.max_values, 7);
+  assert.equal(menu.options.length, 7);
+  assert.ok(menu.options.every((o) => /^\d+$/.test(o.value) && !("rating" in o)));
+  assert.equal(menu.options.find((o) => o.label === "Ghost").description, "new player");
+});
+
+test("discord: picking players posts the teams publicly", async () => {
+  const send = await discordSetup();
+  const body = await (
+    await send({
+      type: 3,
+      data: { custom_id: "teams:pick", component_type: 3, values: ["1", "2", "3", "4"] },
+    })
+  ).json();
+  assert.equal(body.type, 4);
+  assert.equal(body.data.flags, 0);
+  assert.match(body.data.content, /\*\*Team A\*\* \(2\): .*\n\*\*Team B\*\* \(2\)/);
+  for (const name of ["Ace", "Bolt", "Cobra", "Dune"]) assert.match(body.data.content, new RegExp(name));
+});
