@@ -806,6 +806,16 @@ function validRatings(payload) {
     return false;
   const entries = Object.entries(players);
   if (!entries.length || entries.length > 1000) return false;
+  // Optional "last night's grudges" message, posted after /server start.
+  const recap = payload.recap;
+  if (
+    recap != null &&
+    (typeof recap !== "object" ||
+      typeof recap.text !== "string" ||
+      !recap.text ||
+      recap.text.length > 2000)
+  )
+    return false;
   return entries.every(
     ([id, p]) =>
       /^\d{1,20}$/.test(id) &&
@@ -1227,6 +1237,23 @@ async function followUp(interaction, content) {
   );
 }
 
+// After a successful /server start, post last night's grudges (built by the daily
+// stats job and stored with the ratings) as a separate channel message.
+async function postRecap(interaction, env) {
+  const stored = env.RATINGS ? await env.RATINGS.get(RATINGS_KEY, { type: "json" }) : null;
+  const text = stored?.recap?.text;
+  if (typeof text !== "string" || !text) return;
+  await fetch(
+    `https://discord.com/api/v10/webhooks/${interaction.application_id}/${interaction.token}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content: text, allowed_mentions: { parse: [] } }),
+      signal: AbortSignal.timeout(10000),
+    },
+  );
+}
+
 function serverCommand(interaction, env, ctx) {
   // A click on the red button of a private "Are you sure?" message.
   const confirmed = confirmedAction(interaction);
@@ -1272,13 +1299,18 @@ function serverCommand(interaction, env, ctx) {
 
   const who = interaction.member?.user?.global_name || interaction.member?.user?.username || "Someone";
   ctx.waitUntil(
-    runServerAction(sub.name, mapKey, env)
-      .then((text) => `${text} (by ${discordEscape(who)})`)
-      .catch((error) =>
-        `Couldn't do that: ${error instanceof Error ? error.message : "request failed"}.`,
-      )
-      .then((content) => followUp(interaction, content))
-      .catch(() => {}),
+    (async () => {
+      let ok = false;
+      let content;
+      try {
+        content = `${await runServerAction(sub.name, mapKey, env)} (by ${discordEscape(who)})`;
+        ok = true;
+      } catch (error) {
+        content = `Couldn't do that: ${error instanceof Error ? error.message : "request failed"}.`;
+      }
+      await followUp(interaction, content);
+      if (ok && sub.name === "start") await postRecap(interaction, env);
+    })().catch(() => {}),
   );
   // Deferred public reply: Discord shows "thinking…" until followUp edits it.
   return json({ type: 5 }, 200);

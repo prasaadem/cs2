@@ -126,7 +126,7 @@ Setup (once):
 
 Only members with **Manage Server** or **Administrator** can use these commands. Discord hides them from everyone else, and the Worker checks the permission again on every request. Each command sends one fixed, allow-listed action to DatHost, the same ones the Server page uses:
 
-- `/server start`: start the game server
+- `/server start`: start the game server. When it starts successfully, the bot also posts **last night's grudges**. This covers only the most recent game night, skips `aim_`/`awp_` warm-up maps, and lists each player's nemesis, the biggest rivalries, and duos who won or lost every game together (3+ games). The daily job builds the message with `stats/recap.py` and sends it with the ratings. Run `python stats/recap.py` to preview it.
 - `/server stop`: stop the game server. It first asks privately for confirmation with a **Stop server** button.
 - `/server restart-game`: restart the match with `mp_restartgame 1`, which resets scores to 0-0. It first asks privately for confirmation with a **Restart match** button.
 - `/server map name:<map>`: change the map. Start typing a name and matching maps are suggested. Only maps from the approved list are accepted.
