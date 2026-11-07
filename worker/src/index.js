@@ -975,8 +975,17 @@ async function makeSplit(requested, env) {
       },
     };
   const { teamA, teamB, miss } = bestSplit(players);
-  const roster = (team) =>
-    team.map(({ name, known, provisional }) => ({ name, known, provisional }));
+  // One random captain per team, listed first.
+  const roster = (team) => {
+    const captain = Math.floor(Math.random() * team.length);
+    const ordered = [team[captain], ...team.filter((_, i) => i !== captain)];
+    return ordered.map(({ name, known, provisional }, i) => ({
+      name,
+      known,
+      provisional,
+      captain: i === 0,
+    }));
+  };
   return {
     status: 200,
     body: {
@@ -1099,7 +1108,11 @@ function discordEscape(text) {
 function formatTeams({ teams, balance, unknown }) {
   const line = (team) =>
     team
-      .map((p) => discordEscape(p.name) + (p.provisional ? " (new)" : ""))
+      .map(
+        (p) =>
+          (p.captain ? `**${discordEscape(p.name)}** (captain)` : discordEscape(p.name)) +
+          (p.provisional ? " (new)" : ""),
+      )
       .join(", ");
   const lines = [
     `**Team A** (${teams[0].length}): ${line(teams[0])}`,

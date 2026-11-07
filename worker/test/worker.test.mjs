@@ -685,3 +685,31 @@ test("discord: picking players posts the teams publicly", async () => {
   assert.match(body.data.content, /\*\*Team A\*\* \(2\): .*\n\*\*Team B\*\* \(2\)/);
   for (const name of ["Ace", "Bolt", "Cobra", "Dune"]) assert.match(body.data.content, new RegExp(name));
 });
+
+test("each team gets exactly one captain, listed first", async () => {
+  const benv = balancerEnv();
+  await putRatings(benv, { v: 1, players: samplePlayers });
+  const seen = new Set();
+  for (let i = 0; i < 40; i++) {
+    const req = request("/api/split", {
+      method: "POST",
+      body: { players: ["Ace", "Bolt", "Cobra", "Dune", "Echo", "Frost"] },
+    });
+    req.headers.set("CF-Connecting-IP", `203.0.113.${i}`); // stay under the rate limit
+    const body = await (await worker.fetch(req, benv)).json();
+    for (const team of body.teams) {
+      assert.equal(team.filter((p) => p.captain).length, 1);
+      assert.equal(team[0].captain, true);
+      seen.add(team[0].name);
+    }
+  }
+  assert.ok(seen.size > 2, "captains should vary between calls");
+});
+
+test("discord: captain is shown in bold with a label", async () => {
+  const send = await discordSetup();
+  const body = await (await send(teamsCommand("Ace, Bolt, Cobra, Dune"))).json();
+  const lines = body.data.content.split("\n");
+  for (const line of lines.slice(0, 2))
+    assert.match(line, /^\*\*Team [AB]\*\* \(2\): \*\*[^*]+\*\* \(captain\), /);
+});
