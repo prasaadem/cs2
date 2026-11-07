@@ -95,7 +95,7 @@ The daily job computes player ratings (`stats/ratings.py`) and sends them to the
 - `PUT /ratings`: used only by the daily job. It needs `Authorization: Bearer <RATINGS_TOKEN>`.
 - `POST /api/split` with `{"players": ["name", "[U:1:123]", ...]}` (2 to 16 players): returns two rosters and a balance label (`even`, `close` or `uneven`). Players are matched by name or Steam ID. Unknown players count as average and are listed in `unknown`. This endpoint is open to the allowed site origins and limited to 20 requests a minute per IP.
 
-When the lobby is odd, the short team gets slightly stronger players. In the archive, a team down a player won about 45% of rounds.
+When the lobby is odd, the short team gets players about 0.25 stronger on average. Ratings count every finished game equally, and the order games were played in makes no difference. In the archive, a team down a player won about 45% of rounds.
 
 One-time setup:
 

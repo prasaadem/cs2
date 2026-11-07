@@ -46,6 +46,14 @@ class RatingsTest(unittest.TestCase):
         g2 = dict(game('g01', ['1', '2'], ['3', '4']), fin=False)
         self.assertIsNone(ratings.team_results(dict(g2, p=[])))
 
+    def test_game_order_does_not_matter(self):
+        games = [game(f'g{i:02d}', ['1', '2'], ['3', '4'], strong='1') for i in range(8)]
+        games += [game(f'h{i:02d}', ['3', '1'], ['2', '4']) for i in range(5)]
+        forward = ratings.compute(games)
+        backward = ratings.compute(list(reversed(games)))
+        for pid in forward:
+            self.assertAlmostEqual(forward[pid]['rating'], backward[pid]['rating'], places=6)
+
     def test_empty_archive(self):
         self.assertEqual(ratings.compute([]), {})
 

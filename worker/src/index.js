@@ -789,8 +789,8 @@ const RATINGS_MAX_BYTES = 256 * 1024;
 const SPLIT_MIN_PLAYERS = 2;
 const SPLIT_MAX_PLAYERS = 16;
 // In uneven lobbies the short team won 45% of rounds (100 archived games). At about
-// 0.15 round share per rating unit, the short team needs a mean about 0.3 higher.
-const SHORT_TEAM_OFFSET = 0.3;
+// 0.2 round share per rating unit, the short team needs a mean about 0.25 higher.
+const SHORT_TEAM_OFFSET = 0.25;
 // Splits this close to the best are treated as equally good; one is picked at random
 // so the same group does not get identical teams every time.
 const SPLIT_TOLERANCE = 0.05;

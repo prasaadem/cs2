@@ -8,13 +8,14 @@ Usage:
 The output is NOT written under docs/ or data/ on purpose: those folders are
 public, and the ratings are only meant to be used by the Worker, never shown.
 
-Model (settings chosen by walk-forward backtest over the archive):
-  * performance rating: damage per round, kill-death difference and entry
-    kills-minus-deaths per round, averaged over a player's games with an
-    exponential recency decay (half-life 20 games), pulled toward the group
-    average until a player has about 8 games' worth of data
-  * win/loss rating: an Elo-style number updated from each team's share of
-    rounds won
+Model (every finished game counts equally; game order does not matter):
+  * performance rating: the plain average over all of a player's games of damage
+    per round, kill-death difference and entry kills-minus-deaths per round,
+    pulled toward the group average until a player has about 8 games
+  * win/loss rating: one strength number per player, fitted to all games at once
+    so that the difference between two teams' average strengths best explains
+    each game's round score (teammates and opponents are taken into account);
+    ridge-regularized so players with few games stay near average
   * final rating: an even blend of the two, each in standard-deviation units
     across all known players (0 is average, +1 is one spread above)
 
@@ -23,7 +24,6 @@ Publishing reads RATINGS_PUBLISH_URL and RATINGS_TOKEN from the environment.
 import argparse
 import glob
 import json
-import math
 import os
 import statistics
 import sys
@@ -36,9 +36,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SCHEMA = 1
 MIN_ROUNDS = 5       # a player needs this many rounds in a game for it to count
 PRIOR_GAMES = 8      # games' worth of pull toward the group average
-HALF_LIFE = 20       # games until a game counts half as much
 BLEND = 0.5          # weight of the performance rating (rest is win/loss)
-ELO_K = 0.24         # learning rate of the win/loss rating
+WL_RIDGE = 4.0       # pull of the win/loss fit toward average (in games)
 PERF_WEIGHTS = {'adr': 1.0, 'kd': 2.0, 'entry': 3.0}
 REGULAR_MIN_GAMES = 10
 PROVISIONAL_BELOW = 5
@@ -94,50 +93,76 @@ def performance(p):
     return w['adr'] * adr / 75 + w['kd'] * kd + w['entry'] * entry
 
 
+def solve(matrix, vector):
+    """Solve a small dense linear system by Gaussian elimination with pivoting."""
+    n = len(vector)
+    m = [row[:] + [vector[i]] for i, row in enumerate(matrix)]
+    for col in range(n):
+        pivot = max(range(col, n), key=lambda r: abs(m[r][col]))
+        m[col], m[pivot] = m[pivot], m[col]
+        for r in range(n):
+            if r != col and m[r][col]:
+                f = m[r][col] / m[col][col]
+                for c in range(col, n + 1):
+                    m[r][c] -= f * m[col][c]
+    return [m[i][n] / m[i][i] for i in range(n)]
+
+
+def win_loss_strengths(rows, ids):
+    """Ridge least squares over all games at once:
+    share_a - 0.5 ~ mean(strength of team A) - mean(strength of team B)."""
+    index = {pid: i for i, pid in enumerate(ids)}
+    n = len(ids)
+    ata = [[0.0] * n for _ in range(n)]
+    aty = [0.0] * n
+    for team_a, team_b, share_a in rows:
+        coef = defaultdict(float)
+        for pid in team_a:
+            coef[index[pid]] += 1 / len(team_a)
+        for pid in team_b:
+            coef[index[pid]] -= 1 / len(team_b)
+        y = share_a - 0.5
+        for i, ci in coef.items():
+            aty[i] += ci * y
+            for j, cj in coef.items():
+                ata[i][j] += ci * cj
+    # games average about 1/len(team) per player, so scale the ridge to match
+    ridge = WL_RIDGE / 25
+    for i in range(n):
+        ata[i][i] += ridge
+    return dict(zip(ids, solve(ata, aty)))
+
+
 def compute(games):
-    """Run through the archive oldest to newest and return the rating table."""
-    hist = defaultdict(list)       # id -> [(game index, performance)]
-    elo = defaultdict(float)
+    """Rate everyone from all usable games, each game weighted equally."""
+    hist = defaultdict(list)       # id -> [performance per game]
+    rows = []                      # (team A ids, team B ids, A's round share)
     names, last_night, played = {}, {}, defaultdict(int)
-    n = 0
     for game in games:
         res = team_results(game)
         if res is None:
             continue
         a, b = list(res.values())
-        ea = statistics.mean(elo[p['id']] for p in a['players'])
-        eb = statistics.mean(elo[p['id']] for p in b['players'])
-        expected = 1 / (1 + math.exp(-(ea - eb)))
-        for p in a['players']:
-            elo[p['id']] += ELO_K * (a['share'] - expected)
-        for p in b['players']:
-            elo[p['id']] -= ELO_K * (a['share'] - expected)
+        rows.append(([p['id'] for p in a['players']], [p['id'] for p in b['players']], a['share']))
         for t in res.values():
             for p in t['players']:
-                hist[p['id']].append((n, performance(p)))
+                hist[p['id']].append(performance(p))
                 names[p['id']] = p['n']
                 last_night[p['id']] = game.get('night')
                 played[p['id']] += 1
-        n += 1
 
     if not hist:
         return {}
-    every = [v for h in hist.values() for _, v in h]
-    group_mean = statistics.mean(every)
+    group_mean = statistics.mean(v for h in hist.values() for v in h)
+    perf = {pid: (group_mean * PRIOR_GAMES + sum(h)) / (PRIOR_GAMES + len(h)) for pid, h in hist.items()}
+    ids = sorted(hist)
+    wl = win_loss_strengths(rows, ids)
 
-    def perf_rating(pid):
-        h = hist[pid]
-        weights = [0.5 ** ((n - i) / HALF_LIFE) for i, _ in h]
-        total = sum(weights)
-        s = sum(w * v for w, (_, v) in zip(weights, h))
-        return (group_mean * PRIOR_GAMES + s) / (PRIOR_GAMES + total)
-
-    perf = {pid: perf_rating(pid) for pid in hist}
     p_mean, p_sd = statistics.mean(perf.values()), statistics.pstdev(perf.values()) or 1.0
-    e_mean, e_sd = statistics.mean(elo[i] for i in hist), statistics.pstdev([elo[i] for i in hist]) or 1.0
+    w_mean, w_sd = statistics.mean(wl.values()), statistics.pstdev(wl.values()) or 1.0
     table = {}
-    for pid in hist:
-        rating = BLEND * (perf[pid] - p_mean) / p_sd + (1 - BLEND) * (elo[pid] - e_mean) / e_sd
+    for pid in ids:
+        rating = BLEND * (perf[pid] - p_mean) / p_sd + (1 - BLEND) * (wl[pid] - w_mean) / w_sd
         table[pid] = {
             'name': names[pid],
             'rating': round(rating, 4),
