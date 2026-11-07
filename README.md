@@ -100,7 +100,7 @@ When the lobby is odd, the short team gets slightly stronger players. In the arc
 One-time setup:
 
 ```bash
-npx wrangler kv namespace create RATINGS --config worker/wrangler.toml   # paste the id into wrangler.toml
+npx wrangler kv namespace create RATINGS --config worker/wrangler.toml   # already done; the id is in wrangler.toml
 openssl rand -hex 32 | tee /dev/tty | npx wrangler secret put RATINGS_TOKEN --config worker/wrangler.toml
 npx wrangler deploy --config worker/wrangler.toml
 ```

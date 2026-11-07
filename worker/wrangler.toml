@@ -6,8 +6,6 @@ compatibility_date = "2026-10-18"
 ALLOWED_ORIGINS = "https://prasaadem.github.io,http://127.0.0.1:8765,http://localhost:8765"
 
 # Team-balancer ratings, written by the daily stats job (PUT /ratings).
-# Create with: npx wrangler kv namespace create RATINGS --config worker/wrangler.toml
-# then uncomment and paste the printed id.
-# [[kv_namespaces]]
-# binding = "RATINGS"
-# id = "<namespace id>"
+[[kv_namespaces]]
+binding = "RATINGS"
+id = "148c3c4bdbd24c55a71a7e154047e278"
