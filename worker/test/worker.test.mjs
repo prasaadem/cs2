@@ -609,8 +609,12 @@ async function discordSetup() {
         body: tamper ? body.replace("teams", "teamz") : body,
       }),
       benv,
+      ctx,
     );
   };
+  const pending = [];
+  const ctx = { waitUntil: (promise) => pending.push(promise) };
+  send.settle = () => Promise.all(pending.splice(0));
   return send;
 }
 
@@ -712,4 +716,119 @@ test("discord: captain is shown in bold with a label", async () => {
   const lines = body.data.content.split("\n");
   for (const line of lines.slice(0, 2))
     assert.match(line, /^\*\*Team [AB]\*\* \(2\): \*\*[^*]+\*\* \(captain\), /);
+});
+
+// ---- Discord /server ----
+
+const MANAGE_GUILD = String(1 << 5);
+
+function serverInteraction(sub, { permissions = MANAGE_GUILD, options, type = 2 } = {}) {
+  return {
+    type,
+    application_id: "app123",
+    token: "interaction-token",
+    member: { permissions, user: { username: "tester" } },
+    data: { name: "server", options: [{ type: 1, name: sub, ...(options ? { options } : {}) }] },
+  };
+}
+
+async function withFetchLog(run) {
+  const calls = [];
+  const saved = globalThis.fetch;
+  globalThis.fetch = async (url, init = {}) => {
+    const body = init.body instanceof FormData ? init.body.get("line") : init.body;
+    calls.push({ url: String(url), method: init.method, body });
+    return Response.json({});
+  };
+  try {
+    await run(calls);
+  } finally {
+    globalThis.fetch = saved;
+  }
+  return calls;
+}
+
+test("discord /server: refuses members without Manage Server, before calling DatHost", async () => {
+  const send = await discordSetup();
+  await withFetchLog(async (calls) => {
+    const body = await (await send(serverInteraction("start", { permissions: "0" }))).json();
+    assert.equal(body.type, 4);
+    assert.equal(body.data.flags, 64);
+    assert.match(body.data.content, /Manage Server/);
+    await send.settle();
+    assert.equal(calls.length, 0);
+  });
+});
+
+test("discord /server: administrators are allowed too", async () => {
+  const send = await discordSetup();
+  const res = await send(serverInteraction("warmup-end", { permissions: String(1 << 3) }));
+  assert.deepEqual(await res.json(), { type: 5 });
+  await send.settle();
+});
+
+test("discord /server: each action sends only its fixed command, then edits the reply", async () => {
+  const cases = [
+    ["start", undefined, (c) => c.url.endsWith("/game-servers/test-server/start") && c.method === "POST"],
+    ["warmup-end", undefined, (c) => c.body === "mp_warmup_end 1"],
+    ["forcecamera", undefined, (c) => c.body === "mp_forcecamera 1"],
+    ["map", [{ type: 3, name: "name", value: "official:de_mirage" }], (c) => c.body === "map de_mirage"],
+  ];
+  for (const [sub, options, isDathostCall] of cases) {
+    const send = await discordSetup();
+    const calls = await withFetchLog(async () => {
+      const res = await send(serverInteraction(sub, { options }));
+      assert.deepEqual(await res.json(), { type: 5 }, sub);
+      await send.settle();
+    });
+    const dathost = calls.filter((c) => c.url.startsWith("https://dathost.com/"));
+    assert.equal(dathost.length, 1, sub);
+    assert.ok(isDathostCall(dathost[0]), sub);
+    const edit = calls.find((c) => c.url.startsWith("https://discord.com/"));
+    assert.equal(edit.url, "https://discord.com/api/v10/webhooks/app123/interaction-token/messages/@original");
+    assert.equal(edit.method, "PATCH");
+    assert.match(JSON.parse(edit.body).content, /\(by tester\)$/);
+  }
+});
+
+test("discord /server map: rejects maps that are not on the list", async () => {
+  const send = await discordSetup();
+  const calls = await withFetchLog(async () => {
+    const body = await (
+      await send(serverInteraction("map", { options: [{ type: 3, name: "name", value: "map de_dust2; quit" }] }))
+    ).json();
+    assert.equal(body.data.flags, 64);
+    await send.settle();
+  });
+  assert.equal(calls.length, 0);
+});
+
+test("discord /server map: autocomplete suggests matching maps", async () => {
+  const send = await discordSetup();
+  const body = await (
+    await send(
+      serverInteraction("map", { type: 4, options: [{ type: 3, name: "name", value: "mira", focused: true }] }),
+    )
+  ).json();
+  assert.equal(body.type, 8);
+  assert.ok(body.data.choices.length > 0 && body.data.choices.length <= 25);
+  assert.equal(body.data.choices[0].value, "official:de_mirage");
+  assert.ok(body.data.choices.every((c) => /mirage/i.test(c.name)));
+});
+
+test("discord /server: DatHost errors are reported in the follow-up", async () => {
+  const send = await discordSetup();
+  const saved = globalThis.fetch;
+  const edits = [];
+  globalThis.fetch = async (url, init = {}) => {
+    if (String(url).startsWith("https://discord.com/")) edits.push(JSON.parse(init.body).content);
+    return new Response("nope", { status: 500 });
+  };
+  try {
+    await send(serverInteraction("start"));
+    await send.settle();
+  } finally {
+    globalThis.fetch = saved;
+  }
+  assert.match(edits[0], /Couldn't do that: DatHost returned HTTP 500/);
 });

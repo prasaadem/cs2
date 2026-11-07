@@ -1126,7 +1126,111 @@ function formatTeams({ teams, balance, unknown }) {
   return lines.join("\n");
 }
 
-async function discordInteraction(request, env) {
+// ---- Discord /server command ------------------------------------------------
+// Only members with Manage Server (or Administrator) may run it. Discord hides the
+// command from others via default_member_permissions, and the Worker re-checks the
+// permission bits Discord sends, so a per-channel override cannot widen access.
+const DISCORD_AUTOCOMPLETE = 4;
+const PERM_ADMINISTRATOR = 1n << 3n;
+const PERM_MANAGE_GUILD = 1n << 5n;
+const SERVER_SUBCOMMANDS = {
+  start: "Server starting",
+  "warmup-end": "Warmup ended",
+  forcecamera: "Spectating locked to own team (mp_forcecamera 1)",
+};
+
+function canManageServer(interaction) {
+  try {
+    const bits = BigInt(interaction.member?.permissions || "0");
+    return (bits & (PERM_ADMINISTRATOR | PERM_MANAGE_GUILD)) !== 0n;
+  } catch {
+    return false;
+  }
+}
+
+function mapSuggestions(query) {
+  const q = String(query || "").trim().toLowerCase();
+  const ranked = MAPS.filter(
+    (m) => !q || m.label.toLowerCase().includes(q) || m.key.toLowerCase().includes(q),
+  ).sort(
+    (a, b) =>
+      Number(b.label.toLowerCase().startsWith(q)) - Number(a.label.toLowerCase().startsWith(q)) ||
+      Number(Boolean(b.good)) - Number(Boolean(a.good)) ||
+      a.label.localeCompare(b.label),
+  );
+  return ranked.slice(0, 25).map((m) => ({
+    name: `${m.label}${m.size ? ` (${m.size})` : ""}`.slice(0, 100),
+    value: m.key,
+  }));
+}
+
+async function runServerAction(sub, mapKey, env) {
+  if (sub === "start") {
+    await dathost(`/game-servers/${serverId(env)}/start`, "POST", env);
+    return "Server starting. It usually takes a minute or two to come up.";
+  }
+  if (sub === "warmup-end") {
+    await dathostConsole(CONSOLE_PRESETS.warmup_end, env);
+    return SERVER_SUBCOMMANDS[sub] + ".";
+  }
+  if (sub === "forcecamera") {
+    await dathostConsole(CONSOLE_PRESETS.forcecamera, env);
+    return SERVER_SUBCOMMANDS[sub] + ".";
+  }
+  if (sub === "map") {
+    const map = MAP_BY_KEY.get(mapKey);
+    await dathostConsole(map.line, env);
+    return `Changing map to ${map.label}.`;
+  }
+  throw new Error("Unsupported action");
+}
+
+async function followUp(interaction, content) {
+  await fetch(
+    `https://discord.com/api/v10/webhooks/${interaction.application_id}/${interaction.token}/messages/@original`,
+    {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content, allowed_mentions: { parse: [] } }),
+      signal: AbortSignal.timeout(10000),
+    },
+  );
+}
+
+function serverCommand(interaction, env, ctx) {
+  const sub = interaction.data.options?.[0];
+  if (interaction.type === DISCORD_AUTOCOMPLETE) {
+    const focused = sub?.options?.find((o) => o.focused);
+    return json(
+      { type: 8, data: { choices: canManageServer(interaction) ? mapSuggestions(focused?.value) : [] } },
+      200,
+    );
+  }
+  if (interaction.type !== DISCORD_COMMAND) return discordReply("Unknown command.", true);
+  if (!canManageServer(interaction))
+    return discordReply("Only members with Manage Server can control the game server.", true);
+  if (!sub || (sub.name !== "map" && !Object.hasOwn(SERVER_SUBCOMMANDS, sub.name)))
+    return discordReply("Unknown server action.", true);
+  const mapKey = sub.name === "map" ? sub.options?.find((o) => o.name === "name")?.value : null;
+  if (sub.name === "map" && !MAP_BY_KEY.has(mapKey))
+    return discordReply("Pick a map from the suggestions as you type.", true);
+  if (!ctx?.waitUntil) return discordReply("Server control is unavailable right now.", true);
+
+  const who = interaction.member?.user?.global_name || interaction.member?.user?.username || "Someone";
+  ctx.waitUntil(
+    runServerAction(sub.name, mapKey, env)
+      .then((text) => `${text} (by ${discordEscape(who)})`)
+      .catch((error) =>
+        `Couldn't do that: ${error instanceof Error ? error.message : "request failed"}.`,
+      )
+      .then((content) => followUp(interaction, content))
+      .catch(() => {}),
+  );
+  // Deferred public reply: Discord shows "thinking…" until followUp edits it.
+  return json({ type: 5 }, 200);
+}
+
+async function discordInteraction(request, env, ctx) {
   if (request.method !== "POST")
     return json({ error: "Method not allowed" }, 405);
   if (!env.DISCORD_PUBLIC_KEY)
@@ -1141,6 +1245,7 @@ async function discordInteraction(request, env) {
     return json({ error: "Invalid JSON" }, 400);
   }
   if (interaction.type === DISCORD_PING) return json({ type: 1 }, 200);
+  if (interaction.data?.name === "server") return serverCommand(interaction, env, ctx);
   if (!env.RATINGS) return discordReply("Ratings storage is not configured.", true);
 
   let requested;
@@ -1176,7 +1281,7 @@ async function discordInteraction(request, env) {
   return discordReply(formatTeams(result.body));
 }
 
-async function handle(request, env) {
+async function handle(request, env, ctx) {
   const url = new URL(request.url);
   // Called by the daily GitHub Action, not a browser, so it has no Origin header.
   if (url.pathname === "/ratings") {
@@ -1186,7 +1291,7 @@ async function handle(request, env) {
   }
   // Called by Discord's servers; authenticated by signature instead of Origin.
   if (url.pathname === "/discord/interactions")
-    return discordInteraction(request, env);
+    return discordInteraction(request, env, ctx);
 
   const origin = allowedOrigin(request, env);
   if (!origin) return json({ error: "Origin is not allowed" }, 403);
