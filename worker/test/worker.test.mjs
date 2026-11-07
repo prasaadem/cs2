@@ -567,10 +567,149 @@ test("even split balances team means exactly when possible", () => {
 });
 
 test("odd split makes the short team slightly stronger", () => {
-  const players = [1.5, 1.0, 0.5, 0.0, -0.5, -1.0, -1.5].map((rating) => ({ rating }));
+  const players = [1.4, 1.2, 1.1, 1.0, 0.9, 0.8, 0.7].map((rating) => ({ rating }));
   const { teamA, teamB } = bestSplit(players, () => 0);
   const mean = (t) => t.reduce((s, p) => s + p.rating, 0) / t.length;
   assert.equal(teamA.length, 3);
   assert.equal(teamB.length, 4);
   assert.ok(mean(teamA) > mean(teamB));
+});
+
+// ---- Discord /teams ----
+
+async function discordSetup() {
+  const keys = await crypto.subtle.generateKey({ name: "Ed25519" }, true, [
+    "sign",
+    "verify",
+  ]);
+  const raw = new Uint8Array(await crypto.subtle.exportKey("raw", keys.publicKey));
+  const benv = {
+    ...balancerEnv(),
+    DISCORD_PUBLIC_KEY: Buffer.from(raw).toString("hex"),
+  };
+  await putRatings(benv, { v: 1, players: samplePlayers });
+  const send = async (interaction, { tamper = false } = {}) => {
+    const body = JSON.stringify(interaction);
+    const timestamp = String(Math.floor(Date.now() / 1000));
+    const signature = new Uint8Array(
+      await crypto.subtle.sign(
+        { name: "Ed25519" },
+        keys.privateKey,
+        new TextEncoder().encode(timestamp + body),
+      ),
+    );
+    return worker.fetch(
+      new Request("https://worker.example/discord/interactions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Signature-Ed25519": Buffer.from(signature).toString("hex"),
+          "X-Signature-Timestamp": timestamp,
+        },
+        body: tamper ? body.replace("teams", "teamz") : body,
+      }),
+      benv,
+    );
+  };
+  return send;
+}
+
+const teamsCommand = (value) => ({
+  type: 2,
+  data: { name: "teams", options: [{ name: "players", type: 3, value }] },
+});
+
+test("discord: answers PING and rejects bad signatures", async () => {
+  const send = await discordSetup();
+  const ping = await send({ type: 1 });
+  assert.equal(ping.status, 200);
+  assert.deepEqual(await ping.json(), { type: 1 });
+  assert.equal((await send(teamsCommand("Ace, Bolt"), { tamper: true })).status, 401);
+  const unsigned = await worker.fetch(
+    new Request("https://worker.example/discord/interactions", {
+      method: "POST",
+      body: "{}",
+    }),
+    { ...env, DISCORD_PUBLIC_KEY: "00".repeat(32) },
+  );
+  assert.equal(unsigned.status, 401);
+});
+
+test("discord: /teams replies publicly with two teams and no ratings", async () => {
+  const send = await discordSetup();
+  const response = await send(teamsCommand("Ace, Bolt, cobra, Dune, Echo, Frost, Ghost, new_guy"));
+  const body = await response.json();
+  assert.equal(body.type, 4);
+  assert.equal(body.data.flags, 0);
+  assert.deepEqual(body.data.allowed_mentions, { parse: [] });
+  const text = body.data.content;
+  assert.match(text, /\*\*Team A\*\* \(4\)/);
+  assert.match(text, /\*\*Team B\*\* \(4\)/);
+  assert.match(text, /Ghost \(new\)/);
+  assert.match(text, /counted as average: new\\_guy/);
+  assert.doesNotMatch(text, /1\.5|-0\.5/);
+});
+
+test("discord: bad player lists get a private hint", async () => {
+  const send = await discordSetup();
+  const body = await (await send(teamsCommand("Ace"))).json();
+  assert.equal(body.data.flags, 64);
+  assert.match(body.data.content, /separated by commas/);
+});
+
+test("discord: /teams with no names shows a private multi-select of players", async () => {
+  const send = await discordSetup();
+  const body = await (await send({ type: 2, data: { name: "teams" } })).json();
+  assert.equal(body.type, 4);
+  assert.equal(body.data.flags, 64);
+  const menu = body.data.components[0].components[0];
+  assert.equal(menu.type, 3);
+  assert.equal(menu.custom_id, "teams:pick");
+  assert.equal(menu.min_values, 2);
+  assert.equal(menu.max_values, 7);
+  assert.equal(menu.options.length, 7);
+  assert.ok(menu.options.every((o) => /^\d+$/.test(o.value) && !("rating" in o)));
+  assert.equal(menu.options.find((o) => o.label === "Ghost").description, "new player");
+});
+
+test("discord: picking players posts the teams publicly", async () => {
+  const send = await discordSetup();
+  const body = await (
+    await send({
+      type: 3,
+      data: { custom_id: "teams:pick", component_type: 3, values: ["1", "2", "3", "4"] },
+    })
+  ).json();
+  assert.equal(body.type, 4);
+  assert.equal(body.data.flags, 0);
+  assert.match(body.data.content, /\*\*Team A\*\* \(2\): .*\n\*\*Team B\*\* \(2\)/);
+  for (const name of ["Ace", "Bolt", "Cobra", "Dune"]) assert.match(body.data.content, new RegExp(name));
+});
+
+test("each team gets exactly one captain, listed first", async () => {
+  const benv = balancerEnv();
+  await putRatings(benv, { v: 1, players: samplePlayers });
+  const seen = new Set();
+  for (let i = 0; i < 40; i++) {
+    const req = request("/api/split", {
+      method: "POST",
+      body: { players: ["Ace", "Bolt", "Cobra", "Dune", "Echo", "Frost"] },
+    });
+    req.headers.set("CF-Connecting-IP", `203.0.113.${i}`); // stay under the rate limit
+    const body = await (await worker.fetch(req, benv)).json();
+    for (const team of body.teams) {
+      assert.equal(team.filter((p) => p.captain).length, 1);
+      assert.equal(team[0].captain, true);
+      seen.add(team[0].name);
+    }
+  }
+  assert.ok(seen.size > 2, "captains should vary between calls");
+});
+
+test("discord: captain is shown in bold with a label", async () => {
+  const send = await discordSetup();
+  const body = await (await send(teamsCommand("Ace, Bolt, Cobra, Dune"))).json();
+  const lines = body.data.content.split("\n");
+  for (const line of lines.slice(0, 2))
+    assert.match(line, /^\*\*Team [AB]\*\* \(2\): \*\*[^*]+\*\* \(captain\), /);
 });

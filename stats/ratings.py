@@ -6,141 +6,69 @@ Usage:
     python stats/ratings.py --out ratings.json --publish     # also PUT it to the Worker
 
 The output is NOT written under docs/ or data/ on purpose: those folders are
-public, and the ratings are only meant to be used by the Worker, never shown.
+public, and the ratings are only meant to be used by the Worker.
 
-Model (settings chosen by walk-forward backtest over the archive):
-  * performance rating: damage per round, kill-death difference and entry
-    kills-minus-deaths per round, averaged over a player's games with an
-    exponential recency decay (half-life 20 games), pulled toward the group
-    average until a player has about 8 games' worth of data
-  * win/loss rating: an Elo-style number updated from each team's share of
-    rounds won
-  * final rating: an even blend of the two, each in standard-deviation units
-    across all known players (0 is average, +1 is one spread above)
+Model: each player's overall rating is the same number the site shows as
+"Rating" on the leaderboard: the HLTV 1.0-style rating (1.00 is average)
+computed from that player's totals of kills, deaths, rounds and multi-kill
+rounds across every game in the archive, all days. Every round counts equally.
 
 Publishing reads RATINGS_PUBLISH_URL and RATINGS_TOKEN from the environment.
 """
 import argparse
 import glob
 import json
-import math
 import os
-import statistics
 import sys
 import urllib.request
-from collections import defaultdict
 from datetime import datetime, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 SCHEMA = 1
-MIN_ROUNDS = 5       # a player needs this many rounds in a game for it to count
-PRIOR_GAMES = 8      # games' worth of pull toward the group average
-HALF_LIFE = 20       # games until a game counts half as much
-BLEND = 0.5          # weight of the performance rating (rest is win/loss)
-ELO_K = 0.24         # learning rate of the win/loss rating
-PERF_WEIGHTS = {'adr': 1.0, 'kd': 2.0, 'entry': 3.0}
+TOTAL_KEYS = ('r', 'k', 'd', 'k1', 'k2', 'k3', 'k4', 'k5')
 REGULAR_MIN_GAMES = 10
 PROVISIONAL_BELOW = 5
 
 
-def num(p, key):
-    return p.get(key) or 0
-
-
 def load_games(data_dir):
-    """Finished games with a winner, oldest first (ids start with the UTC start time)."""
+    """Every archived game, oldest first (the site counts all of them too)."""
     games = []
     for path in sorted(glob.glob(os.path.join(data_dir, '*.json'))):
         with open(path, encoding='utf-8') as fh:
-            g = json.load(fh)
-        if g.get('fin') and g.get('win'):
-            games.append(g)
+            games.append(json.load(fh))
     return games
 
 
-def team_results(game):
-    """{team: {'players': [...], 'share': fraction of rounds won}} or None if unusable."""
-    rounds = game['rounds']
-    teams = defaultdict(list)
-    for p in game['p']:
-        if num(p, 'r') < MIN_ROUNDS:
-            continue
-        won = lost = 0
-        for i, side in enumerate(p['sd']):
-            if side == '.' or i >= len(rounds):
-                continue
-            if rounds[i] == side:
-                won += 1
-            else:
-                lost += 1
-        teams[p['team']].append((p, won, lost))
-    if len(teams) != 2 or any(len(v) < 2 for v in teams.values()):
-        return None
-    out = {}
-    for team, rows in teams.items():
-        won = statistics.mean(w for _, w, _ in rows)
-        lost = statistics.mean(l for _, _, l in rows)
-        out[team] = {'players': [p for p, _, _ in rows], 'share': won / (won + lost) if won + lost else 0.5}
-    return out
-
-
-def performance(p):
-    r = num(p, 'r')
-    adr = num(p, 'dmg') / r
-    kd = (num(p, 'k') - num(p, 'd')) / r
-    entry = (num(p, 'ek') - num(p, 'ed')) / r
-    w = PERF_WEIGHTS
-    return w['adr'] * adr / 75 + w['kd'] * kd + w['entry'] * entry
+def hltv_rating(t):
+    """Same formula as rating() in stats/template.html."""
+    r = t['r']
+    if not r:
+        return 0.0
+    return (t['k'] / r / 0.679
+            + 0.7 * max(r - t['d'], 0) / r / 0.317
+            + (t['k1'] + 4 * t['k2'] + 9 * t['k3'] + 16 * t['k4'] + 25 * t['k5']) / r / 1.277) / 2.7
 
 
 def compute(games):
-    """Run through the archive oldest to newest and return the rating table."""
-    hist = defaultdict(list)       # id -> [(game index, performance)]
-    elo = defaultdict(float)
-    names, last_night, played = {}, {}, defaultdict(int)
-    n = 0
+    """{player id: {name, rating, games, ...}} from career totals over all games."""
+    totals, names, last_night, played = {}, {}, {}, {}
     for game in games:
-        res = team_results(game)
-        if res is None:
-            continue
-        a, b = list(res.values())
-        ea = statistics.mean(elo[p['id']] for p in a['players'])
-        eb = statistics.mean(elo[p['id']] for p in b['players'])
-        expected = 1 / (1 + math.exp(-(ea - eb)))
-        for p in a['players']:
-            elo[p['id']] += ELO_K * (a['share'] - expected)
-        for p in b['players']:
-            elo[p['id']] -= ELO_K * (a['share'] - expected)
-        for t in res.values():
-            for p in t['players']:
-                hist[p['id']].append((n, performance(p)))
-                names[p['id']] = p['n']
-                last_night[p['id']] = game.get('night')
-                played[p['id']] += 1
-        n += 1
-
-    if not hist:
-        return {}
-    every = [v for h in hist.values() for _, v in h]
-    group_mean = statistics.mean(every)
-
-    def perf_rating(pid):
-        h = hist[pid]
-        weights = [0.5 ** ((n - i) / HALF_LIFE) for i, _ in h]
-        total = sum(weights)
-        s = sum(w * v for w, (_, v) in zip(weights, h))
-        return (group_mean * PRIOR_GAMES + s) / (PRIOR_GAMES + total)
-
-    perf = {pid: perf_rating(pid) for pid in hist}
-    p_mean, p_sd = statistics.mean(perf.values()), statistics.pstdev(perf.values()) or 1.0
-    e_mean, e_sd = statistics.mean(elo[i] for i in hist), statistics.pstdev([elo[i] for i in hist]) or 1.0
+        for p in game.get('p', []):
+            pid = p['id']
+            t = totals.setdefault(pid, dict.fromkeys(TOTAL_KEYS, 0))
+            for k in TOTAL_KEYS:
+                t[k] += p.get(k) or 0
+            names[pid] = p['n']
+            last_night[pid] = game.get('night')
+            played[pid] = played.get(pid, 0) + 1
     table = {}
-    for pid in hist:
-        rating = BLEND * (perf[pid] - p_mean) / p_sd + (1 - BLEND) * (elo[pid] - e_mean) / e_sd
+    for pid, t in totals.items():
+        if not t['r']:
+            continue
         table[pid] = {
             'name': names[pid],
-            'rating': round(rating, 4),
+            'rating': round(hltv_rating(t), 4),
             'games': played[pid],
             'last_night': last_night[pid],
             'regular': played[pid] >= REGULAR_MIN_GAMES,

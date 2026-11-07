@@ -788,12 +788,14 @@ const RATINGS_KEY = "ratings";
 const RATINGS_MAX_BYTES = 256 * 1024;
 const SPLIT_MIN_PLAYERS = 2;
 const SPLIT_MAX_PLAYERS = 16;
-// In uneven lobbies the short team won 45% of rounds (100 archived games). At about
-// 0.15 round share per rating unit, the short team needs a mean about 0.3 higher.
-const SHORT_TEAM_OFFSET = 0.3;
+// Ratings are each player's overall site rating (HLTV 1.0 style, 1.00 = average;
+// regulars spread about 0.27 around the mean). In uneven lobbies the short team
+// won 45% of rounds (100 archived games); at about 0.5 round share per rating
+// point, the short team needs an average rating about 0.1 higher.
+const SHORT_TEAM_OFFSET = 0.1;
 // Splits this close to the best are treated as equally good; one is picked at random
 // so the same group does not get identical teams every time.
-const SPLIT_TOLERANCE = 0.05;
+const SPLIT_TOLERANCE = 0.015;
 const SPLIT_RATE_LIMIT = 20; // requests per minute per client IP, per Worker instance
 const splitHits = new Map();
 
@@ -852,8 +854,10 @@ function rateLimited(request) {
 }
 
 // Matches each requested player to the ratings by account ID, Steam3 ID
-// ([U:1:123]) or case-insensitive name. Unknown players count as average (0).
+// ([U:1:123]) or case-insensitive name. Unknown players get the group average.
 function resolvePlayers(requested, table) {
+  const ratings = Object.values(table).map((p) => p.rating);
+  const average = ratings.reduce((sum, r) => sum + r, 0) / ratings.length;
   const byName = new Map();
   for (const [id, p] of Object.entries(table))
     byName.set(p.name.trim().toLowerCase(), id);
@@ -873,7 +877,7 @@ function resolvePlayers(requested, table) {
     seen.add(key);
     players.push({
       name: known ? table[id].name : text,
-      rating: known ? table[id].rating : 0,
+      rating: known ? table[id].rating : average,
       known,
       provisional: !known || Boolean(table[id].provisional),
     });
@@ -920,8 +924,8 @@ function bestSplit(players, random = Math.random) {
 }
 
 function splitLabel(miss) {
-  if (miss < 0.15) return "even";
-  if (miss < 0.4) return "close";
+  if (miss < 0.04) return "even";
+  if (miss < 0.1) return "close";
   return "uneven";
 }
 
@@ -939,38 +943,237 @@ async function splitTeams(request, env, cors) {
     return json({ error: "Invalid JSON" }, 400, cors);
   }
   const requested = body && Array.isArray(body.players) ? body.players : null;
+  const result = await makeSplit(requested, env);
+  return json(result.body, result.status, cors);
+}
+
+// Shared by /api/split and the Discord /teams command. Returns {status, body};
+// body has `error` or the rosters. Never includes ratings.
+async function makeSplit(requested, env) {
   if (
     !requested ||
     !requested.every(
       (p) => typeof p === "string" && p.trim() && p.length <= 64,
     )
   )
-    return json({ error: "Send players as a list of names or IDs" }, 400, cors);
+    return {
+      status: 400,
+      body: { error: "Send players as a list of names or IDs" },
+    };
   const stored = await env.RATINGS.get(RATINGS_KEY, { type: "json" });
   if (!stored || !stored.players)
-    return json({ error: "No ratings have been published yet" }, 503, cors);
+    return {
+      status: 503,
+      body: { error: "No ratings have been published yet" },
+    };
   const players = resolvePlayers(requested, stored.players);
   if (players.length < SPLIT_MIN_PLAYERS || players.length > SPLIT_MAX_PLAYERS)
-    return json(
-      {
+    return {
+      status: 400,
+      body: {
         error: `Send between ${SPLIT_MIN_PLAYERS} and ${SPLIT_MAX_PLAYERS} different players`,
       },
-      400,
-      cors,
-    );
+    };
   const { teamA, teamB, miss } = bestSplit(players);
-  const roster = (team) =>
-    team.map(({ name, known, provisional }) => ({ name, known, provisional }));
-  return json(
-    {
+  // One random captain per team, listed first.
+  const roster = (team) => {
+    const captain = Math.floor(Math.random() * team.length);
+    const ordered = [team[captain], ...team.filter((_, i) => i !== captain)];
+    return ordered.map(({ name, known, provisional }, i) => ({
+      name,
+      known,
+      provisional,
+      captain: i === 0,
+    }));
+  };
+  return {
+    status: 200,
+    body: {
       teams: [roster(teamA), roster(teamB)],
       balance: splitLabel(miss),
       unknown: players.filter((p) => !p.known).map((p) => p.name),
       ratingsUpdated: stored.generated || null,
     },
+  };
+}
+
+// ---- Discord /teams command -------------------------------------------------
+// Discord POSTs interactions here. Each request is signed with the application's
+// Ed25519 key; anything without a valid signature is rejected with 401, which is
+// also what Discord checks for when the endpoint URL is saved.
+const DISCORD_PING = 1;
+const DISCORD_COMMAND = 2;
+const DISCORD_COMPONENT = 3;
+const DISCORD_EPHEMERAL = 64;
+const PICKER_ID = "teams:pick";
+const PICKER_MAX_OPTIONS = 25; // Discord's limit for one select menu
+
+// A private reply with a multi-select of known players, most recent first.
+// Values are account IDs, so the split needs no name matching.
+async function playerPicker(env) {
+  const stored = await env.RATINGS.get(RATINGS_KEY, { type: "json" });
+  if (!stored || !stored.players)
+    return discordReply("No ratings have been published yet.", true);
+  const options = Object.entries(stored.players)
+    .sort(
+      ([, a], [, b]) =>
+        String(b.last_night || "").localeCompare(String(a.last_night || "")) ||
+        (b.games || 0) - (a.games || 0) ||
+        a.name.localeCompare(b.name),
+    )
+    .slice(0, PICKER_MAX_OPTIONS)
+    .map(([id, p]) => ({
+      label: p.name.slice(0, 100),
+      value: id,
+      ...(p.provisional ? { description: "new player" } : {}),
+    }));
+  if (options.length < SPLIT_MIN_PLAYERS)
+    return discordReply("Not enough rated players to pick from.", true);
+  return json(
+    {
+      type: 4,
+      data: {
+        content:
+          "Pick who's playing, then close the menu. To include a guest who isn't listed, use `/teams players:` and type the names.",
+        flags: DISCORD_EPHEMERAL,
+        components: [
+          {
+            type: 1,
+            components: [
+              {
+                type: 3, // string select
+                custom_id: PICKER_ID,
+                placeholder: "Select players",
+                min_values: SPLIT_MIN_PLAYERS,
+                max_values: Math.min(SPLIT_MAX_PLAYERS, options.length),
+                options,
+              },
+            ],
+          },
+        ],
+      },
+    },
     200,
-    cors,
   );
+}
+
+function hexToBytes(hex) {
+  if (!/^(?:[0-9a-f]{2})+$/i.test(hex)) return null;
+  return Uint8Array.from(hex.match(/../g), (pair) => parseInt(pair, 16));
+}
+
+async function validDiscordSignature(request, body, publicKey) {
+  const signature = hexToBytes(request.headers.get("X-Signature-Ed25519") || "");
+  const timestamp = request.headers.get("X-Signature-Timestamp") || "";
+  const keyBytes = hexToBytes(publicKey || "");
+  if (!signature || !timestamp || !keyBytes) return false;
+  try {
+    const key = await crypto.subtle.importKey(
+      "raw",
+      keyBytes,
+      { name: "Ed25519" },
+      false,
+      ["verify"],
+    );
+    return await crypto.subtle.verify(
+      { name: "Ed25519" },
+      key,
+      signature,
+      encoder.encode(timestamp + body),
+    );
+  } catch {
+    return false;
+  }
+}
+
+function discordReply(content, ephemeral = false) {
+  return json(
+    {
+      type: 4,
+      data: {
+        content,
+        flags: ephemeral ? DISCORD_EPHEMERAL : 0,
+        allowed_mentions: { parse: [] },
+      },
+    },
+    200,
+  );
+}
+
+// Discord markdown would mangle names like *star* or __x__.
+function discordEscape(text) {
+  return text.replace(/([\\*_~`|>#\-\[\]()])/g, "\\$1");
+}
+
+function formatTeams({ teams, balance, unknown }) {
+  const line = (team) =>
+    team
+      .map(
+        (p) =>
+          (p.captain ? `**${discordEscape(p.name)}** (captain)` : discordEscape(p.name)) +
+          (p.provisional ? " (new)" : ""),
+      )
+      .join(", ");
+  const lines = [
+    `**Team A** (${teams[0].length}): ${line(teams[0])}`,
+    `**Team B** (${teams[1].length}): ${line(teams[1])}`,
+    `Balance: ${balance}`,
+  ];
+  if (unknown.length)
+    lines.push(
+      `Not in the stats yet, counted as average: ${unknown.map(discordEscape).join(", ")}`,
+    );
+  return lines.join("\n");
+}
+
+async function discordInteraction(request, env) {
+  if (request.method !== "POST")
+    return json({ error: "Method not allowed" }, 405);
+  if (!env.DISCORD_PUBLIC_KEY)
+    return json({ error: "Discord is not configured" }, 503);
+  const body = await request.text();
+  if (!(await validDiscordSignature(request, body, env.DISCORD_PUBLIC_KEY)))
+    return json({ error: "Invalid request signature" }, 401);
+  let interaction;
+  try {
+    interaction = JSON.parse(body);
+  } catch {
+    return json({ error: "Invalid JSON" }, 400);
+  }
+  if (interaction.type === DISCORD_PING) return json({ type: 1 }, 200);
+  if (!env.RATINGS) return discordReply("Ratings storage is not configured.", true);
+
+  let requested;
+  if (
+    interaction.type === DISCORD_COMPONENT &&
+    interaction.data?.custom_id === PICKER_ID
+  ) {
+    requested = Array.isArray(interaction.data.values)
+      ? interaction.data.values.map(String)
+      : [];
+  } else if (
+    interaction.type === DISCORD_COMMAND &&
+    interaction.data?.name === "teams"
+  ) {
+    const option = interaction.data.options?.find((o) => o.name === "players");
+    requested = String(option?.value || "")
+      .split(/[,\n]/)
+      .map((name) => name.trim())
+      .filter(Boolean);
+    // No names typed: show a multi-select of known players instead.
+    if (!requested.length) return playerPicker(env);
+  } else {
+    return discordReply("Unknown command.", true);
+  }
+  const result = await makeSplit(requested.length ? requested : null, env);
+  if (result.status !== 200)
+    return discordReply(
+      result.status === 400
+        ? `List between ${SPLIT_MIN_PLAYERS} and ${SPLIT_MAX_PLAYERS} different in-game names, separated by commas (names up to 64 characters).`
+        : result.body.error,
+      true,
+    );
+  return discordReply(formatTeams(result.body));
 }
 
 async function handle(request, env) {
@@ -981,6 +1184,9 @@ async function handle(request, env) {
       return json({ error: "Method not allowed" }, 405);
     return storeRatings(request, env);
   }
+  // Called by Discord's servers; authenticated by signature instead of Origin.
+  if (url.pathname === "/discord/interactions")
+    return discordInteraction(request, env);
 
   const origin = allowedOrigin(request, env);
   if (!origin) return json({ error: "Origin is not allowed" }, 403);

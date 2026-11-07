@@ -93,9 +93,9 @@ The allowed site origins are configured in `worker/wrangler.toml` for `https://p
 The daily job computes player ratings (`stats/ratings.py`) and sends them to the Worker, which keeps them in KV. The ratings never go into `docs/` or `data/`, and no endpoint returns them.
 
 - `PUT /ratings`: used only by the daily job. It needs `Authorization: Bearer <RATINGS_TOKEN>`.
-- `POST /api/split` with `{"players": ["name", "[U:1:123]", ...]}` (2 to 16 players): returns two rosters and a balance label (`even`, `close` or `uneven`). Players are matched by name or Steam ID. Unknown players count as average and are listed in `unknown`. This endpoint is open to the allowed site origins and limited to 20 requests a minute per IP.
+- `POST /api/split` with `{"players": ["name", "[U:1:123]", ...]}` (2 to 16 players): returns two rosters (one random captain per team, listed first and marked `captain: true`) and a balance label (`even`, `close` or `uneven`). Players are matched by name or Steam ID. Unknown players count as the group average and are listed in `unknown`. This endpoint is open to the allowed site origins and limited to 20 requests a minute per IP.
 
-When the lobby is odd, the short team gets slightly stronger players. In the archive, a team down a player won about 45% of rounds.
+Each player's strength is their overall **Rating** from the site leaderboard: the HLTV 1.0-style rating from their kill, death, survival and multi-kill totals across every game. The split keeps the two teams' average ratings as close as possible. When the lobby is odd, the short team gets an average rating about 0.1 higher, because a team down a player won about 45% of rounds in the archive. Players not in the stats count as the group average.
 
 One-time setup:
 
@@ -107,6 +107,20 @@ npx wrangler deploy --config worker/wrangler.toml
 ```
 
 Then set the GitHub secret `RATINGS_PUBLISH_URL` to the Worker URL followed by `/ratings`. To rotate the token, run the `t=...` line again.
+
+### Discord `/teams`
+
+In Discord, typing `/teams` shows you a private dropdown of the 25 most recent players. Tick who's playing and close it, and the bot posts two balanced teams to the channel, each with a randomly chosen captain shown first in bold. To include a guest who isn't in the list, use `/teams players: Sheldor, Rat, Guest, ...` with in-game names or Steam IDs separated by commas. Players with fewer than 5 games are marked "(new)". Ratings are never shown. Discord sends each command to `POST /discord/interactions`, and the Worker checks Discord's signature with `DISCORD_PUBLIC_KEY` (set in `wrangler.toml`).
+
+Setup (once):
+
+1. Deploy the Worker.
+2. In the Discord Developer Portal, under General Information, set the **Interactions Endpoint URL** to `<worker url>/discord/interactions` and save. Discord tests the URL before it accepts it.
+3. Register the command in your server. Run this with the bot token on your clipboard. The token isn't stored anywhere.
+
+   ```bash
+   DISCORD_BOT_TOKEN=$(pbpaste) node worker/scripts/register-discord-command.mjs
+   ```
 
 Run the Worker unit tests locally with `node --test worker/test/worker.test.mjs`.
 
