@@ -780,14 +780,215 @@ function serverUptime(server) {
   );
 }
 
+// ---- Team balancer ----------------------------------------------------------
+// Ratings arrive from the daily stats job (PUT /ratings with RATINGS_TOKEN) and are
+// kept in KV. They are never returned by any endpoint: /api/split replies with two
+// rosters and a coarse label only.
+const RATINGS_KEY = "ratings";
+const RATINGS_MAX_BYTES = 256 * 1024;
+const SPLIT_MIN_PLAYERS = 2;
+const SPLIT_MAX_PLAYERS = 16;
+// In uneven lobbies the short team won 45% of rounds (100 archived games). At about
+// 0.15 round share per rating unit, the short team needs a mean about 0.3 higher.
+const SHORT_TEAM_OFFSET = 0.3;
+// Splits this close to the best are treated as equally good; one is picked at random
+// so the same group does not get identical teams every time.
+const SPLIT_TOLERANCE = 0.05;
+const SPLIT_RATE_LIMIT = 20; // requests per minute per client IP, per Worker instance
+const splitHits = new Map();
+
+function validRatings(payload) {
+  if (!payload || typeof payload !== "object" || payload.v !== 1) return false;
+  const players = payload.players;
+  if (!players || typeof players !== "object" || Array.isArray(players))
+    return false;
+  const entries = Object.entries(players);
+  if (!entries.length || entries.length > 1000) return false;
+  return entries.every(
+    ([id, p]) =>
+      /^\d{1,20}$/.test(id) &&
+      p &&
+      typeof p.name === "string" &&
+      typeof p.rating === "number" &&
+      Number.isFinite(p.rating),
+  );
+}
+
+async function storeRatings(request, env) {
+  if (!env.RATINGS_TOKEN || !env.RATINGS)
+    return json({ error: "Ratings storage is not configured" }, 503);
+  const authorization = request.headers.get("Authorization") || "";
+  const token = authorization.startsWith("Bearer ")
+    ? authorization.slice(7)
+    : "";
+  if (!sameSecret(token, env.RATINGS_TOKEN))
+    return json({ error: "Unauthorized" }, 401);
+  const text = await request.text();
+  if (encoder.encode(text).length > RATINGS_MAX_BYTES)
+    return json({ error: "Ratings payload is too large" }, 413);
+  let payload;
+  try {
+    payload = JSON.parse(text);
+  } catch {
+    return json({ error: "Invalid JSON" }, 400);
+  }
+  if (!validRatings(payload))
+    return json({ error: "Ratings payload is not in the expected format" }, 400);
+  await env.RATINGS.put(RATINGS_KEY, JSON.stringify(payload));
+  return json({ ok: true, players: Object.keys(payload.players).length }, 200);
+}
+
+function rateLimited(request) {
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  const minute = Math.floor(Date.now() / 60000);
+  const entry = splitHits.get(ip);
+  if (!entry || entry.minute !== minute) {
+    if (splitHits.size > 5000) splitHits.clear();
+    splitHits.set(ip, { minute, count: 1 });
+    return false;
+  }
+  entry.count += 1;
+  return entry.count > SPLIT_RATE_LIMIT;
+}
+
+// Matches each requested player to the ratings by account ID, Steam3 ID
+// ([U:1:123]) or case-insensitive name. Unknown players count as average (0).
+function resolvePlayers(requested, table) {
+  const byName = new Map();
+  for (const [id, p] of Object.entries(table))
+    byName.set(p.name.trim().toLowerCase(), id);
+  const seen = new Set();
+  const players = [];
+  for (const raw of requested) {
+    const text = raw.trim();
+    const steam3 = text.match(/^\[U:1:(\d+)\]$/i);
+    const id = steam3
+      ? steam3[1]
+      : Object.hasOwn(table, text)
+        ? text
+        : byName.get(text.toLowerCase());
+    const known = id !== undefined && Object.hasOwn(table, id);
+    const key = known ? `id:${id}` : `name:${text.toLowerCase()}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    players.push({
+      name: known ? table[id].name : text,
+      rating: known ? table[id].rating : 0,
+      known,
+      provisional: !known || Boolean(table[id].provisional),
+    });
+  }
+  return players;
+}
+
+// Tries every split (at most C(16,8) = 12870) and returns the most even one.
+// For an odd count the smaller team should be about SHORT_TEAM_OFFSET stronger.
+function bestSplit(players, random = Math.random) {
+  const n = players.length;
+  const small = Math.floor(n / 2);
+  const target = n % 2 ? SHORT_TEAM_OFFSET : 0;
+  const candidates = [];
+  const total = players.reduce((sum, p) => sum + p.rating, 0);
+  const pick = [];
+  const walk = (start, sum) => {
+    if (pick.length === small) {
+      const meanSmall = sum / small;
+      const meanLarge = (total - sum) / (n - small);
+      // Even lobbies: only keep splits where player 0 is on team A, so mirror
+      // images are not counted twice.
+      if (n % 2 === 0 && pick[0] !== 0) return;
+      candidates.push({
+        members: [...pick],
+        miss: Math.abs(meanSmall - meanLarge - target),
+      });
+      return;
+    }
+    for (let i = start; i <= n - (small - pick.length); i++) {
+      pick.push(i);
+      walk(i + 1, sum + players[i].rating);
+      pick.pop();
+    }
+  };
+  walk(0, 0);
+  const best = Math.min(...candidates.map((c) => c.miss));
+  const near = candidates.filter((c) => c.miss <= best + SPLIT_TOLERANCE);
+  const chosen = near[Math.floor(random() * near.length)];
+  const inSmall = new Set(chosen.members);
+  const teamA = players.filter((_, i) => inSmall.has(i));
+  const teamB = players.filter((_, i) => !inSmall.has(i));
+  return { teamA, teamB, miss: chosen.miss };
+}
+
+function splitLabel(miss) {
+  if (miss < 0.15) return "even";
+  if (miss < 0.4) return "close";
+  return "uneven";
+}
+
+async function splitTeams(request, env, cors) {
+  if (request.method !== "POST")
+    return json({ error: "Method not allowed" }, 405, cors);
+  if (rateLimited(request))
+    return json({ error: "Too many requests; try again in a minute" }, 429, cors);
+  if (!env.RATINGS)
+    return json({ error: "Ratings storage is not configured" }, 503, cors);
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return json({ error: "Invalid JSON" }, 400, cors);
+  }
+  const requested = body && Array.isArray(body.players) ? body.players : null;
+  if (
+    !requested ||
+    !requested.every(
+      (p) => typeof p === "string" && p.trim() && p.length <= 64,
+    )
+  )
+    return json({ error: "Send players as a list of names or IDs" }, 400, cors);
+  const stored = await env.RATINGS.get(RATINGS_KEY, { type: "json" });
+  if (!stored || !stored.players)
+    return json({ error: "No ratings have been published yet" }, 503, cors);
+  const players = resolvePlayers(requested, stored.players);
+  if (players.length < SPLIT_MIN_PLAYERS || players.length > SPLIT_MAX_PLAYERS)
+    return json(
+      {
+        error: `Send between ${SPLIT_MIN_PLAYERS} and ${SPLIT_MAX_PLAYERS} different players`,
+      },
+      400,
+      cors,
+    );
+  const { teamA, teamB, miss } = bestSplit(players);
+  const roster = (team) =>
+    team.map(({ name, known, provisional }) => ({ name, known, provisional }));
+  return json(
+    {
+      teams: [roster(teamA), roster(teamB)],
+      balance: splitLabel(miss),
+      unknown: players.filter((p) => !p.known).map((p) => p.name),
+      ratingsUpdated: stored.generated || null,
+    },
+    200,
+    cors,
+  );
+}
+
 async function handle(request, env) {
+  const url = new URL(request.url);
+  // Called by the daily GitHub Action, not a browser, so it has no Origin header.
+  if (url.pathname === "/ratings") {
+    if (request.method !== "PUT")
+      return json({ error: "Method not allowed" }, 405);
+    return storeRatings(request, env);
+  }
+
   const origin = allowedOrigin(request, env);
   if (!origin) return json({ error: "Origin is not allowed" }, 403);
   const cors = corsHeaders(origin);
   if (request.method === "OPTIONS")
     return new Response(null, { status: 204, headers: cors });
 
-  const url = new URL(request.url);
+  if (url.pathname === "/api/split") return splitTeams(request, env, cors);
   if (url.pathname === "/api/login" && request.method === "POST") {
     if (!env.CONTROL_PASSPHRASE || !env.SESSION_SECRET)
       return json({ error: "Worker secrets are not configured" }, 503, cors);
@@ -966,4 +1167,5 @@ async function handle(request, env) {
   }
 }
 
+export { bestSplit };
 export default { fetch: handle };

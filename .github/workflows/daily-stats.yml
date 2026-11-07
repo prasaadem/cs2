@@ -18,6 +18,8 @@ jobs:
     timeout-minutes: 20
     env:
       DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      RATINGS_PUBLISH_URL: ${{ secrets.RATINGS_PUBLISH_URL }}
+      RATINGS_TOKEN: ${{ secrets.RATINGS_TOKEN }}
     steps:
       - uses: actions/checkout@v4
 
@@ -64,3 +66,11 @@ jobs:
       - name: Post to Discord
         if: steps.update.outputs.changed == 'true' && env.DISCORD_WEBHOOK_URL != ''
         run: python stats/notify_discord.py --changes "$RUNNER_TEMP/changes.json" --wait-for-site
+
+      # team balancer: send fresh ratings to the Worker. The ratings stay out of the repo
+      # (the file goes to the runner's temp folder). Skipped until both secrets exist, and a
+      # failure here never fails the stats sync.
+      - name: Publish team-balancer ratings
+        if: env.RATINGS_PUBLISH_URL != '' && env.RATINGS_TOKEN != ''
+        continue-on-error: true
+        run: python stats/ratings.py --out "$RUNNER_TEMP/ratings.json" --publish

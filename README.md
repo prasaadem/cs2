@@ -88,6 +88,26 @@ Use a unique, randomly generated control passphrase of at least 32 characters an
 
 The allowed site origins are configured in `worker/wrangler.toml` for `https://prasaadem.github.io` and local preview on port 8765. If the Pages domain changes, update `ALLOWED_ORIGINS` and redeploy. After deployment, open `#/server` on the site, enter the Worker URL shown by Wrangler and the control passphrase, then unlock. The passphrase is sent only to the Worker over HTTPS; the returned token expires after 15 minutes and is kept in browser local storage so the session survives reloads until expiry or sign-out.
 
+### Team balancer
+
+The daily job computes player ratings (`stats/ratings.py`) and sends them to the Worker, which keeps them in KV. The ratings never go into `docs/` or `data/`, and no endpoint returns them.
+
+- `PUT /ratings`: used only by the daily job. It needs `Authorization: Bearer <RATINGS_TOKEN>`.
+- `POST /api/split` with `{"players": ["name", "[U:1:123]", ...]}` (2 to 16 players): returns two rosters and a balance label (`even`, `close` or `uneven`). Players are matched by name or Steam ID. Unknown players count as average and are listed in `unknown`. This endpoint is open to the allowed site origins and limited to 20 requests a minute per IP.
+
+When the lobby is odd, the short team gets slightly stronger players. In the archive, a team down a player won about 45% of rounds.
+
+One-time setup:
+
+```bash
+npx wrangler kv namespace create RATINGS --config worker/wrangler.toml   # already done; the id is in wrangler.toml
+# one token, sent to both Cloudflare and GitHub without ever being printed
+t=$(openssl rand -hex 32); printf %s "$t" | npx wrangler secret put RATINGS_TOKEN --config worker/wrangler.toml; printf %s "$t" | gh secret set RATINGS_TOKEN; unset t
+npx wrangler deploy --config worker/wrangler.toml
+```
+
+Then set the GitHub secret `RATINGS_PUBLISH_URL` to the Worker URL followed by `/ratings`. To rotate the token, run the `t=...` line again.
+
 Run the Worker unit tests locally with `node --test worker/test/worker.test.mjs`.
 
 ## Stats notes

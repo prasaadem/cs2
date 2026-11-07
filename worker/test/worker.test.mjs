@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { after, before, test } from "node:test";
-import worker from "../src/index.js";
+import worker, { bestSplit } from "../src/index.js";
 
 const origin = "https://prasaadem.github.io";
 const env = {
@@ -450,4 +450,127 @@ test("lists supplied maps and changes map using only the selected preset", async
     env,
   );
   assert.equal(invalidMap.status, 400);
+});
+
+// ---- team balancer ----
+
+function fakeKv() {
+  const store = new Map();
+  return {
+    store,
+    async get(key, options) {
+      const value = store.get(key);
+      if (value === undefined) return null;
+      return options?.type === "json" ? JSON.parse(value) : value;
+    },
+    async put(key, value) {
+      store.set(key, value);
+    },
+  };
+}
+
+const ratingsToken = "test ratings token";
+const samplePlayers = {
+  1: { name: "Ace", rating: 1.5, games: 30 },
+  2: { name: "Bolt", rating: 1.0, games: 30 },
+  3: { name: "Cobra", rating: 0.5, games: 30 },
+  4: { name: "Dune", rating: 0.0, games: 30 },
+  5: { name: "Echo", rating: -0.5, games: 30 },
+  6: { name: "Frost", rating: -1.0, games: 30 },
+  7: { name: "Ghost", rating: -1.5, games: 3, provisional: true },
+};
+
+function balancerEnv() {
+  return { ...env, RATINGS_TOKEN: ratingsToken, RATINGS: fakeKv() };
+}
+
+function putRatings(benv, payload, token = ratingsToken) {
+  return worker.fetch(
+    new Request("https://worker.example/ratings", {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    }),
+    benv,
+  );
+}
+
+test("stores ratings only with the ratings token and a valid payload", async () => {
+  const benv = balancerEnv();
+  assert.equal(
+    (await putRatings(benv, { v: 1, players: samplePlayers }, "wrong")).status,
+    401,
+  );
+  assert.equal(benv.RATINGS.store.size, 0);
+  assert.equal(
+    (await putRatings(benv, { v: 1, players: { x: { name: "a" } } })).status,
+    400,
+  );
+  const ok = await putRatings(benv, { v: 1, players: samplePlayers });
+  assert.equal(ok.status, 200);
+  assert.equal((await ok.json()).players, 7);
+  assert.ok(benv.RATINGS.store.has("ratings"));
+});
+
+test("ratings storage reports 503 until the token and KV are configured", async () => {
+  const response = await putRatings(env, { v: 1, players: samplePlayers });
+  assert.equal(response.status, 503);
+});
+
+test("split returns two rosters and a label, never ratings", async () => {
+  const benv = balancerEnv();
+  await putRatings(benv, { v: 1, generated: "2026-11-07T00:00:00Z", players: samplePlayers });
+  const response = await worker.fetch(
+    request("/api/split", {
+      method: "POST",
+      body: { players: ["ace", "Bolt", "[U:1:3]", "4", "Echo", "Frost", "Newbie"] },
+    }),
+    benv,
+  );
+  assert.equal(response.status, 200);
+  const text = await response.text();
+  assert.ok(!text.includes("rating\""), "response must not include ratings");
+  const body = JSON.parse(text);
+  assert.equal(body.teams.length, 2);
+  assert.equal(body.teams[0].length + body.teams[1].length, 7);
+  assert.deepEqual(body.unknown, ["Newbie"]);
+  assert.ok(["even", "close", "uneven"].includes(body.balance));
+  assert.equal(body.ratingsUpdated, "2026-11-07T00:00:00Z");
+});
+
+test("split needs an allowed origin, published ratings and a sane player list", async () => {
+  const benv = balancerEnv();
+  const send = (players, requestOrigin) =>
+    worker.fetch(
+      request("/api/split", { method: "POST", body: { players }, requestOrigin }),
+      benv,
+    );
+  assert.equal((await send(["Ace", "Bolt"], "https://attacker.example")).status, 403);
+  assert.equal((await send(["Ace", "Bolt"])).status, 503);
+  await putRatings(benv, { v: 1, players: samplePlayers });
+  assert.equal((await send(["Ace"])).status, 400);
+  assert.equal((await send(["Ace", "ace"])).status, 400);
+  assert.equal((await send([1, 2])).status, 400);
+  assert.equal((await send(["Ace", "Bolt"])).status, 200);
+});
+
+test("even split balances team means exactly when possible", () => {
+  const players = [1.5, 1.0, 0.5, 0.0, -0.5, -1.5].map((rating) => ({ rating }));
+  const { teamA, teamB, miss } = bestSplit(players, () => 0);
+  const mean = (t) => t.reduce((s, p) => s + p.rating, 0) / t.length;
+  assert.equal(teamA.length, 3);
+  assert.ok(miss < 1e-9);
+  assert.ok(Math.abs(mean(teamA) - mean(teamB)) < 1e-9);
+});
+
+test("odd split makes the short team slightly stronger", () => {
+  const players = [1.5, 1.0, 0.5, 0.0, -0.5, -1.0, -1.5].map((rating) => ({ rating }));
+  const { teamA, teamB } = bestSplit(players, () => 0);
+  const mean = (t) => t.reduce((s, p) => s + p.rating, 0) / t.length;
+  assert.equal(teamA.length, 3);
+  assert.equal(teamB.length, 4);
+  assert.ok(mean(teamA) > mean(teamB));
 });
