@@ -574,3 +574,85 @@ test("odd split makes the short team slightly stronger", () => {
   assert.equal(teamB.length, 4);
   assert.ok(mean(teamA) > mean(teamB));
 });
+
+// ---- Discord /teams ----
+
+async function discordSetup() {
+  const keys = await crypto.subtle.generateKey({ name: "Ed25519" }, true, [
+    "sign",
+    "verify",
+  ]);
+  const raw = new Uint8Array(await crypto.subtle.exportKey("raw", keys.publicKey));
+  const benv = {
+    ...balancerEnv(),
+    DISCORD_PUBLIC_KEY: Buffer.from(raw).toString("hex"),
+  };
+  await putRatings(benv, { v: 1, players: samplePlayers });
+  const send = async (interaction, { tamper = false } = {}) => {
+    const body = JSON.stringify(interaction);
+    const timestamp = String(Math.floor(Date.now() / 1000));
+    const signature = new Uint8Array(
+      await crypto.subtle.sign(
+        { name: "Ed25519" },
+        keys.privateKey,
+        new TextEncoder().encode(timestamp + body),
+      ),
+    );
+    return worker.fetch(
+      new Request("https://worker.example/discord/interactions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Signature-Ed25519": Buffer.from(signature).toString("hex"),
+          "X-Signature-Timestamp": timestamp,
+        },
+        body: tamper ? body.replace("teams", "teamz") : body,
+      }),
+      benv,
+    );
+  };
+  return send;
+}
+
+const teamsCommand = (value) => ({
+  type: 2,
+  data: { name: "teams", options: [{ name: "players", type: 3, value }] },
+});
+
+test("discord: answers PING and rejects bad signatures", async () => {
+  const send = await discordSetup();
+  const ping = await send({ type: 1 });
+  assert.equal(ping.status, 200);
+  assert.deepEqual(await ping.json(), { type: 1 });
+  assert.equal((await send(teamsCommand("Ace, Bolt"), { tamper: true })).status, 401);
+  const unsigned = await worker.fetch(
+    new Request("https://worker.example/discord/interactions", {
+      method: "POST",
+      body: "{}",
+    }),
+    { ...env, DISCORD_PUBLIC_KEY: "00".repeat(32) },
+  );
+  assert.equal(unsigned.status, 401);
+});
+
+test("discord: /teams replies publicly with two teams and no ratings", async () => {
+  const send = await discordSetup();
+  const response = await send(teamsCommand("Ace, Bolt, cobra, Dune, Echo, Frost, Ghost, new_guy"));
+  const body = await response.json();
+  assert.equal(body.type, 4);
+  assert.equal(body.data.flags, 0);
+  assert.deepEqual(body.data.allowed_mentions, { parse: [] });
+  const text = body.data.content;
+  assert.match(text, /\*\*Team A\*\* \(4\)/);
+  assert.match(text, /\*\*Team B\*\* \(4\)/);
+  assert.match(text, /Ghost \(new\)/);
+  assert.match(text, /counted as average: new\\_guy/);
+  assert.doesNotMatch(text, /1\.5|-0\.5/);
+});
+
+test("discord: bad player lists get a private hint", async () => {
+  const send = await discordSetup();
+  const body = await (await send(teamsCommand("Ace"))).json();
+  assert.equal(body.data.flags, 64);
+  assert.match(body.data.content, /separated by commas/);
+});

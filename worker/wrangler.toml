@@ -4,6 +4,9 @@ compatibility_date = "2026-10-18"
 
 [vars]
 ALLOWED_ORIGINS = "https://prasaadem.github.io,http://127.0.0.1:8765,http://localhost:8765"
+# Discord /teams command. Both values are public (shown in the Developer Portal).
+DISCORD_APPLICATION_ID = "1568703389934817502"
+DISCORD_PUBLIC_KEY = "a37d43b961f62756d3e66f8b9b374f1c2f33beba43c80996f27d943ddd8ed162"
 
 # Team-balancer ratings, written by the daily stats job (PUT /ratings).
 [[kv_namespaces]]

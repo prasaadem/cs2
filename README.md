@@ -108,6 +108,20 @@ npx wrangler deploy --config worker/wrangler.toml
 
 Then set the GitHub secret `RATINGS_PUBLISH_URL` to the Worker URL followed by `/ratings`. To rotate the token, run the `t=...` line again.
 
+### Discord `/teams`
+
+In Discord, `/teams players: Sheldor, Rat, BigHero, ...` posts two balanced teams to the channel. Names are in-game names or Steam IDs, separated by commas. Players with fewer than 5 games are marked "(new)". Ratings are never shown. Discord sends each command to `POST /discord/interactions`, and the Worker checks Discord's signature with `DISCORD_PUBLIC_KEY` (set in `wrangler.toml`).
+
+Setup (once):
+
+1. Deploy the Worker.
+2. In the Discord Developer Portal, under General Information, set the **Interactions Endpoint URL** to `<worker url>/discord/interactions` and save. Discord tests the URL before it accepts it.
+3. Register the command in your server. Run this with the bot token on your clipboard. The token isn't stored anywhere.
+
+   ```bash
+   DISCORD_BOT_TOKEN=$(pbpaste) DISCORD_GUILD_ID=<server id> node worker/scripts/register-discord-command.mjs
+   ```
+
 Run the Worker unit tests locally with `node --test worker/test/worker.test.mjs`.
 
 ## Stats notes
