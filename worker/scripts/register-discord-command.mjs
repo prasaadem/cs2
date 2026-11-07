@@ -34,6 +34,7 @@ const server = {
   options: [
     { type: SUBCOMMAND, name: "start", description: "Start the game server" },
     { type: SUBCOMMAND, name: "stop", description: "Stop the game server (asks to confirm)" },
+    { type: SUBCOMMAND, name: "restart-game", description: "Restart the match, scores reset to 0-0 (asks to confirm)" },
     {
       type: SUBCOMMAND,
       name: "map",

@@ -128,6 +128,7 @@ Only members with **Manage Server** or **Administrator** can use these commands.
 
 - `/server start`: start the game server
 - `/server stop`: stop the game server. It first asks privately for confirmation with a **Stop server** button.
+- `/server restart-game`: restart the match with `mp_restartgame 1`, which resets scores to 0-0. It first asks privately for confirmation with a **Restart match** button.
 - `/server map name:<map>`: change the map. Start typing a name and matching maps are suggested. Only maps from the approved list are accepted.
 - `/server warmup-end`: run `mp_warmup_end 1`
 - `/server forcecamera`: run `mp_forcecamera 1`

@@ -840,7 +840,7 @@ test("discord /server stop: asks to confirm and calls DatHost only after the but
     assert.equal(ask.type, 4);
     assert.equal(ask.data.flags, 64);
     const button = ask.data.components[0].components[0];
-    assert.equal(button.custom_id, "server:confirm-stop");
+    assert.equal(button.custom_id, "server:confirm:stop");
     assert.equal(button.style, 4);
     await send.settle();
   });
@@ -851,7 +851,7 @@ test("discord /server stop: asks to confirm and calls DatHost only after the but
     application_id: "app123",
     token: "interaction-token",
     member: { permissions, user: { username: "tester" } },
-    data: { custom_id: "server:confirm-stop", component_type: 2 },
+    data: { custom_id: "server:confirm:stop", component_type: 2 },
   });
   const denied = await withFetchLog(async () => {
     const body = await (await send(click("0"))).json();
@@ -866,4 +866,45 @@ test("discord /server stop: asks to confirm and calls DatHost only after the but
   });
   assert.ok(done.some((c) => c.url.endsWith("/game-servers/test-server/stop") && c.method === "POST"));
   assert.match(JSON.parse(done.find((c) => c.url.startsWith("https://discord.com/")).body).content, /Server stopping\. \(by tester\)/);
+});
+
+test("discord /server restart-game: confirms, then sends only mp_restartgame 1", async () => {
+  const send = await discordSetup();
+  const asked = await withFetchLog(async () => {
+    const ask = await (await send(serverInteraction("restart-game"))).json();
+    assert.equal(ask.data.flags, 64);
+    assert.match(ask.data.content, /Restart the match\?/);
+    assert.equal(ask.data.components[0].components[0].custom_id, "server:confirm:restart-game");
+    await send.settle();
+  });
+  assert.equal(asked.length, 0);
+  const calls = await withFetchLog(async () => {
+    const res = await send({
+      type: 3,
+      application_id: "app123",
+      token: "interaction-token",
+      member: { permissions: MANAGE_GUILD, user: { username: "tester" } },
+      data: { custom_id: "server:confirm:restart-game", component_type: 2 },
+    });
+    assert.deepEqual(await res.json(), { type: 5 });
+    await send.settle();
+  });
+  const dathost = calls.filter((c) => c.url.startsWith("https://dathost.com/"));
+  assert.deepEqual(dathost.map((c) => c.body), ["mp_restartgame 1"]);
+});
+
+test("discord /server: unknown confirm buttons are ignored", async () => {
+  const send = await discordSetup();
+  const calls = await withFetchLog(async () => {
+    const body = await (
+      await send({
+        type: 3,
+        member: { permissions: MANAGE_GUILD },
+        data: { custom_id: "server:confirm:quit", component_type: 2 },
+      })
+    ).json();
+    assert.equal(body.data.flags, 64);
+    await send.settle();
+  });
+  assert.equal(calls.length, 0);
 });
