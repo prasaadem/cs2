@@ -1,11 +1,13 @@
 // Registers the /teams slash command in one Discord server. Run once, and again
 // only if the command definition below changes:
 //
-//   DISCORD_BOT_TOKEN=$(pbpaste) DISCORD_GUILD_ID=<server id> \
-//     node worker/scripts/register-discord-command.mjs
+//   DISCORD_BOT_TOKEN=$(pbpaste) node worker/scripts/register-discord-command.mjs
+//
+// Set DISCORD_GUILD_ID to register in a different server.
 //
 // The bot token is used only here, never stored in the repo or the Worker.
 const APPLICATION_ID = "1568703389934817502";
+const DEFAULT_GUILD_ID = "698372700829253672"; // the CS2 Nights server
 
 const command = {
   name: "teams",
@@ -23,7 +25,7 @@ const command = {
 };
 
 const token = process.env.DISCORD_BOT_TOKEN;
-const guild = process.env.DISCORD_GUILD_ID;
+const guild = process.env.DISCORD_GUILD_ID || DEFAULT_GUILD_ID;
 if (!token || !/^\d{17,20}$/.test(guild || "")) {
   console.error("Set DISCORD_BOT_TOKEN and DISCORD_GUILD_ID (the numeric server ID).");
   process.exit(1);

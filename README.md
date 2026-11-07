@@ -119,7 +119,7 @@ Setup (once):
 3. Register the command in your server. Run this with the bot token on your clipboard. The token isn't stored anywhere.
 
    ```bash
-   DISCORD_BOT_TOKEN=$(pbpaste) DISCORD_GUILD_ID=<server id> node worker/scripts/register-discord-command.mjs
+   DISCORD_BOT_TOKEN=$(pbpaste) node worker/scripts/register-discord-command.mjs
    ```
 
 Run the Worker unit tests locally with `node --test worker/test/worker.test.mjs`.
