@@ -567,7 +567,7 @@ test("even split balances team means exactly when possible", () => {
 });
 
 test("odd split makes the short team slightly stronger", () => {
-  const players = [1.5, 1.0, 0.5, 0.0, -0.5, -1.0, -1.5].map((rating) => ({ rating }));
+  const players = [1.4, 1.2, 1.1, 1.0, 0.9, 0.8, 0.7].map((rating) => ({ rating }));
   const { teamA, teamB } = bestSplit(players, () => 0);
   const mean = (t) => t.reduce((s, p) => s + p.rating, 0) / t.length;
   assert.equal(teamA.length, 3);

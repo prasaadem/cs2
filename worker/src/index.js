@@ -788,12 +788,14 @@ const RATINGS_KEY = "ratings";
 const RATINGS_MAX_BYTES = 256 * 1024;
 const SPLIT_MIN_PLAYERS = 2;
 const SPLIT_MAX_PLAYERS = 16;
-// In uneven lobbies the short team won 45% of rounds (100 archived games). At about
-// 0.2 round share per rating unit, the short team needs a mean about 0.25 higher.
-const SHORT_TEAM_OFFSET = 0.25;
+// Ratings are each player's overall site rating (HLTV 1.0 style, 1.00 = average;
+// regulars spread about 0.27 around the mean). In uneven lobbies the short team
+// won 45% of rounds (100 archived games); at about 0.5 round share per rating
+// point, the short team needs an average rating about 0.1 higher.
+const SHORT_TEAM_OFFSET = 0.1;
 // Splits this close to the best are treated as equally good; one is picked at random
 // so the same group does not get identical teams every time.
-const SPLIT_TOLERANCE = 0.05;
+const SPLIT_TOLERANCE = 0.015;
 const SPLIT_RATE_LIMIT = 20; // requests per minute per client IP, per Worker instance
 const splitHits = new Map();
 
@@ -852,8 +854,10 @@ function rateLimited(request) {
 }
 
 // Matches each requested player to the ratings by account ID, Steam3 ID
-// ([U:1:123]) or case-insensitive name. Unknown players count as average (0).
+// ([U:1:123]) or case-insensitive name. Unknown players get the group average.
 function resolvePlayers(requested, table) {
+  const ratings = Object.values(table).map((p) => p.rating);
+  const average = ratings.reduce((sum, r) => sum + r, 0) / ratings.length;
   const byName = new Map();
   for (const [id, p] of Object.entries(table))
     byName.set(p.name.trim().toLowerCase(), id);
@@ -873,7 +877,7 @@ function resolvePlayers(requested, table) {
     seen.add(key);
     players.push({
       name: known ? table[id].name : text,
-      rating: known ? table[id].rating : 0,
+      rating: known ? table[id].rating : average,
       known,
       provisional: !known || Boolean(table[id].provisional),
     });
@@ -920,8 +924,8 @@ function bestSplit(players, random = Math.random) {
 }
 
 function splitLabel(miss) {
-  if (miss < 0.15) return "even";
-  if (miss < 0.4) return "close";
+  if (miss < 0.04) return "even";
+  if (miss < 0.1) return "close";
   return "uneven";
 }
 

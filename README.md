@@ -93,9 +93,9 @@ The allowed site origins are configured in `worker/wrangler.toml` for `https://p
 The daily job computes player ratings (`stats/ratings.py`) and sends them to the Worker, which keeps them in KV. The ratings never go into `docs/` or `data/`, and no endpoint returns them.
 
 - `PUT /ratings`: used only by the daily job. It needs `Authorization: Bearer <RATINGS_TOKEN>`.
-- `POST /api/split` with `{"players": ["name", "[U:1:123]", ...]}` (2 to 16 players): returns two rosters and a balance label (`even`, `close` or `uneven`). Players are matched by name or Steam ID. Unknown players count as average and are listed in `unknown`. This endpoint is open to the allowed site origins and limited to 20 requests a minute per IP.
+- `POST /api/split` with `{"players": ["name", "[U:1:123]", ...]}` (2 to 16 players): returns two rosters and a balance label (`even`, `close` or `uneven`). Players are matched by name or Steam ID. Unknown players count as the group average and are listed in `unknown`. This endpoint is open to the allowed site origins and limited to 20 requests a minute per IP.
 
-When the lobby is odd, the short team gets players about 0.25 stronger on average. Ratings count every finished game equally, and the order games were played in makes no difference. In the archive, a team down a player won about 45% of rounds.
+Each player's strength is their overall **Rating** from the site leaderboard: the HLTV 1.0-style rating from their kill, death, survival and multi-kill totals across every game. The split keeps the two teams' average ratings as close as possible. When the lobby is odd, the short team gets an average rating about 0.1 higher, because a team down a player won about 45% of rounds in the archive. Players not in the stats count as the group average.
 
 One-time setup:
 
