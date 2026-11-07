@@ -122,6 +122,19 @@ Setup (once):
    DISCORD_BOT_TOKEN=$(pbpaste) node worker/scripts/register-discord-command.mjs
    ```
 
+### Discord `/server`
+
+Only members with **Manage Server** or **Administrator** can use these commands. Discord hides them from everyone else, and the Worker checks the permission again on every request. Each command sends one fixed, allow-listed action to DatHost, the same ones the Server page uses:
+
+- `/server start`: start the game server
+- `/server stop`: stop the game server. It first asks privately for confirmation with a **Stop server** button.
+- `/server restart-game`: restart the match with `mp_restartgame 1`, which resets scores to 0-0. It first asks privately for confirmation with a **Restart match** button.
+- `/server map name:<map>`: change the map. Start typing a name and matching maps are suggested. Only maps from the approved list are accepted.
+- `/server warmup-end`: run `mp_warmup_end 1`
+- `/server forcecamera`: run `mp_forcecamera 1`
+
+The bot replies publicly, shows "thinking…" while DatHost responds, then edits the reply to show the result and who ran it. After changing these commands, run the registration script again (the `/teams` setup steps above have the command).
+
 Run the Worker unit tests locally with `node --test worker/test/worker.test.mjs`.
 
 ## Stats notes
