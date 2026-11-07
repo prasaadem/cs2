@@ -101,11 +101,12 @@ One-time setup:
 
 ```bash
 npx wrangler kv namespace create RATINGS --config worker/wrangler.toml   # already done; the id is in wrangler.toml
-openssl rand -hex 32 | tee /dev/tty | npx wrangler secret put RATINGS_TOKEN --config worker/wrangler.toml
+# one token, sent to both Cloudflare and GitHub without ever being printed
+t=$(openssl rand -hex 32); printf %s "$t" | npx wrangler secret put RATINGS_TOKEN --config worker/wrangler.toml; printf %s "$t" | gh secret set RATINGS_TOKEN; unset t
 npx wrangler deploy --config worker/wrangler.toml
 ```
 
-Save the printed token as the GitHub secret `RATINGS_TOKEN`, then clear your terminal. Set `RATINGS_PUBLISH_URL` to the Worker URL followed by `/ratings`.
+Then set the GitHub secret `RATINGS_PUBLISH_URL` to the Worker URL followed by `/ratings`. To rotate the token, run the `t=...` line again.
 
 Run the Worker unit tests locally with `node --test worker/test/worker.test.mjs`.
 
