@@ -649,7 +649,7 @@ test("discord: /teams replies publicly with two teams and no ratings", async () 
   const text = body.data.content;
   assert.match(text, /\*\*Team A\*\* \(4\)/);
   assert.match(text, /\*\*Team B\*\* \(4\)/);
-  assert.match(text, /Ghost \(new\)/);
+  assert.match(text, /Ghost(\*\* \(captain\))? \(new\)/); // Ghost may be the random captain
   assert.match(text, /counted as average: new\\_guy/);
   assert.doesNotMatch(text, /1\.5|-0\.5/);
 });
@@ -831,4 +831,39 @@ test("discord /server: DatHost errors are reported in the follow-up", async () =
     globalThis.fetch = saved;
   }
   assert.match(edits[0], /Couldn't do that: DatHost returned HTTP 500/);
+});
+
+test("discord /server stop: asks to confirm and calls DatHost only after the button", async () => {
+  const send = await discordSetup();
+  const calls = await withFetchLog(async () => {
+    const ask = await (await send(serverInteraction("stop"))).json();
+    assert.equal(ask.type, 4);
+    assert.equal(ask.data.flags, 64);
+    const button = ask.data.components[0].components[0];
+    assert.equal(button.custom_id, "server:confirm-stop");
+    assert.equal(button.style, 4);
+    await send.settle();
+  });
+  assert.equal(calls.length, 0);
+
+  const click = (permissions) => ({
+    type: 3,
+    application_id: "app123",
+    token: "interaction-token",
+    member: { permissions, user: { username: "tester" } },
+    data: { custom_id: "server:confirm-stop", component_type: 2 },
+  });
+  const denied = await withFetchLog(async () => {
+    const body = await (await send(click("0"))).json();
+    assert.equal(body.data.flags, 64);
+    await send.settle();
+  });
+  assert.equal(denied.length, 0);
+
+  const done = await withFetchLog(async () => {
+    assert.deepEqual(await (await send(click(MANAGE_GUILD))).json(), { type: 5 });
+    await send.settle();
+  });
+  assert.ok(done.some((c) => c.url.endsWith("/game-servers/test-server/stop") && c.method === "POST"));
+  assert.match(JSON.parse(done.find((c) => c.url.startsWith("https://discord.com/")).body).content, /Server stopping\. \(by tester\)/);
 });

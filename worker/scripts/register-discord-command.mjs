@@ -33,6 +33,7 @@ const server = {
   contexts: [0], // servers only, not DMs
   options: [
     { type: SUBCOMMAND, name: "start", description: "Start the game server" },
+    { type: SUBCOMMAND, name: "stop", description: "Stop the game server (asks to confirm)" },
     {
       type: SUBCOMMAND,
       name: "map",

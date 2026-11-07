@@ -1137,7 +1137,9 @@ const SERVER_SUBCOMMANDS = {
   start: "Server starting",
   "warmup-end": "Warmup ended",
   forcecamera: "Spectating locked to own team (mp_forcecamera 1)",
+  stop: "Server stopping",
 };
+const STOP_CONFIRM_ID = "server:confirm-stop";
 
 function canManageServer(interaction) {
   try {
@@ -1169,6 +1171,10 @@ async function runServerAction(sub, mapKey, env) {
     await dathost(`/game-servers/${serverId(env)}/start`, "POST", env);
     return "Server starting. It usually takes a minute or two to come up.";
   }
+  if (sub === "stop") {
+    await dathost(`/game-servers/${serverId(env)}/stop`, "POST", env);
+    return "Server stopping.";
+  }
   if (sub === "warmup-end") {
     await dathostConsole(CONSOLE_PRESETS.warmup_end, env);
     return SERVER_SUBCOMMANDS[sub] + ".";
@@ -1198,7 +1204,11 @@ async function followUp(interaction, content) {
 }
 
 function serverCommand(interaction, env, ctx) {
-  const sub = interaction.data.options?.[0];
+  // The confirm button on the private "Stop the server?" message.
+  const confirmingStop =
+    interaction.type === DISCORD_COMPONENT &&
+    interaction.data?.custom_id === STOP_CONFIRM_ID;
+  const sub = confirmingStop ? { name: "stop" } : interaction.data.options?.[0];
   if (interaction.type === DISCORD_AUTOCOMPLETE) {
     const focused = sub?.options?.find((o) => o.focused);
     return json(
@@ -1206,7 +1216,8 @@ function serverCommand(interaction, env, ctx) {
       200,
     );
   }
-  if (interaction.type !== DISCORD_COMMAND) return discordReply("Unknown command.", true);
+  if (interaction.type !== DISCORD_COMMAND && !confirmingStop)
+    return discordReply("Unknown command.", true);
   if (!canManageServer(interaction))
     return discordReply("Only members with Manage Server can control the game server.", true);
   if (!sub || (sub.name !== "map" && !Object.hasOwn(SERVER_SUBCOMMANDS, sub.name)))
@@ -1214,6 +1225,25 @@ function serverCommand(interaction, env, ctx) {
   const mapKey = sub.name === "map" ? sub.options?.find((o) => o.name === "name")?.value : null;
   if (sub.name === "map" && !MAP_BY_KEY.has(mapKey))
     return discordReply("Pick a map from the suggestions as you type.", true);
+  if (sub.name === "stop" && !confirmingStop)
+    return json(
+      {
+        type: 4,
+        data: {
+          content: "Stop the server? Anyone playing will be disconnected.",
+          flags: DISCORD_EPHEMERAL,
+          components: [
+            {
+              type: 1,
+              components: [
+                { type: 2, style: 4, label: "Stop server", custom_id: STOP_CONFIRM_ID },
+              ],
+            },
+          ],
+        },
+      },
+      200,
+    );
   if (!ctx?.waitUntil) return discordReply("Server control is unavailable right now.", true);
 
   const who = interaction.member?.user?.global_name || interaction.member?.user?.username || "Someone";
@@ -1245,7 +1275,11 @@ async function discordInteraction(request, env, ctx) {
     return json({ error: "Invalid JSON" }, 400);
   }
   if (interaction.type === DISCORD_PING) return json({ type: 1 }, 200);
-  if (interaction.data?.name === "server") return serverCommand(interaction, env, ctx);
+  if (
+    interaction.data?.name === "server" ||
+    interaction.data?.custom_id === STOP_CONFIRM_ID
+  )
+    return serverCommand(interaction, env, ctx);
   if (!env.RATINGS) return discordReply("Ratings storage is not configured.", true);
 
   let requested;

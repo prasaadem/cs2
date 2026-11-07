@@ -127,6 +127,7 @@ Setup (once):
 Only members with **Manage Server** or **Administrator** can use these commands. Discord hides them from everyone else, and the Worker checks the permission again on every request. Each command sends one fixed, allow-listed action to DatHost, the same ones the Server page uses:
 
 - `/server start`: start the game server
+- `/server stop`: stop the game server. It first asks privately for confirmation with a **Stop server** button.
 - `/server map name:<map>`: change the map. Start typing a name and matching maps are suggested. Only maps from the approved list are accepted.
 - `/server warmup-end`: run `mp_warmup_end 1`
 - `/server forcecamera`: run `mp_forcecamera 1`
