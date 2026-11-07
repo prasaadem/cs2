@@ -615,6 +615,7 @@ async function discordSetup() {
   const pending = [];
   const ctx = { waitUntil: (promise) => pending.push(promise) };
   send.settle = () => Promise.all(pending.splice(0));
+  send.env = benv;
   return send;
 }
 
@@ -907,4 +908,74 @@ test("discord /server: unknown confirm buttons are ignored", async () => {
     await send.settle();
   });
   assert.equal(calls.length, 0);
+});
+
+// ---- last night's grudges after /server start ----
+
+const recapText = "**🔥 Last night's grudges** (Nov 4, 10 games)\n\n**Nemesis** (who killed you most)\n- Pheonix: Sheldor got you **15-4**";
+
+test("ratings payload may carry a recap, which is size-checked", async () => {
+  const benv = balancerEnv();
+  const ok = await putRatings(benv, { v: 1, players: samplePlayers, recap: { night: "2026-11-04", games: 10, text: recapText } });
+  assert.equal(ok.status, 200);
+  assert.equal(JSON.parse(benv.RATINGS.store.get("ratings")).recap.text, recapText);
+  assert.equal((await putRatings(benv, { v: 1, players: samplePlayers, recap: { text: "x".repeat(2001) } })).status, 400);
+  assert.equal((await putRatings(benv, { v: 1, players: samplePlayers, recap: "text" })).status, 400);
+  assert.equal((await putRatings(benv, { v: 1, players: samplePlayers, recap: null })).status, 200);
+});
+
+async function runStart(send, dathostStatus = 200) {
+  const posts = [];
+  const saved = globalThis.fetch;
+  globalThis.fetch = async (url, init = {}) => {
+    const u = String(url);
+    if (u.startsWith("https://discord.com/")) posts.push({ url: u, method: init.method, body: JSON.parse(init.body) });
+    return u.startsWith("https://dathost.com/") ? new Response("{}", { status: dathostStatus }) : Response.json({});
+  };
+  try {
+    await send(serverInteraction("start"));
+    await send.settle();
+  } finally {
+    globalThis.fetch = saved;
+  }
+  return posts;
+}
+
+test("/server start posts last night's grudges after the start message", async () => {
+  const send = await discordSetup();
+  // discordSetup stores ratings without a recap; add one
+  await putRatings(send.env, { v: 1, players: samplePlayers, recap: { text: recapText } });
+  const posts = await runStart(send);
+  assert.equal(posts.length, 2);
+  assert.equal(posts[0].method, "PATCH");
+  assert.match(posts[0].body.content, /^Server starting/);
+  assert.equal(posts[1].method, "POST");
+  assert.equal(posts[1].url, "https://discord.com/api/v10/webhooks/app123/interaction-token");
+  assert.equal(posts[1].body.content, recapText);
+  assert.deepEqual(posts[1].body.allowed_mentions, { parse: [] });
+});
+
+test("no grudges post when start fails, when there is no recap, or for other actions", async () => {
+  let send = await discordSetup();
+  await putRatings(send.env, { v: 1, players: samplePlayers, recap: { text: recapText } });
+  assert.equal((await runStart(send, 500)).length, 1);
+
+  send = await discordSetup();
+  assert.equal((await runStart(send)).length, 1);
+
+  send = await discordSetup();
+  await putRatings(send.env, { v: 1, players: samplePlayers, recap: { text: recapText } });
+  const saved = globalThis.fetch;
+  const discord = [];
+  globalThis.fetch = async (url) => {
+    if (String(url).startsWith("https://discord.com/")) discord.push(url);
+    return Response.json({});
+  };
+  try {
+    await send(serverInteraction("warmup-end"));
+    await send.settle();
+  } finally {
+    globalThis.fetch = saved;
+  }
+  assert.equal(discord.length, 1);
 });

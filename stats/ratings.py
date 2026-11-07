@@ -23,6 +23,8 @@ import sys
 import urllib.request
 from datetime import datetime, timezone
 
+from recap import build_recap
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 SCHEMA = 1
@@ -84,6 +86,8 @@ def build(data_dir):
         'generated': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
         'games': len(games),
         'players': compute(games),
+        # last night's grudges, posted by the Discord bot after /server start
+        'recap': build_recap(games),
     }
 
 
