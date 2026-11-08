@@ -9,7 +9,8 @@ without it the previous sync time is kept.
 
 Writes docs/data/games.json (all games in one file, oldest first),
 docs/data/positions.json (kill and grenade positions, loaded only by the
-heatmap page) and docs/index.html (the page, which loads that JSON).
+heatmap page), docs/data/presence.json (who was on the server when, loaded only by the
+attendance page) and docs/index.html (the page, which loads that JSON).
 """
 import argparse
 import datetime as dt
@@ -17,8 +18,11 @@ import glob
 import json
 import os
 import re
+import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+import presence  # noqa: E402
 
 
 def radar_overviews(radar_dir):
@@ -44,6 +48,7 @@ def radar_overviews(radar_dir):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--data', default=os.path.join(HERE, '..', 'data', 'games'))
+    ap.add_argument('--presence', default=os.path.join(HERE, '..', 'data', 'presence'))
     ap.add_argument('--docs', default=os.path.join(HERE, '..', 'docs'))
     ap.add_argument('--template', default=os.path.join(HERE, 'template.html'))
     ap.add_argument('--title', default='CS2 Nights')
@@ -73,6 +78,8 @@ def main():
             positions[g['id']] = [kp or [], np_ or []]
     with open(os.path.join(args.docs, 'data', 'positions.json'), 'w', encoding='utf-8') as fh:
         json.dump(positions, fh, separators=(',', ':'))
+    with open(os.path.join(args.docs, 'data', 'presence.json'), 'w', encoding='utf-8') as fh:
+        json.dump(presence.load_all(args.presence), fh, ensure_ascii=False, separators=(',', ':'))
     payload = {'title': args.title, 'updated': updated, 'synced': synced, 'games': games}
     with open(out, 'w', encoding='utf-8') as fh:
         json.dump(payload, fh, ensure_ascii=False, separators=(',', ':'))

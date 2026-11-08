@@ -26,6 +26,10 @@ There is one JSON file per game, named `<UTC start YYYYMMDD-HHMM>-<map>.json`. T
 
 Raw logs are never committed, because they contain passwords and player IP addresses.
 
+## Join/leave timeline: `data/presence/`
+
+`stats/presence.py` reads the connect, entered-the-game and disconnect lines from the same logs and saves each night's stays as `data/presence/<night>.json` (player id, name, join and leave time in UTC, leave reason). The IP address on the connect line is never stored. A map change drops everyone for a moment, so stays less than two minutes apart are joined into one. The same never-delete rule as the games applies: stays are only added or extended, so nights whose logs DatHost has dropped stay intact. Nights from before this existed have no data and keep the games-based table. The Attendance page for a night draws the timeline from `docs/data/presence.json`.
+
 ## Setup
 
 - **Repository secrets** (Settings → Secrets and variables → Actions):
