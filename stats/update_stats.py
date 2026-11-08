@@ -11,6 +11,9 @@ Rules, so history is never lost:
   * a game is re-parsed by a newer parser version only from logs that are at
     least as complete (same or more rounds, and finished if it was finished)
   * nothing is ever deleted (games missing from the logs stay as they are)
+
+Join/leave sessions (who was on the server when) go to data/presence/<night>.json by
+the same never-delete rule; see presence.py.
 """
 import argparse
 import json
@@ -20,6 +23,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import logparse  # noqa: E402
+import presence  # noqa: E402
 
 
 def load(path):
@@ -59,6 +63,8 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--logs', required=True, help='folder containing the server .log files')
     ap.add_argument('--data', default=os.path.join(HERE, '..', 'data', 'games'))
+    ap.add_argument('--presence', default=os.path.join(HERE, '..', 'data', 'presence'),
+                    help='folder for the per-night join/leave sessions')
     ap.add_argument('--min-rounds', type=int, default=3, help='skip matches with fewer rounds (default 3)')
     ap.add_argument('--changes', help='write the ids of added/updated games to this JSON file')
     args = ap.parse_args()
@@ -71,6 +77,13 @@ def main():
         print(f'  + {g["id"]}  {g["ct"]}:{g["t"]}{"" if g["fin"] else " (unfinished)"}')
     for g in updated:
         print(f'  ~ {g["id"]}  {g["ct"]}:{g["t"]}{"" if g["fin"] else " (unfinished)"}')
+
+    # join/leave sessions: a problem here must never stop the stats sync
+    try:
+        nights = presence.merge_archive(presence.parse_presence(args.logs), args.presence)
+        print(f'presence: {len(nights)} night(s) updated' + (f' ({", ".join(nights)})' if nights else ''))
+    except Exception as e:  # noqa: BLE001
+        print(f'presence: skipped ({type(e).__name__}: {e})', file=sys.stderr)
 
     if args.changes:
         with open(args.changes, 'w', encoding='utf-8') as fh:

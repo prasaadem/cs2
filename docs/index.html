@@ -1776,6 +1776,18 @@
           grid-template-columns: 90px 1fr 40px;
         }
       }
+          /* attendance: who was on the server when */
+      .tl { position: relative; padding-right: 1.6rem; }
+      .tlrow { display: grid; grid-template-columns: 7.5rem 1fr; align-items: center; gap: 0.6rem; padding: 3px 0; }
+      .tlname { font-size: 0.82rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .tltrack { position: relative; height: 18px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
+      .tlgame { position: absolute; top: 0; bottom: 0; background: var(--accent-soft); }
+      .tlseg { position: absolute; top: 3px; bottom: 3px; min-width: 3px; border-radius: 3px; background: var(--ct); }
+      .tlseg.open { background: repeating-linear-gradient(135deg, var(--ct) 0 4px, var(--ct-soft) 4px 8px); }
+      .tlaxis { position: relative; height: 1.2rem; margin-left: 8.1rem; font-size: 0.7rem; color: var(--text-3); }
+      .tlaxis span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+      .tlkey { display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.75rem; color: var(--text-3); margin-top: 0.6rem; }
+      .tlkey i { display: inline-block; width: 12px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
     </style>
   </head>
   <body>
@@ -5053,6 +5065,7 @@
     ${old ? `<div class="note">${old} game${old > 1 ? "s" : ""} parsed before chat/quit tracking show 0 for those until the next daily update.</div>` : ""}
     <section><h2>${night ? "Who played" : "Attendance"}</h2><div id="at"></div>
       <div class="note">Time played counts each game's length × the share of its rounds a player was in. ${night ? "" : "Join time is the average start of each player’s first game of the night."} Quits are leaving a game in progress (not map changes); timeouts are connection drops.</div></section>
+    ${night ? `<section class="card pad"><h2>On the server</h2><div id="tl" data-night="${night}"><div class="sub">Loading…</div></div></section>` : ""}
     ${
       night
         ? ""
@@ -5151,6 +5164,90 @@
               sort: night ? "join" : "nn",
               asc: !!night,
               rank: true,
+            });
+            if (night) renderTimeline(night, gs);
+          }
+
+          // ---------- who was on the server when ----------
+          let PRESENCE = null;
+          const loadPresence = () =>
+            PRESENCE
+              ? Promise.resolve(PRESENCE)
+              : fetch("data/presence.json", { cache: "no-cache" })
+                  .then((r) => (r.ok ? r.json() : {}))
+                  .catch(() => ({}))
+                  .then((d) => (PRESENCE = d));
+          // minutes past 6 PM Pacific on the night's date; sessions are stored in UTC
+          const pacificMins = (iso, night) => {
+            const parts = Object.fromEntries(
+              new Intl.DateTimeFormat("en-US", {
+                timeZone: "America/Los_Angeles",
+                hourCycle: "h23",
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+              })
+                .formatToParts(new Date(iso))
+                .map((p) => [p.type, p.value]),
+            );
+            const local = Date.UTC(+parts.year, +parts.month - 1, +parts.day, +parts.hour, +parts.minute, +parts.second);
+            const [y, m, d] = night.split("-").map(Number);
+            return (local - Date.UTC(y, m - 1, d, 18, 0, 0)) / 60000;
+          };
+          function renderTimeline(night, gs) {
+            loadPresence().then((pres) => {
+              const box = $("#tl");
+              if (!box || box.dataset.night !== night) return;
+              const list = pres[night] || [];
+              if (!list.length) {
+                box.innerHTML =
+                  '<div class="note">No join/leave times for this night. They are read from the server logs, so nights from before this was added only have the table above.</div>';
+                return;
+              }
+              const by = {};
+              for (const s of list) {
+                const a = (by[s.id] = by[s.id] || { id: s.id, n: s.n, s: [] });
+                a.n = s.n;
+                a.s.push({ a: pacificMins(s.in, night), b: pacificMins(s.out, night), o: !!s.o, st: !!s.s });
+              }
+              const rows = Object.values(by).sort((x, y) => x.s[0].a - y.s[0].a);
+              const bands = gs.map((g) => {
+                const a = nightMins(g, g.start);
+                return { a, b: a + g.min, map: g.map };
+              });
+              const all = [...rows.flatMap((r) => r.s.flatMap((s) => [s.a, s.b])), ...bands.flatMap((g) => [g.a, g.b])];
+              const lo = Math.floor(Math.min(...all) / 30) * 30;
+              const hi = Math.ceil(Math.max(...all) / 30) * 30;
+              const span = Math.max(hi - lo, 30);
+              const x = (m) => ((m - lo) / span) * 100;
+              // most players on at once
+              const ev = rows.flatMap((r) => r.s.flatMap((s) => [[s.a, 1], [s.b, -1]])).sort((p, q) => p[0] - q[0] || p[1] - q[1]);
+              let cur = 0, peak = 0, peakAt = 0;
+              for (const [m, d] of ev) {
+                cur += d;
+                if (cur > peak) (peak = cur), (peakAt = m);
+              }
+              let ticks = "";
+              for (let m = Math.ceil(lo / 60) * 60; m <= hi; m += 60)
+                ticks += `<span style="left:${x(m)}%">${clock(18 * 60 + m)}</span>`;
+              const bandHtml = bands
+                .map((g) => `<i class="tlgame" style="left:${x(g.a)}%;width:${x(g.b) - x(g.a)}%" title="${esc(mapName(g.map))}"></i>`)
+                .join("");
+              const seg = (r, s) => {
+                const note = s.o ? " (still connected when the logs ended)" : s.st ? " (already on when the log began)" : "";
+                const tip = `${r.n}: ${clock(18 * 60 + s.a)} – ${clock(18 * 60 + s.b)}${note}`;
+                return `<i class="tlseg${s.o ? " open" : ""}" style="left:${x(s.a)}%;width:${x(s.b) - x(s.a)}%" title="${esc(tip)}"></i>`;
+              };
+              box.innerHTML = `
+                <div class="sub">${rows.length} players · most on at once: ${peak} around ${clock(18 * 60 + peakAt)}</div>
+                <div class="tl"><div class="tlaxis">${ticks}</div>
+                  ${rows.map((r) => `<div class="tlrow"><div class="tlname">${plink(r.id, r.n)}</div><div class="tltrack">${bandHtml}${r.s.map((s) => seg(r, s)).join("")}</div></div>`).join("")}
+                </div>
+                <div class="tlkey"><span><i style="background:var(--ct)"></i>On the server</span><span><i style="background:var(--accent-soft)"></i>A match was running</span></div>
+                <div class="note">Times are Pacific. A map change drops everyone for a moment, so gaps under two minutes are joined into one stay.</div>`;
             });
           }
 
