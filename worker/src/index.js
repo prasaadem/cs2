@@ -850,17 +850,17 @@ async function storeRatings(request, env) {
   return json({ ok: true, players: Object.keys(payload.players).length }, 200);
 }
 
-function rateLimited(request) {
+function rateLimited(request, hits = splitHits, limit = SPLIT_RATE_LIMIT) {
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
   const minute = Math.floor(Date.now() / 60000);
-  const entry = splitHits.get(ip);
+  const entry = hits.get(ip);
   if (!entry || entry.minute !== minute) {
-    if (splitHits.size > 5000) splitHits.clear();
-    splitHits.set(ip, { minute, count: 1 });
+    if (hits.size > 5000) hits.clear();
+    hits.set(ip, { minute, count: 1 });
     return false;
   }
   entry.count += 1;
-  return entry.count > SPLIT_RATE_LIMIT;
+  return entry.count > limit;
 }
 
 // Matches each requested player to the ratings by account ID, Steam3 ID
@@ -1371,6 +1371,84 @@ async function discordInteraction(request, env, ctx) {
   return discordReply(formatTeams(result.body));
 }
 
+// ---- Live presence: who is on the server right now ------------------------------
+// A cron trigger (see wrangler.toml) checks the server about once a minute and keeps a
+// small snapshot in KV; /api/presence only ever serves that snapshot, so visitors never
+// reach DatHost. The snapshot is written when it changes and otherwise every
+// PRESENCE_REFRESH_MS, which keeps KV writes far under the free limit and lets the
+// reader tell "nothing changed" from "the checker stopped".
+const PRESENCE_KEY = "live:presence";
+const PRESENCE_REFRESH_MS = 10 * 60 * 1000;
+const PRESENCE_STALE_MS = 15 * 60 * 1000;
+const PRESENCE_RATE_LIMIT = 30; // requests per minute per client IP, per Worker instance
+const PRESENCE_MAX_PLAYERS = 32;
+const presenceHits = new Map();
+
+// Checks the server and updates the snapshot. Returns the snapshot, or null when the
+// check could not be completed (the previous snapshot is then left as it was).
+async function pollPresence(env, now = Date.now()) {
+  if (
+    !env.RATINGS ||
+    !env.DATHOST_EMAIL ||
+    !env.DATHOST_PASSWORD ||
+    !env.DATHOST_SERVER_ID
+  )
+    return null;
+  const server = await dathost(`/game-servers/${serverId(env)}`, "GET", env);
+  const state = serverState(server);
+  let snap = { v: 1, online: false, map: null, players: [] };
+  if (state.running && !state.transitioning) {
+    const result = await getConnectedPlayers(env);
+    if (!result.available) return null;
+    snap = {
+      v: 1,
+      online: true,
+      map: currentMap(server) || null,
+      // names only: no user IDs, Steam IDs or addresses
+      players: result.players
+        .map((player) => String(player.name).slice(0, 64))
+        .sort((a, b) => a.localeCompare(b))
+        .slice(0, PRESENCE_MAX_PLAYERS),
+    };
+  }
+  const prev = await env.RATINGS.get(PRESENCE_KEY, { type: "json" });
+  const unchanged =
+    prev &&
+    prev.online === snap.online &&
+    prev.map === snap.map &&
+    JSON.stringify(prev.players) === JSON.stringify(snap.players);
+  if (unchanged && now - Date.parse(prev.updatedAt) < PRESENCE_REFRESH_MS)
+    return prev;
+  snap.updatedAt = new Date(now).toISOString();
+  await env.RATINGS.put(PRESENCE_KEY, JSON.stringify(snap));
+  return snap;
+}
+
+async function getPresence(request, env, cors) {
+  if (request.method !== "GET")
+    return json({ error: "Method not allowed" }, 405, cors);
+  if (rateLimited(request, presenceHits, PRESENCE_RATE_LIMIT))
+    return json({ error: "Too many requests; try again in a minute" }, 429, cors);
+  if (!env.RATINGS)
+    return json({ error: "Presence storage is not configured" }, 503, cors);
+  const headers = { ...cors, "Cache-Control": "public, max-age=15" };
+  const snap = await env.RATINGS.get(PRESENCE_KEY, { type: "json" });
+  const fresh =
+    snap && Date.now() - Date.parse(snap.updatedAt) <= PRESENCE_STALE_MS;
+  if (!fresh) return json({ available: false }, 200, headers);
+  return json(
+    {
+      available: true,
+      online: snap.online,
+      map: snap.map,
+      players: snap.players,
+      updatedAt: snap.updatedAt,
+    },
+    200,
+    headers,
+  );
+}
+
 async function handle(request, env, ctx) {
   const url = new URL(request.url);
   // Called by the daily GitHub Action, not a browser, so it has no Origin header.
@@ -1390,6 +1468,7 @@ async function handle(request, env, ctx) {
     return new Response(null, { status: 204, headers: cors });
 
   if (url.pathname === "/api/split") return splitTeams(request, env, cors);
+  if (url.pathname === "/api/presence") return getPresence(request, env, cors);
   if (url.pathname === "/api/login" && request.method === "POST") {
     if (!env.CONTROL_PASSPHRASE || !env.SESSION_SECRET)
       return json({ error: "Worker secrets are not configured" }, 503, cors);
@@ -1568,5 +1647,11 @@ async function handle(request, env, ctx) {
   }
 }
 
-export { bestSplit };
-export default { fetch: handle };
+// Cron trigger: refresh the live presence snapshot. A failed check keeps the old
+// snapshot, which goes stale on its own if checks keep failing.
+async function scheduled(event, env, ctx) {
+  ctx.waitUntil(pollPresence(env).catch(() => null));
+}
+
+export { bestSplit, pollPresence };
+export default { fetch: handle, scheduled };

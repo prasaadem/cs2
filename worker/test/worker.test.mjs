@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { after, before, test } from "node:test";
-import worker, { bestSplit } from "../src/index.js";
+import worker, { bestSplit, pollPresence } from "../src/index.js";
 
 const origin = "https://prasaadem.github.io";
 const env = {
@@ -978,4 +978,153 @@ test("no grudges post when start fails, when there is no recap, or for other act
     globalThis.fetch = saved;
   }
   assert.equal(discord.length, 1);
+});
+
+// ---- live presence ---------------------------------------------------------------
+
+function memoryKV(initial = {}) {
+  const data = new Map(Object.entries(initial));
+  const kv = {
+    puts: 0,
+    async get(key) {
+      return data.has(key) ? JSON.parse(data.get(key)) : null;
+    },
+    async put(key, value) {
+      kv.puts += 1;
+      data.set(key, value);
+    },
+  };
+  return kv;
+}
+
+// Mocks DatHost: the server record, the console command, and the console backlog.
+function mockServer({ status = "running", names = [], statusOk = true } = {}) {
+  const calls = { console: 0 };
+  globalThis.fetch = async (url, options) => {
+    if (String(url).includes("/console")) {
+      calls.console += 1;
+      if (options.method === "GET") {
+        return Response.json(
+          statusOk
+            ? [
+                "# userid name uniqueid connected ping loss state rate",
+                ...names.map(
+                  (n, i) => `# ${i + 2} "${n}" STEAM_1:0:${100 + i} 00:10:20 42 0 active 786432`,
+                ),
+                '# 99 "Practice Bot" BOT 00:10:20 5 0 active 786432',
+              ]
+            : ["nothing useful"],
+        );
+      }
+      return new Response(null, { status: 200 });
+    }
+    return Response.json({ status, ip: "203.0.113.5", ports: { game: 27015 } });
+  };
+  return calls;
+}
+
+const presenceEnv = (kv) => ({ ...env, RATINGS: kv });
+
+test("presence poll saves names only, sorted, and skips bots", async () => {
+  const kv = memoryKV();
+  mockServer({ names: ["Zed", "alpha"] });
+  const snap = await pollPresence(presenceEnv(kv), 1_000_000);
+  assert.equal(snap.online, true);
+  assert.deepEqual(snap.players, ["alpha", "Zed"]);
+  const saved = JSON.stringify(await kv.get("live:presence"));
+  assert.ok(!/STEAM|\[U:|203\.0\.113/.test(saved), "no IDs or addresses stored");
+});
+
+test("presence poll writes only on a change or after the refresh interval", async () => {
+  const kv = memoryKV();
+  const e = presenceEnv(kv);
+  mockServer({ names: ["Rat"] });
+  await pollPresence(e, 1_000_000);
+  await pollPresence(e, 1_060_000); // a minute later, same players
+  await pollPresence(e, 1_120_000);
+  assert.equal(kv.puts, 1);
+  mockServer({ names: ["Rat", "Sheldor"] });
+  await pollPresence(e, 1_180_000); // someone joined
+  assert.equal(kv.puts, 2);
+  await pollPresence(e, 1_180_000 + 11 * 60 * 1000); // same players, past the refresh interval
+  assert.equal(kv.puts, 3);
+});
+
+test("presence poll records an offline server without asking the console", async () => {
+  const kv = memoryKV();
+  const calls = mockServer({ status: "stopped" });
+  const snap = await pollPresence(presenceEnv(kv), 1_000_000);
+  assert.deepEqual([snap.online, snap.players], [false, []]);
+  assert.equal(calls.console, 0);
+});
+
+test("presence poll keeps the old snapshot when the console cannot be read", async () => {
+  const kv = memoryKV();
+  mockServer({ names: ["Rat"], statusOk: false });
+  assert.equal(await pollPresence(presenceEnv(kv), 1_000_000), null);
+  assert.equal(kv.puts, 0);
+});
+
+test("presence poll does nothing until KV and DatHost are configured", async () => {
+  mockServer({ names: ["Rat"] });
+  assert.equal(await pollPresence({ ...env }, 1_000_000), null);
+});
+
+test("/api/presence serves the snapshot to allowed origins and needs no login", async () => {
+  const kv = memoryKV({
+    "live:presence": JSON.stringify({
+      v: 1, online: true, map: "de_dust2", players: ["Rat", "Zed"],
+      updatedAt: new Date().toISOString(),
+    }),
+  });
+  const { updatedAt } = await kv.get("live:presence");
+  const response = await worker.fetch(request("/api/presence"), presenceEnv(kv));
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), {
+    available: true, online: true, map: "de_dust2", players: ["Rat", "Zed"], updatedAt,
+  });
+  const blocked = await worker.fetch(
+    request("/api/presence", { requestOrigin: "https://evil.example" }),
+    presenceEnv(kv),
+  );
+  assert.equal(blocked.status, 403);
+});
+
+test("/api/presence says unavailable when there is no snapshot or it has gone stale", async () => {
+  const stale = new Date(Date.now() - 16 * 60 * 1000).toISOString();
+  for (const kv of [
+    memoryKV(),
+    memoryKV({ "live:presence": JSON.stringify({ v: 1, online: true, map: null, players: ["Rat"], updatedAt: stale }) }),
+  ]) {
+    const response = await worker.fetch(request("/api/presence"), presenceEnv(kv));
+    assert.deepEqual(await response.json(), { available: false });
+  }
+});
+
+test("/api/presence reports 503 without KV and rejects other methods", async () => {
+  assert.equal((await worker.fetch(request("/api/presence"), { ...env })).status, 503);
+  const post = await worker.fetch(request("/api/presence", { method: "POST", body: {} }), presenceEnv(memoryKV()));
+  assert.equal(post.status, 405);
+});
+
+test("/api/presence is rate limited per client", async () => {
+  const kv = memoryKV();
+  const hit = () =>
+    worker.fetch(
+      new Request("https://worker.example/api/presence", {
+        headers: { Origin: origin, "CF-Connecting-IP": "198.51.100.7" },
+      }),
+      presenceEnv(kv),
+    );
+  for (let i = 0; i < 30; i++) assert.equal((await hit()).status, 200);
+  assert.equal((await hit()).status, 429);
+});
+
+test("the cron trigger refreshes the snapshot in the background", async () => {
+  const kv = memoryKV();
+  mockServer({ names: ["Rat"] });
+  const pending = [];
+  await worker.scheduled({}, presenceEnv(kv), { waitUntil: (p) => pending.push(p) });
+  await Promise.all(pending);
+  assert.deepEqual((await kv.get("live:presence")).players, ["Rat"]);
 });

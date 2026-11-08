@@ -1788,6 +1788,10 @@
       .tlaxis span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
       .tlkey { display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.75rem; color: var(--text-3); margin-top: 0.6rem; }
       .tlkey i { display: inline-block; width: 12px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
+          /* server page: who is on right now */
+      .live-names { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.6rem; }
+      .live-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; background: var(--text-3); }
+      .live-dot.on { background: var(--win); }
     </style>
   </head>
   <body>
@@ -6336,10 +6340,58 @@
               `<h1>Not found</h1><p class="sub">Nothing here${onlyFin ? " with “Completed games only” switched on" : ""}. <a href="#/" style="color:var(--accent)">Back to overview</a></p>`;
           }
 
+          // ---------- live: who is on the server right now ----------
+          // Public: reads the Worker's snapshot (names only), no sign-in needed.
+          const LIVE_WORKER = "https://cs2-server-control.prasaadem.workers.dev";
+          let liveTimer = null;
+          async function renderLive() {
+            const box = document.getElementById("live-body");
+            if (!box) {
+              clearInterval(liveTimer);
+              liveTimer = null;
+              return;
+            }
+            let base = LIVE_WORKER;
+            try {
+              const saved = localStorage.getItem("cs2.controlWorkerUrl");
+              if (saved && /^https:\/\/[^/]+\.workers\.dev$/.test(saved)) base = saved;
+            } catch (e) {}
+            let d = null;
+            try {
+              const r = await fetch(base + "/api/presence", { cache: "no-store" });
+              d = r.ok ? await r.json() : null;
+            } catch (e) {}
+            if (!document.getElementById("live-body")) return;
+            if (!d || !d.available) {
+              box.innerHTML = '<span class="live-dot"></span>Live status isn’t available right now.';
+              return;
+            }
+            const ago = Math.max(0, Math.round((Date.now() - Date.parse(d.updatedAt)) / 60000));
+            const when = ago < 1 ? "just now" : `${ago} min ago`;
+            if (!d.online) {
+              box.innerHTML = `<span class="live-dot"></span>The server is off. <span class="muted">Checked ${when}.</span>`;
+              return;
+            }
+            const map = d.map ? ` on ${esc(mapName(d.map))}` : "";
+            if (!d.players.length) {
+              box.innerHTML = `<span class="live-dot on"></span>The server is on${map}, nobody connected yet. <span class="muted">Checked ${when}.</span>`;
+              return;
+            }
+            box.innerHTML = `<span class="live-dot on"></span>${d.players.length} on the server${map} <span class="muted">· checked ${when}</span>
+              <div class="live-names">${d.players.map((n) => `<span class="chip">${esc(n)}</span>`).join("")}</div>`;
+          }
+          function startLive() {
+            clearInterval(liveTimer);
+            renderLive();
+            liveTimer = setInterval(renderLive, 30000);
+          }
+
           function viewServer() {
             pageTitle("Server");
+            setTimeout(startLive, 0); // after the page below is in place
             $("#app").innerHTML =
               `<div class="pagehead"><div><h1>Server</h1><div class="sub">Power controls</div></div><div class="srv-tools"><div class="srv-session" id="server-session" hidden>Unlocked<button id="server-signout" type="button">Sign out</button></div><button class="iconbtn" id="server-refresh" type="button" title="Refresh status" aria-label="Refresh status">↻</button></div></div>
+    <section class="card pad" id="live" style="margin-bottom:1rem"><h2>Now playing</h2><div id="live-body" class="sub">Checking…</div></section>
     <p class="server-message" id="server-message" role="status" aria-live="polite"></p>
     <form class="server-connection card" id="server-connect">
       <label class="server-field">Worker URL<input id="server-url" type="url" inputmode="url" placeholder="https://your-worker.your-account.workers.dev" autocomplete="url" required></label>
