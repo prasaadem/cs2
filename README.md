@@ -92,6 +92,14 @@ Use a unique, randomly generated control passphrase of at least 32 characters an
 
 The allowed site origins are configured in `worker/wrangler.toml` for `https://prasaadem.github.io` and local preview on port 8765. If the Pages domain changes, update `ALLOWED_ORIGINS` and redeploy. After deployment, open `#/server` on the site, enter the Worker URL shown by Wrangler and the control passphrase, then unlock. The passphrase is sent only to the Worker over HTTPS; the returned token expires after 15 minutes and is kept in browser local storage so the session survives reloads until expiry or sign-out.
 
+### Live presence ("Now playing")
+
+A Worker cron trigger (`[triggers]` in `worker/wrangler.toml`, every minute) checks DatHost and keeps a small snapshot in the `RATINGS` KV namespace under the key `live:presence`: whether the server is on, the map, and the connected players' names. No IDs or addresses are stored. The snapshot is written when it changes and otherwise every 10 minutes, which keeps KV writes well under the free limit.
+
+`GET /api/presence` serves that snapshot to the allowed site origins with no sign-in, limited to 30 requests a minute per IP, and never calls DatHost itself. If the snapshot is more than 15 minutes old (the checker stopped) it answers `{"available": false}`. The Server page shows it as "Now playing" above the controls and refreshes every 30 seconds.
+
+No new secrets are needed. Deploying the Worker (`npx wrangler deploy --config worker/wrangler.toml`) registers the cron trigger.
+
 ### Team balancer
 
 The daily job computes player ratings (`stats/ratings.py`) and sends them to the Worker, which keeps them in KV. The ratings never go into `docs/` or `data/`, and no endpoint returns them.

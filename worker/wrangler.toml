@@ -12,3 +12,7 @@ DISCORD_PUBLIC_KEY = "a37d43b961f62756d3e66f8b9b374f1c2f33beba43c80996f27d943ddd
 [[kv_namespaces]]
 binding = "RATINGS"
 id = "148c3c4bdbd24c55a71a7e154047e278"
+
+# Live presence: refresh the "who is on the server" snapshot every minute.
+[triggers]
+crons = ["* * * * *"]
