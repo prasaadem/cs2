@@ -2054,7 +2054,7 @@
    "start_utc": "2026-11-08T09:21:24Z",
    "dur": 1192,
    "rounds": 14,
-   "trimmed": 13,
+   "trimmed": 14,
    "players": [
     "pichekistha",
     "mcdreamy111",
@@ -2804,7 +2804,7 @@
    ]
   },
   "auto-20261108-0920-cs_museum_d-cupcake.dem": {
-   "size": 131686400,
+   "size": 131704656,
    "ids": [
     "20261108-0922-cs_museum_d",
     "20261108-0922-cs_museum_d"
