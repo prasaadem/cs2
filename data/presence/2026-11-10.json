@@ -1,0 +1,90 @@
+{
+ "night": "2026-11-10",
+ "sessions": [
+  {
+   "id": "837983112",
+   "in": "2026-11-11T05:21:11Z",
+   "n": "KaiZen",
+   "out": "2026-11-11T08:22:53Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "859176345",
+   "in": "2026-11-11T05:21:11Z",
+   "n": "It's Thief",
+   "out": "2026-11-11T08:22:57Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "80924469",
+   "in": "2026-11-11T05:21:36Z",
+   "n": "pichekistha",
+   "out": "2026-11-11T08:23:12Z",
+   "r": "NETWORK_DISCONNECT_TIMEDOUT"
+  },
+  {
+   "id": "1080094440",
+   "in": "2026-11-11T05:26:39Z",
+   "n": "Sheldor",
+   "out": "2026-11-11T08:22:44Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "1075176373",
+   "in": "2026-11-11T05:40:12Z",
+   "n": "prasaadem",
+   "out": "2026-11-11T08:22:54Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "887890842",
+   "in": "2026-11-11T05:41:52Z",
+   "n": "BigHero",
+   "out": "2026-11-11T08:22:52Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "186183274",
+   "in": "2026-11-11T05:43:28Z",
+   "n": "whitefe@ther",
+   "out": "2026-11-11T08:22:54Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "892155064",
+   "in": "2026-11-11T05:59:29Z",
+   "n": "Rat",
+   "out": "2026-11-11T08:23:08Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "156268658",
+   "in": "2026-11-11T06:08:45Z",
+   "n": "mcdreamy111",
+   "out": "2026-11-11T08:22:48Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "335158966",
+   "in": "2026-11-11T06:24:44Z",
+   "n": "kiiiiiira",
+   "out": "2026-11-11T08:23:16Z",
+   "r": "NETWORK_DISCONNECT_TIMEDOUT"
+  },
+  {
+   "id": "1080906432",
+   "in": "2026-11-11T06:29:03Z",
+   "n": "Ironman",
+   "out": "2026-11-11T08:11:49Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "867967831",
+   "in": "2026-11-11T06:42:15Z",
+   "n": "MAXROY",
+   "out": "2026-11-11T08:22:53Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  }
+ ],
+ "v": 1
+}
