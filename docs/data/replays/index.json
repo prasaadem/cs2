@@ -2287,9 +2287,9 @@
    "game": "20261111-0808-de_anubis",
    "map": "de_anubis",
    "start_utc": "2026-11-11T08:07:46Z",
-   "dur": 879,
+   "dur": 876,
    "rounds": 10,
-   "trimmed": 11,
+   "trimmed": 18,
    "players": [
     "pichekistha",
     "mcdreamy111",
@@ -3124,7 +3124,7 @@
    ]
   },
   "auto-20261111-0806-de_anubis-cupcake.dem": {
-   "size": 118964224,
+   "size": 119031093,
    "ids": [
     "20261111-0808-de_anubis"
    ]
