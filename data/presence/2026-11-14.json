@@ -1,0 +1,147 @@
+{
+ "night": "2026-11-14",
+ "sessions": [
+  {
+   "id": "80924469",
+   "in": "2026-11-15T05:14:42Z",
+   "n": "pichekistha",
+   "o": 1,
+   "out": "2026-11-15T05:31:01Z",
+   "r": ""
+  },
+  {
+   "id": "1080094440",
+   "in": "2026-11-15T05:37:04Z",
+   "n": "Sheldor",
+   "out": "2026-11-15T05:37:18Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "80924469",
+   "in": "2026-11-15T05:37:05Z",
+   "n": "pichekistha",
+   "out": "2026-11-15T05:52:23Z",
+   "r": "NETWORK_DISCONNECT_TIMEDOUT"
+  },
+  {
+   "id": "859176345",
+   "in": "2026-11-15T05:37:06Z",
+   "n": "It's Thief",
+   "out": "2026-11-15T08:44:47Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "1075176373",
+   "in": "2026-11-15T05:39:07Z",
+   "n": "prasaadem",
+   "out": "2026-11-15T09:34:14Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "186183274",
+   "in": "2026-11-15T05:42:10Z",
+   "n": "whitefe@ther",
+   "out": "2026-11-15T09:34:13Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "837983112",
+   "in": "2026-11-15T05:43:28Z",
+   "n": "KaiZen",
+   "out": "2026-11-15T09:34:12Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "87305029",
+   "in": "2026-11-15T05:44:50Z",
+   "n": "Fraggy",
+   "out": "2026-11-15T09:18:12Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "1080094440",
+   "in": "2026-11-15T05:45:17Z",
+   "n": "Sheldor",
+   "out": "2026-11-15T09:34:18Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "887890842",
+   "in": "2026-11-15T05:48:17Z",
+   "n": "BigHero",
+   "out": "2026-11-15T06:52:37Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "183841098",
+   "in": "2026-11-15T05:48:51Z",
+   "n": "Ground5",
+   "out": "2026-11-15T09:34:27Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "80924469",
+   "in": "2026-11-15T05:54:38Z",
+   "n": "pichekistha",
+   "out": "2026-11-15T09:34:31Z",
+   "r": "NETWORK_DISCONNECT_TIMEDOUT"
+  },
+  {
+   "id": "867967831",
+   "in": "2026-11-15T06:01:18Z",
+   "n": "MAXROY",
+   "out": "2026-11-15T09:34:17Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "1080906432",
+   "in": "2026-11-15T06:12:48Z",
+   "n": "Ironman",
+   "out": "2026-11-15T09:14:50Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "892155064",
+   "in": "2026-11-15T06:27:09Z",
+   "n": "Rat",
+   "out": "2026-11-15T09:34:18Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "335158966",
+   "in": "2026-11-15T06:31:48Z",
+   "n": "kiiiiiira",
+   "out": "2026-11-15T09:31:33Z",
+   "r": "NETWORK_DISCONNECT_EXITING"
+  },
+  {
+   "id": "1085341771",
+   "in": "2026-11-15T06:50:48Z",
+   "n": "blazingshack",
+   "out": "2026-11-15T09:14:40Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "887890842",
+   "in": "2026-11-15T07:05:45Z",
+   "n": "BigHero",
+   "out": "2026-11-15T07:11:02Z",
+   "r": "NETWORK_DISCONNECT_TIMEDOUT"
+  },
+  {
+   "id": "887890842",
+   "in": "2026-11-15T07:14:02Z",
+   "n": "BigHero",
+   "out": "2026-11-15T09:34:10Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  },
+  {
+   "id": "156268658",
+   "in": "2026-11-15T07:16:00Z",
+   "n": "mcdreamy111",
+   "out": "2026-11-15T09:14:43Z",
+   "r": "NETWORK_DISCONNECT_DISCONNECT_BY_USER"
+  }
+ ],
+ "v": 1
+}
