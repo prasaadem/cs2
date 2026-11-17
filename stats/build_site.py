@@ -10,7 +10,9 @@ without it the previous sync time is kept.
 Writes docs/data/games.json (all games in one file, oldest first),
 docs/data/positions.json (kill and grenade positions, loaded only by the
 heatmap page), docs/data/presence.json (who was on the server when, loaded only by the
-attendance page) and docs/index.html (the page, which loads that JSON).
+attendance page), docs/data/teamhits.json (same-team hits per game, loaded only by the
+friendly fire page), docs/data/rivalries.json (kills between opponents per game, loaded
+only by the rivalries page) and docs/index.html (the page, which loads that JSON).
 """
 import argparse
 import datetime as dt
@@ -23,6 +25,8 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import presence  # noqa: E402
+import rivalries  # noqa: E402
+import teamhits  # noqa: E402
 
 
 def radar_overviews(radar_dir):
@@ -71,6 +75,8 @@ def main():
             synced = json.load(fh).get('synced')
 
     os.makedirs(os.path.join(args.docs, 'data'), exist_ok=True)
+    # who killed whom per game, for the Rivalries page; before kp is moved out of the games
+    matrix = rivalries.opponent_kills(games)
     positions = {}
     for g in games:
         kp, np_ = g.pop('kp', None), g.pop('np', None)
@@ -80,6 +86,11 @@ def main():
         json.dump(positions, fh, separators=(',', ':'))
     with open(os.path.join(args.docs, 'data', 'presence.json'), 'w', encoding='utf-8') as fh:
         json.dump(presence.load_all(args.presence), fh, ensure_ascii=False, separators=(',', ':'))
+    with open(os.path.join(args.docs, 'data', 'rivalries.json'), 'w', encoding='utf-8') as fh:
+        json.dump(matrix, fh, separators=(',', ':'))
+    with open(os.path.join(args.docs, 'data', 'teamhits.json'), 'w', encoding='utf-8') as fh:
+        json.dump(teamhits.all_teamhits(os.path.join(args.docs, 'data', 'replays')), fh,
+                  ensure_ascii=False, sort_keys=True, separators=(',', ':'))
     payload = {'title': args.title, 'updated': updated, 'synced': synced, 'games': games}
     with open(out, 'w', encoding='utf-8') as fh:
         json.dump(payload, fh, ensure_ascii=False, separators=(',', ':'))
