@@ -155,6 +155,10 @@ The bot replies publicly, shows "thinking…" while DatHost responds, then edits
 
 Run the Worker unit tests locally with `node --test worker/test/worker.test.mjs`.
 
+## Rivalries page
+
+The Rivalries page (`#/rivalries`) shows the same "last night's grudges" as the Discord message after `/server start`, for the latest night by default, any other night, or all time: each player's nemesis, the biggest rivalries (kills each way), duos who won or lost every game together, and a head-to-head kill matrix. It uses the recap's rules (warm-up maps skipped, kills on teammates and suicides ignored, nemesis needs 3+ kills and duos 3+ finished games for a night, 10+ for all time). The data is `docs/data/rivalries.json`, built by `stats/rivalries.py` from each game's kill list and loaded only by that page. Tests: `python stats/test_rivalries.py`.
+
 ## Stats notes
 
 - **Rating** is an HLTV 1.0-style rating, where 1.00 is average.

@@ -1792,6 +1792,23 @@
       .live-names { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.6rem; }
       .live-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; background: var(--text-3); }
       .live-dot.on { background: var(--win); }
+          /* rivalries */
+      .rvrow { display: grid; grid-template-columns: minmax(0, 9rem) minmax(0, 1fr) minmax(0, 9rem) 4.5rem; align-items: center; gap: 0.7rem; padding: 6px 0; font-size: 0.9rem; }
+      .rvrow .l { text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .rvrow .r { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .rvrow .sc { text-align: right; font-variant-numeric: tabular-nums; color: var(--text-2); }
+      .rvbar { display: flex; height: 12px; border-radius: 6px; overflow: hidden; background: var(--surface-2); }
+      .rvbar i { display: block; height: 100%; }
+      .rvbar .a { background: var(--accent); }
+      .rvbar .b { background: var(--ct); }
+      .rvmwrap { overflow-x: auto; }
+      table.rvm { border-collapse: collapse; font-size: 0.78rem; font-variant-numeric: tabular-nums; }
+      table.rvm th, table.rvm td { padding: 4px 6px; text-align: center; white-space: nowrap; }
+      table.rvm th.rl { text-align: right; position: sticky; left: 0; background: var(--surface); font-weight: 600; }
+      table.rvm thead th { font-weight: 500; color: var(--text-2); vertical-align: bottom; }
+      table.rvm td.self { background: var(--surface-2); }
+      .rvduo { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 10px; }
+      .rvduo .chip b { font-weight: 600; margin-left: 4px; }
     </style>
   </head>
   <body>
@@ -1913,6 +1930,12 @@
               <path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c3 0 6 1.8 6 5.5" />
               <path d="M13.5 3.5 20 10" /></svg
             ><span>Friendly fire</span></a
+          >
+          <a href="#/rivalries" data-r="rivalries"
+            ><svg class="ni" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 4l7 7M19 4l-7 7M12 11l-6 8M12 11l6 8" />
+              <path d="M3.5 5.5 5 4l1.5 1.5M20.5 5.5 19 4l-1.5 1.5" /></svg
+            ><span>Rivalries</span></a
           >
           <a href="#/awards" data-r="awards"
             ><svg class="ni" viewBox="0 0 24 24" aria-hidden="true">
@@ -5038,6 +5061,200 @@
             return { nights, rows: Object.values(by) };
           }
 
+          // ---------- rivalries: who beats whom ----------
+          // Same rules as the Discord "last night's grudges" message (stats/recap.py), for any
+          // night or all time. Kills between opponents per game come from data/rivalries.json.
+          let RIVALS = null;
+          const loadRivals = () =>
+            RIVALS
+              ? Promise.resolve(RIVALS)
+              : fetch("data/rivalries.json", { cache: "no-cache" })
+                  .then((r) => (r.ok ? r.json() : { ids: [], g: {} }))
+                  .catch(() => ({ ids: [], g: {} }))
+                  .then((d) => (RIVALS = d));
+          const RV_MIN_ROUNDS = 5;
+          function rivalStats(gs, rv, night) {
+            const names = {};
+            const kills = {};
+            const K = (a, b) => kills[a + "|" + b] || 0;
+            const duo = {};
+            for (const g of gs) {
+              const team = {};
+              for (const p of g.p) {
+                team[p.id] = p.team;
+                if ((p.r || 0) >= RV_MIN_ROUNDS) names[p.id] = p.n;
+              }
+              for (const [a, b, c] of rv.g[g.id] || []) {
+                const key = rv.ids[a] + "|" + rv.ids[b];
+                kills[key] = (kills[key] || 0) + c;
+              }
+              if (g.fin) {
+                const ps = g.p.filter((p) => (p.res === "W" || p.res === "L") && (p.r || 0) >= RV_MIN_ROUNDS);
+                for (let i = 0; i < ps.length; i++)
+                  for (let j = i + 1; j < ps.length; j++) {
+                    if (ps[i].team !== ps[j].team) continue;
+                    const key = [ps[i].id, ps[j].id].sort().join("|");
+                    const d = (duo[key] = duo[key] || [0, 0]);
+                    d[ps[i].res === "L" ? 1 : 0] += 1;
+                  }
+              }
+            }
+            // string order like Python's, so ties break the same way as the Discord message
+            const lc = (id) => names[id].toLowerCase();
+            const cmp = (x, y) => (x < y ? -1 : x > y ? 1 : 0);
+            const ids = Object.keys(names).sort((a, b) => cmp(lc(a), lc(b)));
+            const minNem = night ? 3 : 10;
+            const nem = {};
+            for (const v of ids) {
+              let best = null, bestKey = null;
+              for (const a of ids) {
+                if (a === v) continue;
+                const key = [K(a, v), K(a, v) - K(v, a), lc(a)];
+                if (!bestKey || key[0] > bestKey[0] || (key[0] === bestKey[0] && (key[1] > bestKey[1] || (key[1] === bestKey[1] && key[2] >= bestKey[2])))) {
+                  best = a;
+                  bestKey = key;
+                }
+              }
+              if (best && K(best, v) >= minNem) nem[v] = best;
+            }
+            const done = new Set();
+            const nemRows = [];
+            for (const [v, a] of Object.entries(nem)) {
+              if (done.has(v)) continue;
+              if (nem[a] === v) {
+                done.add(v);
+                done.add(a);
+                let [first, second] = K(v, a) >= K(a, v) ? [v, a] : [a, v];
+                const x = K(second, first), y = K(first, second);
+                // first is the one who got the better of it
+                nemRows.push({ a: first, b: second, x: Math.max(K(v, a), K(a, v)), y: Math.min(K(v, a), K(a, v)), mutual: true });
+              } else {
+                nemRows.push({ a: v, b: a, x: K(a, v), y: K(v, a), mutual: false });
+              }
+            }
+            nemRows.sort((p, q) => q.x - q.y - (p.x - p.y) || q.x + q.y - (p.x + p.y));
+            const pairs = [];
+            for (let i = 0; i < ids.length; i++)
+              for (let j = i + 1; j < ids.length; j++) {
+                const t = K(ids[i], ids[j]) + K(ids[j], ids[i]);
+                if (t) pairs.push([t, ids[i], ids[j]]);
+              }
+            pairs.sort((p, q) => q[0] - p[0] || cmp(lc(p[1]), lc(q[1])) || cmp(lc(p[2]), lc(q[2])));
+            const minDuo = night ? 3 : 10;
+            const streaks = Object.entries(duo)
+              .filter(([, r]) => r[0] + r[1] >= minDuo && (r[0] === 0 || r[1] === 0))
+              .map(([key, r]) => [r, ...key.split("|")])
+              .filter(([, a, b]) => names[a] && names[b]);
+            const order = (p, q) => q[0][0] + q[0][1] - (p[0][0] + p[0][1]) || cmp(lc(p[1]), lc(q[1])) || cmp(lc(p[2]), lc(q[2]));
+            return {
+              names,
+              ids,
+              K,
+              nemRows,
+              pairs,
+              unbeaten: streaks.filter((s) => s[0][1] === 0).sort(order),
+              winless: streaks.filter((s) => s[0][0] === 0).sort(order),
+              total: Object.values(kills).reduce((a, b) => a + b, 0),
+            };
+          }
+          function viewRivalries(arg) {
+            pageTitle("Rivalries");
+            $("#app").innerHTML = `
+    <div class="pagehead"><div><h1>Rivalries</h1><div class="sub" id="rv-sub">Who beats whom</div></div></div>
+    <div id="rv"><div class="sub">Loading…</div></div>`;
+            loadRivals().then((rv) => {
+              const box = $("#rv");
+              if (!box || !location.hash.startsWith("#/rivalries")) return;
+              const covered = games().filter((g) => rv.g[g.id]);
+              if (!covered.length) {
+                box.innerHTML = '<div class="note">No kill data yet.</div>';
+                return;
+              }
+              const nights = [...new Set(covered.map((g) => g.night))].sort().reverse();
+              const all = arg === "all";
+              const night = all ? null : nights.includes(arg) ? arg : nights[0];
+              if (arg && !all && arg !== night) return notFound();
+              const gs = night ? covered.filter((g) => g.night === night) : covered;
+              const S = rivalStats(gs, rv, !!night);
+              const nm = (id) => `<a href="#/player/${id}">${esc(S.names[id])}</a>`;
+              $("#rv-sub").textContent = night ? `${nightLabel(night, true)} · ${gs.length} games` : `All time · ${gs.length} games`;
+              const top = S.pairs[0];
+              const tiles = `<div class="tiles">
+                ${tile("Games", gs.length, night ? "that night" : `${nights.length} nights`)}
+                ${tile("Kills between opponents", S.total.toLocaleString())}
+                ${top ? tile("Biggest rivalry", `${esc(S.names[top[1]])} vs ${esc(S.names[top[2]])}`, `${top[0]} kills between them`) : ""}
+              </div>`;
+              const split = (t, a, b) => {
+                const x = S.K(a, b), y = S.K(b, a);
+                const [lead, trail, xl, yl] = y > x ? [b, a, y, x] : [a, b, x, y];
+                return { lead, trail, xl, yl };
+              };
+              const rivalRows = S.pairs.slice(0, night ? 8 : 12).map(([t, a, b]) => {
+                const { lead, trail, xl, yl } = split(t, a, b);
+                return `<div class="rvrow"><div class="l">${nm(lead)}</div>
+                  <div class="rvbar" title="${esc(S.names[lead])} ${xl} – ${yl} ${esc(S.names[trail])}"><i class="a" style="width:${(xl / t) * 100}%"></i><i class="b" style="width:${(yl / t) * 100}%"></i></div>
+                  <div class="r">${nm(trail)}</div><div class="sc">${xl}–${yl}</div></div>`;
+              });
+              const duoChips = (list) =>
+                list.slice(0, 8).map((s) => `<span class="chip">${esc(S.names[s[1]])} + ${esc(S.names[s[2]])}<b>${s[0][0]}–${s[0][1]}</b></span>`).join("");
+              box.innerHTML = `
+    <div class="filters"><span class="flabel">Night</span><select id="rv-night"><option value="all" ${all ? "selected" : ""}>All time</option>${nights
+      .map((n) => `<option value="${n}" ${n === night ? "selected" : ""}>${esc(nightLabel(n))}</option>`)
+      .join("")}</select></div>
+    ${tiles}
+    <section><h2>${night ? "Last night’s grudges" : "Nemesis"}</h2>
+      <div id="rv-nem"><div class="t"></div></div>
+      <div class="note">The opponent who killed you most (at least ${night ? 3 : 10} kills). Two players who are each other’s nemesis share a row.</div></section>
+    <section><h2>Biggest rivalries</h2>${rivalRows.length ? rivalRows.join("") : '<div class="note">No kills between opponents.</div>'}
+      <div class="note">Kills each way between the pair. The longer left bar is who is ahead.</div></section>
+    <section><h2>Duos</h2>
+      ${S.unbeaten.length ? `<div>🟢 Unbeaten together</div><div class="rvduo">${duoChips(S.unbeaten)}</div>` : ""}
+      ${S.winless.length ? `<div>🔴 Never won together</div><div class="rvduo">${duoChips(S.winless)}</div>` : ""}
+      ${S.unbeaten.length || S.winless.length ? "" : '<div class="note">No pair has played enough finished games together with an all-win or all-loss record.</div>'}
+      <div class="note">Pairs on the same team in ${night ? 3 : 10}+ finished games who won all or lost all (wins–losses).</div></section>
+    <section><h2>Head to head</h2><div class="rvmwrap" id="rv-matrix"></div>
+      <div class="note">Kills by the player on the left against the player across the top. Darker means more.</div></section>`;
+              $("#rv-night").onchange = (e) => {
+                location.hash = "#/rivalries" + (e.target.value === "all" ? "/all" : "/" + e.target.value);
+              };
+              mountTable(
+                $("#rv-nem .t"),
+                [
+                  { k: "an", l: "Player", cls: "l pname", asc: true, v: (r) => S.names[r.a], f: (v, r) => nm(r.a) },
+                  { k: "bn", l: "Nemesis", cls: "l pname", asc: true, v: (r) => S.names[r.b], f: (v, r) => nm(r.b) },
+                  { k: "x", l: "Score", t: "Kills between them, the player first", v: (r) => r.x - r.y, f: (v, r) => `${r.x}–${r.y}` },
+                  { k: "tot", l: "Total", v: (r) => r.x + r.y },
+                  { k: "note", l: "", sort: false, v: () => 0, f: (v, r) => (r.mutual ? (r.x === r.y ? "dead even" : "each other’s nemesis") : "") },
+                ],
+                S.nemRows,
+                { sort: "x", rank: true },
+              );
+              // head-to-head matrix: players with the most kills first
+              const ranked = S.ids
+                .map((id) => ({ id, k: S.ids.reduce((a, o) => a + S.K(id, o), 0) }))
+                .filter((r) => r.k > 0)
+                .sort((a, b) => b.k - a.k)
+                .slice(0, 16)
+                .map((r) => r.id);
+              let max = 1;
+              for (const a of ranked) for (const b of ranked) if (a !== b) max = Math.max(max, S.K(a, b));
+              $("#rv-matrix").innerHTML = `<table class="rvm"><thead><tr><th></th>${ranked
+                .map((id) => `<th>${esc(S.names[id])}</th>`)
+                .join("")}</tr></thead><tbody>${ranked
+                .map(
+                  (a) =>
+                    `<tr><th class="rl">${nm(a)}</th>${ranked
+                      .map((b) =>
+                        a === b
+                          ? '<td class="self"></td>'
+                          : `<td style="background:rgba(235,104,52,${(0.55 * S.K(a, b)) / max})">${S.K(a, b) || ""}</td>`,
+                      )
+                      .join("")}</tr>`,
+                )
+                .join("")}</tbody></table>`;
+            });
+          }
+
           // ---------- friendly fire: hits on your own team ----------
           // The server has friendly fire off, so none of this did any damage; the demo
           // still records the contact. Counted per game in data/teamhits.json (see
@@ -7441,6 +7658,7 @@
                 heatmap: () => viewHeatmap(arg, arg2),
                 attendance: () => viewAttendance(arg),
                 friendlyfire: () => viewFriendlyFire(arg),
+                rivalries: () => viewRivalries(arg),
                 replays: viewReplays,
                 replay: () => viewReplay(arg),
               })[view] || notFound
