@@ -1906,6 +1906,14 @@
               <path d="m9 15.5 2 2 4-4" /></svg
             ><span>Attendance</span></a
           >
+          <a href="#/friendlyfire" data-r="friendlyfire"
+            ><svg class="ni" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="9" cy="8" r="3" />
+              <circle cx="17" cy="9" r="2.5" />
+              <path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c3 0 6 1.8 6 5.5" />
+              <path d="M13.5 3.5 20 10" /></svg
+            ><span>Friendly fire</span></a
+          >
           <a href="#/awards" data-r="awards"
             ><svg class="ni" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M8 4h8v5a4 4 0 0 1-8 0V4z" />
@@ -5030,6 +5038,112 @@
             return { nights, rows: Object.values(by) };
           }
 
+          // ---------- friendly fire: hits on your own team ----------
+          // The server has friendly fire off, so none of this did any damage; the demo
+          // still records the contact. Counted per game in data/teamhits.json (see
+          // stats/teamhits.py): [flashes, seconds blind, fire, HE, knife, bullets].
+          let TEAMHITS = null;
+          const loadTeamHits = () =>
+            TEAMHITS
+              ? Promise.resolve(TEAMHITS)
+              : fetch("data/teamhits.json", { cache: "no-cache" })
+                  .then((r) => (r.ok ? r.json() : {}))
+                  .catch(() => ({}))
+                  .then((d) => (TEAMHITS = d));
+          const FF_KINDS = [
+            { k: "tf", l: "Flashes", t: "Teammates flashed by this player's flashbangs", d: "Teammates flashed" },
+            { k: "fire", l: "Fire", t: "Times a molotov or incendiary burned a teammate", d: "Teammates burned" },
+            { k: "he", l: "HE", t: "Times an HE grenade hit a teammate", d: "HE grenades on teammates" },
+            { k: "knife", l: "Knife", t: "Knife hits on a teammate", d: "Knife hits on teammates" },
+            { k: "gun", l: "Bullets", t: "Gun hits on a teammate (rifles, pistols, snipers, shotguns)", d: "Bullets into teammates" },
+          ];
+          function ffRows(gs, hits) {
+            const by = {};
+            for (const g of gs) {
+              const e = hits[g.id];
+              if (!e) continue;
+              for (const p of g.p) {
+                const v = e[p.id];
+                if (!v) continue;
+                const r = (by[p.id] = by[p.id] || { id: p.id, n: p.n, g: 0, r: 0, tf: 0, tfs: 0, fire: 0, he: 0, knife: 0, gun: 0 });
+                r.n = p.n;
+                r.g += 1;
+                r.r += p.r || 0;
+                r.tf += v[0];
+                r.tfs += v[1];
+                r.fire += v[2];
+                r.he += v[3];
+                r.knife += v[4];
+                r.gun += v[5];
+              }
+            }
+            for (const r of Object.values(by)) r.ut = r.tf + r.fire + r.he;
+            return Object.values(by);
+          }
+          function viewFriendlyFire(night) {
+            pageTitle(night ? `Friendly fire · ${nightLabel(night)}` : "Friendly fire");
+            $("#app").innerHTML = `
+    <div class="pagehead"><div><h1>Friendly fire</h1><div class="sub">${night ? esc(nightLabel(night, true)) : "Who lands hits on their own team"}</div></div></div>
+    <div id="ff"><div class="sub">Loading…</div></div>`;
+            loadTeamHits().then((hits) => {
+              const box = $("#ff");
+              if (!box || !location.hash.startsWith("#/friendlyfire")) return;
+              const covered = games().filter((g) => hits[g.id]);
+              if (!covered.length) {
+                box.innerHTML = '<div class="note">No replay data yet. These stats are read from the game replays.</div>';
+                return;
+              }
+              const nights = [...new Set(covered.map((g) => g.night))].sort().reverse();
+              const gs = night ? covered.filter((g) => g.night === night) : covered;
+              if (!gs.length) return notFound();
+              const rows = ffRows(gs, hits);
+              const recs = FF_KINDS.map((k) => {
+                const s = rows.filter((r) => r[k.k] > 0).sort((a, b) => b[k.k] - a[k.k]);
+                if (!s.length) return "";
+                return `<a class="card rec" href="#/player/${s[0].id}"><div class="l">${k.d}</div><div class="v">${s[0][k.k]}</div><div class="w">${esc(s[0].n)}</div>
+        <div class="s">${s[1] ? `2nd ${esc(s[1].n)} (${s[1][k.k]})` : ""}</div></a>`;
+              }).join("");
+              const tot = (k) => rows.reduce((a, r) => a + r[k], 0);
+              box.innerHTML = `
+    <div class="filters"><span class="flabel">Night</span><select id="ff-night"><option value="">All nights</option>${nights
+      .map((n) => `<option value="${n}" ${n === night ? "selected" : ""}>${esc(nightLabel(n))}</option>`)
+      .join("")}</select>
+      <span class="flabel">Show</span><select id="ff-mode"><option value="n">Totals</option><option value="r">Per 100 rounds</option></select></div>
+    <div class="recs">${recs}</div>
+    <section><h2>Leaderboard</h2><div id="fft"><div class="filters"></div><div class="t"></div></div>
+      <div class="note">Friendly fire is off on the server, so none of this hurt anyone: these are the times a player's flashes, fire, HE grenades, knife or bullets landed on a teammate. Utility is flashes + fire + HE. Counted from the ${gs.length} game${gs.length === 1 ? "" : "s"} that have a replay${night ? " that night" : " (since the replays began)"}: ${tot("tf")} teammates flashed (${Math.round(tot("tfs"))} s blind), ${tot("fire")} burned, ${tot("he")} HE, ${tot("knife")} knife, ${tot("gun")} bullets.</div></section>`;
+              $("#ff-night").onchange = (e) => {
+                location.hash = "#/friendlyfire" + (e.target.value ? "/" + e.target.value : "");
+              };
+              const draw = () => {
+                const per = $("#ff-mode").value === "r";
+                const val = (k) => (r) => (per ? (r.r ? (r[k] / r.r) * 100 : 0) : r[k]);
+                const fmt = (v) => (per ? v.toFixed(1) : v);
+                const cols = [
+                  { k: "n", l: "Player", cls: "l pname", asc: true, f: (v, r) => plink(r.id, v) },
+                  { k: "g", l: "G", t: "Games with a replay" },
+                  ...FF_KINDS.map((k) => ({
+                    k: k.k,
+                    l: k.l,
+                    t: k.t + (per ? " (per 100 rounds)" : ""),
+                    v: val(k.k),
+                    f: (v) => (v ? fmt(v) : '<span class="muted">–</span>'),
+                  })),
+                  { k: "ut", l: "Utility", t: "Flashes + fire + HE grenades on teammates", v: val("ut"), f: (v) => (v ? fmt(v) : '<span class="muted">–</span>') },
+                ];
+                const el = $("#fft");
+                el.innerHTML = '<div class="filters"></div><div class="t"></div>';
+                const run = (mg) =>
+                  mountTable($(".t", el), cols, rows.filter((r) => r.g >= mg), { sort: "ut", rank: true });
+                const def = Math.min(per ? 5 : 1, Math.max(...rows.map((r) => r.g)));
+                minGamesFilter($(".filters", el), rows, def, run);
+                run(def);
+              };
+              $("#ff-mode").onchange = draw;
+              draw();
+            });
+          }
+
           function viewAttendance(night) {
             const all = games();
             const allNights = [...new Set(all.map((g) => g.night))]
@@ -7326,6 +7440,7 @@
                 rounds: () => viewRounds(arg),
                 heatmap: () => viewHeatmap(arg, arg2),
                 attendance: () => viewAttendance(arg),
+                friendlyfire: () => viewFriendlyFire(arg),
                 replays: viewReplays,
                 replay: () => viewReplay(arg),
               })[view] || notFound

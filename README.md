@@ -92,6 +92,12 @@ Use a unique, randomly generated control passphrase of at least 32 characters an
 
 The allowed site origins are configured in `worker/wrangler.toml` for `https://prasaadem.github.io` and local preview on port 8765. If the Pages domain changes, update `ALLOWED_ORIGINS` and redeploy. After deployment, open `#/server` on the site, enter the Worker URL shown by Wrangler and the control passphrase, then unlock. The passphrase is sent only to the Worker over HTTPS; the returned token expires after 15 minutes and is kept in browser local storage so the session survives reloads until expiry or sign-out.
 
+### Friendly fire page (same-team hits)
+
+Friendly fire is off on the server, so nobody takes damage from a teammate, but the demo still records the contact. `stats/teamhits.py` reads the replay files and counts, per player and game, how often their flashes, fire (molotov/incendiary), HE grenades, knife and bullets landed on a teammate. Teams are read from each replay's own per-player samples at the moment of the event, so the half-time swap needs no special handling. The result goes to `docs/data/teamhits.json` and the Friendly fire page shows a leaderboard (totals or per 100 rounds, per night or overall). "Utility" there is flashes + fire + HE. It only covers games that have a replay.
+
+As a check, the team flashes counted this way match the server-log stat (`ft`, the Awards "Team flasher") for the same games almost exactly: 1,577 against 1,604, with 1,212 of 1,221 player-games identical.
+
 ### Live presence ("Now playing")
 
 A Worker cron trigger (`[triggers]` in `worker/wrangler.toml`, every minute) checks DatHost and keeps a small snapshot in the `RATINGS` KV namespace under the key `live:presence`: whether the server is on, the map, and the connected players' names. No IDs or addresses are stored. The snapshot is written when it changes and otherwise every 10 minutes, which keeps KV writes well under the free limit.
