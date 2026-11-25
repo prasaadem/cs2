@@ -166,3 +166,5 @@ The Rivalries page (`#/rivalries`) shows the same "last night's grudges" as the 
 - **W–L** counts completed games only.
 - **ADR** comes from the server's round summaries and excludes each game's last round.
 - Every game records `v` (the parser version). Metrics added later appear for new games only. Older games show "–" for them.
+
+-- by Aditya Emani
